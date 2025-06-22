@@ -1,0 +1,10 @@
+{
+	"Page": {
+		"title": "Trello Clone",
+		"Description": "An Trello clone made by next"
+	},
+	"HomePage": {
+		"title": "Hello world!",
+		"about": "Go to the about page"
+	}
+}
