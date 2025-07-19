@@ -6,5 +6,11 @@
 	"HomePage": {
 		"title": "Hello world!11",
 		"about": "Go to the about page11"
+	},
+	"NavBarLogin": {
+		"ButtonLogin": {
+			"login": "Iniciar sesión",
+			"getFree": "Obtener Trello gratis"
+		}
 	}
 }

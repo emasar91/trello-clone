@@ -5,6 +5,10 @@ import { getMessages } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { routing } from '@/i18n/routing'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
+import { ThemeProvider } from '@mui/material/styles'
+import theme from '@/theme'
+import NavBarLogin from '@/components/navBarLogin/NavBarLogin'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -16,19 +20,47 @@ const geistMono = Geist_Mono({
 	subsets: ['latin'],
 })
 
-// ✅ Metadata dinámica
 export async function generateMetadata({
-	params,
+	params: { locale },
 }: {
 	params: { locale: string }
 }): Promise<Metadata> {
-	const messages = await getMessages({ locale: params.locale })
+	const messages = await getMessages({ locale })
 	const t = messages?.Page as Record<string, string>
 
 	return {
 		title: t?.title || 'Default Title',
 		description: t?.description || 'Default description',
 	}
+}
+
+async function InnerLayout({
+	children,
+	locale,
+}: {
+	children: React.ReactNode
+	locale: 'en' | 'es'
+}) {
+	if (!routing.locales.includes(locale)) {
+		notFound()
+	}
+
+	const messages = await getMessages({ locale })
+
+	return (
+		<html lang={locale}>
+			<body className={`${geistSans.variable} ${geistMono.variable}`}>
+				<AppRouterCacheProvider options={{ key: 'css' }}>
+					<NextIntlClientProvider locale={locale} messages={messages}>
+						<ThemeProvider theme={theme}>
+							<NavBarLogin />
+							{children}
+						</ThemeProvider>
+					</NextIntlClientProvider>
+				</AppRouterCacheProvider>
+			</body>
+		</html>
+	)
 }
 
 export default async function LocaleLayout({
@@ -38,27 +70,5 @@ export default async function LocaleLayout({
 	children: React.ReactNode
 	params: { locale: 'en' | 'es' }
 }) {
-	const { locale } = params
-
-	if (!routing.locales.includes(locale)) {
-		notFound()
-	}
-
-	const allowedLocales = ['en', 'es']
-
-	if (!allowedLocales.includes(locale)) {
-		notFound()
-	}
-
-	const messages = await getMessages({ locale: locale as 'en' | 'es' })
-
-	return (
-		<html lang={locale}>
-			<body className={`${geistSans.variable} ${geistMono.variable}`}>
-				<NextIntlClientProvider locale={locale} messages={messages}>
-					{children}
-				</NextIntlClientProvider>
-			</body>
-		</html>
-	)
+	return <InnerLayout locale={params.locale}>{children}</InnerLayout>
 }
