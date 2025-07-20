@@ -53,8 +53,10 @@ async function InnerLayout({
 				<AppRouterCacheProvider options={{ key: 'css' }}>
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<ThemeProvider theme={theme}>
-							<NavBarLogin />
-							{children}
+							<div className="flex flex-col justify-center items-center">
+								<NavBarLogin />
+								{children}
+							</div>
 						</ThemeProvider>
 					</NextIntlClientProvider>
 				</AppRouterCacheProvider>

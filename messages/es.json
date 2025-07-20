@@ -1,16 +1,23 @@
 {
 	"Page": {
 		"title": "Trello Clon",
-		"Description": "Un clone de Trello hecho con next"
+		"description": "Un clone de Trello hecho con next"
 	},
-	"HomePage": {
-		"title": "Hello world!11",
-		"about": "Go to the about page11"
-	},
+
 	"NavBarLogin": {
-		"ButtonLogin": {
+		"buttonLogin": {
 			"login": "Iniciar sesión",
 			"getFree": "Obtener Trello gratis"
+		}
+	},
+
+	"NavBar": {
+		"tabs": {
+			"features": "Características",
+			"solutions": "Soluciones",
+			"plans": "Planes",
+			"pricing": "Precios",
+			"resources": "Recursos"
 		}
 	}
 }

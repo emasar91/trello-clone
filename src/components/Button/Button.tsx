@@ -17,7 +17,7 @@ export default function ButtonLogin({
 	bgColor,
 	hoverColor,
 }: Props) {
-	const t = useTranslations('NavBarLogin.ButtonLogin')
+	const t = useTranslations('NavBarLogin.buttonLogin')
 
 	return (
 		<Button

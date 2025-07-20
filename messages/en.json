@@ -3,8 +3,21 @@
 		"title": "Trello Clone",
 		"Description": "An Trello clone made by next"
 	},
-	"HomePage": {
-		"title": "Hello world!",
-		"about": "Go to the about page"
+
+	"NavBarLogin": {
+		"buttonLogin": {
+			"login": "Log in",
+			"getFree": "Get Trello for free"
+		}
+	},
+
+	"NavBar": {
+		"tabs": {
+			"features": "Features",
+			"solutions": "Solutions",
+			"plans": "Plans",
+			"pricing": "Pricing",
+			"resources": "Resources"
+		}
 	}
 }
