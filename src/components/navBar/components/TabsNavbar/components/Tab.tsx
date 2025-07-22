@@ -1,4 +1,4 @@
-import { ITab } from '@/types/navBar'
+import { ITab, TabsOptions } from '@/types/navBar'
 import { Button } from '@mui/material'
 import React from 'react'
 import { ArrowDown } from '@/components/Icons/ArrowDown'
@@ -8,12 +8,10 @@ import { useTranslations } from 'next-intl'
 type Props = {
 	tab: ITab
 	selected: boolean
-	handleChange: (event: React.SyntheticEvent, newValue: number) => void
-	value: number
+	handleChange: (value: TabsOptions) => void
 }
 
-const Tab = ({ tab, selected, handleChange, value }: Props) => {
-	console.log('🚀 ~ Tab ~ selected:', tab.tab)
+const Tab = ({ tab, selected, handleChange }: Props) => {
 	const buttonDrawer = tab.drawer
 
 	const t = useTranslations('NavBar.tabs')
@@ -22,7 +20,7 @@ const Tab = ({ tab, selected, handleChange, value }: Props) => {
 		<Button
 			id="demo-customized-button"
 			variant="text"
-			onClick={(e) => handleChange(e, value)}
+			onClick={() => handleChange(tab.tab as TabsOptions)}
 			disableRipple
 			sx={{
 				fontSize: '16px',

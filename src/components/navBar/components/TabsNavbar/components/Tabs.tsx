@@ -1,12 +1,16 @@
 import { tabsNavbar } from '@/constants'
 import React from 'react'
 import Tab from '@/components/Navbar/components/TabsNavbar/components/Tab'
+import { useStoreTrello } from '@/context/useStoreTrello'
+import { ITab } from '@/types/navBar'
+import { TabsOptions } from '@/context/interface'
 
 const Tabs = () => {
-	const [value, setValue] = React.useState(0)
+	const { tabSelected, setTabSelected, setDrawerOpen } = useStoreTrello()
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue)
+	const handleChange = (value: TabsOptions) => {
+		setTabSelected(value)
+		setDrawerOpen(true)
 	}
 
 	return (
@@ -15,10 +19,9 @@ const Tabs = () => {
 				{tabsNavbar.map((tab, index) => (
 					<Tab
 						key={`index-${index}-${tab.tab}`}
-						tab={tab}
-						value={index}
+						tab={tab as ITab}
 						handleChange={handleChange}
-						selected={value === index}
+						selected={tabSelected === tab.tab}
 					/>
 				))}
 			</div>

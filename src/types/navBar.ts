@@ -23,6 +23,14 @@ export interface IDrawer {
 }
 
 export interface ITab {
-	tab: string
+	tab: TabsOptions
 	drawer?: IDrawer
 }
+
+export type TabsOptions =
+	| 'features'
+	| 'solutions'
+	| 'plans'
+	| 'pricing'
+	| 'resources'
+	| ''

@@ -1,18 +1,17 @@
 'use client'
 
 import { Drawer } from '@mui/material'
-import React from 'react'
+import { useStoreTrello } from '@/context/useStoreTrello'
 
 const BoxInfo = () => {
-	const [open, setOpen] = React.useState(false)
+	const { drawerOpen, setDrawerOpen } = useStoreTrello()
 
-	const toggleDrawer = (newOpen: boolean) => () => {
-		setOpen(newOpen)
-	}
+	if (!drawerOpen) return null
+
 	return (
 		<Drawer
-			open={true}
-			onClose={toggleDrawer(false)}
+			open={drawerOpen}
+			onClose={() => setDrawerOpen(false)}
 			anchor="top"
 			sx={{
 				'.MuiDrawer-paper': { marginTop: '60px !important' },

@@ -7,7 +7,7 @@ import TabsNavbar from '@/components/Navbar/components/TabsNavbar/TabsNavbar'
 
 export default function NavBar() {
 	return (
-		<div className=" z-1300 w-full flex items-center justify-center hover:shadow-xl bg-white">
+		<div className=" z-1300 w-full flex items-center justify-center hover:shadow-lg bg-white">
 			<div className="flex w-full items-center  justify-between h-15 overflow-hidden pl-2 bg-white max-w-[1320]">
 				<div className="flex items-center">
 					<Image
