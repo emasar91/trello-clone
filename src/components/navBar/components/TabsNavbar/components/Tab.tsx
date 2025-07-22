@@ -17,6 +17,7 @@ const Tab = ({ tab, selected, handleChange, value }: Props) => {
 	const buttonDrawer = tab.drawer
 
 	const t = useTranslations('NavBar.tabs')
+
 	return (
 		<Button
 			id="demo-customized-button"
@@ -25,11 +26,13 @@ const Tab = ({ tab, selected, handleChange, value }: Props) => {
 			disableRipple
 			sx={{
 				fontSize: '16px',
+				lineHeight: '24px',
 				width: 'auto',
 				padding: '16px',
 				display: 'flex',
 				alignItems: 'center',
 				gap: '4px',
+				fontWeight: '400',
 				color: selected ? colors.textNavbarSelected : colors.textNavbar,
 				borderBottom: selected
 					? `2px solid ${colors.textNavbarSelected}`

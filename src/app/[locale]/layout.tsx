@@ -8,7 +8,8 @@ import { routing } from '@/i18n/routing'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '@/theme'
-import NavBarLogin from '@/components/navBarLogin/NavBarLogin'
+import NavBar from '@/components/Navbar/NavBar'
+import BoxInfo from '../../components/Navbar/components/BoxInfo/BoxInfo'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -54,7 +55,8 @@ async function InnerLayout({
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<ThemeProvider theme={theme}>
 							<div className="flex flex-col justify-center items-center">
-								<NavBarLogin />
+								<NavBar />
+								<BoxInfo />
 								{children}
 							</div>
 						</ThemeProvider>
