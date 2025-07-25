@@ -2,6 +2,7 @@ export const tabsNavbar = [
 	{
 		tab: 'features',
 		drawer: {
+			title: 'featuresTitle',
 			items: [
 				{ title: 'inbox', description: 'inboxDescription' },
 				{ title: 'planner', description: 'plannerDescription' },
@@ -20,6 +21,7 @@ export const tabsNavbar = [
 	{
 		tab: 'solutions',
 		drawer: {
+			title: 'solutionsTitle',
 			items: [
 				{ title: 'marketingTeams', description: 'marketingTeamsDescription' },
 				{
@@ -65,6 +67,7 @@ export const tabsNavbar = [
 	{
 		tab: 'resources',
 		drawer: {
+			title: 'resourcesTitle',
 			items: [
 				{ title: 'trelloGuide', description: 'trelloGuideDescription' },
 				{ title: 'remoteWorkGuide', description: 'remoteWorkGuideDescription' },
@@ -86,6 +89,8 @@ export const tabsNavbar = [
 ]
 
 export const colors = {
+	white: '#ffffff',
+
 	textNavbarSelected: 'rgb(0, 101, 255)',
 	textNavbar: '#000000',
 }

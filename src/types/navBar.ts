@@ -18,6 +18,7 @@ interface IExtraItem {
 }
 
 export interface IDrawer {
+	title?: string
 	items: ITabItem[]
 	extraInfo?: IExtraInfo
 }
