@@ -16,9 +16,29 @@ export const NavBarRowStyle: SxProps<Theme> = {
 	display: 'flex',
 	width: '100%',
 	maxWidth: '1320px',
-	alignItems: 'center',
 	justifyContent: 'space-between',
 	overflow: 'hidden',
 	backgroundColor: colors.white,
-	paddingLeft: '0.5rem',
+	alignItems: 'stretch',
+	height: '60px',
+	margin: '0px auto',
+}
+
+export const NavBarRowContentStyle: SxProps<Theme> = {
+	display: 'flex',
+	alignItems: 'center',
+	height: '60px',
+}
+
+export const NavBarButtonsLoginStyle: SxProps<Theme> = {
+	marginLeft: 'auto',
+	display: 'flex',
+	alignItems: 'stretch',
+}
+
+export const NavBarLogoStyle: SxProps<Theme> = {
+	alignItems: 'center',
+	alignSelf: 'stretch',
+	display: 'flex',
+	padding: '1rem',
 }

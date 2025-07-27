@@ -13,7 +13,7 @@ export const PageContainerStyle: SxProps<Theme> = {
 export const PageContainerChildStyle: SxProps<Theme> = {
 	display: 'flex',
 	width: '100%',
-	maxWidth: '1140px',
+	maxWidth: '1140px !important',
 	flexDirection: 'column',
 	justifyContent: 'center',
 	verticalAlign: 'middle',

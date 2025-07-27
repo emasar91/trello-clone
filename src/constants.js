@@ -90,6 +90,8 @@ export const tabsNavbar = [
 
 export const colors = {
 	white: '#ffffff',
+	gray: 'rgba(234, 230, 255, 0.4)',
+	black: '#000000',
 
 	textNavbarSelected: 'rgb(0, 101, 255)',
 	textNavbar: '#000000',

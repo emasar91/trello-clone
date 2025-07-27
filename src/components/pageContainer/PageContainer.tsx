@@ -19,6 +19,7 @@ type Props = {
  * @returns {React.ReactElement}
  */
 const PageContainer = ({ children }: Props) => {
+	console.log('🚀 ~ PageContainer ~ children:', children)
 	return (
 		<Box sx={PageContainerStyle}>
 			<Box sx={PageContainerChildStyle}>{children}</Box>

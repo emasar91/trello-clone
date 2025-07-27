@@ -1,8 +1,16 @@
 'use client'
 
-import { Drawer } from '@mui/material'
+import { Box, Drawer } from '@mui/material'
 import { useStoreTrello } from '@/context/useStoreTrello'
-import { BoxInfoContainerStyle } from './BoxInfo.style'
+import {
+	BoxInfoContainerStyle,
+	BoxInfoContentStyle,
+	BoxInfoLeftContentStyle,
+	BoxInfoLeftStyle,
+	BoxInfoRightContentStyle,
+	BoxInfoRightStyle,
+} from './BoxInfo.style'
+import Info from './components/Info/Info'
 
 /**
  * BoxInfo component that renders a Drawer containing additional information
@@ -15,8 +23,10 @@ import { BoxInfoContainerStyle } from './BoxInfo.style'
  */
 
 const BoxInfo = () => {
-	const { drawerOpen, setDrawerOpen, itemsBoxInfo } = useStoreTrello()
-	console.log('🚀 ~ BoxInfo ~ itemsBoxInfo:', itemsBoxInfo)
+	const { drawerOpen, setDrawerOpen, boxInfo } = useStoreTrello()
+	console.log('🚀 ~ BoxInfo ~ itemsBoxInfo:', boxInfo)
+
+	const dataInfo = { title: boxInfo?.title, items: boxInfo?.items }
 
 	if (!drawerOpen) return null
 
@@ -27,7 +37,16 @@ const BoxInfo = () => {
 			anchor="top"
 			sx={BoxInfoContainerStyle}
 		>
-			asdasd
+			<Box sx={BoxInfoContentStyle}>
+				<Box sx={BoxInfoLeftStyle}>
+					<Box sx={BoxInfoLeftContentStyle}>
+						<Info data={dataInfo} />
+					</Box>
+				</Box>
+				<Box sx={BoxInfoRightStyle}>
+					<Box sx={BoxInfoRightContentStyle}>derecho</Box>
+				</Box>
+			</Box>
 		</Drawer>
 	)
 }

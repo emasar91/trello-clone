@@ -4,16 +4,15 @@ import { create } from 'zustand'
 const initialState: IStoreTrello = {
 	tabSelected: '',
 	drawerOpen: false,
-	itemsBoxInfo: null,
+	boxInfo: null,
 	setTabSelected: () => {},
 	setDrawerOpen: () => {},
-	setItemsBoxInfo: () => {},
+	setBoxInfo: () => {},
 }
 
 export const useStoreTrello = create<IStoreTrello>((set) => ({
 	...initialState,
 	setTabSelected: (value) => set((state) => ({ ...state, tabSelected: value })),
 	setDrawerOpen: (value) => set((state) => ({ ...state, drawerOpen: value })),
-	setItemsBoxInfo: (value) =>
-		set((state) => ({ ...state, itemsBoxInfo: value })),
+	setBoxInfo: (value) => set((state) => ({ ...state, boxInfo: value })),
 }))

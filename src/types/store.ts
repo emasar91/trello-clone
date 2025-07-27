@@ -1,4 +1,4 @@
-import { ITabItem } from '@/types/navBar'
+import { IDrawer } from '@/types/navBar'
 
 export type TabsOptions =
 	| 'features'
@@ -11,8 +11,8 @@ export type TabsOptions =
 export interface IStoreTrello {
 	tabSelected: TabsOptions
 	drawerOpen: boolean
-	itemsBoxInfo: ITabItem[] | null
+	boxInfo: IDrawer | null
 	setTabSelected: (value: TabsOptions) => void
 	setDrawerOpen: (value: boolean) => void
-	setItemsBoxInfo: (value: ITabItem[]) => void
+	setBoxInfo: (value: IDrawer) => void
 }

@@ -1,11 +1,16 @@
 'use client'
 
-import Image from 'next/image'
 import React from 'react'
-import ButtonLogin from '../Button/Button'
 import TabsNavbar from '@/components/Navbar/components/TabsNavbar/TabsNavbar'
-import { Box } from '@mui/material'
-import { NavBarContainerStyle, NavBarRowStyle } from './NavBar.style'
+import { Box, Link } from '@mui/material'
+import {
+	NavBarButtonsLoginStyle,
+	NavBarContainerStyle,
+	NavBarLogoStyle,
+	NavBarRowStyle,
+} from './NavBar.style'
+import { Logo } from '../../../public/assets/Logo'
+import { useTranslations } from 'next-intl'
 
 /**
  * The Navbar component for the Trelo clone.
@@ -17,29 +22,48 @@ import { NavBarContainerStyle, NavBarRowStyle } from './NavBar.style'
  * @returns {React.ReactElement} The rendered navbar component.
  */
 export default function NavBar() {
+	const t = useTranslations('NavBarLogin.buttonLogin')
+
 	return (
 		<Box sx={NavBarContainerStyle}>
 			<Box sx={NavBarRowStyle}>
-				<Box className="flex items-center">
-					<Image
-						src="/assets/navbar.PNG"
-						width={120}
-						height={40}
-						alt="Trelo clone"
-					/>
-					<Box>
-						<TabsNavbar />
-					</Box>
-				</Box>
+				<Link href={'/'} sx={NavBarLogoStyle}>
+					<Logo />
+				</Link>
 				<Box>
-					<ButtonLogin variant="text" text="login" />
-					<ButtonLogin
-						variant="contained"
-						text="getFree"
-						color="white"
-						bgColor="rgb(0, 101, 255)"
-						hoverColor="rgb(7, 71, 166)"
-					/>
+					<TabsNavbar />
+				</Box>
+				<Box sx={NavBarButtonsLoginStyle}>
+					<Link
+						sx={{
+							alignItems: 'center',
+							alignSelf: 'stretch',
+							color: 'rgb(23, 43, 77)',
+							display: 'flex',
+							fontSize: '1.2rem',
+							height: '100%',
+							padding: '0.5rem 1.5rem',
+							textDecoration: 'none',
+						}}
+					>
+						{t('login')}
+					</Link>
+					<Link
+						sx={{
+							backgroundColor: 'rgb(0, 101, 255)',
+							WebkitBoxAlign: 'center',
+							alignItems: 'center',
+							alignSelf: 'stretch',
+							color: 'rgb(255, 255, 255)',
+							display: 'flex',
+							fontSize: '1.2rem',
+							height: '100%',
+							padding: '0.5rem 1.5rem',
+							textDecoration: 'none',
+						}}
+					>
+						{t('getFree')}
+					</Link>
 				</Box>
 			</Box>
 		</Box>
