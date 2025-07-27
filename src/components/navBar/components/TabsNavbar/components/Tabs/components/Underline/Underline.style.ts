@@ -14,7 +14,7 @@ export const UnderlineStyle = (underlineStyle: {
 	height: '2px',
 	backgroundColor: 'rgb(0, 101, 255)',
 	transform: underlineStyle.active ? 'scaleX(1)' : 'scaleX(0)',
-	transformOrigin: underlineStyle.origin,
+	transformOrigin: 'left',
 	opacity: underlineStyle.active ? 1 : 0,
 	transition:
 		'left 0.3s ease, width 0.3s ease, transform 0.3s ease, opacity 0.3s ease',
