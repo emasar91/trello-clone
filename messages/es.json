@@ -19,5 +19,46 @@
 			"pricing": "Precios",
 			"resources": "Recursos"
 		}
+	},
+	"Drawer": {
+		"features": {
+			"featuresTitle": "Descubre las funciones que ayudan a tu equipo a triunfar",
+			"featuresExtraTitle": "Conoce Trello",
+			"featuresExtraDescription": "Trello facilita el trabajo de tu equipo. Independientemente del proyecto, el flujo de trabajo o el tipo de equipo, Trello te ayuda a mantener todo organizado. Es muy sencillo: regístrate, crea un tablero y ¡listo! La productividad te espera.",
+			"featuresExtraButton": "Echa un vistazo a Trello",
+			"featuresExtraButtonLink": "/tour"
+		},
+		"solutions": {
+			"solutionsTitle": "Toma como referencia estas guías de Trello prediseñadas para todos los equipos",
+			"solutionsExtraTitle": "Nuestro producto en acción",
+			"items": {
+				"title1": "Caso de uso: Gestión de tareas",
+				"description1": "Realiza un seguimiento del progreso de las tareas en un solo lugar con un diseño visual que añade un toque especial a tus tareas pendientes.",
+				"link1": "/use-cases/task-management",
+				"title2": "Caso de uso: Centro de recursos",
+				"description2": "Ahorra horas de trabajo al proporcionar a los equipos un centro de información bien diseñado para encontrar información de forma fácil y rápida.",
+				"link2": "/use-cases/resource-hub",
+				"title3": "Caso de uso: Gestión de proyectos",
+				"description3": "Mantén tus proyectos organizados, tus plazos al día y a tus compañeros de equipo alineados con Trello.",
+				"link3": "/use-cases/project-management"
+			},
+			"solutionsExtraLink": "/use-cases",
+			"solutionsExtraLinkText": "Ver todos los casos de uso"
+		},
+		"plans": {
+			"plansTitle": "Descubre las funciones que ayudan a tu equipo a triunfar",
+			"plansExtraTitle": "Compare planes y precios",
+			"plansExtraDescription": "Tanto si sois un equipo de 2 como de 2000 personas, el modelo de precios flexible de Trello te permite pagar solo por lo que necesitas.",
+			"plansExtraButton": "Ver precios de Trello",
+			"plansExtraButtonLink": "/pricing"
+		},
+		"pricing": {},
+		"resources": {
+			"resourcesTitle": "Aprende y conecta",
+			"resourcesExtraTitle": "Ayudando a los equipos a trabajar mejor juntos",
+			"resourcesExtraDescription": "Descubre casos de uso de Trello, consejos de productividad, mejores prácticas para la colaboración en equipo y consejos de expertos sobre el trabajo a distancia.",
+			"resourcesExtraButton": "Echa un vistazo al blog de Trello",
+			"resourcesExtraButtonLink": "/pricing"
+		}
 	}
 }

@@ -11,6 +11,7 @@ import {
 	BoxInfoRightStyle,
 } from './BoxInfo.style'
 import Info from './components/Info/Info'
+import ExtraInfo from './components/ExtraInfo/ExtraInfo'
 
 /**
  * BoxInfo component that renders a Drawer containing additional information
@@ -23,12 +24,23 @@ import Info from './components/Info/Info'
  */
 
 const BoxInfo = () => {
-	const { drawerOpen, setDrawerOpen, boxInfo } = useStoreTrello()
+	const { drawerOpen, setDrawerOpen, boxInfo, tabSelected } = useStoreTrello()
 	console.log('🚀 ~ BoxInfo ~ itemsBoxInfo:', boxInfo)
 
-	const dataInfo = { title: boxInfo?.title, items: boxInfo?.items }
+	const dataInfo = {
+		title: boxInfo?.title,
+		items: boxInfo?.items,
+	}
 
-	if (!drawerOpen) return null
+	const dataExtraInfo = {
+		title: boxInfo?.extraInfo?.title || '',
+		description: boxInfo?.extraInfo?.description,
+		button: boxInfo?.extraInfo?.button,
+		link: boxInfo?.extraInfo?.link,
+		items: boxInfo?.extraInfo?.items,
+		buttonLink: boxInfo?.extraInfo?.buttonLink || '/',
+		linkText: boxInfo?.extraInfo?.linkText,
+	}
 
 	return (
 		<Drawer
@@ -40,11 +52,13 @@ const BoxInfo = () => {
 			<Box sx={BoxInfoContentStyle}>
 				<Box sx={BoxInfoLeftStyle}>
 					<Box sx={BoxInfoLeftContentStyle}>
-						<Info data={dataInfo} />
+						<Info data={dataInfo} tabSelected={tabSelected} />
 					</Box>
 				</Box>
 				<Box sx={BoxInfoRightStyle}>
-					<Box sx={BoxInfoRightContentStyle}>derecho</Box>
+					<Box sx={BoxInfoRightContentStyle}>
+						<ExtraInfo data={dataExtraInfo} tabSelected={tabSelected} />
+					</Box>
 				</Box>
 			</Box>
 		</Drawer>

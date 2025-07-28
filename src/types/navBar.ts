@@ -8,13 +8,16 @@ export interface IExtraInfo {
 	title: string
 	description?: string
 	button?: string
+	buttonLink?: string
 	link?: string
+	linkText?: string
 	items?: IExtraItem[]
 }
 
 interface IExtraItem {
 	title: string
 	description: string
+	link: string
 }
 
 export interface IDrawer {

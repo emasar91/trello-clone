@@ -2,15 +2,13 @@ import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const BoxInfoContainerStyle: SxProps<Theme> = {
-	height: '100vh',
-	transition: 'height 0.3s ease-in-out',
 	'.MuiDrawer-paper': { marginTop: '60px !important', width: '100%' },
 }
 
 export const BoxInfoContentStyle: SxProps<Theme> = {
 	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
+	alignItems: 'start',
+	justifyContent: 'start',
 	flexDirection: 'row',
 	width: '100%',
 }

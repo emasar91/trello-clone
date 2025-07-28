@@ -1,14 +1,25 @@
 import { ITabItem } from '@/types/navBar'
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, Typography } from '@mui/material'
+import { InfoStyle, InfoTitleStyle } from './Info.style'
+import { useTranslations } from 'next-intl'
 
 type Props = {
 	data: { title: string | undefined; items: ITabItem[] | undefined }
+	tabSelected: string
 }
 
-const Info = ({ data }: Props) => {
+const Info = ({ data, tabSelected }: Props) => {
 	console.log('🚀 ~ Info ~ data:', data)
-	return <Box>Info</Box>
+	const t = useTranslations(`Drawer.${tabSelected}`)
+	return (
+		<Box sx={InfoStyle}>
+			{data.title && (
+				<Typography variant="h3" sx={InfoTitleStyle}>
+					{t(`${data.title}`)}
+				</Typography>
+			)}
+		</Box>
+	)
 }
 
 export default Info
