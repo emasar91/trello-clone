@@ -65,6 +65,7 @@ export const ExtraInfoItemContainerStyle: SxProps<Theme> = {
 	margin: '-1rem',
 	padding: '1.5rem 1rem',
 	cursor: 'pointer',
+	textDecoration: 'none',
 	'&:hover .hover-arrow': {
 		opacity: 1,
 		transform: 'translateX(0)',
@@ -82,4 +83,5 @@ export const ExtraInfoLinkStyle: SxProps<Theme> = {
 
 export const ExtraInfoContainerLinkStyle: SxProps<Theme> = {
 	display: 'flex',
+	cursor: 'pointer',
 }

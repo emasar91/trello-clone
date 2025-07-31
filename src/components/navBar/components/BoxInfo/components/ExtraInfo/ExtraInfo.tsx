@@ -21,8 +21,8 @@ type Props = {
 }
 
 const Info = ({ data, tabSelected }: Props) => {
-	console.log('🚀 ~ Info ~ data:', data)
 	const t = useTranslations(`Drawer.${tabSelected}`)
+
 	return (
 		<Box sx={ExtraInfoStyle}>
 			<Typography variant="h3" sx={ExtraInfoTitleStyle}>
@@ -47,7 +47,12 @@ const Info = ({ data, tabSelected }: Props) => {
 			{data.items && (
 				<Box>
 					{data.items.map((item, index) => (
-						<Box key={`index-${index}`} sx={ExtraInfoItemContainerStyle}>
+						<Box
+							key={`index-${index}`}
+							sx={ExtraInfoItemContainerStyle}
+							component={Link}
+							href={t(`items.${item.link}`)}
+						>
 							<Box key={`index-${index}-${item.title}`}>
 								<Box
 									sx={{
