@@ -1,5 +1,4 @@
 export const ArrowRight = ({ color }: { color: string }) => {
-	console.log('🚀 ~ FlechaDerecha ~ color:', color)
 	return (
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
 			<rect width="24" height="24" fill="#fff" fillOpacity="0.01"></rect>

@@ -1,120 +1,58 @@
 import { IExtraInfo } from '@/types/navBar'
-import { Box, Link, Typography } from '@mui/material'
-import {
-	ExtraInfoButtonStyle,
-	ExtraInfoContainerLinkStyle,
-	ExtraInfoDescriptionStyle,
-	ExtraInfoItemContainerStyle,
-	ExtraInfoItemDescriptionStyle,
-	ExtraInfoItemTitleStyle,
-	ExtraInfoLinkStyle,
-	ExtraInfoStyle,
-	ExtraInfoTitleStyle,
-} from './ExtaInfo.style'
+import { Box } from '@mui/material'
+import { ExtraInfoStyle } from './ExtaInfo.style'
 import { useTranslations } from 'next-intl'
-import { ArrowRight } from '@/public/assets/ArrowRight'
-import { colors } from '@/constants'
+import TitleExtraInfo from './Components/Title/TitleExtraInfo'
+import DescriptionExtraInfo from './Components/Description/DescriptionExtraInfo'
+import ButtonExtraInfo from './Components/Button/ButtonExtraInfo'
+import ItemExtraInfo from './Components/Item/ItemExtraInfo'
+import LinkExtraInfo from './Components/Link/LinkExtraInfo'
 
 type Props = {
 	data: IExtraInfo
 	tabSelected: string
 }
 
-const Info = ({ data, tabSelected }: Props) => {
-	const t = useTranslations(`Drawer.${tabSelected}`)
+/**
+ * A component that renders the ExtraInfo section of the Navbar.
+ *
+ * The ExtraInfo section is the bottom section of the Navbar, which contains
+ * a title, description, items, and a link. The items are rendered as links
+ * with icons, and the link is rendered as a button with a link icon.
+ *
+ * @param data - an object containing the data for the ExtraInfo section
+ * @param tabSelected - the selected tab in the Navbar
+ * @returns a JSX element for the ExtraInfo section
+ */
+const ExtraInfo = ({ data, tabSelected }: Props) => {
+	const t = useTranslations(`Drawer.${tabSelected}.extraInfo`)
 
 	return (
 		<Box sx={ExtraInfoStyle}>
-			<Typography variant="h3" sx={ExtraInfoTitleStyle}>
-				{t(`${data.title}`)}
-			</Typography>
+			<Box>
+				<TitleExtraInfo text={t(`${data.title}`)} />
 
-			{data.description && (
-				<Typography component="p" sx={ExtraInfoDescriptionStyle}>
-					{t(`${data.description}`)}
-				</Typography>
-			)}
+				{data.description && (
+					<DescriptionExtraInfo text={t(`${data.description}`)} />
+				)}
+				{data.items && <ItemExtraInfo data={data} tabSelected={tabSelected} />}
+
+				{data.link && (
+					<LinkExtraInfo
+						linkButton={t(`${data.linkText}`)}
+						linkTitle={t(`${data.link}`)}
+					/>
+				)}
+			</Box>
 
 			{data.button && (
-				<Link
-					href={data.buttonLink ? t(data.buttonLink) : '/'}
-					sx={ExtraInfoButtonStyle}
-				>
-					{t(`${data.button}`)}
-				</Link>
-			)}
-
-			{data.items && (
-				<Box>
-					{data.items.map((item, index) => (
-						<Box
-							key={`index-${index}`}
-							sx={ExtraInfoItemContainerStyle}
-							component={Link}
-							href={t(`items.${item.link}`)}
-						>
-							<Box key={`index-${index}-${item.title}`}>
-								<Box
-									sx={{
-										display: 'flex',
-									}}
-								>
-									<Typography variant="h3" sx={ExtraInfoItemTitleStyle}>
-										{t(`items.${item.title}`)}
-									</Typography>
-									<Box
-										className="hover-arrow"
-										sx={{
-											transition: 'all 0.3s ease',
-											opacity: 0,
-											color: 'primary.main',
-											fontSize: '1.2rem',
-											...ExtraInfoItemTitleStyle,
-										}}
-									>
-										<ArrowRight color={colors.violet} />
-									</Box>
-								</Box>
-								<Typography component="p" sx={ExtraInfoItemDescriptionStyle}>
-									{t(`items.${item.description}`)}
-								</Typography>
-							</Box>
-						</Box>
-					))}
-				</Box>
-			)}
-
-			{data.link && (
-				<Box
-					sx={{
-						...ExtraInfoContainerLinkStyle,
-						display: 'flex',
-						alignItems: 'center',
-						'&:hover .hover-arrow': {
-							transform: 'translateX(5px)',
-						},
-					}}
-				>
-					<Link href={t(`${data.link}`)} sx={ExtraInfoLinkStyle}>
-						{t(`${data.linkText}`)}
-					</Link>
-
-					<Box
-						className="hover-arrow"
-						sx={{
-							transition: 'transform 0.3s ease',
-							fontSize: '1.2rem',
-							marginLeft: '0.5rem',
-							...ExtraInfoItemTitleStyle,
-							padding: '0',
-						}}
-					>
-						<ArrowRight color={colors.blue} />
-					</Box>
-				</Box>
+				<ButtonExtraInfo
+					text={t(`${data.button}`)}
+					linkButton={data.buttonLink ? t(data.buttonLink) : ''}
+				/>
 			)}
 		</Box>
 	)
 }
 
-export default Info
+export default ExtraInfo

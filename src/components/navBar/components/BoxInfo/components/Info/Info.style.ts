@@ -12,13 +12,25 @@ export const InfoStyle: SxProps<Theme> = {
 	transition: 'opacity 0.3s',
 }
 
-export const InfoTitleStyle: SxProps<Theme> = {
-	lineHeight: '21px',
-	fontWeight: '500',
-	fontFamily: "var(--font-family-text, 'Charlie Text', sans-serif)",
-	borderBottom: '1px solid rgb(223, 225, 230)',
+export const InfoContainerLinkStyle: SxProps<Theme> = {
+	display: 'flex',
+	cursor: 'pointer',
+}
+
+export const InfoLinkStyle: SxProps<Theme> = {
+	color: 'rgb(23, 43, 77) !important',
+	textDecoration: 'none',
+}
+
+export const InfoItemTitleStyle: SxProps<Theme> = {
 	color: 'rgb(23, 43, 77)',
 	fontSize: '1rem',
-	paddingBottom: '1rem',
-	width: '100%',
+	fontWeight: 'normal',
+	lineHeight: '1.5rem',
+	paddingRight: '0.3rem',
+	paddingBottom: '0.6rem',
+}
+
+export const InfoItemDescriptionStyle: SxProps<Theme> = {
+	fontSize: '0.75rem',
 }

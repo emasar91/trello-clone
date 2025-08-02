@@ -25,11 +25,11 @@ import ExtraInfo from './components/ExtraInfo/ExtraInfo'
 
 const BoxInfo = () => {
 	const { drawerOpen, setDrawerOpen, boxInfo, tabSelected } = useStoreTrello()
-	console.log('🚀 ~ BoxInfo ~ itemsBoxInfo:', boxInfo)
 
 	const dataInfo = {
 		title: boxInfo?.title,
 		items: boxInfo?.items,
+		itemsFullWidth: boxInfo?.itemsFullWidth,
 	}
 
 	const dataExtraInfo = {
@@ -55,9 +55,16 @@ const BoxInfo = () => {
 						<Info data={dataInfo} tabSelected={tabSelected} />
 					</Box>
 				</Box>
-				<Box sx={BoxInfoRightStyle}>
-					<Box sx={BoxInfoRightContentStyle}>
-						<ExtraInfo data={dataExtraInfo} tabSelected={tabSelected} />
+				<Box
+					sx={{
+						height: '-webkit-fill-available',
+						backgroundColor: 'rgba(234, 230, 255, 0.4)',
+					}}
+				>
+					<Box sx={BoxInfoRightStyle}>
+						<Box sx={BoxInfoRightContentStyle}>
+							<ExtraInfo data={dataExtraInfo} tabSelected={tabSelected} />
+						</Box>
 					</Box>
 				</Box>
 			</Box>

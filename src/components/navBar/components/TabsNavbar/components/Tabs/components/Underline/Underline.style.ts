@@ -4,7 +4,7 @@ import { SxProps } from '@mui/material'
 export const UnderlineStyle = (underlineStyle: {
 	left: number
 	width: number
-	origin: 'left' | 'right'
+	origin: string
 	active: boolean
 }): SxProps<Theme> => ({
 	position: 'absolute',

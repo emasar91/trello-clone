@@ -4,12 +4,42 @@ export const tabsNavbar = [
 		drawer: {
 			title: 'featuresTitle',
 			items: [
-				{ title: 'inbox', description: 'inboxDescription' },
-				{ title: 'planner', description: 'plannerDescription' },
-				{ title: 'automation', description: 'automationDescription' },
-				{ title: 'power-ups', description: 'powerUpsDescription' },
-				{ title: 'templates', description: 'templatesDescription' },
-				{ title: 'integrations', description: 'integrationsDescription' },
+				{
+					title: 'inbox',
+					description: 'inboxDescription',
+					link: 'inboxLink',
+					icon: 'inbox',
+				},
+				{
+					title: 'planner',
+					description: 'plannerDescription',
+					link: 'plannerLink',
+					icon: 'planner',
+				},
+				{
+					title: 'automation',
+					description: 'automationDescription',
+					link: 'automationLink',
+					icon: 'automation',
+				},
+				{
+					title: 'power-ups',
+					description: 'powerUpsDescription',
+					link: 'power-upsLink',
+					icon: 'power-ups',
+				},
+				{
+					title: 'templates',
+					description: 'templatesDescription',
+					link: 'templatesLink',
+					icon: 'templates',
+				},
+				{
+					title: 'integrations',
+					description: 'integrationsDescription',
+					link: 'integrationsLink',
+					icon: 'integrations',
+				},
 			],
 			extraInfo: {
 				title: 'featuresExtraTitle',
@@ -24,18 +54,42 @@ export const tabsNavbar = [
 		drawer: {
 			title: 'solutionsTitle',
 			items: [
-				{ title: 'marketingTeams', description: 'marketingTeamsDescription' },
+				{
+					title: 'marketingTeams',
+					description: 'marketingTeamsDescription',
+					link: 'marketingTeamsLink',
+					icon: 'marketingTeams',
+				},
 				{
 					title: 'productManagement',
 					description: 'productManagementDescription',
+					link: 'productManagementLink',
+					icon: 'productManagement',
 				},
 				{
 					title: 'engineeringTeams',
 					description: 'engineeringTeamsDescription',
+					link: 'engineeringTeamsLink',
+					icon: 'engineeringTeams',
 				},
-				{ title: 'designTeams', description: 'designTeamsDescription' },
-				{ title: 'startups', description: 'startupsDescription' },
-				{ title: 'remoteTeams', description: 'remoteTeamsDescription' },
+				{
+					title: 'designTeams',
+					description: 'designTeamsDescription',
+					link: 'designTeamsLink',
+					icon: 'designTeams',
+				},
+				{
+					title: 'startups',
+					description: 'startupsDescription',
+					link: 'startupsLink',
+					icon: 'startups',
+				},
+				{
+					title: 'remoteTeams',
+					description: 'remoteTeamsDescription',
+					link: 'remoteTeamsLink',
+					icon: 'remoteTeams',
+				},
 			],
 			extraInfo: {
 				title: 'solutionsExtraTitle',
@@ -53,10 +107,34 @@ export const tabsNavbar = [
 		tab: 'plans',
 		drawer: {
 			items: [
-				{ title: 'standard', description: 'standardDescription' },
-				{ title: 'premium', description: 'premiumDescription' },
-				{ title: 'enterprise', description: 'enterpriseDescription' },
-				{ title: 'free', description: 'freeDescription', button: 'freeButton' },
+				{
+					title: 'standard',
+					description: 'standardDescription',
+					link: 'standardLink',
+					icon: 'standard',
+				},
+				{
+					title: 'premium',
+					description: 'premiumDescription',
+					link: 'premiumLink',
+					icon: 'premium',
+				},
+				{
+					title: 'enterprise',
+					description: 'enterpriseDescription',
+					link: 'enterpriseLink',
+					icon: 'enterprise',
+				},
+				,
+			],
+			itemsFullWidth: [
+				{
+					title: 'free',
+					description: 'freeDescription',
+					icon: 'free',
+					button: 'freeButton',
+					link: 'freeLink',
+				},
 			],
 			extraInfo: {
 				title: 'plansExtraTitle',
@@ -72,15 +150,36 @@ export const tabsNavbar = [
 		drawer: {
 			title: 'resourcesTitle',
 			items: [
-				{ title: 'trelloGuide', description: 'trelloGuideDescription' },
-				{ title: 'remoteWorkGuide', description: 'remoteWorkGuideDescription' },
-				{ title: 'webinars', description: 'webinarsDescription' },
+				{
+					title: 'trelloGuide',
+					description: 'trelloGuideDescription',
+					link: 'trelloGuideLink',
+				},
+				{
+					title: 'remoteWorkGuide',
+					description: 'remoteWorkGuideDescription',
+					link: 'remoteWorkGuideLink',
+				},
+				{
+					title: 'webinars',
+					description: 'webinarsDescription',
+					link: 'webinarsLink',
+				},
 				{
 					title: 'customersStories',
 					description: 'customersStoriesDescription',
+					link: 'customersStoriesLink',
 				},
-				{ title: 'developers', description: 'developersDescription' },
-				{ title: 'helpResources', description: 'helpResourcesDescription' },
+				{
+					title: 'developers',
+					description: 'developersDescription',
+					link: 'developersLink',
+				},
+				{
+					title: 'helpResources',
+					description: 'helpResourcesDescription',
+					link: 'helpResourcesLink',
+				},
 			],
 			extraInfo: {
 				title: 'resourcesExtraTitle',
@@ -98,7 +197,12 @@ export const colors = {
 	black: '#000000',
 	violet: 'rgb(101, 84, 192)',
 	blue: 'rgb(0, 101, 255)',
-
+	hover1: 'rgba(255, 250, 229, 0.5)',
+	hover2: 'rgba(222, 235, 255, 0.5)',
+	hover3: 'rgba(255, 242, 251, 0.5)',
+	hover4: 'rgba(255, 235, 229, 0.5)',
+	hover5: 'rgba(230, 252, 255, 0.5)',
+	hover6: 'rgba(227, 252, 239, 0.5)',
 	textNavbarSelected: 'rgb(0, 101, 255)',
 	textNavbar: '#000000',
 }

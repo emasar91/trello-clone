@@ -22,43 +22,152 @@
 	},
 	"Drawer": {
 		"features": {
-			"featuresTitle": "Descubre las funciones que ayudan a tu equipo a triunfar",
-			"featuresExtraTitle": "Conoce Trello",
-			"featuresExtraDescription": "Trello facilita el trabajo de tu equipo. Independientemente del proyecto, el flujo de trabajo o el tipo de equipo, Trello te ayuda a mantener todo organizado. Es muy sencillo: regístrate, crea un tablero y ¡listo! La productividad te espera.",
-			"featuresExtraButton": "Echa un vistazo a Trello",
-			"featuresExtraButtonLink": "/tour"
+			"info": {
+				"featuresTitle": "Descubre las funciones que ayudan a tu equipo a triunfar",
+				"items": {
+					"inbox": "Bandeja de entrada",
+					"inboxDescription": "Captura todos los detalles importantes de los correos electrónicos, Slack y mucho más directamente en tu bandeja de entrada de Trello.",
+					"inboxLink": "inbox",
+
+					"planner": "Planificador",
+					"plannerDescription": "Sincroniza tu calendario y asigna franjas horarias específicas para aumentar la productividad.",
+					"plannerLink": "planner",
+
+					"automation": "Automatización",
+					"automationDescription": "Automatiza tareas y flujos de trabajo con la automatización de Butler.",
+					"automationLink": "butler-automation",
+
+					"power-ups": "Power-ups",
+					"powerUpsDescription": "Potencia a tus equipos vinculando sus herramientas favoritas con los complementos de Trello.",
+					"power-upsLink": "power-ups",
+
+					"templates": "Plantillas",
+					"templatesDescription": "Proporcione a su equipo un plan para alcanzar el éxito con plantillas fáciles de usar creadas por líderes del sector y la comunidad Trello.",
+					"templatesLink": "templates",
+
+					"integrations": "Integraciones",
+					"integrationsDescription": "Encuentra las aplicaciones que tu equipo ya está utilizando o descubre nuevas formas de trabajar en Trello.",
+					"integrationsLink": "integrations"
+				}
+			},
+			"extraInfo": {
+				"featuresExtraTitle": "Conoce Trello",
+				"featuresExtraDescription": "Trello facilita el trabajo de tu equipo. Independientemente del proyecto, el flujo de trabajo o el tipo de equipo, Trello te ayuda a mantener todo organizado. Es muy sencillo: regístrate, crea un tablero y ¡listo! La productividad te espera.",
+				"featuresExtraButton": "Echa un vistazo a Trello",
+				"featuresExtraButtonLink": "/tour"
+			}
 		},
 		"solutions": {
-			"solutionsTitle": "Toma como referencia estas guías de Trello prediseñadas para todos los equipos",
-			"solutionsExtraTitle": "Nuestro producto en acción",
-			"items": {
-				"title1": "Caso de uso: Gestión de tareas",
-				"description1": "Realiza un seguimiento del progreso de las tareas en un solo lugar con un diseño visual que añade un toque especial a tus tareas pendientes.",
-				"link1": "/use-cases/task-management",
-				"title2": "Caso de uso: Centro de recursos",
-				"description2": "Ahorra horas de trabajo al proporcionar a los equipos un centro de información bien diseñado para encontrar información de forma fácil y rápida.",
-				"link2": "/use-cases/resource-hub",
-				"title3": "Caso de uso: Gestión de proyectos",
-				"description3": "Mantén tus proyectos organizados, tus plazos al día y a tus compañeros de equipo alineados con Trello.",
-				"link3": "/use-cases/project-management"
+			"info": {
+				"solutionsTitle": "Toma como referencia estas guías de Trello prediseñadas para todos los equipos",
+				"items": {
+					"marketingTeams": "Equipo de Marketing",
+					"marketingTeamsDescription": "Ya sea para lanzar un nuevo producto, una campaña o crear contenido, Trello ayuda a los equipos de marketing a alcanzar el éxito.",
+					"marketingTeamsLink": "teams/marketing",
+
+					"productManagement": "Equipos de gestión",
+					"productManagementDescription": "Utiliza los tableros de gestión y las funciones de hoja de ruta de Trello para simplificar proyectos y procesos complejos.",
+					"productManagementLink": "/teams/product",
+
+					"engineeringTeams": "Equipo de Ingeniería",
+					"engineeringTeamsDescription": "Empodera a tus equipos de diseño utilizando Trello para optimizar las solicitudes creativas y promover una colaboración más fluida entre equipos.",
+					"engineeringTeamsLink": "/teams/engineering",
+
+					"designTeams": "Equipo de Diseño",
+					"designTeamsDescription": "Empodera a tus equipos de diseño utilizando Trello para optimizar las solicitudes creativas y promover una colaboración más fluida entre equipos.",
+					"designTeamsLink": "/teams/design",
+
+					"startups": "Startups",
+					"startupsDescription": "Desde alcanzar los objetivos de ingresos hasta gestionar los flujos de trabajo, las pequeñas empresas prosperan con Trello.",
+					"startupsLink": "/teams/startups",
+
+					"remoteTeams": "Equipo Remoto",
+					"remoteTeamsDescription": "Mantenga a su equipo remoto conectado y motivado, sin importar en qué parte del mundo se encuentren.",
+					"remoteTeamsLink": "/teams/remote-team-management"
+				}
 			},
-			"solutionsExtraLink": "/use-cases",
-			"solutionsExtraLinkText": "Ver todos los casos de uso"
+			"extraInfo": {
+				"solutionsExtraTitle": "Nuestro producto en acción",
+				"items": {
+					"title1": "Caso de uso: Gestión de tareas",
+					"description1": "Realiza un seguimiento del progreso de las tareas en un solo lugar con un diseño visual que añade un toque especial a tus tareas pendientes.",
+					"link1": "/use-cases/task-management",
+					"title2": "Caso de uso: Centro de recursos",
+					"description2": "Ahorra horas de trabajo al proporcionar a los equipos un centro de información bien diseñado para encontrar información de forma fácil y rápida.",
+					"link2": "/use-cases/resource-hub",
+					"title3": "Caso de uso: Gestión de proyectos",
+					"description3": "Mantén tus proyectos organizados, tus plazos al día y a tus compañeros de equipo alineados con Trello.",
+					"link3": "/use-cases/project-management"
+				},
+				"solutionsExtraLink": "/use-cases",
+				"solutionsExtraLinkText": "Ver todos los casos de uso"
+			}
 		},
 		"plans": {
-			"plansTitle": "Descubre las funciones que ayudan a tu equipo a triunfar",
-			"plansExtraTitle": "Compare planes y precios",
-			"plansExtraDescription": "Tanto si sois un equipo de 2 como de 2000 personas, el modelo de precios flexible de Trello te permite pagar solo por lo que necesitas.",
-			"plansExtraButton": "Ver precios de Trello",
-			"plansExtraButtonLink": "/pricing"
+			"info": {
+				"items": {
+					"estandard": "Estándar",
+					"estandardDescription": "Para equipos que necesitan gestionar más trabajo y ampliar la colaboración.",
+					"estandardLink": "/estandard",
+
+					"premium": "Premium",
+					"premiumDescription": "Ideal para equipos de hasta 100 personas que necesitan realizar un seguimiento de múltiples proyectos y visualizar el trabajo de diversas formas.",
+					"premiumLink": "/premium",
+
+					"enterprise": "Empresa",
+					"enterpriseDescription": "Todo lo que los equipos y administradores de su empresa necesitan para gestionar proyectos.",
+					"enterpriseLink": "/enterprise",
+
+					"free": "Plan Gratis",
+					"freeDescription": "Para personas o equipos pequeños que desean mantener su trabajo organizado.",
+					"freeButton": "Haz un recorrido gratis",
+					"freeLink": "/tour"
+				}
+			},
+			"extraInfo": {
+				"plansTitle": "Descubre las funciones que ayudan a tu equipo a triunfar",
+				"plansExtraTitle": "Compare planes y precios",
+				"plansExtraDescription": "Tanto si sois un equipo de 2 como de 2000 personas, el modelo de precios flexible de Trello te permite pagar solo por lo que necesitas.",
+				"plansExtraButton": "Ver precios de Trello",
+				"plansExtraButtonLink": "/pricing"
+			}
 		},
 		"pricing": {},
 		"resources": {
-			"resourcesTitle": "Aprende y conecta",
-			"resourcesExtraTitle": "Ayudando a los equipos a trabajar mejor juntos",
-			"resourcesExtraDescription": "Descubre casos de uso de Trello, consejos de productividad, mejores prácticas para la colaboración en equipo y consejos de expertos sobre el trabajo a distancia.",
-			"resourcesExtraButton": "Echa un vistazo al blog de Trello",
-			"resourcesExtraButtonLink": "/blog/trello"
+			"info": {
+				"resourcesTitle": "Aprende y conecta",
+				"items": {
+					"trelloGuide": "Guía de Trello",
+					"trelloGuideDescription": "Nuestra guía de flujo de trabajo fácil de seguir te llevará desde la configuración del proyecto hasta convertirte en un experto en Trello en muy poco tiempo.",
+					"trelloGuideLink": "teams/marketing",
+
+					"remoteWorkGuide": "Guía para el trabajo remoto",
+					"remoteWorkGuideDescription": "La guía completa para preparar a tu equipo para el éxito del trabajo remoto.",
+					"remoteWorkGuideLink": "/teams/product",
+
+					"webinars": "Seminarios web",
+					"webinarsDescription": "Disfruta de nuestros seminarios web gratuitos sobre Trello y conviértete en un profesional de la productividad.",
+					"webinarsLink": "/teams/engineering",
+
+					"customersStories": "Historias de clientes",
+					"customersStoriesDescription": "Descubre cómo las empresas han adoptado Trello como parte esencial de su flujo de trabajo",
+					"customersStoriesLink": "/teams/design",
+
+					"developers": "Desarrolladores",
+					"developersDescription": "¡El cielo es el límite en lo que puedes ofrecer a los usuarios de Trello con tu Power-Up!",
+					"developersLink": "/teams/startups",
+
+					"helpResources": "Recursos de ayuda",
+					"helpResourcesDescription": "¿Necesitas ayuda? Artículos y preguntas frecuentes para ayudarte a salir del atolladero.",
+					"helpResourcesLink": "/teams/remote-team-management"
+				}
+			},
+			"extraInfo": {
+				"resourcesExtraTitle": "Ayudando a los equipos a trabajar mejor juntos",
+				"resourcesExtraDescription": "Descubre casos de uso de Trello, consejos de productividad, mejores prácticas para la colaboración en equipo y consejos de expertos sobre el trabajo a distancia.",
+				"resourcesExtraButton": "Echa un vistazo al blog de Trello",
+				"resourcesExtraButtonLink": "/blog/trello"
+			}
 		}
 	}
 }

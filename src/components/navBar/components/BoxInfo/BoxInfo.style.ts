@@ -3,12 +3,14 @@ import { SxProps, Theme } from '@mui/material'
 
 export const BoxInfoContainerStyle: SxProps<Theme> = {
 	'.MuiDrawer-paper': { marginTop: '60px !important', width: '100%' },
+	height: '100%',
+	display: 'block',
 }
 
 export const BoxInfoContentStyle: SxProps<Theme> = {
-	display: 'flex',
 	alignItems: 'start',
 	justifyContent: 'start',
+	display: 'flex',
 	flexDirection: 'row',
 	width: '100%',
 }
@@ -27,7 +29,6 @@ export const BoxInfoRightStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'center',
 	width: 'calc(-237.5px + 50vw)',
-	backgroundColor: colors.gray,
 	padding: '2rem 0px 4.75rem',
 }
 

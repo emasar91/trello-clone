@@ -23,6 +23,7 @@ import Underline from './components/Underline/Underline'
 const Tabs = () => {
 	const { tabSelected, setTabSelected, setDrawerOpen, setBoxInfo, drawerOpen } =
 		useStoreTrello()
+	const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
 
 	const handleChange = (value: ITab) => {
 		setTabSelected(value.tab)
@@ -30,12 +31,11 @@ const Tabs = () => {
 		setBoxInfo(value.drawer as IDrawer)
 	}
 
-	const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
 	const [underline, setUnderline] = useState({
 		left: 0,
 		width: 0,
-		origin: 'left' as 'left' | 'right',
-		active: false, // activa animación
+		origin: 'left',
+		active: false,
 	})
 
 	useEffect(() => {
@@ -59,26 +59,28 @@ const Tabs = () => {
 			const left = rect.left - containerRect.left
 			const width = rect.width
 
-			// 1. Desactivar visibilidad y setear posición
 			setUnderline((prev) => ({
 				...prev,
 				left,
 				width,
-				origin: drawerOpen ? 'left' : 'right',
+				origin: 'left',
 				active: false,
 			}))
 
-			// 2. Esperar dos frames y luego activar
 			requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
 					setUnderline((prev) => ({
 						...prev,
-						active: drawerOpen, // solo mostrar si el drawer está abierto
+						active: drawerOpen,
 					}))
 				})
 			})
 		}
 	}, [tabSelected, drawerOpen])
+
+	useEffect(() => {
+		if (!drawerOpen) setUnderline((prev) => ({ ...prev, active: false }))
+	}, [drawerOpen])
 
 	return (
 		<Box sx={TabsContainerStyle}>
