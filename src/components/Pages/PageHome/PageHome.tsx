@@ -3,6 +3,7 @@ import CustomModal from '@/components/CustomModal/CustomModal'
 import PageContainer from '@/components/pageContainer/PageContainer'
 import VideoBox from '@/components/VideoBox/VideoBox'
 import Section1 from './components/Section1'
+import Section2 from './components/Section2'
 
 /**
  * PageHome component that renders a video and a description of the product.
@@ -16,6 +17,7 @@ const PageHome = () => {
 			<CustomModal styles={{ width: '720px', height: '405px' }}>
 				<VideoBox VideoSrc="/assets/video/VideoTrello.mp4" />
 			</CustomModal>
+			<Section2 />
 		</PageContainer>
 	)
 }
