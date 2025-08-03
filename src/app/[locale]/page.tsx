@@ -1,7 +1,7 @@
-import PageContainer from '@/components/pageContainer/PageContainer'
+import PageHome from '@/components/Pages/PageHome/PageHome'
 
 const HomePage = () => {
-	return <PageContainer>asdd</PageContainer>
+	return <PageHome />
 }
 
 export default HomePage

@@ -169,5 +169,12 @@
 				"resourcesExtraButtonLink": "/blog/trello"
 			}
 		}
+	},
+
+	"PageHome": {
+		"title": "Capture, organize, and tackle your to-dos from anywhere.",
+		"subTitle": "Escape the clutter and chaos—unleash your productivity with Trello.",
+		"description": "By entering my email, I acknowledge the Atlassian Privacy Policy",
+		"watchVideo": "Watch video"
 	}
 }

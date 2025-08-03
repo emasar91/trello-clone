@@ -8,6 +8,14 @@
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Charlie Display';
+	src: url('/fonts/charlie-text/CharlieT-Display.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
 :root {
 	--background: #ffffff;
 	--foreground: #171717;

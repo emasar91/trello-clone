@@ -169,5 +169,12 @@
 				"resourcesExtraButtonLink": "/blog/trello"
 			}
 		}
+	},
+
+	"PageHome": {
+		"title": "Captura, organiza y aborda tus tareas pendientes desde cualquier lugar.",
+		"subTitle": "Escápate del desorden y el caos: libera tu productividad con Trello.",
+		"description": "Al introducir mi correo electrónico, acepto la Política de privacidad de Atlassian.",
+		"watchVideo": "Ver video"
 	}
 }
