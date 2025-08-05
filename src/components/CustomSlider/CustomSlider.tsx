@@ -15,14 +15,12 @@ import {
 } from './CustomSlider.styles'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 
 type Props = {
 	showLeftItems: boolean
-	items: {
-		title: string
-		desc: string
-		image: string
-	}[]
+	items: string[]
+	translate: string
 }
 
 /**
@@ -31,16 +29,14 @@ type Props = {
  * @param {object} props The component props.
  * @param {boolean} props.showLeftItems Whether to show the left items.
  * @param {array} props.items The items to display in the slider.
- * @param {string} props.items[].title The title of the item.
- * @param {string} props.items[].desc The description of the item.
- * @param {string} props.items[].image The image of the item.
  *
  * @returns A JSX element representing the custom slider component.
  */
-export function CustomSlider({ showLeftItems, items }: Props) {
+export function CustomSlider({ showLeftItems, items, translate }: Props) {
 	const [isDragging, setIsDragging] = useState(false)
 	const [activeIndex, setActiveIndex] = useState(0)
 	const sliderRef = useRef<Slider | null>(null)
+	const t = useTranslations(translate)
 
 	const internalSetActiveIndex = (index: number) => {
 		setActiveIndex?.(index)
@@ -65,7 +61,7 @@ export function CustomSlider({ showLeftItems, items }: Props) {
 				<Box sx={CustomSliderLeftItemsContainerColumnStyle}>
 					{items.map((item, index) => (
 						<Box
-							key={item.title}
+							key={`item-${index}`}
 							onClick={() => internalSetActiveIndex(index)}
 							sx={CustomSliderLeftItemsContainerStyle(activeIndex, index)}
 						>
@@ -74,13 +70,13 @@ export function CustomSlider({ showLeftItems, items }: Props) {
 								sx={CustomSliderLeftItemsTitleStyle}
 								color="rgb(9, 30, 66)"
 							>
-								{item.title}
+								{t(`${item}.title`)}
 							</Typography>
 							<Typography
 								component={'p'}
 								sx={CustomSliderLeftItemsDescriptionStyle}
 							>
-								{item.desc}
+								{t(`${item}.description`)}
 							</Typography>
 						</Box>
 					))}
@@ -96,8 +92,8 @@ export function CustomSlider({ showLeftItems, items }: Props) {
 					>
 						{items.map((item, index) => (
 							<Tab
-								key={item.title}
-								aria-label={item.title}
+								key={t(`${item}.title`)}
+								aria-label={t(`${item}.title`)}
 								disableFocusRipple
 								disableTouchRipple
 								disableRipple
@@ -118,8 +114,8 @@ export function CustomSlider({ showLeftItems, items }: Props) {
 							<Box key={index} sx={CustomSliderImageContainerStyle}>
 								<Box
 									component="img"
-									src={item.image}
-									alt={item.title}
+									src={t(`${item}.image`)}
+									alt={t(`${item}.title`)}
 									sx={CustomSliderImageStyle}
 								/>
 							</Box>

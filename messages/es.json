@@ -181,7 +181,26 @@
 		"section2": {
 			"title": "Tu motor de productividad",
 			"subTitle": "Trello 101",
-			"description": "Mantén el orden y la eficiencia con la bandeja de entrada, los tableros y el planificador. Cada tarea, idea o responsabilidad, por pequeña que sea, encuentra su lugar, lo que te permite rendir al máximo."
+			"description": "Mantén el orden y la eficiencia con la bandeja de entrada, los tableros y el planificador. Cada tarea, idea o responsabilidad, por pequeña que sea, encuentra su lugar, lo que te permite rendir al máximo.",
+			"slider": {
+				"items": {
+					"Inbox": {
+						"title": "Bandeja de entrada",
+						"description": "Cuando lo tienes en mente, lo guardas en tu bandeja de entrada. Anota tus tareas pendientes desde cualquier lugar y en cualquier momento.",
+						"image": "/assets/inbox-slider.webp"
+					},
+					"Boards": {
+						"title": "Tableros",
+						"description": "Tu lista de tareas pendientes puede ser larga, ¡pero es manejable! Lleva un control de todo, desde «tareas pendientes» hasta «misión cumplida».",
+						"image": "/assets/board-slider.webp"
+					},
+					"Planner": {
+						"title": "Planificador",
+						"description": "Arrastra, suelta y listo. Añade tus tareas más importantes al calendario y dedica tiempo a lo que realmente importa.",
+						"image": "/assets/planner-slider.webp"
+					}
+				}
+			}
 		}
 	}
 }

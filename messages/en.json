@@ -181,7 +181,26 @@
 		"section2": {
 			"title": "Your productivity powerhouse",
 			"subTitle": "Trello 101",
-			"description": "Stay organized and efficient with Inbox, Boards, and Planner. Every to-do, idea, or responsibility—no matter how small—finds its place, keeping you at the top of your game."
+			"description": "Stay organized and efficient with Inbox, Boards, and Planner. Every to-do, idea, or responsibility—no matter how small—finds its place, keeping you at the top of your game.",
+			"slider": {
+				"items": {
+					"Inbox": {
+						"title": "Inbox",
+						"description": "When it’s on your mind, it goes in your Inbox. Capture your to-dos from anywhere, anytime.",
+						"image": "/assets/inbox-slider.webp"
+					},
+					"Boards": {
+						"title": "Boards",
+						"description": "Your to-do list may be long, but it can be manageable! Keep tabs on everything from \"to-dos to tackle\" to \"mission accomplished!”",
+						"image": "/assets/board-slider.webp"
+					},
+					"Planner": {
+						"title": "Planner",
+						"description": "Drag, drop, get it done. Snap your top tasks into your calendar and make time for what truly matters.",
+						"image": "/assets/planner-slider.webp"
+					}
+				}
+			}
 		}
 	}
 }
