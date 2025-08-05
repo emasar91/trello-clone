@@ -11,7 +11,7 @@ import {
 	ItemFullWidthIconContainerStyle,
 	ItemFullWidthTitleContainerStyle,
 	ItemFullWidthTitleStyle,
-} from './ItemFullWidth.style'
+} from './ItemFullWidth.styles'
 
 type Props = { data: IDataInfo; tabSelected: string }
 

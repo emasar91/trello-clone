@@ -8,7 +8,7 @@ import {
 	ExtraInfoItemContainerStyle,
 	ExtraInfoItemDescriptionStyle,
 	ExtraInfoItemTitleStyle,
-} from './ItemExtraInfo.style'
+} from './ItemExtraInfo.styles'
 
 type Props = { data: IExtraInfo; tabSelected: string }
 

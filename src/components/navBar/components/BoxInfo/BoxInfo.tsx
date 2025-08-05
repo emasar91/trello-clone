@@ -9,7 +9,7 @@ import {
 	BoxInfoLeftStyle,
 	BoxInfoRightContentStyle,
 	BoxInfoRightStyle,
-} from './BoxInfo.style'
+} from './BoxInfo.styles'
 import Info from './components/Info/Info'
 import ExtraInfo from './components/ExtraInfo/ExtraInfo'
 

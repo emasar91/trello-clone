@@ -8,7 +8,7 @@ import {
 	NavBarContainerStyle,
 	NavBarLogoStyle,
 	NavBarRowStyle,
-} from './NavBar.style'
+} from './NavBar.styles'
 import { Logo } from '../../../public/assets/Logo'
 import { useTranslations } from 'next-intl'
 

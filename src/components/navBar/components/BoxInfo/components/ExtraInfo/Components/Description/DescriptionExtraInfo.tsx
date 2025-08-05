@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 import React from 'react'
-import { ExtraInfoDescriptionStyle } from './DescriptionExtraInfo.style'
+import { ExtraInfoDescriptionStyle } from './DescriptionExtraInfo.styles'
 
 type Props = { text: string }
 

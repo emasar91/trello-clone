@@ -1,7 +1,7 @@
 import Modal from '@mui/material/Modal'
 import { Box } from '@mui/material'
 import { useStoreTrello } from '@/context/useStoreTrello'
-import { ModalStyles } from './CustomModal.style'
+import { ModalStyles } from './CustomModal.styles'
 type Props = { children: React.ReactNode; styles?: object }
 
 /**

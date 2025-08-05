@@ -3,7 +3,7 @@ import React from 'react'
 import {
 	PageContainerChildStyle,
 	PageContainerStyle,
-} from './PageContainer.style'
+} from './PageContainer.styles'
 
 type Props = {
 	children: React.ReactNode

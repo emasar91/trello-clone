@@ -1,9 +1,9 @@
 import { ITab } from '@/types/navBar'
 import { Button } from '@mui/material'
 import React, { forwardRef } from 'react'
-import { ArrowDown } from '@/components/Icons/ArrowDown'
+import { ArrowDown } from '@/public/assets/icons/ArrowDown'
 import { useTranslations } from 'next-intl'
-import { TabContainerStyle } from './Tab.style'
+import { TabContainerStyle } from './Tab.styles'
 
 type Props = {
 	tab: ITab

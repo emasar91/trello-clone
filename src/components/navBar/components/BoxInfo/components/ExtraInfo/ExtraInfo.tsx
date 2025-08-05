@@ -1,6 +1,6 @@
 import { IExtraInfo } from '@/types/navBar'
 import { Box } from '@mui/material'
-import { ExtraInfoStyle } from './ExtaInfo.style'
+import { ExtraInfoStyle } from './ExtaInfo.styles'
 import { useTranslations } from 'next-intl'
 import TitleExtraInfo from './Components/Title/TitleExtraInfo'
 import DescriptionExtraInfo from './Components/Description/DescriptionExtraInfo'

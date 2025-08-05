@@ -172,9 +172,16 @@
 	},
 
 	"PageHome": {
-		"title": "Capture, organize, and tackle your to-dos from anywhere.",
-		"subTitle": "Escape the clutter and chaos—unleash your productivity with Trello.",
-		"description": "By entering my email, I acknowledge the Atlassian Privacy Policy",
-		"watchVideo": "Watch video"
+		"section1": {
+			"title": "Capture, organize, and tackle your to-dos from anywhere.",
+			"subTitle": "Escape the clutter and chaos—unleash your productivity with Trello.",
+			"description": "By entering my email, I acknowledge the Atlassian Privacy Policy",
+			"watchVideo": "Watch video"
+		},
+		"section2": {
+			"title": "Your productivity powerhouse",
+			"subTitle": "Trello 101",
+			"description": "Stay organized and efficient with Inbox, Boards, and Planner. Every to-do, idea, or responsibility—no matter how small—finds its place, keeping you at the top of your game."
+		}
 	}
 }

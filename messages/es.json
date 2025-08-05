@@ -172,9 +172,16 @@
 	},
 
 	"PageHome": {
-		"title": "Captura, organiza y aborda tus tareas pendientes desde cualquier lugar.",
-		"subTitle": "Escápate del desorden y el caos: libera tu productividad con Trello.",
-		"description": "Al introducir mi correo electrónico, acepto la Política de privacidad de Atlassian.",
-		"watchVideo": "Ver video"
+		"section1": {
+			"title": "Captura, organiza y aborda tus tareas pendientes desde cualquier lugar.",
+			"subTitle": "Escápate del desorden y el caos: libera tu productividad con Trello.",
+			"description": "Al introducir mi correo electrónico, acepto la Política de privacidad de Atlassian.",
+			"watchVideo": "Ver video"
+		},
+		"section2": {
+			"title": "Tu motor de productividad",
+			"subTitle": "Trello 101",
+			"description": "Mantén el orden y la eficiencia con la bandeja de entrada, los tableros y el planificador. Cada tarea, idea o responsabilidad, por pequeña que sea, encuentra su lugar, lo que te permite rendir al máximo."
+		}
 	}
 }

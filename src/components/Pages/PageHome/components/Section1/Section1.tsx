@@ -17,7 +17,7 @@ import {
 
 const Section1 = () => {
 	const { setOpenModal } = useStoreTrello()
-	const t = useTranslations('PageHome')
+	const t = useTranslations('PageHome.section1')
 	return (
 		<Box sx={PageHomeContainerStyle}>
 			<Box sx={PageHomeContentStyle}>

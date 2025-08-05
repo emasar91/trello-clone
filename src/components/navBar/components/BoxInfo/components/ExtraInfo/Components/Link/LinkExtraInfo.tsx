@@ -6,7 +6,7 @@ import {
 	ExtraInfoContainerLinkStyle,
 	ExtraInfoItemTitleStyle,
 	ExtraInfoLinkStyle,
-} from './LinkExtraInfo.style'
+} from './LinkExtraInfo.styles'
 
 type Props = { linkButton: string; linkTitle: string }
 

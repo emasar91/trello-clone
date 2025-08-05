@@ -10,7 +10,7 @@ import {
 	ItemInfoTitleContainerStyle,
 	ItemInfoTitleIconStyle,
 	ItemInfoTitleStyle,
-} from './ItemInfo.style'
+} from './ItemInfo.styles'
 
 type Props = { data: IDataInfo; tabSelected: string }
 

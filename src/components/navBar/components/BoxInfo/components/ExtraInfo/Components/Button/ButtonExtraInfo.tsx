@@ -1,6 +1,6 @@
 import { Box, Link } from '@mui/material'
 import React from 'react'
-import { ExtraInfoButtonStyle } from './buttonExtraInfo.style'
+import { ExtraInfoButtonStyle } from './buttonExtraInfo.styles'
 
 type Props = { text: string; linkButton: string }
 

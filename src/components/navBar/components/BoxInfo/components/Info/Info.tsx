@@ -1,6 +1,6 @@
 import { IDataInfo } from '@/types/navBar'
 import { Box } from '@mui/material'
-import { InfoStyle } from './Info.style'
+import { InfoStyle } from './Info.styles'
 import { useTranslations } from 'next-intl'
 import TitleInfo from './components/Title/TitleInfo'
 import ItemInfo from './components/Item/ItemInfo'
