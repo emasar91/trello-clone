@@ -201,6 +201,18 @@
 					}
 				}
 			}
+		},
+		"section3": {
+			"Title": "Del mensaje a la acción",
+			"subTitle": "Convierte rápidamente las comunicaciones de tus aplicaciones favoritas en tareas pendientes, manteniendo todas tus conversaciones y tareas organizadas en un solo lugar.",
+			"cardFeature1": {
+				"title": "Magia del correo electrónico",
+				"description": "¡Convierte fácilmente tus correos electrónicos en tareas pendientes! Solo tienes que reenviarlos a tu bandeja de entrada de Trello y Atlassian Intelligence (IA) los transformará en tareas organizadas con todos los enlaces que necesitas."
+			},
+			"cardFeature2": {
+				"title": "Magia de la aplicación de mensajes",
+				"description": "¿Necesitas hacer un seguimiento de un mensaje de Slack o Microsoft Teams? ¡Envíalo directamente a tu tablero de Trello! La interfaz de tu aplicación favorita te permite guardar los mensajes que aparecen en tu bandeja de entrada de Trello con resúmenes y enlaces generados por IA."
+			}
 		}
 	}
 }

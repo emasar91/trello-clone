@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl'
 import { CustomSlider } from '@/components/CustomSlider/CustomSlider'
 import { itemsSliderSection2 } from '@/constants'
 
-export default function FeatureSlider() {
+const Section2 = () => {
 	const t = useTranslations('PageHome.section2')
 
 	return (
@@ -41,3 +41,5 @@ export default function FeatureSlider() {
 		</Box>
 	)
 }
+
+export default Section2

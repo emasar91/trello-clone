@@ -4,6 +4,7 @@ import PageContainer from '@/components/pageContainer/PageContainer'
 import VideoBox from '@/components/VideoBox/VideoBox'
 import Section1 from './components/Section1/Section1'
 import Section2 from './components/Section2/Section2'
+import Section3 from './components/Section3/Section3'
 
 /**
  * PageHome component that renders a video and a description of the product.
@@ -21,6 +22,9 @@ const PageHome = () => {
 			</PageContainer>
 			<PageContainer backgroundColor="rgba(255,255,255,255)">
 				<Section2 />
+			</PageContainer>
+			<PageContainer backgroundColor="rgb(0,101,255)">
+				<Section3 />
 			</PageContainer>
 		</>
 	)

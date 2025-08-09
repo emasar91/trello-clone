@@ -201,6 +201,18 @@
 					}
 				}
 			}
+		},
+		"section3": {
+			"title": "From message to action",
+			"subTitle": "Quickly turn communication from your favorite apps into to-dos, keeping all your discussions and tasks organized in one place.",
+			"cardFeature1": {
+				"title": "Email Magic",
+				"description": "Easily turn your emails into to-dos! Just forward them to your Trello Inbox, and they’ll be transformed by Atlassian Intelligence (AI) into organized to-dos with all the links you need."
+			},
+			"cardFeature2": {
+				"title": "Message App Sorcery",
+				"description": "Need to follow up on a message from Slack or Microsoft Teams? Send it directly to your Trello board! Your favorite app interface lets you save messages that appear in your Trello Inbox with AI-generated summaries and links."
+			}
 		}
 	}
 }

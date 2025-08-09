@@ -2,6 +2,8 @@ import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const NavBarContainerStyle: SxProps<Theme> = {
+	position: 'fixed',
+	top: '0px',
 	display: 'flex',
 	width: '100%',
 	zIndex: '1300',
