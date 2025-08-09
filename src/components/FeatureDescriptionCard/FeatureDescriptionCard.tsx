@@ -5,6 +5,7 @@ import {
 	FeatureDescriptionCardContainerStyle,
 	FeatureDescriptionCardContentStyle,
 	FeatureDescriptionCardDescriptionStyle,
+	FeatureDescriptionCardImageStyle,
 	FeatureDescriptionCardTitleAndDescriptionContainerStyle,
 	FeatureDescriptionCardTitleContainerStyle,
 	FeatureDescriptionCardTitleStyle,
@@ -28,7 +29,11 @@ const FeatureDescriptionCard = ({
 	return (
 		<Box sx={FeatureDescriptionCardContainerStyle}>
 			<Box sx={FeatureDescriptionCardContentStyle(sideImage)}>
-				<Box component={'img'} src={imageSrc} sx={{ width: '55%' }}></Box>
+				<Box
+					component={'img'}
+					src={imageSrc}
+					sx={FeatureDescriptionCardImageStyle}
+				></Box>
 				<Box sx={FeatureDescriptionCardTitleAndDescriptionContainerStyle}>
 					<Box sx={FeatureDescriptionCardTitleContainerStyle}>
 						{icon}

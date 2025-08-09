@@ -27,6 +27,8 @@ export const FeatureDescriptionCardTitleContainerStyle: SxProps<Theme> = {
 export const FeatureDescriptionCardTitleAndDescriptionContainerStyle: SxProps<Theme> =
 	{ padding: '0px 2rem', width: '45%' }
 
+export const FeatureDescriptionCardImageStyle: SxProps<Theme> = { width: '55%' }
+
 export const FeatureDescriptionCardContentStyle = (
 	sideImage: 'left' | 'right'
 ) => ({
