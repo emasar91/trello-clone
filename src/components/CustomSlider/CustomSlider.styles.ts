@@ -12,10 +12,12 @@ export const CustomSliderImageContainerStyle: SxProps<Theme> = {
 }
 
 export const CustomSliderContentContainerStyle = (
-	isDragging: boolean
+	isDragging: boolean,
+	showLeftItems: boolean
 ): SxProps<Theme> => ({
 	width: '100%',
-	maxWidth: 720,
+	maxWidth: showLeftItems ? 720 : 1108,
+	mawHeight: showLeftItems ? 450 : 300,
 	mx: 'auto',
 	cursor: isDragging ? 'grabbing' : 'grab',
 })
@@ -46,15 +48,32 @@ export const CustomSliderTabStyle = (
 })
 
 export const CustomSliderTabsPanelStyle: SxProps<Theme> = {
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
 	'& .MuiTabs-indicator': {
 		display: 'none',
 	},
 	'& .MuiTabs-scroller	': {
-		height: '1rem',
+		height: '1.5rem',
+		display: 'flex',
+		alignItems: 'center',
 	},
 	minHeight: '0',
 	marginLeft: 'auto',
 	width: 'max-content',
+}
+
+export const CustomSliderTabsArrowPanelStyle: SxProps<Theme> = {
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	'& .MuiTabs-indicator': {
+		display: 'none',
+	},
+	'& .MuiTabs-scroller	': {
+		height: '1.5rem',
+	},
 }
 
 export const CustomSliderLeftItemsDescriptionStyle: SxProps<Theme> = {
@@ -95,4 +114,28 @@ export const CustomSliderContainerStyle: SxProps<Theme> = {
 	flexDirection: 'row',
 	gap: 4,
 	padding: '1rem 1rem 5rem',
+}
+
+export const CustomSliderRightIconTabStyle: SxProps<Theme> = {
+	backgroundColor: 'rgb(244, 245, 247) !important',
+	padding: '0.4rem',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	'&:hover svg polygon': {
+		fill: 'rgb(0,184,217)',
+	},
+}
+
+export const CustomSliderLeftIconTabStyle: SxProps<Theme> = {
+	backgroundColor: 'rgb(244, 245, 247) !important',
+	padding: '0.4rem',
+	margin: '0 1rem',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	marginRight: '2rem',
+	'&:hover svg polygon': {
+		fill: 'rgb(0,184,217)',
+	},
 }

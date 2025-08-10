@@ -1,4 +1,4 @@
-import { Box, Tabs, Tab, Typography } from '@mui/material'
+import { Box, Tabs, Tab, Typography, IconButton } from '@mui/material'
 import Slider from 'react-slick'
 import { useRef, useState } from 'react'
 import {
@@ -6,16 +6,21 @@ import {
 	CustomSliderContentContainerStyle,
 	CustomSliderImageContainerStyle,
 	CustomSliderImageStyle,
+	CustomSliderLeftIconTabStyle,
 	CustomSliderLeftItemsContainerColumnStyle,
 	CustomSliderLeftItemsContainerStyle,
 	CustomSliderLeftItemsDescriptionStyle,
 	CustomSliderLeftItemsTitleStyle,
+	CustomSliderRightIconTabStyle,
+	CustomSliderTabsArrowPanelStyle,
 	CustomSliderTabsPanelStyle,
 	CustomSliderTabStyle,
 } from './CustomSlider.styles'
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
+import { ArrowLeftIcon } from '@/public/assets/icons/ArrowLeftIcon'
+import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
 
 type Props = {
 	showLeftItems: boolean
@@ -83,8 +88,14 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 				</Box>
 			)}
 
-			<Box>
-				<Box>
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'column',
+					gap: '1.5rem',
+				}}
+			>
+				<Box sx={{ display: 'flex', gap: '1.5rem' }}>
 					<Tabs
 						value={activeIndex}
 						onChange={(_, newValue) => internalSetActiveIndex(newValue)}
@@ -101,17 +112,47 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 							/>
 						))}
 					</Tabs>
+
+					{!showLeftItems && (
+						<Box sx={CustomSliderTabsArrowPanelStyle}>
+							<IconButton
+								onClick={() =>
+									internalSetActiveIndex(
+										activeIndex === 0 ? items.length - 1 : activeIndex - 1
+									)
+								}
+								sx={CustomSliderLeftIconTabStyle}
+								disableRipple
+							>
+								<ArrowLeftIcon />
+							</IconButton>
+							<IconButton
+								onClick={() =>
+									internalSetActiveIndex(
+										activeIndex === items.length - 1 ? 0 : activeIndex + 1
+									)
+								}
+								sx={CustomSliderRightIconTabStyle}
+								disableRipple
+							>
+								<ArrowRightIcon />
+							</IconButton>
+						</Box>
+					)}
 				</Box>
 
 				<Box
-					sx={CustomSliderContentContainerStyle(isDragging)}
+					sx={CustomSliderContentContainerStyle(isDragging, showLeftItems)}
 					onMouseDown={() => setIsDragging(true)}
 					onMouseUp={() => setIsDragging(false)}
 					onMouseLeave={() => setIsDragging(false)}
 				>
 					<Slider ref={sliderRef} {...settings}>
 						{items.map((item, index) => (
-							<Box key={index} sx={CustomSliderImageContainerStyle}>
+							<Box
+								key={`index-${index}-${item.title}`}
+								sx={CustomSliderImageContainerStyle}
+							>
 								<Box
 									component="img"
 									src={t(`${item.title}.image`)}

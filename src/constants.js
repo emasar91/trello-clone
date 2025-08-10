@@ -199,8 +199,6 @@ export const itemsSliderSection2 = [
 	{ title: 'Boards' },
 	{
 		title: 'Planner',
-		description: 'PlannerDescription',
-		image: 'PlannerSlider',
 	},
 ]
 
@@ -226,6 +224,14 @@ export const featureItemsSection4 = [
 	},
 	{
 		title: 'CardMirroring',
+	},
+]
+
+export const itemsSliderSection5 = [
+	{ title: 'slide1' },
+	{ title: 'slide2' },
+	{
+		title: 'slide3',
 	},
 ]
 

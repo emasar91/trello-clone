@@ -1,5 +1,5 @@
 import { colors } from '@/constants'
-import { ArrowRight } from '@/public/assets/icons/ArrowRightIcon'
+import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
 import { IExtraInfo } from '@/types/navBar'
 import { Box, Link, Typography } from '@mui/material'
 import { useTranslations } from 'next-intl'
@@ -52,7 +52,7 @@ const ItemExtraInfo = ({ data, tabSelected }: Props) => {
 									...ExtraInfoItemTitleStyle,
 								}}
 							>
-								<ArrowRight color={colors.violet} />
+								<ArrowRightIcon color={colors.violet} />
 							</Box>
 						</Box>
 						<Typography component="p" sx={ExtraInfoItemDescriptionStyle}>

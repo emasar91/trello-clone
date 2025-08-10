@@ -245,6 +245,27 @@
 					"buttonLink": "/pricing"
 				}
 			}
+		},
+		"section5": {
+			"slider": {
+				"items": {
+					"slide1": {
+						"title": "slide1",
+						"description": "slide1",
+						"image": "/assets/slide1-esp.png"
+					},
+					"slide2": {
+						"title": "slide2",
+						"description": "slide2",
+						"image": "/assets/slide2-esp.png"
+					},
+					"slide3": {
+						"title": "slide3",
+						"description": "slide3",
+						"image": "/assets/slide3-esp.png"
+					}
+				}
+			}
 		}
 	}
 }

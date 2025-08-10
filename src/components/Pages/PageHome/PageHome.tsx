@@ -6,6 +6,7 @@ import Section1 from './components/Section1/Section1'
 import Section2 from './components/Section2/Section2'
 import Section3 from './components/Section3/Section3'
 import Section4 from './components/Section4/Section4'
+import Section5 from './components/Section5/Section5'
 
 /**
  * PageHome component that renders a video and a description of the product.
@@ -29,6 +30,9 @@ const PageHome = () => {
 			</PageContainer>
 			<PageContainer backgroundColor="rgb(255,255,255)" margin="-175px 0 0 0">
 				<Section4 />
+			</PageContainer>
+			<PageContainer backgroundColor="rgb(255,255,255)">
+				<Section5 />
 			</PageContainer>
 		</>
 	)
