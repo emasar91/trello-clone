@@ -16,11 +16,10 @@ import {
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import { ISliderItem } from '@/types/slider'
 
 type Props = {
 	showLeftItems: boolean
-	items: ISliderItem[]
+	items: { title: string }[]
 	translate: string
 }
 
