@@ -16,10 +16,11 @@ import {
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
+import { ISliderItem } from '@/types/slider'
 
 type Props = {
 	showLeftItems: boolean
-	items: string[]
+	items: ISliderItem[]
 	translate: string
 }
 
@@ -70,13 +71,13 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 								sx={CustomSliderLeftItemsTitleStyle}
 								color="rgb(9, 30, 66)"
 							>
-								{t(`${item}.title`)}
+								{t(`${item.title}.title`)}
 							</Typography>
 							<Typography
 								component={'p'}
 								sx={CustomSliderLeftItemsDescriptionStyle}
 							>
-								{t(`${item}.description`)}
+								{t(`${item.title}.description`)}
 							</Typography>
 						</Box>
 					))}
@@ -92,8 +93,8 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 					>
 						{items.map((item, index) => (
 							<Tab
-								key={t(`${item}.title`)}
-								aria-label={t(`${item}.title`)}
+								key={t(`${item.title}.title`)}
+								aria-label={t(`${item.title}.title`)}
 								disableFocusRipple
 								disableTouchRipple
 								disableRipple
@@ -114,8 +115,8 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 							<Box key={index} sx={CustomSliderImageContainerStyle}>
 								<Box
 									component="img"
-									src={t(`${item}.image`)}
-									alt={t(`${item}.title`)}
+									src={t(`${item.title}.image`)}
+									alt={t(`${item.title}.title`)}
 									sx={CustomSliderImageStyle}
 								/>
 							</Box>

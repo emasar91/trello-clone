@@ -8,6 +8,7 @@ import {
 type Props = {
 	children: React.ReactNode
 	backgroundColor?: string
+	margin?: string
 }
 
 /**
@@ -19,9 +20,9 @@ type Props = {
  * @param {{ children: React.ReactNode }} props
  * @returns {React.ReactElement}
  */
-const PageContainer = ({ children, backgroundColor }: Props) => {
+const PageContainer = ({ children, backgroundColor, margin }: Props) => {
 	return (
-		<Box sx={PageContainerStyle(backgroundColor)}>
+		<Box sx={PageContainerStyle(backgroundColor, margin)}>
 			<Box sx={PageContainerChildStyle}>{children}</Box>
 		</Box>
 	)

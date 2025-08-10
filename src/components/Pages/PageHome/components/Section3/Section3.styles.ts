@@ -5,6 +5,7 @@ export const Section3ContainerStyle: SxProps<Theme> = {
 	flexDirection: 'column',
 	alignItems: 'center',
 	justifyContent: 'center',
+	zIndex: 10,
 }
 
 export const Section3TitleStyle: SxProps<Theme> = {

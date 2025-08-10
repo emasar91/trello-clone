@@ -203,15 +203,47 @@
 			}
 		},
 		"section3": {
-			"Title": "Del mensaje a la acción",
+			"title": "Del mensaje a la acción",
 			"subTitle": "Convierte rápidamente las comunicaciones de tus aplicaciones favoritas en tareas pendientes, manteniendo todas tus conversaciones y tareas organizadas en un solo lugar.",
-			"cardFeature1": {
-				"title": "Magia del correo electrónico",
-				"description": "¡Convierte fácilmente tus correos electrónicos en tareas pendientes! Solo tienes que reenviarlos a tu bandeja de entrada de Trello y Atlassian Intelligence (IA) los transformará en tareas organizadas con todos los enlaces que necesitas."
-			},
-			"cardFeature2": {
-				"title": "Magia de la aplicación de mensajes",
-				"description": "¿Necesitas hacer un seguimiento de un mensaje de Slack o Microsoft Teams? ¡Envíalo directamente a tu tablero de Trello! La interfaz de tu aplicación favorita te permite guardar los mensajes que aparecen en tu bandeja de entrada de Trello con resúmenes y enlaces generados por IA."
+			"items": {
+				"EmailMagic": {
+					"title": "Magia del correo electrónico",
+					"description": "¡Convierte fácilmente tus correos electrónicos en tareas pendientes! Solo tienes que reenviarlos a tu bandeja de entrada de Trello y Atlassian Intelligence (IA) los transformará en tareas organizadas con todos los enlaces que necesitas.",
+					"image": "/assets/email-todos.webp"
+				},
+				"MessageAppSorcery": {
+					"title": "Magia de la aplicación de mensajes",
+					"description": "¿Necesitas hacer un seguimiento de un mensaje de Slack o Microsoft Teams? ¡Envíalo directamente a tu tablero de Trello! La interfaz de tu aplicación favorita te permite guardar los mensajes que aparecen en tu bandeja de entrada de Trello con resúmenes y enlaces generados por IA.",
+					"image": "/assets/slackteams-to-inbox.webp"
+				}
+			}
+		},
+		"section4": {
+			"title": "Haz más con Trello",
+			"subTitle": "Trabaja de forma más inteligente",
+			"description": "Personalice la forma en que se organiza con integraciones sencillas, automatización y duplicación de sus tareas pendientes en múltiples ubicaciones.",
+			"items": {
+				"Integrations": {
+					"title": "Integraciones",
+					"description": "Conecta las aplicaciones que ya utilizas a tu flujo de trabajo de Trello o añade un Power-Up para ajustarlo a tus necesidades específicas.",
+					"image": "/assets/integration.svg",
+					"button": "Explorar integraciones",
+					"buttonLink": "/integrations"
+				},
+				"ButlerAutomation": {
+					"title": "Automatización Butler",
+					"description": "La automatización sin código está integrada en todos los tableros de Trello. Céntrate en el trabajo que más importa y deja que los robots hagan el resto.",
+					"image": "/assets/ButlerAutomation.svg",
+					"button": "Conozca la automatización",
+					"buttonLink": "/butler-automation"
+				},
+				"CardMirroring": {
+					"title": "Duplicación de tarjetas",
+					"description": "Vea todas sus tareas pendientes de varios tableros en un solo lugar. Duplique una tarjeta para realizar un seguimiento del trabajo donde lo necesite.",
+					"image": "/assets/CardMirroring.svg",
+					"button": "Comparar planes",
+					"buttonLink": "/pricing"
+				}
 			}
 		}
 	}

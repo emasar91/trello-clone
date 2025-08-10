@@ -205,13 +205,45 @@
 		"section3": {
 			"title": "From message to action",
 			"subTitle": "Quickly turn communication from your favorite apps into to-dos, keeping all your discussions and tasks organized in one place.",
-			"cardFeature1": {
-				"title": "Email Magic",
-				"description": "Easily turn your emails into to-dos! Just forward them to your Trello Inbox, and they’ll be transformed by Atlassian Intelligence (AI) into organized to-dos with all the links you need."
-			},
-			"cardFeature2": {
-				"title": "Message App Sorcery",
-				"description": "Need to follow up on a message from Slack or Microsoft Teams? Send it directly to your Trello board! Your favorite app interface lets you save messages that appear in your Trello Inbox with AI-generated summaries and links."
+			"items": {
+				"EmailMagic": {
+					"title": "Email Magic",
+					"description": "Easily turn your emails into to-dos! Just forward them to your Trello Inbox, and they’ll be transformed by Atlassian Intelligence (AI) into organized to-dos with all the links you need.",
+					"image": "/assets/email-todos.webp"
+				},
+				"MessageAppSorcery": {
+					"title": "Message App Sorcery",
+					"description": "Need to follow up on a message from Slack or Microsoft Teams? Send it directly to your Trello board! Your favorite app interface lets you save messages that appear in your Trello Inbox with AI-generated summaries and links.",
+					"image": "/assets/slackteams-to-inbox.webp"
+				}
+			}
+		},
+		"section4": {
+			"title": "Do more with Trello",
+			"subTitle": "Work Smarter",
+			"description": "Customize the way you organize with easy integrations, automation, and mirroring of your to-dos across multiple locations.",
+			"items": {
+				"Integrations": {
+					"title": "Integrations",
+					"description": "Connect the apps you are already using into your Trello workflow or add a Power-Up to fine-tune your specific needs.",
+					"image": "/assets/integration.svg",
+					"button": "Browse Integrations",
+					"buttonLink": "/integrations"
+				},
+				"ButlerAutomation": {
+					"title": "Butler Automation",
+					"description": "No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.",
+					"image": "/assets/ButlerAutomation.svg",
+					"button": "Get to know Automation",
+					"buttonLink": "/butler-automation"
+				},
+				"CardMirroring": {
+					"title": "Card mirroring",
+					"description": "View all your to-dos from multiple boards in one place. Mirror a card to keep track of work wherever you need it!",
+					"image": "/assets/CardMirroring.svg",
+					"button": "Compare plans",
+					"buttonLink": "/pricing"
+				}
 			}
 		}
 	}

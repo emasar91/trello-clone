@@ -1,3 +1,6 @@
+import { CalendarIcon } from '@/public/assets/icons/CalendarIcon'
+import { EmilMagicIcon } from '@/public/assets/icons/EmailMagicIcon'
+
 export const tabsNavbar = [
 	{
 		tab: 'features',
@@ -191,7 +194,40 @@ export const tabsNavbar = [
 	},
 ]
 
-export const itemsSliderSection2 = ['Inbox', 'Boards', 'Planner']
+export const itemsSliderSection2 = [
+	{ title: 'Inbox' },
+	{ title: 'Boards' },
+	{
+		title: 'Planner',
+		description: 'PlannerDescription',
+		image: 'PlannerSlider',
+	},
+]
+
+export const featureSection3 = [
+	{
+		title: 'EmailMagic',
+		icon: <EmilMagicIcon />,
+		sideImage: 'left',
+	},
+	{
+		title: 'MessageAppSorcery',
+		icon: <CalendarIcon />,
+		sideImage: 'right',
+	},
+]
+
+export const featureItemsSection4 = [
+	{
+		title: 'Integrations',
+	},
+	{
+		title: 'ButlerAutomation',
+	},
+	{
+		title: 'CardMirroring',
+	},
+]
 
 export const colors = {
 	white: '#ffffff',

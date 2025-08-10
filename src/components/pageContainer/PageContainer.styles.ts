@@ -1,7 +1,8 @@
 import { SxProps, Theme } from '@mui/material'
 
 export const PageContainerStyle = (
-	backgroundColor?: string
+	backgroundColor?: string,
+	margin?: string
 ): SxProps<Theme> => ({
 	display: 'flex',
 	height: '100%',
@@ -10,6 +11,7 @@ export const PageContainerStyle = (
 	alignItems: 'center',
 	justifyContent: 'center',
 	backgroundColor: backgroundColor,
+	margin: margin,
 })
 
 export const PageContainerChildStyle: SxProps<Theme> = {
