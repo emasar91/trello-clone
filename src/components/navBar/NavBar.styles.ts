@@ -44,3 +44,32 @@ export const NavBarLogoStyle: SxProps<Theme> = {
 	display: 'flex',
 	padding: '1rem',
 }
+
+export const NavBarRegisterStyle: SxProps<Theme> = {
+	backgroundColor: 'rgb(0, 101, 255)',
+	WebkitBoxAlign: 'center',
+	alignItems: 'center',
+	alignSelf: 'stretch',
+	color: 'rgb(255, 255, 255)',
+	display: 'flex',
+	fontSize: '1.2rem',
+	height: '100%',
+	padding: '0.5rem 1.5rem',
+	textDecoration: 'none',
+}
+
+export const NavBarLoginStyle: SxProps<Theme> = {
+	alignItems: 'center',
+	alignSelf: 'stretch',
+	color: 'rgb(23, 43, 77)',
+	display: 'flex',
+	fontSize: '1.2rem',
+	height: '100%',
+	padding: '0.5rem 1.5rem',
+	textDecoration: 'none',
+}
+
+export const NavBarLangSwitcherStyle: SxProps<Theme> = {
+	display: 'flex',
+	alignItems: 'center',
+}

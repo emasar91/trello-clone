@@ -6,11 +6,15 @@ import { Box, Link } from '@mui/material'
 import {
 	NavBarButtonsLoginStyle,
 	NavBarContainerStyle,
+	NavBarLangSwitcherStyle,
+	NavBarLoginStyle,
 	NavBarLogoStyle,
+	NavBarRegisterStyle,
 	NavBarRowStyle,
 } from './NavBar.styles'
 import { Logo } from '../../../public/assets/Logo'
 import { useTranslations } from 'next-intl'
+import LangSwitcher from './components/LangSwitcher/LangSwitcher'
 
 /**
  * The Navbar component for the Trelo clone.
@@ -34,36 +38,15 @@ const NavBar = () => {
 					<TabsNavbar />
 				</Box>
 				<Box sx={NavBarButtonsLoginStyle}>
-					<Link
-						sx={{
-							alignItems: 'center',
-							alignSelf: 'stretch',
-							color: 'rgb(23, 43, 77)',
-							display: 'flex',
-							fontSize: '1.2rem',
-							height: '100%',
-							padding: '0.5rem 1.5rem',
-							textDecoration: 'none',
-						}}
-					>
+					<Box sx={NavBarLangSwitcherStyle}>
+						<LangSwitcher />
+					</Box>
+					<Box component={Link} href={'/login'} sx={NavBarLoginStyle}>
 						{t('login')}
-					</Link>
-					<Link
-						sx={{
-							backgroundColor: 'rgb(0, 101, 255)',
-							WebkitBoxAlign: 'center',
-							alignItems: 'center',
-							alignSelf: 'stretch',
-							color: 'rgb(255, 255, 255)',
-							display: 'flex',
-							fontSize: '1.2rem',
-							height: '100%',
-							padding: '0.5rem 1.5rem',
-							textDecoration: 'none',
-						}}
-					>
+					</Box>
+					<Box component={Link} href={'/register'} sx={NavBarRegisterStyle}>
 						{t('getFree')}
-					</Link>
+					</Box>
 				</Box>
 			</Box>
 		</Box>
