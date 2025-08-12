@@ -267,5 +267,30 @@
 				}
 			}
 		}
+	},
+	"Footer": {
+		"loging": "Log in",
+		"items": {
+			"AboutTrello": {
+				"title": "About Trello",
+				"subTitle": "What’s behind the boards.",
+				"link": "/about"
+			},
+			"Jobs": {
+				"title": "Jobs",
+				"subTitle": "Learn about open roles on the Trello team.",
+				"link": "/company/careers"
+			},
+			"Apps": {
+				"title": "Apps",
+				"subTitle": "Download the Trello App for your Desktop or Mobile devices.",
+				"link": "/platforms"
+			},
+			"ContactUs": {
+				"title": "ContactUs",
+				"subTitle": "Need anything? Get in touch and we can help.",
+				"link": "/contact"
+			}
+		}
 	}
 }

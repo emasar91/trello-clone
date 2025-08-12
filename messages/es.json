@@ -267,5 +267,30 @@
 				}
 			}
 		}
+	},
+	"Footer": {
+		"loging": "iniciar Sesion",
+		"items": {
+			"AboutTrello": {
+				"title": "Sobre Trello",
+				"subTitle": "¿Qué hay detrás de las tablas?",
+				"link": "/about"
+			},
+			"Jobs": {
+				"title": "Trabajos",
+				"subTitle": "Conoce las vacantes disponibles en el equipo de Trello.",
+				"link": "/company/careers"
+			},
+			"Apps": {
+				"title": "Aplicaciones",
+				"subTitle": "Descarga la aplicación Trello para tu computadora o dispositivos móviles.",
+				"link": "/platforms"
+			},
+			"ContactUs": {
+				"title": "ContactUs",
+				"subTitle": "¿Necesitas algo? Ponte en contacto con nosotros y te ayudaremos.",
+				"link": "/contact"
+			}
+		}
 	}
 }

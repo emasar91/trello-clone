@@ -235,6 +235,8 @@ export const itemsSliderSection5 = [
 	},
 ]
 
+export const footerItems = ['AboutTrello', 'Jobs', 'Apps', 'ContactUs']
+
 export const colors = {
 	white: '#ffffff',
 	gray: 'rgba(234, 230, 255, 0.4)',

@@ -21,7 +21,7 @@ import { useTranslations } from 'next-intl'
  *
  * @returns {React.ReactElement} The rendered navbar component.
  */
-export default function NavBar() {
+const NavBar = () => {
 	const t = useTranslations('NavBarLogin.buttonLogin')
 
 	return (
@@ -69,3 +69,5 @@ export default function NavBar() {
 		</Box>
 	)
 }
+
+export default NavBar

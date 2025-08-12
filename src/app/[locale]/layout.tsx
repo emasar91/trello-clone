@@ -12,6 +12,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from '@/theme'
 import NavBar from '@/components/Navbar/NavBar'
 import BoxInfo from '../../components/Navbar/components/BoxInfo/BoxInfo'
+import Footer from '@/components/Footer/Footer'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -60,6 +61,7 @@ async function InnerLayout({
 								<NavBar />
 								<BoxInfo />
 								{children}
+								<Footer />
 							</div>
 						</ThemeProvider>
 					</NextIntlClientProvider>
