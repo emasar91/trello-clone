@@ -266,10 +266,10 @@ export const routes = [
 	'customers',
 	'trello/developers',
 	'trello/trello/help',
-	'AboutTrello',
-	'Jobs',
-	'Apps',
-	'ContactUs',
+	'about',
+	'company/careers',
+	'platforms',
+	'contact',
 ]
 
 export const colors = {

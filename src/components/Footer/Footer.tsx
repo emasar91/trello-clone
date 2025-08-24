@@ -31,21 +31,24 @@ const Footer = () => {
 					</Box>
 
 					<Box sx={FooterItemRowStyle}>
-						{footerItems.map((item, index) => (
-							<Box
-								key={`index-${index}-${item}`}
-								component={Link}
-								href={item}
-								sx={FooterItemsContainerStyle}
-							>
-								<Typography sx={FooterTitleStyle}>
-									{t(`items.${item}.title`)}
-								</Typography>
-								<Typography sx={FooterSubTitleStyle}>
-									{t(`items.${item}.subTitle`)}
-								</Typography>
-							</Box>
-						))}
+						{footerItems.map((item, index) => {
+							console.log('🚀 ~ Footer ~ item:', item)
+							return (
+								<Box
+									key={`index-${index}-${item}`}
+									component={Link}
+									href={t(`items.${item}.link`)}
+									sx={FooterItemsContainerStyle}
+								>
+									<Typography sx={FooterTitleStyle}>
+										{t(`items.${item}.title`)}
+									</Typography>
+									<Typography sx={FooterSubTitleStyle}>
+										{t(`items.${item}.subTitle`)}
+									</Typography>
+								</Box>
+							)
+						})}
 					</Box>
 				</Box>
 			</Box>
