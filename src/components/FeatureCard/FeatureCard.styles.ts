@@ -49,7 +49,7 @@ export const FeatureCardContentStyle: SxProps<Theme> = {
 export const FeatureCardContentContainerStyle: SxProps<Theme> = {
 	padding: '1.5rem',
 	height: '100%',
-	backgroundColor: colors.white,
+	backgroundColor: colors.whiteBackground,
 	color: colors.darkBlue,
 	borderRadius: '0.5rem',
 	overflow: 'hidden',
