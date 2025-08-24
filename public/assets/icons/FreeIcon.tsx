@@ -1,9 +1,10 @@
+import { colors } from '@/constants'
+
 export const FreeIcon = () => {
 	return (
 		<svg
-			fill="rgba(255,196,0,255)"
+			fill={colors.yellow}
 			width="0.9rem"
-			height="auto"
 			aria-hidden="true"
 			viewBox="0 0 44 65"
 		>

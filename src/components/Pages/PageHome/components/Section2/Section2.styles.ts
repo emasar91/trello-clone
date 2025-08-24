@@ -1,3 +1,4 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const Section2TitleStyle: SxProps<Theme> = {
@@ -15,11 +16,11 @@ export const Section2SubtitleStyle: SxProps<Theme> = {
 	fontSize: '1rem',
 	lineHeight: '1.25',
 	textTransform: 'uppercase',
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 }
 
 export const Section2DescriptionStyle: SxProps<Theme> = {
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 	fontSize: '1.25rem',
 }
 
@@ -70,11 +71,11 @@ export const Section2TabSliderStyle = (
 	padding: 0,
 	margin: '0px 4px !important',
 	borderRadius: '6px',
-	backgroundColor: activeIndex === index ? 'rgb(132,142,160)' : 'rgb(9,30,66)',
+	backgroundColor: activeIndex === index ? colors.gray : colors.darkBlue,
 	color: 'transparent',
 	transition: 'all 0.3s ease-in-out',
 	'&:hover': {
-		backgroundColor: activeIndex === index ? '#7A8599' : '#B0B0B0',
+		backgroundColor: activeIndex === index ? colors.gray : colors.darkBlueHover,
 	},
 	'& .MuiTab-wrapper': {
 		display: 'none',

@@ -24,7 +24,7 @@ const LinkExtraInfo = ({ linkButton, linkTitle }: Props) => {
 			</Link>
 
 			<Box className="hover-arrow" sx={ExtraInfoItemTitleStyle}>
-				<ArrowRightIcon color={colors.blue} />
+				<ArrowRightIcon color={colors.primary} />
 			</Box>
 		</Box>
 	)

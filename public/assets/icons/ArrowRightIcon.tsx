@@ -1,8 +1,6 @@
-export const ArrowRightIcon = ({
-	color = 'rgb(122,134,154)',
-}: {
-	color?: string
-}) => {
+import { colors } from '@/constants'
+
+export const ArrowRightIcon = ({ color = colors.gray }: { color?: string }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

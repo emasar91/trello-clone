@@ -19,7 +19,6 @@ export async function InnerMockRoute({
 	if (!mock) return ''
 	const messages = await getMessages({ locale })
 	const currentPath = mock?.join('/') || ''
-	console.log('🚀 ~ InnerMockRoute ~ currentPath:', currentPath)
 
 	return (
 		<NextIntlClientProvider locale={locale} messages={messages}>

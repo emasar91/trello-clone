@@ -1,9 +1,10 @@
+import { colors } from '@/constants'
+
 export const PremiumIcon = () => {
 	return (
 		<svg
-			fill="rgba(249,156,219,255)"
+			fill={colors.pink}
 			width="1.2rem"
-			height="auto"
 			aria-hidden="true"
 			viewBox="0 0 65 63"
 		>

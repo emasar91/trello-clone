@@ -1,15 +1,16 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const FeatureDescriptionCardDescriptionStyle: SxProps<Theme> = {
 	fontWeight: 400,
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 	fontSize: '1.25rem',
 	lineHeight: 1.5,
 }
 
 export const FeatureDescriptionCardTitleStyle: SxProps<Theme> = {
 	fontFamily: 'var(--font-family-text, "Charlie Display", sans-serif)',
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 	fontWeight: 600,
 	fontSize: '1rem',
 	lineHeight: 1.25,
@@ -34,10 +35,10 @@ export const FeatureDescriptionCardContentStyle = (
 ) => ({
 	display: 'flex',
 	flexDirection: sideImage === 'left' ? 'row' : 'row-reverse',
-	backgroundColor: 'rgb(255, 255, 255)',
+	backgroundColor: colors.white,
 	alignItems: 'center',
 	borderRadius: ' 0.5rem',
-	boxShadow: 'rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px',
+	boxShadow: `${colors.blackShadow}8f 0px 0.5rem 1rem 0px`,
 	gap: '2rem',
 	textAlign: 'left',
 	padding: '2rem',

@@ -1,3 +1,4 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const ItemFullWidthContainerStyle: SxProps<Theme> = {
@@ -13,7 +14,7 @@ export const ItemFullWidthContentContainerStyle: SxProps<Theme> = {
 	margin: '0px auto',
 	gap: '1rem',
 	maxWidth: '712px',
-	backgroundColor: 'rgba(255, 250, 229, 0.4)',
+	backgroundColor: colors.yellowLight,
 	boxSizing: 'border-box',
 }
 
@@ -26,18 +27,18 @@ export const ItemFullWidthButtonStyle: SxProps<Theme> = {
 	textAlign: 'center',
 	transition: '250ms ease-out',
 	textDecoration: 'none',
-	backgroundColor: 'rgb(255, 255, 255)',
-	border: '1px solid rgb(255, 171, 0)',
+	backgroundColor: colors.white,
+	border: `1px solid ${colors.yellow}`,
 	fontSize: '1rem',
 	padding: '0.7rem 1rem 0.8rem',
-	color: 'rgb(23, 43, 77) !important',
+	color: `${colors.darkBlue} !important`,
 	'&:hover': {
-		backgroundColor: 'rgba(255, 250, 229, 0.4)',
+		backgroundColor: colors.yellowLight,
 	},
 }
 
 export const ItemFullWidthDescriptionStyle: SxProps<Theme> = {
-	color: ' rgb(80, 95, 121)',
+	color: colors.black,
 	fontSize: '0.75rem',
 	lineHeight: '1rem',
 	marginBottom: '1.5rem',
@@ -46,7 +47,7 @@ export const ItemFullWidthDescriptionStyle: SxProps<Theme> = {
 export const ItemFullWidthTitleStyle: SxProps<Theme> = {
 	lineHeight: '1.5rem',
 	paddingRight: '0.3rem',
-	color: 'rgb(23, 43, 77)',
+	color: colors.darkBlue,
 	fontSize: '1rem',
 	fontWeight: 'normal',
 	margin: '0.5rem !important',

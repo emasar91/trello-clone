@@ -14,11 +14,11 @@ export const TabContainerStyle = (
 	alignItems: 'center',
 	gap: '4px',
 	fontWeight: '400',
-	color: selected && isOpen ? colors.textNavbarSelected : colors.textNavbar,
+	color: selected && isOpen ? colors.primary : colors.black,
 	borderRadius: '0px',
 	boxSizing: 'border-box',
 	'&:hover': {
 		backgroundColor: 'transparent',
-		color: colors.textNavbarSelected,
+		color: colors.primary,
 	},
 })

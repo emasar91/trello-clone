@@ -1,9 +1,10 @@
+import { colors } from '@/constants'
+
 export const StandardIcon = () => {
 	return (
 		<svg
-			fill="rgba(121,226,242,255)"
+			fill={colors.blueLight}
 			width="0.8rem"
-			height="auto"
 			aria-hidden="true"
 			viewBox="0 0 46 65"
 		>

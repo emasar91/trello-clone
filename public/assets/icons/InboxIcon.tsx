@@ -1,11 +1,7 @@
+import { colors } from '@/constants'
+
 export const InboxIcon = () => (
-	<svg
-		aria-hidden="true"
-		width="1.2rem"
-		height="auto"
-		viewBox="0 0 48 48"
-		fill="rgb(122, 134, 154)"
-	>
+	<svg aria-hidden="true" width="1.2rem" viewBox="0 0 48 48" fill={colors.gray}>
 		<path d="M31 21L17 21L17 17L31 17V21Z" />
 		<path
 			fillRule="evenodd"

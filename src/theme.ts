@@ -1,5 +1,6 @@
 'use client'
 import { createTheme } from '@mui/material/styles'
+import { colors } from './constants'
 
 const theme = createTheme({
 	typography: {
@@ -9,19 +10,18 @@ const theme = createTheme({
 		MuiTypography: {
 			styleOverrides: {
 				root: {
-					color: 'rgb(23, 43, 77)',
+					color: colors.blueText,
 				},
 			},
 		},
 		MuiButton: {
 			styleOverrides: {
 				root: {
-					color: 'rgb(23, 43, 77)',
-					textTransform: 'none', // ya que lo habías preguntado antes
+					color: colors.blueText,
+					textTransform: 'none',
 				},
 			},
 		},
-		// Otros componentes si querés: MuiInputBase, MuiFormLabel, etc.
 	},
 })
 

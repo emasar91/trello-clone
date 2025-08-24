@@ -1,3 +1,5 @@
+import { colors } from '@/constants'
+
 export const ArrowLeftIcon = () => {
 	return (
 		<svg
@@ -11,7 +13,7 @@ export const ArrowLeftIcon = () => {
 			<g>
 				<polygon
 					points="17.77,3.77 16,2 6,12 16,22 17.77,20.23 9.54,12"
-					fill="rgb(122,134,154)"
+					fill={colors.gray}
 				/>
 			</g>
 		</svg>

@@ -22,7 +22,6 @@ type MockPageProps = {
 }
 
 export default function MockPageClient({ route }: MockPageProps) {
-	console.log('🚀 ~ MockPageClient ~ route:', route)
 	const t = useTranslations('MockPage')
 	return (
 		<main style={MockPageContainerStyle}>

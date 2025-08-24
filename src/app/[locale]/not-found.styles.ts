@@ -1,3 +1,4 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const NotFoundContainerStyle = {
@@ -10,7 +11,7 @@ export const NotFoundContainerStyle = {
 	justifyContent: 'center',
 	alignItems: 'center',
 	width: '100%',
-	backgroundColor: '#002e90',
+	backgroundColor: colors.blueBackground,
 }
 
 export const NotFoundCardContainerStyle: SxProps<Theme> = { maxWidth: 500 }
@@ -23,7 +24,7 @@ export const NotFoundButtonsContainerStyle: SxProps<Theme> = {
 
 export const NotFoundButtonStyle: SxProps<Theme> = {
 	color: 'white',
-	backgroundColor: '#155dfc',
+	backgroundColor: colors.primary,
 }
 
 export const NotFoundTitleStyle: SxProps<Theme> = {
@@ -31,24 +32,24 @@ export const NotFoundTitleStyle: SxProps<Theme> = {
 	fontSize: '1.5rem',
 	lineHeight: '2rem',
 	fontWeight: 600,
-	color: 'rgb(31,41,55)',
+	color: colors.blueText,
 }
 
 export const NotFoundSubtitleStyle: SxProps<Theme> = {
 	lineHeight: 1.625,
-	color: 'rgb(75,85,99)',
+	color: colors.gray,
 }
 
 export const NotFoundDescriptionStyle: SxProps<Theme> = {
 	fontSize: '0.875rem',
 	lineHeight: 1.625,
-	color: 'rgb(30,64,175)',
+	color: colors.darkBlue,
 }
 
 export const NotFoundDescriptionContainerStyle: SxProps<Theme> = {
 	marginBottom: '1.5rem',
 	borderRadius: '0.5rem',
-	backgroundColor: 'rgb(239,246,255)',
+	backgroundColor: colors.iconBackground,
 	padding: '1rem',
 }
 
@@ -62,7 +63,7 @@ export const NotFoundIconContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'center',
 	borderRadius: '100%',
-	backgroundColor: 'rgb(219,234,254)',
+	backgroundColor: colors.iconBackground,
 }
 
 export const NotFoundTitleAndSubtitleContainerStyle: SxProps<Theme> = {

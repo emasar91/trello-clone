@@ -3,7 +3,7 @@ import PageContainer from '../pageContainer/PageContainer'
 import { Box, Link } from '@mui/material'
 import { LogoFooter } from '@/public/assets/LogoFooter'
 import Typography from '@mui/material/Typography'
-import { footerItems } from '@/constants'
+import { colors, footerItems } from '@/constants'
 import { useTranslations } from 'next-intl'
 import {
 	FooterContainerStyle,
@@ -20,7 +20,7 @@ import {
 const Footer = () => {
 	const t = useTranslations('Footer')
 	return (
-		<PageContainer backgroundColor="#172b4d">
+		<PageContainer backgroundColor={colors.darkBlue}>
 			<Box sx={FooterContainerStyle}>
 				<Box sx={FooterContentStyle}>
 					<Box sx={FooterLogInContainerStyle}>
@@ -32,7 +32,6 @@ const Footer = () => {
 
 					<Box sx={FooterItemRowStyle}>
 						{footerItems.map((item, index) => {
-							console.log('🚀 ~ Footer ~ item:', item)
 							return (
 								<Box
 									key={`index-${index}-${item}`}

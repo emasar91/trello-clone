@@ -1,3 +1,4 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const ItemInfoContainerStyle = (hoverColor: string): SxProps<Theme> => ({
@@ -24,14 +25,14 @@ export const ItemInfoTitleIconStyle: SxProps<Theme> = {
 export const ItemInfoTitleStyle: SxProps<Theme> = {
 	lineHeight: '1.5rem',
 	paddingRight: '0.3rem',
-	color: 'rgb(23, 43, 77)',
+	color: colors.darkBlue,
 	fontSize: '1rem',
 	fontWeight: 'normal',
 	margin: '0px !important',
 }
 
 export const ItemInfoDescriptionStyle: SxProps<Theme> = {
-	color: ' rgb(80, 95, 121)',
+	color: colors.grayLight,
 	fontSize: '0.75rem',
 	lineHeight: '1rem',
 	margin: '0px !important',

@@ -1,3 +1,4 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const ExtraInfoContainerLinkStyle: SxProps<Theme> = {
@@ -10,14 +11,14 @@ export const ExtraInfoContainerLinkStyle: SxProps<Theme> = {
 }
 
 export const ExtraInfoLinkStyle: SxProps<Theme> = {
-	color: 'rgb(23, 43, 77) !important',
+	color: `${colors.darkBlue} !important`,
 	textDecoration: 'none',
 }
 
 export const ExtraInfoItemTitleStyle: SxProps<Theme> = {
 	transition: 'transform 0.3s ease',
 	marginLeft: '0.5rem',
-	color: 'rgb(23, 43, 77)',
+	color: colors.darkBlue,
 	fontSize: '1rem',
 	fontWeight: 'normal',
 	lineHeight: '1.5rem',

@@ -1,9 +1,10 @@
+import { colors } from '@/constants'
+
 export const CalendarIcon = () => {
 	return (
 		<svg
-			fill="rgb(0, 199, 229)"
+			fill={colors.blueLight}
 			width="2rem"
-			height="auto"
 			aria-hidden="true"
 			viewBox="0 0 32 32"
 		>

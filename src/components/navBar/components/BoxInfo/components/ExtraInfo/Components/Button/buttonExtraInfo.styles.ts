@@ -12,12 +12,12 @@ export const ExtraInfoButtonStyle: SxProps<Theme> = {
 	transition: '250ms ease-out',
 	textDecoration: 'none',
 	backgroundColor: colors.white,
-	border: '1px solid rgb(101, 84, 192)',
+	border: `1px solid ${colors.violet}`,
 	fontSize: '1rem',
 	padding: '0.7rem 1rem 0.8rem',
-	color: 'rgb(23, 43, 77) !important',
+	color: `${colors.darkBlue} !important`,
 
 	'&:hover': {
-		backgroundColor: 'rgb(234, 230, 255)',
+		backgroundColor: colors.violetLight,
 	},
 }

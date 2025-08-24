@@ -1,6 +1,8 @@
+import { colors } from '@/constants'
+
 export const ArrowDown = () => (
 	<svg
-		fill="rgb(122, 134, 154)"
+		fill={colors.gray}
 		height="4"
 		viewBox="0 0 13 8"
 		width="8"

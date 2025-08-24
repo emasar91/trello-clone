@@ -41,3 +41,8 @@ export const BoxInfoRightContentStyle: SxProps<Theme> = {
 	margin: '0px auto 0px calc(47.5px - 1rem)',
 	width: '285px',
 }
+
+export const BoxInfoRightContainerStyle: SxProps<Theme> = {
+	height: '-webkit-fill-available',
+	backgroundColor: colors.violetLight,
+}

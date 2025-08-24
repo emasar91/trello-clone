@@ -1,10 +1,11 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const PageHomeContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'flex-start',
 	display: 'flex',
-	borderColor: 'rgb(244, 245, 247)',
+	borderColor: colors.whiteBackground,
 }
 
 export const PageHomeContentStyle: SxProps<Theme> = {
@@ -21,7 +22,7 @@ export const PageHomeTitleStyle: SxProps<Theme> = {
 	fontSize: '3rem',
 	lineHeight: '1.25',
 	fontWeight: 500,
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
 }
 
@@ -48,7 +49,7 @@ export const PageHomeLinkContainerStyle: SxProps<Theme> = {
 
 export const PageHomeLinkStyle: SxProps<Theme> = {
 	marginRight: '0.5rem',
-	color: 'rgb(0, 82, 204)',
+	color: colors.primary,
 	textDecoration: 'underline',
 }
 

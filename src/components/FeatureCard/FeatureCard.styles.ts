@@ -10,11 +10,14 @@ export const FeatureCardButtonStyle: SxProps<Theme> = {
 	textAlign: 'center',
 	transition: '250ms ease-out',
 	textDecoration: 'none',
-	backgroundColor: 'rgb(255, 255, 255)',
+	backgroundColor: colors.white,
 	border: `1px solid ${colors.primary}`,
 	fontSize: '1rem',
 	padding: '0.7rem 1rem 0.8rem',
-	color: 'rgb(23, 43, 77) !important',
+	color: `${colors.blueText} !important`,
+	'&:hover': {
+		backgroundColor: colors.violetLight,
+	},
 }
 
 export const FeatureCardDescriptionStyle: SxProps<Theme> = {
@@ -22,7 +25,7 @@ export const FeatureCardDescriptionStyle: SxProps<Theme> = {
 	fontWeight: 400,
 	fontSize: '1rem',
 	lineHeight: 1.5,
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 }
 
 export const FeatureCardTitleStyle: SxProps<Theme> = {
@@ -32,7 +35,7 @@ export const FeatureCardTitleStyle: SxProps<Theme> = {
 	fontSize: '1.5rem',
 	lineHeight: '2rem',
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
-	color: 'rgb(9, 30, 66)',
+	color: colors.darkBlue,
 }
 
 export const FeatureCardContentStyle: SxProps<Theme> = {
@@ -46,8 +49,8 @@ export const FeatureCardContentStyle: SxProps<Theme> = {
 export const FeatureCardContentContainerStyle: SxProps<Theme> = {
 	padding: '1.5rem',
 	height: '100%',
-	backgroundColor: ' rgb(250, 251, 252)',
-	color: ' rgb(9, 30, 66)',
+	backgroundColor: colors.white,
+	color: colors.darkBlue,
 	borderRadius: '0.5rem',
 	overflow: 'hidden',
 }

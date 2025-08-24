@@ -1,11 +1,12 @@
+import { colors } from '@/constants'
+
 export const IntegrationIcon = () => {
 	return (
 		<svg
 			aria-hidden="true"
 			width="1.2rem"
-			height="auto"
 			viewBox="0 0 48 48"
-			fill="rgb(122, 134, 154)"
+			fill={colors.gray}
 		>
 			<path
 				fillRule="evenodd"

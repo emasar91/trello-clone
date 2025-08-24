@@ -70,11 +70,7 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 							onClick={() => internalSetActiveIndex(index)}
 							sx={CustomSliderLeftItemsContainerStyle(activeIndex, index)}
 						>
-							<Typography
-								variant="h6"
-								sx={CustomSliderLeftItemsTitleStyle}
-								color="rgb(9, 30, 66)"
-							>
+							<Typography variant="h6" sx={CustomSliderLeftItemsTitleStyle}>
 								{t(`${item.title}.title`)}
 							</Typography>
 							<Typography

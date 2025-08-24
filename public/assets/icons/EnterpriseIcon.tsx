@@ -1,9 +1,10 @@
+import { colors } from '@/constants'
+
 export const EnterpriseIcon = () => {
 	return (
 		<svg
-			fill="rgba(76,154,255,255)"
+			fill={colors.primary}
 			width="1.8rem"
-			height="auto"
 			aria-hidden="true"
 			viewBox="0 0 65 42"
 		>

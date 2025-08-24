@@ -7,6 +7,7 @@ import {
 	BoxInfoContentStyle,
 	BoxInfoLeftContentStyle,
 	BoxInfoLeftStyle,
+	BoxInfoRightContainerStyle,
 	BoxInfoRightContentStyle,
 	BoxInfoRightStyle,
 } from './BoxInfo.styles'
@@ -17,7 +18,6 @@ import ExtraInfo from './components/ExtraInfo/ExtraInfo'
  * BoxInfo component that renders a Drawer containing additional information
  * when the drawer is open. Utilizes Zustand for state management.
  *
- * - Logs the itemsBoxInfo to the console for debugging purposes.
  * - Returns null if the drawer is not open.
  *
  * @returns {React.ReactElement | null} The Drawer component when open, otherwise null.
@@ -55,12 +55,7 @@ const BoxInfo = () => {
 						<Info data={dataInfo} tabSelected={tabSelected} />
 					</Box>
 				</Box>
-				<Box
-					sx={{
-						height: '-webkit-fill-available',
-						backgroundColor: 'rgba(234, 230, 255, 0.4)',
-					}}
-				>
+				<Box sx={BoxInfoRightContainerStyle}>
 					<Box sx={BoxInfoRightStyle}>
 						<Box sx={BoxInfoRightContentStyle}>
 							<ExtraInfo data={dataExtraInfo} tabSelected={tabSelected} />

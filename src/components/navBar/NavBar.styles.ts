@@ -10,8 +10,7 @@ export const NavBarContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'center',
 	backgroundColor: colors.white,
-	boxShadow:
-		'0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(0,0,0,0.1), 0 4px 6px -4px rgb(0,0,0,0.1)',
+	boxShadow: `'0 0 ${colors.black}, 0 0 ${colors.black}, 0 10px 15px -3px ${colors.black}, 0 4px 6px -4px ${colors.black}'`,
 }
 
 export const NavBarRowStyle: SxProps<Theme> = {
@@ -50,7 +49,7 @@ export const NavBarRegisterStyle: SxProps<Theme> = {
 	WebkitBoxAlign: 'center',
 	alignItems: 'center',
 	alignSelf: 'stretch',
-	color: 'rgb(255, 255, 255)',
+	color: colors.white,
 	display: 'flex',
 	fontSize: '1.2rem',
 	height: '100%',
@@ -61,7 +60,7 @@ export const NavBarRegisterStyle: SxProps<Theme> = {
 export const NavBarLoginStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	alignSelf: 'stretch',
-	color: 'rgb(23, 43, 77)',
+	color: colors.darkBlue,
 	display: 'flex',
 	fontSize: '1.2rem',
 	height: '100%',

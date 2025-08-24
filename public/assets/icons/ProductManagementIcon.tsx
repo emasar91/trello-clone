@@ -1,9 +1,10 @@
+import { colors } from '@/constants'
+
 export const ProductManagementIcon = () => {
 	return (
 		<svg
-			fill="rgb(122, 134, 154)"
+			fill={colors.gray}
 			width="1.2rem"
-			height="auto"
 			aria-hidden="true"
 			viewBox="0 0 65 65"
 		>
