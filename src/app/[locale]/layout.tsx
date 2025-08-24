@@ -25,10 +25,12 @@ const geistMono = Geist_Mono({
 })
 
 export async function generateMetadata({
-	params: { locale },
+	params,
 }: {
-	params: { locale: string }
+	params: Promise<{ locale: string }>
 }): Promise<Metadata> {
+	const { locale } = await params
+
 	const messages = await getMessages({ locale })
 	const t = messages?.Page as Record<string, string>
 
@@ -57,10 +59,14 @@ async function InnerLayout({
 				<AppRouterCacheProvider options={{ key: 'css' }}>
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<ThemeProvider theme={theme}>
-							<div className="flex flex-col justify-center items-center">
+							<div className="flex flex-col min-h-screen">
 								<NavBar />
 								<BoxInfo />
-								{children}
+
+								<main className="flex-1 flex flex-col items-center justify-center">
+									{children}
+								</main>
+
 								<Footer />
 							</div>
 						</ThemeProvider>
@@ -71,12 +77,13 @@ async function InnerLayout({
 	)
 }
 
-export default async function LocaleLayout({
+export default async function LocalLayout({
 	children,
 	params,
 }: {
 	children: React.ReactNode
-	params: { locale: 'en' | 'es' }
+	params: Promise<{ locale: 'es' | 'en' }>
 }) {
-	return <InnerLayout locale={params.locale}>{children}</InnerLayout>
+	const { locale } = await params
+	return <InnerLayout locale={locale}>{children}</InnerLayout>
 }

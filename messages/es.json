@@ -106,9 +106,9 @@
 		"plans": {
 			"info": {
 				"items": {
-					"estandard": "Estándar",
-					"estandardDescription": "Para equipos que necesitan gestionar más trabajo y ampliar la colaboración.",
-					"estandardLink": "/estandard",
+					"standard": "Estándar",
+					"standardDescription": "Para equipos que necesitan gestionar más trabajo y ampliar la colaboración.",
+					"standardLink": "/standard",
 
 					"premium": "Premium",
 					"premiumDescription": "Ideal para equipos de hasta 100 personas que necesitan realizar un seguimiento de múltiples proyectos y visualizar el trabajo de diversas formas.",
@@ -132,34 +132,36 @@
 				"plansExtraButtonLink": "/pricing"
 			}
 		},
-		"pricing": {},
+		"pricing": {
+			"link": "/pricing"
+		},
 		"resources": {
 			"info": {
 				"resourcesTitle": "Aprende y conecta",
 				"items": {
 					"trelloGuide": "Guía de Trello",
 					"trelloGuideDescription": "Nuestra guía de flujo de trabajo fácil de seguir te llevará desde la configuración del proyecto hasta convertirte en un experto en Trello en muy poco tiempo.",
-					"trelloGuideLink": "teams/marketing",
+					"trelloGuideLink": "/guide",
 
 					"remoteWorkGuide": "Guía para el trabajo remoto",
 					"remoteWorkGuideDescription": "La guía completa para preparar a tu equipo para el éxito del trabajo remoto.",
-					"remoteWorkGuideLink": "/teams/product",
+					"remoteWorkGuideLink": "/guide/remote-work",
 
 					"webinars": "Seminarios web",
 					"webinarsDescription": "Disfruta de nuestros seminarios web gratuitos sobre Trello y conviértete en un profesional de la productividad.",
-					"webinarsLink": "/teams/engineering",
+					"webinarsLink": "/webinars",
 
 					"customersStories": "Historias de clientes",
 					"customersStoriesDescription": "Descubre cómo las empresas han adoptado Trello como parte esencial de su flujo de trabajo",
-					"customersStoriesLink": "/teams/design",
+					"customersStoriesLink": "/customers",
 
 					"developers": "Desarrolladores",
 					"developersDescription": "¡El cielo es el límite en lo que puedes ofrecer a los usuarios de Trello con tu Power-Up!",
-					"developersLink": "/teams/startups",
+					"developersLink": "/trello/developers",
 
 					"helpResources": "Recursos de ayuda",
 					"helpResourcesDescription": "¿Necesitas ayuda? Artículos y preguntas frecuentes para ayudarte a salir del atolladero.",
-					"helpResourcesLink": "/teams/remote-team-management"
+					"helpResourcesLink": "trello/help"
 				}
 			},
 			"extraInfo": {
@@ -292,5 +294,18 @@
 				"link": "/contact"
 			}
 		}
+	},
+	"MockPage": {
+		"title": "Página no disponible",
+		"subTitle": "Esta sección corresponde a la página original de Trello [route], y fue reemplazada en este clon.",
+		"description": " Este proyecto es un clon con fines de portfolio y la funcionalidad principal está disponible al iniciar sesión.",
+		"buttonLogin": "Iniciar sesión",
+		"buttonHome": "Volver a Inicio"
+	},
+	"NotFound": {
+		"title": "Página no existente",
+		"description": " Este proyecto es un clon con fines de portfolio y la funcionalidad principal está disponible al iniciar sesión.",
+		"buttonLogin": "Iniciar sesión",
+		"buttonHome": "Volver a Inicio"
 	}
 }

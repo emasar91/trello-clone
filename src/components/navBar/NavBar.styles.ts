@@ -46,7 +46,7 @@ export const NavBarLogoStyle: SxProps<Theme> = {
 }
 
 export const NavBarRegisterStyle: SxProps<Theme> = {
-	backgroundColor: 'rgb(0, 101, 255)',
+	backgroundColor: colors.primary,
 	WebkitBoxAlign: 'center',
 	alignItems: 'center',
 	alignSelf: 'stretch',

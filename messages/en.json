@@ -132,7 +132,9 @@
 				"plansExtraButtonLink": "/pricing"
 			}
 		},
-		"pricing": {},
+		"pricing": {
+			"link": "/pricing"
+		},
 		"resources": {
 			"info": {
 				"resourcesTitle": "Learn & connect",
@@ -292,5 +294,18 @@
 				"link": "/contact"
 			}
 		}
+	},
+	"MockPage": {
+		"title": "Page not available",
+		"subTitle": "This section corresponds to the original Trello page [route], and was replaced in this clone.",
+		"description": "This project is a clone for portfolio purposes, and the main functionality is available upon login.",
+		"buttonLogin": "Log in",
+		"buttonHome": "Back to Home"
+	},
+	"NotFound": {
+		"title": "Página no disponible",
+		"description": " Este proyecto es un clon con fines de portfolio y la funcionalidad principal está disponible al iniciar sesión.",
+		"buttonLogin": "Iniciar sesión",
+		"buttonHome": "Volver a Inicio"
 	}
 }

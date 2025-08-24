@@ -237,7 +237,43 @@ export const itemsSliderSection5 = [
 
 export const footerItems = ['AboutTrello', 'Jobs', 'Apps', 'ContactUs']
 
+export const routes = [
+	'inbox',
+	'planner',
+	'butler-automation',
+	'power-ups',
+	'templates',
+	'integrations',
+	'tour',
+	'teams/marketing',
+	'teams/product',
+	'teams/engineering',
+	'teams/design',
+	'teams/startups',
+	'teams/remote-team-management',
+	'use-cases/task-management',
+	'use-cases/resource-hub',
+	'use-cases/project-management',
+	'use-cases',
+	'standard',
+	'premium',
+	'enterprise',
+	'pricing',
+	'blog/trello',
+	'guide',
+	'guide/remote-work',
+	'webinars',
+	'customers',
+	'trello/developers',
+	'trello/trello/help',
+	'AboutTrello',
+	'Jobs',
+	'Apps',
+	'ContactUs',
+]
+
 export const colors = {
+	primary: 'rgb(0, 101, 255)',
 	white: '#ffffff',
 	gray: 'rgba(234, 230, 255, 0.4)',
 	black: '#000000',

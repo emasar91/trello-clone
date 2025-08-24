@@ -1,3 +1,4 @@
+import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const FeatureCardButtonStyle: SxProps<Theme> = {
@@ -10,7 +11,7 @@ export const FeatureCardButtonStyle: SxProps<Theme> = {
 	transition: '250ms ease-out',
 	textDecoration: 'none',
 	backgroundColor: 'rgb(255, 255, 255)',
-	border: '1px solid rgb(0, 101, 255)',
+	border: `1px solid ${colors.primary}`,
 	fontSize: '1rem',
 	padding: '0.7rem 1rem 0.8rem',
 	color: 'rgb(23, 43, 77) !important',

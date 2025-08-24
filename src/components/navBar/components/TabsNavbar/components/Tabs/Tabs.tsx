@@ -6,6 +6,7 @@ import { IDrawer, ITab } from '@/types/navBar'
 import { Box } from '@mui/material'
 import { TabsContainerStyle, TabsRowStyle } from './Tabs.styles'
 import Underline from './components/Underline/Underline'
+import { useTranslations } from 'next-intl'
 
 /**
  * Tabs component renders a list of tabs and manages their state.
@@ -25,10 +26,15 @@ const Tabs = () => {
 		useStoreTrello()
 	const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
 
+	const t = useTranslations('Drawer')
+
 	const handleChange = (value: ITab) => {
 		setTabSelected(value.tab)
 		setDrawerOpen(!!value.drawer)
 		setBoxInfo(value.drawer as IDrawer)
+		if (!value.drawer) {
+			window.location.href = t(`${value.tab}.link`)
+		}
 	}
 
 	const [underline, setUnderline] = useState({
