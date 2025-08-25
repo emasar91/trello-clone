@@ -10,7 +10,6 @@ export const PageHomeContainerStyle: SxProps<Theme> = {
 
 export const PageHomeContentStyle: SxProps<Theme> = {
 	textAlign: 'left',
-	marginTop: '-4rem',
 	display: 'block',
 	flex: '0 0 auto',
 	width: '50%',
