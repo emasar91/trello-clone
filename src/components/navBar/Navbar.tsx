@@ -15,6 +15,9 @@ import {
 import { Logo } from '../../../public/assets/Logo'
 import { useTranslations } from 'next-intl'
 import LangSwitcher from './components/LangSwitcher/LangSwitcher'
+import BoxInfo from './components/BoxInfo/BoxInfo'
+import { useStoreTrello } from '@/context/useStoreTrello'
+import NavbarLogged from './NavbarLogged'
 
 /**
  * The Navbar component for the Trelo clone.
@@ -27,29 +30,35 @@ import LangSwitcher from './components/LangSwitcher/LangSwitcher'
  */
 const NavBar = () => {
 	const t = useTranslations('NavBarLogin.buttonLogin')
+	const { userInfo } = useStoreTrello()
 
-	return (
-		<Box sx={NavBarContainerStyle}>
-			<Box sx={NavBarRowStyle}>
-				<Link href={'/'} sx={NavBarLogoStyle}>
-					<Logo />
-				</Link>
-				<Box>
-					<TabsNavbar />
-				</Box>
-				<Box sx={NavBarButtonsLoginStyle}>
-					<Box sx={NavBarLangSwitcherStyle}>
-						<LangSwitcher />
+	return !userInfo ? (
+		<>
+			<Box sx={NavBarContainerStyle}>
+				<Box sx={NavBarRowStyle}>
+					<Link href={'/'} sx={NavBarLogoStyle}>
+						<Logo />
+					</Link>
+					<Box>
+						<TabsNavbar />
 					</Box>
-					<Box component={Link} href={'/login'} sx={NavBarLoginStyle}>
-						{t('login')}
-					</Box>
-					<Box component={Link} href={'/register'} sx={NavBarRegisterStyle}>
-						{t('getFree')}
+					<Box sx={NavBarButtonsLoginStyle}>
+						<Box sx={NavBarLangSwitcherStyle}>
+							<LangSwitcher />
+						</Box>
+						<Box component={Link} href={'/login'} sx={NavBarLoginStyle}>
+							{t('login')}
+						</Box>
+						<Box component={Link} href={'/register'} sx={NavBarRegisterStyle}>
+							{t('getFree')}
+						</Box>
 					</Box>
 				</Box>
 			</Box>
-		</Box>
+			<BoxInfo />
+		</>
+	) : (
+		<NavbarLogged />
 	)
 }
 

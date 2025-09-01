@@ -11,8 +11,8 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '@/theme'
 import NavBar from '@/components/Navbar/NavBar'
-import BoxInfo from '../../components/Navbar/components/BoxInfo/BoxInfo'
 import Footer from '@/components/Footer/Footer'
+import { AuthProvider } from '@/providers/AuthProvider'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -59,16 +59,15 @@ async function InnerLayout({
 				<AppRouterCacheProvider options={{ key: 'css' }}>
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<ThemeProvider theme={theme}>
-							<div className="flex flex-col min-h-screen">
-								<NavBar />
-								<BoxInfo />
-
-								<main className="flex-1 flex flex-col items-center justify-center">
-									{children}
-								</main>
-
-								<Footer />
-							</div>
+							<AuthProvider>
+								<div className="flex flex-col min-h-screen">
+									<NavBar />
+									<main className="flex-1 flex flex-col items-center justify-center">
+										{children}
+									</main>
+									<Footer />
+								</div>
+							</AuthProvider>
 						</ThemeProvider>
 					</NextIntlClientProvider>
 				</AppRouterCacheProvider>

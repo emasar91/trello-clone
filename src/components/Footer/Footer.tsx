@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import PageContainer from '../pageContainer/PageContainer'
 import { Box, Link } from '@mui/material'
@@ -16,42 +17,47 @@ import {
 	FooterSubTitleStyle,
 	FooterTitleStyle,
 } from './Footer.styles'
+import { useStoreTrello } from '@/context/useStoreTrello'
 
 const Footer = () => {
+	const { userInfo } = useStoreTrello()
+
 	const t = useTranslations('Footer')
 	return (
-		<PageContainer backgroundColor={colors.darkBlue}>
-			<Box sx={FooterContainerStyle}>
-				<Box sx={FooterContentStyle}>
-					<Box sx={FooterLogInContainerStyle}>
-						<LogoFooter />
-						<Box component={Link} href="/loging" sx={FooterLogInLinkStyle}>
-							<Typography sx={FooterLogInStyle}>{t('loging')}</Typography>
+		!userInfo && (
+			<PageContainer backgroundColor={colors.darkBlue}>
+				<Box sx={FooterContainerStyle}>
+					<Box sx={FooterContentStyle}>
+						<Box sx={FooterLogInContainerStyle}>
+							<LogoFooter />
+							<Box component={Link} href="/loging" sx={FooterLogInLinkStyle}>
+								<Typography sx={FooterLogInStyle}>{t('loging')}</Typography>
+							</Box>
+						</Box>
+
+						<Box sx={FooterItemRowStyle}>
+							{footerItems.map((item, index) => {
+								return (
+									<Box
+										key={`index-${index}-${item}`}
+										component={Link}
+										href={t(`items.${item}.link`)}
+										sx={FooterItemsContainerStyle}
+									>
+										<Typography sx={FooterTitleStyle}>
+											{t(`items.${item}.title`)}
+										</Typography>
+										<Typography sx={FooterSubTitleStyle}>
+											{t(`items.${item}.subTitle`)}
+										</Typography>
+									</Box>
+								)
+							})}
 						</Box>
 					</Box>
-
-					<Box sx={FooterItemRowStyle}>
-						{footerItems.map((item, index) => {
-							return (
-								<Box
-									key={`index-${index}-${item}`}
-									component={Link}
-									href={t(`items.${item}.link`)}
-									sx={FooterItemsContainerStyle}
-								>
-									<Typography sx={FooterTitleStyle}>
-										{t(`items.${item}.title`)}
-									</Typography>
-									<Typography sx={FooterSubTitleStyle}>
-										{t(`items.${item}.subTitle`)}
-									</Typography>
-								</Box>
-							)
-						})}
-					</Box>
 				</Box>
-			</Box>
-		</PageContainer>
+			</PageContainer>
+		)
 	)
 }
 

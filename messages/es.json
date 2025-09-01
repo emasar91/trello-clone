@@ -307,5 +307,18 @@
 		"description": " Este proyecto es un clon con fines de portfolio y la funcionalidad principal está disponible al iniciar sesión.",
 		"buttonLogin": "Iniciar sesión",
 		"buttonHome": "Volver a Inicio"
+	},
+	"LoginPage": {
+		"register": "Registrate para continuar",
+		"login": "Inicie sesión para continuar",
+		"noAccount": "No tenes cuenta?",
+		"form": {
+			"google": "Iniciar Sesión con Google",
+			"recoverPassword": "Enviar email",
+			"login": "Iniciar sesión",
+			"emailPlaceholder": "Ingresa tu email",
+			"passwordPlaceholder": "Ingresa tu contraseña",
+			"forgotPassword": "Olvidaste tu contraseña?"
+		}
 	}
 }

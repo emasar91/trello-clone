@@ -1,4 +1,5 @@
 import { IDrawer } from '@/types/navBar'
+import { IUserInfo } from './user'
 
 export type TabsOptions =
 	| 'features'
@@ -13,8 +14,10 @@ export interface IStoreTrello {
 	drawerOpen: boolean
 	boxInfo: IDrawer | null
 	openModal: boolean
+	userInfo: IUserInfo
 	setTabSelected: (value: TabsOptions) => void
 	setDrawerOpen: (value: boolean) => void
 	setBoxInfo: (value: IDrawer) => void
 	setOpenModal: (value: boolean) => void
+	setUserInfo: (value: IUserInfo) => void
 }

@@ -20,5 +20,6 @@ export const PageContainerChildStyle: SxProps<Theme> = {
 	maxWidth: '1140px !important',
 	flexDirection: 'column',
 	justifyContent: 'center',
+	alignItems: 'center',
 	verticalAlign: 'middle',
 }

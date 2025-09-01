@@ -6,14 +6,17 @@ const initialState: IStoreTrello = {
 	drawerOpen: false,
 	boxInfo: null,
 	openModal: false,
+	userInfo: { displayName: '', email: '', photoURL: '' },
 	setTabSelected: () => {},
 	setDrawerOpen: () => {},
 	setBoxInfo: () => {},
 	setOpenModal: () => {},
+	setUserInfo: () => {},
 }
 
 export const useStoreTrello = create<IStoreTrello>((set) => ({
 	...initialState,
+	setUserInfo: (value) => set((state) => ({ ...state, userInfo: value })),
 	setTabSelected: (value) => set((state) => ({ ...state, tabSelected: value })),
 	setDrawerOpen: (value) => set((state) => ({ ...state, drawerOpen: value })),
 	setBoxInfo: (value) => set((state) => ({ ...state, boxInfo: value })),
