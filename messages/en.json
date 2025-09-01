@@ -303,9 +303,22 @@
 		"buttonHome": "Back to Home"
 	},
 	"NotFound": {
-		"title": "Página no disponible",
-		"description": " Este proyecto es un clon con fines de portfolio y la funcionalidad principal está disponible al iniciar sesión.",
-		"buttonLogin": "Iniciar sesión",
-		"buttonHome": "Volver a Inicio"
+		"title": "Page not found",
+		"description": "This project is a clone for portfolio purposes, and the main functionality is available upon logging in.",
+		"buttonLogin": "Sign In",
+		"buttonHome": "Back to Home"
+	},
+	"LoginPage": {
+		"register": "Register to continue",
+		"login": "Sign in to continue",
+		"noAccount": "Don't have an account?",
+		"form": {
+			"google": "Sign In with Google",
+			"recoverPassword": "Send email",
+			"login": "Sign In",
+			"emailPlaceholder": "Enter your email address",
+			"passwordPlaceholder": "Enter your password",
+			"forgotPassword": "Forgot your password?"
+		}
 	}
 }
