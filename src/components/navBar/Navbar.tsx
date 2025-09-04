@@ -16,8 +16,8 @@ import { Logo } from '../../../public/assets/Logo'
 import { useTranslations } from 'next-intl'
 import LangSwitcher from './components/LangSwitcher/LangSwitcher'
 import BoxInfo from './components/BoxInfo/BoxInfo'
-import { useStoreTrello } from '@/context/useStoreTrello'
 import NavbarLogged from './NavbarLogged'
+import { useAuth } from '@/context/useAuthContext'
 
 /**
  * The Navbar component for the Trelo clone.
@@ -30,9 +30,16 @@ import NavbarLogged from './NavbarLogged'
  */
 const NavBar = () => {
 	const t = useTranslations('NavBarLogin.buttonLogin')
-	const { userInfo } = useStoreTrello()
 
-	return !userInfo ? (
+	const { user, loading } = useAuth()
+
+	if (loading) return null
+
+	if (user) {
+		return <NavbarLogged />
+	}
+
+	return (
 		<>
 			<Box sx={NavBarContainerStyle}>
 				<Box sx={NavBarRowStyle}>
@@ -57,8 +64,6 @@ const NavBar = () => {
 			</Box>
 			<BoxInfo />
 		</>
-	) : (
-		<NavbarLogged />
 	)
 }
 

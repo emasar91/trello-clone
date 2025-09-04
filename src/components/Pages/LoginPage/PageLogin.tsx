@@ -1,5 +1,4 @@
 'use client'
-import { useEffect } from 'react'
 import LoginPageContainer from './components/LoginContainer.tsx/LoginContainer'
 import LoginTitle from './components/LoginTitle/LoginTitle'
 import LoginCreateAccount from './components/LoginCreateAccount/LoginCreateAccount'
@@ -7,42 +6,47 @@ import LoginForm from './components/LoginForm/LoginForm'
 import PageContainer from '@/components/pageContainer/PageContainer'
 import { colors } from '@/constants'
 import { Box } from '@mui/material'
-import { redirect } from 'next/navigation'
-import { useStoreTrello } from '@/context/useStoreTrello'
-import { signInEmail, signInGoogle } from './utils'
+import { useRouter } from 'next/navigation'
 import { PageLoginContainerStyle } from './pageLogin.styles'
-import { IUserInfo } from '@/types/user'
+import { signInEmail, signInGoogle } from '@/services/AuthActions'
+import { useLocale, useTranslations } from 'next-intl'
+import { toast } from 'react-toastify'
 
 const PageLogin = () => {
-	const { userInfo, setUserInfo: setUserInfoStore } = useStoreTrello()
-
-	const setUserInfo = ({ displayName, email, photoURL }: IUserInfo) => {
-		setUserInfoStore({ displayName, email, photoURL })
-	}
+	const router = useRouter()
+	const locale = useLocale()
+	const t = useTranslations('Toast')
 
 	const handleLogin = async (
-		typeLogin: string,
+		typeLogin: 'google' | 'email',
 		emailForm?: string,
 		passwordForm?: string
 	) => {
-		if (typeLogin === 'google') {
-			signInGoogle({ setUserInfo })
-		}
+		try {
+			if (typeLogin === 'google') {
+				const result = await signInGoogle(locale)
+				if (result) {
+					router.replace(`/${locale}/appTrello`)
+				}
+			}
 
-		if (typeLogin === 'email' && emailForm && passwordForm) {
-			signInEmail({ setUserInfo, emailForm, passwordForm })
+			if (typeLogin === 'email' && emailForm && passwordForm) {
+				const result = await signInEmail(emailForm, passwordForm, locale)
+				if (result) {
+					router.replace(`/${locale}/appTrello`)
+				}
+			}
+		} catch (error) {
+			if (error.code === 'auth/invalid-credential') {
+				toast.error(t('login.invalidCredential'))
+			} else {
+				toast.error(t('login.error'))
+			}
 		}
 	}
-
 	const handleResetPassword = () => {
-		redirect('/reset-password')
+		router.push('/reset-password')
 	}
-
-	useEffect(() => {
-		if (userInfo) {
-			redirect('/appTrello')
-		}
-	}, [userInfo])
 
 	return (
 		<Box sx={PageLoginContainerStyle}>

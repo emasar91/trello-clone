@@ -1,12 +1,13 @@
+'use client'
 import PageHome from '@/components/Pages/PageHome/PageHome'
 import './globals.css'
-import RedirectIfLoggedIn from '@/components/RedirectIfLoggedIn/RedirectIfLoggedIn'
+import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
 const HomePage = () => {
 	return (
-		<RedirectIfLoggedIn>
+		<ProtectedPage isProtected={false}>
 			<PageHome />
-		</RedirectIfLoggedIn>
+		</ProtectedPage>
 	)
 }
 

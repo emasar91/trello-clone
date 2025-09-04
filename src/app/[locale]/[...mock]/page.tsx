@@ -1,4 +1,5 @@
 import MockPageClient from '@/components/Pages/MockPage/MockPageClient'
+import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 import { routes } from '@/constants'
 import { notFound } from 'next/navigation'
 
@@ -18,6 +19,9 @@ export default async function MockRoute({
 	if (!routes.includes(currentPath)) {
 		return notFound()
 	}
-
-	return <MockPageClient route={currentPath} />
+	return (
+		<ProtectedPage isProtected={false} isMockPublic={true}>
+			<MockPageClient route={currentPath} />
+		</ProtectedPage>
+	)
 }

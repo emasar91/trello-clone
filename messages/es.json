@@ -311,6 +311,7 @@
 	"LoginPage": {
 		"register": "Registrate para continuar",
 		"login": "Inicie sesión para continuar",
+		"recover": "Recuperar contraseña",
 		"noAccount": "No tenes cuenta?",
 		"form": {
 			"google": "Iniciar Sesión con Google",
@@ -319,6 +320,35 @@
 			"emailPlaceholder": "Ingresa tu email",
 			"passwordPlaceholder": "Ingresa tu contraseña",
 			"forgotPassword": "Olvidaste tu contraseña?"
+		}
+	},
+	"NavbarLogged": {
+		"create": "Crear",
+		"menu": {
+			"trello": "Trello",
+			"account": "Cuenta",
+			"profile": "Perfil y visibilidad",
+			"activity": "Actividad",
+			"cards": "Tarjetas",
+			"settings": "Ajustes",
+			"theme": "Tema",
+			"createWorkspace": "Crear Espacio de trabajo",
+			"logout": "Cerrar sesión",
+			"themeSelect": {
+				"light": "Claro",
+				"dark": "Oscuro"
+			}
+		}
+	},
+	"Toast": {
+		"login": {
+			"weakPassword": "La contraseña debe ser al menos de 6 caracteres",
+			"emailAlreadyInUse": "El email ya fue registrado",
+			"invalidEmail": "El email no es valido",
+			"invalidCredential": "Credenciales inválidas",
+			"error": "Hubo un problema al iniciar sesión",
+			"sendEmail": "Email enviado con éxito",
+			"errorSendEmail": "Hubo un problema al enviar el email"
 		}
 	}
 }

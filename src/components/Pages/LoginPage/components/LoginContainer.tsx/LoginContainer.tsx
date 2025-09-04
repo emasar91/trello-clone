@@ -34,7 +34,7 @@ const LoginPageContainer: React.FunctionComponent<ILoginPageContainerProps> = ({
 				<Box sx={LoginContainerHeaderStyle}>
 					<Box
 						component="img"
-						width={35}
+						width={20}
 						alt="back"
 						src="/assets/back.png"
 						onClick={() => window.history.back()}

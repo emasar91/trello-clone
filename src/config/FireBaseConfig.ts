@@ -1,16 +1,7 @@
-import { initializeApp } from 'firebase/app'
+import { FirebaseOptions, getApps, initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 
-interface FirebaseConfig {
-	apiKey: string
-	authDomain: string
-	projectId: string
-	storageBucket: string
-	messagingSenderId: string
-	appId: string
-}
-
-const firebaseConfig: FirebaseConfig = {
+const firebaseConfig: FirebaseOptions = {
 	apiKey: process.env.NEXT_PUBLIC_APIKEY ?? '',
 	authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN ?? '',
 	projectId: process.env.NEXT_PUBLIC_PROJECT_ID ?? '',
@@ -19,7 +10,8 @@ const firebaseConfig: FirebaseConfig = {
 	appId: process.env.NEXT_PUBLIC_APP_ID ?? '',
 }
 
-const app = initializeApp(firebaseConfig)
+const firebaseApp =
+	getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
 
-export const firebaseAuth = getAuth(app)
+export const firebaseAuth = getAuth(firebaseApp)
 export const googleProvider = new GoogleAuthProvider()

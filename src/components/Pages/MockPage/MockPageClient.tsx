@@ -23,6 +23,7 @@ type MockPageProps = {
 
 export default function MockPageClient({ route }: MockPageProps) {
 	const t = useTranslations('MockPage')
+
 	return (
 		<main style={MockPageContainerStyle}>
 			<Card sx={MockPageCardContainerStyle}>

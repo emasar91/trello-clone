@@ -9,21 +9,32 @@ import { useTranslations } from 'next-intl'
 
 interface ILoginTitleProps {
 	register?: boolean
+	recover?: boolean
 }
 
 /**
- * A component to display the login title and subtitle.
+ * Renders the title of the login page, with a Logo and a subtitle
+ * depending of the page is for login, register or recover password
  *
- * @param {ILoginTitleProps} props
- * @param {boolean} [props.register=false] - Whether to use the 'Register' subtitle or not.
- * @returns The component.
+ * @param {{ register?: boolean; recover?: boolean }} props
+ * @param {boolean} [props.register=false] if true, the subtitle is
+ * the text for register
+ * @param {boolean} [props.recover=false] if true, the subtitle is
+ * the text for recover password
+ * @returns {React.ReactElement} A Box component with the Logo and the
+ * subtitle
  */
 const LoginTitle: React.FunctionComponent<ILoginTitleProps> = ({
 	register,
+	recover,
 }) => {
-	const t = useTranslations('LoginTitle')
+	const t = useTranslations('LoginPage')
 
-	const subtitleText: string = !register ? t('login') : t('register')
+	const subtitleText: string = recover
+		? t('recover')
+		: !register
+		? t('login')
+		: t('register')
 
 	return (
 		<Box sx={LoginTitleContainerStyle}>

@@ -12,7 +12,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from '@/theme'
 import NavBar from '@/components/Navbar/NavBar'
 import Footer from '@/components/Footer/Footer'
-import { AuthProvider } from '@/providers/AuthProvider'
+import { AuthProvider } from '@/context/useAuthContext'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',

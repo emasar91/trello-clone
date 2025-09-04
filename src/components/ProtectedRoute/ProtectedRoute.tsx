@@ -1,37 +1,39 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '@/providers/AuthProvider'
-import { CircularProgress } from '@mui/material'
+import { ReactNode } from 'react'
+import { useAuth } from '@/context/useAuthContext'
+import { useProtectedRoute } from '@/hooks/useProtectedRoute'
+import { Box, CircularProgress } from '@mui/material'
+import { ProtectedRouteStyles } from './ProtectedRoute.styles'
 
-/**
- * A client-side component that wraps the given children and only renders them
- * if the user is logged in. If the user is not logged in, it redirects to
- * '/login-required'. While the user is logging in, it displays a circular progress
- * indicator.
- *
- * @param {{ children: React.ReactNode }} props
- * @prop {React.ReactNode} children The children to render if the user is logged in.
- * @returns {React.ReactElement} A CircularProgress if the user is logging in, the
- * children if the user is logged in, or a redirect to '/login-required' if the user
- * is not logged in.
- */
-export default function ProtectedRoute({
+interface ProtectedPageProps {
+	children: ReactNode
+	isProtected?: boolean
+	isMockPublic?: boolean
+}
+
+export function ProtectedPage({
 	children,
-}: {
-	children: React.ReactNode
-}) {
+	isProtected = true,
+	isMockPublic = false,
+}: ProtectedPageProps) {
 	const { user, loading } = useAuth()
-	const router = useRouter()
+	useProtectedRoute(isProtected, isMockPublic)
 
-	useEffect(() => {
-		if (!loading && !user) {
-			router.replace('/login-required')
-		}
-	}, [user, loading, router])
-
-	if (loading) return <CircularProgress />
+	// Mientras carga auth o no hay usuario en ruta protegida → no renderizamos nada
+	if (loading) {
+		return (
+			<Box sx={ProtectedRouteStyles}>
+				<CircularProgress size={60} />
+			</Box>
+		)
+	}
+	if (!user && !loading && isProtected) {
+		return null
+	}
+	if (user && !loading && !isProtected) {
+		return null
+	}
 
 	return <>{children}</>
 }

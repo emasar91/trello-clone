@@ -19,7 +19,7 @@ interface EmailFieldProps {
  * @returns {React.ReactElement}
  */
 const EmailField: React.FC<EmailFieldProps> = ({ value, onChange }) => {
-	const t = useTranslations('LoginForm')
+	const t = useTranslations('LoginPage')
 
 	return (
 		<Box sx={EmailFieldContainerStyle}>

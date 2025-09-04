@@ -16,7 +16,7 @@ interface ResetPasswordLinkProps {
  * @returns {React.ReactElement} A Box component with a Button inside.
  */
 const ResetPasswordLink: React.FC<ResetPasswordLinkProps> = ({ onClick }) => {
-	const t = useTranslations('LoginForm')
+	const t = useTranslations('LoginPage')
 
 	return (
 		<Box sx={ResetPasswordLinkStyle}>

@@ -9,7 +9,7 @@ import { LoginCreateAccountContainerStyle } from './LogginCreateAccount.styles'
  * @returns {React.ReactElement} A Box component with a Typography and a Button
  */
 const LoginCreateAccount = ({}) => {
-	const t = useTranslations('LoginCreateAccount')
+	const t = useTranslations('LoginPage')
 
 	return (
 		<Box sx={LoginCreateAccountContainerStyle}>

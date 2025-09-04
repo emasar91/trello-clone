@@ -20,5 +20,6 @@ export const SubmitButtonContainerStyle = (
 })
 
 export const SubmitButtonStyle: SxProps<Theme> = {
-	color: `${colors.white} !important'`,
+	color: `${colors.white} !important`,
+	width: '100%',
 }

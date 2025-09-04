@@ -291,6 +291,20 @@ export const colors = {
 	blackShadow: '#344563',
 	violetLight: '#f7f5ff',
 	grayLight: '#505f79',
+	blackBackground: '#1d2125',
+
+	grayBackgroundNavbarLogged: '#282e33',
+	grayBackgroundNavbarLoggedHover: '#333c43',
+
+	grayBordersAccountMenu: '#8c9bab',
+	textAccountMenu: '#b6c2cf',
+	hoverItemAccountMenu: '#323940',
+	accountMenuSelectedItem: '#1c2b41',
+	backgroundAccountMenu: '#282e33',
+
+	avatarPrimaryText: '#B6C2CF ',
+	avatarSecondaryText: '#9FADBC',
+	borderMenuAccount: '#39424a',
 
 	hover1: 'rgba(255, 250, 229, 0.5)',
 	hover2: 'rgba(222, 235, 255, 0.5)',
@@ -299,3 +313,6 @@ export const colors = {
 	hover5: 'rgba(230, 252, 255, 0.5)',
 	hover6: 'rgba(227, 252, 239, 0.5)',
 }
+
+export const LIGHT_THEME = 'light'
+export const DARK_THEME = 'dark'

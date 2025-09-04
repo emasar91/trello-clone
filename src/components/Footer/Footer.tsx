@@ -17,47 +17,62 @@ import {
 	FooterSubTitleStyle,
 	FooterTitleStyle,
 } from './Footer.styles'
-import { useStoreTrello } from '@/context/useStoreTrello'
+import { useAuth } from '@/context/useAuthContext'
+
+/**
+ * Footer component, renders a footer with a login link and a list of items with
+ * titles and subtitles.
+ *
+ * When the user is logged in, the component renders null.
+ *
+ * @returns {React.ReactElement | null} The Footer component when the user is not
+ * logged in, otherwise null.
+ */
 
 const Footer = () => {
-	const { userInfo } = useStoreTrello()
-
 	const t = useTranslations('Footer')
-	return (
-		!userInfo && (
-			<PageContainer backgroundColor={colors.darkBlue}>
-				<Box sx={FooterContainerStyle}>
-					<Box sx={FooterContentStyle}>
-						<Box sx={FooterLogInContainerStyle}>
-							<LogoFooter />
-							<Box component={Link} href="/loging" sx={FooterLogInLinkStyle}>
-								<Typography sx={FooterLogInStyle}>{t('loging')}</Typography>
-							</Box>
-						</Box>
 
-						<Box sx={FooterItemRowStyle}>
-							{footerItems.map((item, index) => {
-								return (
-									<Box
-										key={`index-${index}-${item}`}
-										component={Link}
-										href={t(`items.${item}.link`)}
-										sx={FooterItemsContainerStyle}
-									>
-										<Typography sx={FooterTitleStyle}>
-											{t(`items.${item}.title`)}
-										</Typography>
-										<Typography sx={FooterSubTitleStyle}>
-											{t(`items.${item}.subTitle`)}
-										</Typography>
-									</Box>
-								)
-							})}
+	const { user, loading } = useAuth()
+
+	if (loading) return null
+
+	if (user) {
+		return null
+	}
+
+	return (
+		<PageContainer backgroundColor={colors.darkBlue}>
+			<Box sx={FooterContainerStyle}>
+				<Box sx={FooterContentStyle}>
+					<Box sx={FooterLogInContainerStyle}>
+						<LogoFooter />
+						<Box component={Link} href="/loging" sx={FooterLogInLinkStyle}>
+							<Typography sx={FooterLogInStyle}>{t('loging')}</Typography>
 						</Box>
 					</Box>
+
+					<Box sx={FooterItemRowStyle}>
+						{footerItems.map((item, index) => {
+							return (
+								<Box
+									key={`index-${index}-${item}`}
+									component={Link}
+									href={t(`items.${item}.link`)}
+									sx={FooterItemsContainerStyle}
+								>
+									<Typography sx={FooterTitleStyle}>
+										{t(`items.${item}.title`)}
+									</Typography>
+									<Typography sx={FooterSubTitleStyle}>
+										{t(`items.${item}.subTitle`)}
+									</Typography>
+								</Box>
+							)
+						})}
+					</Box>
 				</Box>
-			</PageContainer>
-		)
+			</Box>
+		</PageContainer>
 	)
 }
 

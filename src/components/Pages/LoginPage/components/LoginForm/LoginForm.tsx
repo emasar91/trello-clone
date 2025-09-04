@@ -1,4 +1,5 @@
-import * as React from 'react'
+'use client'
+
 import { useState } from 'react'
 import { Box } from '@mui/material'
 import { useTranslations } from 'next-intl'
@@ -9,13 +10,23 @@ import PasswordField from './components/PasswordField/PasswordField'
 import ResetPasswordLink from './components/ResetPasswordLink/ResetPasswordLink'
 import SubmitButton from './components/SubmitButton/SubmitButton'
 import GoogleLoginButton from './components/GoogleLoginButton/GoogleLoginButton'
+import { toast } from 'react-toastify'
 
 interface ILoginFormProps {
 	handleResetPassword?: (email: string) => void
-	handleLogin?: (typeLogin: string, email?: string, password?: string) => void
+	handleLogin?: (
+		typeLogin: 'google' | 'email',
+		email?: string,
+		password?: string
+	) => void
 	handleRecoverPassword?: (email: string) => void
 	register?: boolean
 	recoverPassword?: boolean
+}
+
+const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/
+export const isValidEmail = (email: string): boolean => {
+	return emailRegex.test(email)
 }
 
 /**
@@ -50,15 +61,25 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = ({
 	const [showPassword, setShowPassword] = useState(false)
 
 	const t = useTranslations('LoginPage')
+	const tt = useTranslations('Toast')
 
 	const textSubmitButton = recoverPassword
 		? t('form.recoverPassword')
 		: t('form.login')
 	const disableButton = recoverPassword ? !email : !email || !password
 
-	const onSubmit = (type: string, email: string, password: string) => {
+	const onSubmit = (
+		type: 'google' | 'email',
+		email: string,
+		password: string
+	) => {
 		if (recoverPassword) {
-			handleRecoverPassword(email)
+			const validEmail = isValidEmail(email)
+			if (validEmail) {
+				handleRecoverPassword(email)
+			} else {
+				toast.error(tt('login.invalidEmail'))
+			}
 		} else {
 			handleLogin(type, email, password)
 		}
@@ -90,7 +111,7 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = ({
 			{!register && !recoverPassword && (
 				<GoogleLoginButton
 					onClick={() => handleLogin('google')}
-					text={t('google')}
+					text={t('form.google')}
 				/>
 			)}
 

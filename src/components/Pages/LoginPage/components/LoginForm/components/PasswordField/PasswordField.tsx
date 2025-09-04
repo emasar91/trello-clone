@@ -24,7 +24,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
 	showPassword,
 	onToggleShow,
 }) => {
-	const t = useTranslations('LoginForm')
+	const t = useTranslations('LoginPage')
 
 	return (
 		<Box sx={PasswordFieldContainerStyle}>

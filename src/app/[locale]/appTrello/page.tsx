@@ -1,11 +1,11 @@
 'use client'
 
-import ProtectedRoute from '@/components/ProtectedRoute/ProtectedRoute'
+import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
 export default function AppTrelloPage() {
 	return (
-		<ProtectedRoute>
+		<ProtectedPage isProtected>
 			<h1>Bienvenido a AppTrello 🚀</h1>
-		</ProtectedRoute>
+		</ProtectedPage>
 	)
 }

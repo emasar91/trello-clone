@@ -1,7 +1,70 @@
+import { HelpIcon } from '@/public/assets/icons/HelpIcon'
+import { LogoIcon } from '@/public/assets/icons/LogoIcon'
+import { MegafonoIcon } from '@/public/assets/icons/MegafonoIcon'
+import { NotificationIcon } from '@/public/assets/icons/NotificationIcon'
+import { SearchIcon } from '@/public/assets/icons/SearchIcon'
+import { Box, Button, Input, InputAdornment, Link } from '@mui/material'
 import React from 'react'
+import AccountMenu from './components/AccountMenu/AccounMenu'
+import {
+	NavbarLoggedActionsStyle,
+	NavbarLoggedAdormentIconStyle,
+	NavbarLoggedContainerStyle,
+	NavbarLoggedCreateButtonStyle,
+	NavbarLoggedInnerWrapperStyle,
+	NavbarLoggedLogoWrapperStyle,
+	NavbarLoggedSearchContainerStyle,
+	NavbarLoggedSearchInputStyle,
+	NavbarLoggedSearchSectionStyle,
+	NavbarLoggedSearchWrapperStyle,
+} from './NavBarLogged.styles'
+import { useTranslations } from 'next-intl'
 
 const NavbarLogged = () => {
-	return <div>NavbarLogged</div>
+	const t = useTranslations('NavbarLogged')
+
+	return (
+		<Box sx={NavbarLoggedContainerStyle}>
+			<Box sx={NavbarLoggedInnerWrapperStyle}>
+				<Box sx={NavbarLoggedLogoWrapperStyle}>
+					<Box component={Link} href="/appTrello">
+						<LogoIcon />
+					</Box>
+				</Box>
+				<Box sx={NavbarLoggedSearchSectionStyle}>
+					<Box sx={NavbarLoggedSearchWrapperStyle}>
+						<Box sx={NavbarLoggedSearchContainerStyle}>
+							<Input
+								disableUnderline
+								placeholder="Buscar"
+								fullWidth
+								sx={NavbarLoggedSearchInputStyle}
+								startAdornment={
+									<InputAdornment
+										position="start"
+										sx={NavbarLoggedAdormentIconStyle}
+									>
+										<SearchIcon />
+									</InputAdornment>
+								}
+							/>
+						</Box>
+					</Box>
+					<Button variant="contained" sx={NavbarLoggedCreateButtonStyle}>
+						{t('create')}
+					</Button>
+				</Box>
+
+				<Box sx={NavbarLoggedActionsStyle}>
+					<MegafonoIcon />
+					<NotificationIcon />
+					<HelpIcon />
+
+					<AccountMenu />
+				</Box>
+			</Box>
+		</Box>
+	)
 }
 
 export default NavbarLogged
