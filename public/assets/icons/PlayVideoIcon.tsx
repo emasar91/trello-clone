@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const PlayVideoIcon = () => {
 	return (
@@ -13,10 +13,15 @@ export const PlayVideoIcon = () => {
 			<path
 				clipRule="evenodd"
 				d="m10.0138 16.3878c-.83597.4912-1.5138.105-1.5138-.8645v-7.04491c0-.97008.6755-1.358 1.5138-.86566l6.465 3.79747c.5548.3261.5589.8517 0 1.1801z"
-				fill={colors.primary}
+				fill={colorTokens.brandPrimary}
 				fillRule="evenodd"
 			></path>
-			<circle cx="12" cy="12" r="11.5" stroke={colors.primary}></circle>
+			<circle
+				cx="12"
+				cy="12"
+				r="11.5"
+				stroke={colorTokens.brandPrimary}
+			></circle>
 		</svg>
 	)
 }

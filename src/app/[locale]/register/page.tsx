@@ -8,13 +8,14 @@ import LoginForm, {
 	isValidEmail,
 } from '@/components/Pages/LoginPage/components/LoginForm/LoginForm'
 import { toast } from 'react-toastify'
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import PageContainer from '@/components/pageContainer/PageContainer'
 import { PageLoginContainerStyle } from '@/components/Pages/LoginPage/pageLogin.styles'
 import { Box } from '@mui/material'
 import { useLocale, useTranslations } from 'next-intl'
 import { signInEmail } from '@/services/AuthActions'
 import { useRouter } from 'next/navigation'
+import { FirebaseError } from 'firebase/app'
 
 const RegisterPage = () => {
 	const locale = useLocale()
@@ -35,11 +36,13 @@ const RegisterPage = () => {
 					if (result) {
 						router.replace(`/${locale}/appTrello`) // redirect inmediato
 					}
-				} catch (error) {
-					if (error.code === 'auth/weak-password') {
+				} catch (error: unknown) {
+					const firebaseError = error as FirebaseError
+
+					if (firebaseError.code === 'auth/weak-password') {
 						toast.error(t('login.weakPassword'))
 					}
-					if (error.code === 'auth/email-already-in-use') {
+					if (firebaseError.code === 'auth/email-already-in-use') {
 						toast.error(t('login.emailAlreadyInUse'))
 					}
 				}
@@ -50,7 +53,7 @@ const RegisterPage = () => {
 	}
 	return (
 		<Box sx={PageLoginContainerStyle}>
-			<PageContainer backgroundColor={colors.blueBackground}>
+			<PageContainer backgroundColor={colorsLanding.registerPageBackground}>
 				<LoginPageContainer register={true} recover={false}>
 					<LoginTitle register={true} />
 					<LoginForm handleLogin={handleLogin} register={true} />

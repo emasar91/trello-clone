@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const LoginContainerStyle = (height: string): SxProps<Theme> => ({
@@ -12,14 +12,13 @@ export const LoginContainerStyle = (height: string): SxProps<Theme> => ({
 	alignItems: 'center',
 	gap: '24px',
 	borderRadius: ' 10px',
-	boxShadow: `0px 0px 10px 0px ${colors.blackShadow}`,
-	backgroundColor: colors.white,
+	boxShadow: `0px 0px 10px 0px ${colorsLanding.loginPageContainerFormShadow}`,
+	backgroundColor: colorsLanding.loginPageContainerForm,
 })
 
 export const LoginContainerHeaderStyle: SxProps<Theme> = {
 	position: 'absolute',
 	top: '16px',
 	left: '16px',
-	color: colors.gray,
 	cursor: 'pointer',
 }

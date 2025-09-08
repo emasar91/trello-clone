@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps } from '@mui/material'
 import { Theme } from '@mui/system'
 
@@ -14,11 +14,10 @@ export const TabContainerStyle = (
 	alignItems: 'center',
 	gap: '4px',
 	fontWeight: '400',
-	color: selected && isOpen ? colors.primary : colors.black,
+	color:
+		selected && isOpen
+			? colorsLanding.textTabsActiveText
+			: colorsLanding.textTabsText,
 	borderRadius: '0px',
 	boxSizing: 'border-box',
-	'&:hover': {
-		backgroundColor: 'transparent',
-		color: colors.primary,
-	},
 })

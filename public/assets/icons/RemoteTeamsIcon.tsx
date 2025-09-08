@@ -1,9 +1,9 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const RemoteTeamsIcon = () => {
 	return (
 		<svg
-			fill={colors.gray}
+			fill={colorTokens.gray}
 			width="1.2rem"
 			aria-hidden="true"
 			viewBox="0 0 65 65"
@@ -14,7 +14,7 @@ export const RemoteTeamsIcon = () => {
 					height="62.129"
 					x="63.02"
 					y="62.691"
-					fill={colors.white}
+					fill={colorTokens.white}
 					rx="31.064"
 					transform="rotate(-180 63.02 62.691)"
 				></rect>

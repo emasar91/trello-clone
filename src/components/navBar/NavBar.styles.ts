@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const NavBarContainerStyle: SxProps<Theme> = {
@@ -9,8 +9,8 @@ export const NavBarContainerStyle: SxProps<Theme> = {
 	zIndex: '1300',
 	alignItems: 'center',
 	justifyContent: 'center',
-	backgroundColor: colors.white,
-	boxShadow: `'0 0 ${colors.black}, 0 0 ${colors.black}, 0 10px 15px -3px ${colors.black}, 0 4px 6px -4px ${colors.black}'`,
+	backgroundColor: colorsLanding.backgroundNavbar,
+	boxShadow: `'0 0 ${colorsLanding.shadow}, 0 0 ${colorsLanding.shadow}, 0 10px 15px -3px ${colorsLanding.shadow}, 0 4px 6px -4px ${colorsLanding.shadow}'`,
 }
 
 export const NavBarRowStyle: SxProps<Theme> = {
@@ -19,7 +19,7 @@ export const NavBarRowStyle: SxProps<Theme> = {
 	maxWidth: '1320px',
 	justifyContent: 'space-between',
 	overflow: 'hidden',
-	backgroundColor: colors.white,
+	backgroundColor: colorsLanding.backgroundNavbar,
 	alignItems: 'stretch',
 	height: '60px',
 	margin: '0px auto',
@@ -45,11 +45,11 @@ export const NavBarLogoStyle: SxProps<Theme> = {
 }
 
 export const NavBarRegisterStyle: SxProps<Theme> = {
-	backgroundColor: colors.primary,
+	backgroundColor: colorsLanding.loginButton,
 	WebkitBoxAlign: 'center',
 	alignItems: 'center',
 	alignSelf: 'stretch',
-	color: colors.white,
+	color: colorsLanding.textLoginButton,
 	display: 'flex',
 	fontSize: '1.2rem',
 	height: '100%',
@@ -60,7 +60,7 @@ export const NavBarRegisterStyle: SxProps<Theme> = {
 export const NavBarLoginStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	alignSelf: 'stretch',
-	color: colors.darkBlue,
+	color: colorsLanding.textTabs,
 	display: 'flex',
 	fontSize: '1.2rem',
 	height: '100%',

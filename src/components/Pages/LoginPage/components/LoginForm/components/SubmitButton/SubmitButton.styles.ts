@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const SubmitButtonContainerStyle = (
@@ -9,7 +9,7 @@ export const SubmitButtonContainerStyle = (
 	padding: '8px 16px',
 	marginTop: '16px',
 	borderRadius: '8px',
-	backgroundColor: colors.primary,
+	backgroundColor: colorsLanding.loginPageFormSubmitButtonBackground,
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
@@ -20,6 +20,6 @@ export const SubmitButtonContainerStyle = (
 })
 
 export const SubmitButtonStyle: SxProps<Theme> = {
-	color: `${colors.white} !important`,
+	color: `${colorsLanding.loginPageFormSubmitButtonText} !important`,
 	width: '100%',
 }

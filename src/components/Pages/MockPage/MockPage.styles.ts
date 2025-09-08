@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const MockPageContainerStyle = {
@@ -11,7 +11,7 @@ export const MockPageContainerStyle = {
 	justifyContent: 'center',
 	alignItems: 'center',
 	width: '100%',
-	backgroundColor: colors.blueBackground,
+	backgroundColor: colorsLanding.mockPageBackground,
 }
 
 export const MockPageCardContainerStyle: SxProps<Theme> = { maxWidth: 500 }
@@ -23,8 +23,8 @@ export const MockPageButtonsContainerStyle: SxProps<Theme> = {
 }
 
 export const MockPageButtonStyle: SxProps<Theme> = {
-	color: 'white',
-	backgroundColor: colors.primary,
+	color: colorsLanding.mockPageLoginButtonText,
+	backgroundColor: colorsLanding.mockPageLoginButtonBackground,
 }
 
 export const MockPageTitleStyle: SxProps<Theme> = {
@@ -32,24 +32,24 @@ export const MockPageTitleStyle: SxProps<Theme> = {
 	fontSize: '1.5rem',
 	lineHeight: '2rem',
 	fontWeight: 600,
-	color: colors.blueText,
+	color: colorsLanding.mockPageTitle,
 }
 
 export const MockPageSubtitleStyle: SxProps<Theme> = {
 	lineHeight: 1.625,
-	color: colors.gray,
+	color: colorsLanding.mockPageSubTitle,
 }
 
 export const MockPageDescriptionStyle: SxProps<Theme> = {
 	fontSize: '0.875rem',
 	lineHeight: 1.625,
-	color: colors.darkBlue,
+	color: colorsLanding.mockPageDescription,
 }
 
 export const MockPageDescriptionContainerStyle: SxProps<Theme> = {
 	marginBottom: '1.5rem',
 	borderRadius: '0.5rem',
-	backgroundColor: colors.iconBackground,
+	backgroundColor: colorsLanding.mockPageDescriptionContainerBackground,
 	padding: '1rem',
 }
 
@@ -63,7 +63,7 @@ export const MockPageIconContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'center',
 	borderRadius: '100%',
-	backgroundColor: colors.iconBackground,
+	backgroundColor: colorsLanding.mockPageIconContainerBackground,
 }
 
 export const MockPageTitleAndSubtitleContainerStyle: SxProps<Theme> = {

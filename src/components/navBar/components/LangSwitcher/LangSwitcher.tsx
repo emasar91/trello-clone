@@ -25,7 +25,7 @@ const LangSwitcher = () => {
 		const segments = pathname.split('/')
 		segments[1] = newLocale // reemplazo el idioma
 		const newPath = segments.join('/')
-		router.push(newPath)
+		router.replace(newPath)
 	}
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)

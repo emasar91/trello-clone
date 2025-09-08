@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 
 export const FeatureCardItemsContainerStyle = {
 	display: 'flex',
@@ -6,7 +6,7 @@ export const FeatureCardItemsContainerStyle = {
 }
 
 export const Section4DescriptionStyle = {
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection4Description,
 	textAlign: 'start',
 	fontSize: '1.25rem',
 }
@@ -14,7 +14,7 @@ export const Section4DescriptionStyle = {
 export const Section4TitleStyle = {
 	paddingBottom: '1rem',
 	fontSize: '2.25rem',
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection4Title,
 	textAlign: 'start',
 	lineHeight: 1.33333,
 	fontWeight: 600,
@@ -29,7 +29,7 @@ export const Section4SubTitleStyle = {
 	lineHeight: 1.25,
 	textTransform: 'uppercase',
 	textAlign: 'start',
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection4SubTitle,
 }
 
 export const Section4TextContainerStyle = {

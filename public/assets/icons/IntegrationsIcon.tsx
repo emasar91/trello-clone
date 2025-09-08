@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const IntegrationIcon = () => {
 	return (
@@ -6,7 +6,7 @@ export const IntegrationIcon = () => {
 			aria-hidden="true"
 			width="1.2rem"
 			viewBox="0 0 48 48"
-			fill={colors.gray}
+			fill={colorTokens.gray}
 		>
 			<path
 				fillRule="evenodd"

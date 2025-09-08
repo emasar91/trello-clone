@@ -1,7 +1,12 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const InboxIcon = () => (
-	<svg aria-hidden="true" width="1.2rem" viewBox="0 0 48 48" fill={colors.gray}>
+	<svg
+		aria-hidden="true"
+		width="1.2rem"
+		viewBox="0 0 48 48"
+		fill={colorTokens.gray}
+	>
 		<path d="M31 21L17 21L17 17L31 17V21Z" />
 		<path
 			fillRule="evenodd"

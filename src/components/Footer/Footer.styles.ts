@@ -1,15 +1,15 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const FooterSubTitleStyle: SxProps<Theme> = {
 	textDecoration: 'none',
-	color: colors.white,
+	color: colorsLanding.footerTitle,
 	lineHeight: '1rem',
 	fontSize: '0.75rem',
 }
 
 export const FooterTitleStyle: SxProps<Theme> = {
-	color: colors.white,
+	color: colorsLanding.footerSubtitle,
 	textDecoration: 'none',
 	paddingBottom: '0.6rem',
 	textAlign: 'start',
@@ -23,7 +23,7 @@ export const FooterItemsContainerStyle: SxProps<Theme> = {
 	alignItems: 'start',
 	flexDirection: 'column',
 	textDecoration: 'none',
-	'&:hover': { backgroundColor: colors.blackShadow },
+	'&:hover': { backgroundColor: colorsLanding.footerItemHover },
 }
 
 export const FooterItemRowStyle: SxProps<Theme> = {
@@ -33,8 +33,8 @@ export const FooterItemRowStyle: SxProps<Theme> = {
 }
 
 export const FooterLogInStyle: SxProps<Theme> = {
-	color: colors.white,
-	'&:hover': { borderBottom: `1px solid ${colors.white}` },
+	color: colorsLanding.footerTitle,
+	'&:hover': { borderBottom: `1px solid ${colorsLanding.footerTitleBorder}` },
 }
 
 export const FooterLogInLinkStyle: SxProps<Theme> = {

@@ -1,6 +1,10 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
-export const ArrowRightIcon = ({ color = colors.gray }: { color?: string }) => {
+export const ArrowRightIcon = ({
+	color = colorTokens.gray,
+}: {
+	color?: string
+}) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

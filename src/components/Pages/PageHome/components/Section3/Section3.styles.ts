@@ -1,4 +1,5 @@
 import { SxProps, Theme } from '@mui/material'
+import { colorsLanding } from '@/constants'
 
 export const Section3ContainerStyle: SxProps<Theme> = {
 	display: 'flex',
@@ -11,7 +12,7 @@ export const Section3ContainerStyle: SxProps<Theme> = {
 export const Section3TitleStyle: SxProps<Theme> = {
 	fontSize: '2.25rem',
 	lineHeight: 1.33333,
-	color: 'white',
+	color: colorsLanding.homePageSection3Title,
 	fontWeight: 'bold',
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
 	textAlign: 'center',
@@ -21,7 +22,7 @@ export const Section3TitleStyle: SxProps<Theme> = {
 export const Section3SubTitleStyle: SxProps<Theme> = {
 	fontSize: '1.25rem',
 	lineHeight: 1.5,
-	color: 'white',
+	color: colorsLanding.homePageSection3SubTitle,
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
 	textAlign: 'center',
 }

@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const ArrowLeftIcon = () => {
 	return (
@@ -13,7 +13,7 @@ export const ArrowLeftIcon = () => {
 			<g>
 				<polygon
 					points="17.77,3.77 16,2 6,12 16,22 17.77,20.23 9.54,12"
-					fill={colors.gray}
+					fill={colorTokens.gray}
 				/>
 			</g>
 		</svg>

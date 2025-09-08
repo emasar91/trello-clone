@@ -1,11 +1,11 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const PageHomeContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'flex-start',
 	display: 'flex',
-	borderColor: colors.whiteBackground,
+	borderColor: colorsLanding.homePageSection1Container,
 }
 
 export const PageHomeContentStyle: SxProps<Theme> = {
@@ -21,7 +21,7 @@ export const PageHomeTitleStyle: SxProps<Theme> = {
 	fontSize: '3rem',
 	lineHeight: '1.25',
 	fontWeight: 500,
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection1Title,
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
 }
 
@@ -48,7 +48,7 @@ export const PageHomeLinkContainerStyle: SxProps<Theme> = {
 
 export const PageHomeLinkStyle: SxProps<Theme> = {
 	marginRight: '0.5rem',
-	color: colors.primary,
+	color: colorsLanding.homePageSection1ButtonVideo,
 	textDecoration: 'underline',
 }
 

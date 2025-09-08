@@ -3,7 +3,14 @@ import { LogoIcon } from '@/public/assets/icons/LogoIcon'
 import { MegafonoIcon } from '@/public/assets/icons/MegafonoIcon'
 import { NotificationIcon } from '@/public/assets/icons/NotificationIcon'
 import { SearchIcon } from '@/public/assets/icons/SearchIcon'
-import { Box, Button, Input, InputAdornment, Link } from '@mui/material'
+import {
+	Box,
+	Button,
+	Input,
+	InputAdornment,
+	Link,
+	useTheme,
+} from '@mui/material'
 import React from 'react'
 import AccountMenu from './components/AccountMenu/AccounMenu'
 import {
@@ -22,15 +29,17 @@ import { useTranslations } from 'next-intl'
 
 const NavbarLogged = () => {
 	const t = useTranslations('NavbarLogged')
+	const theme = useTheme()
 
 	return (
-		<Box sx={NavbarLoggedContainerStyle}>
+		<Box sx={NavbarLoggedContainerStyle(theme)}>
 			<Box sx={NavbarLoggedInnerWrapperStyle}>
-				<Box sx={NavbarLoggedLogoWrapperStyle}>
+				<Box sx={NavbarLoggedLogoWrapperStyle(theme)}>
 					<Box component={Link} href="/appTrello">
 						<LogoIcon />
 					</Box>
 				</Box>
+				``
 				<Box sx={NavbarLoggedSearchSectionStyle}>
 					<Box sx={NavbarLoggedSearchWrapperStyle}>
 						<Box sx={NavbarLoggedSearchContainerStyle}>
@@ -38,7 +47,7 @@ const NavbarLogged = () => {
 								disableUnderline
 								placeholder="Buscar"
 								fullWidth
-								sx={NavbarLoggedSearchInputStyle}
+								sx={NavbarLoggedSearchInputStyle(theme)}
 								startAdornment={
 									<InputAdornment
 										position="start"
@@ -50,11 +59,10 @@ const NavbarLogged = () => {
 							/>
 						</Box>
 					</Box>
-					<Button variant="contained" sx={NavbarLoggedCreateButtonStyle}>
+					<Button variant="contained" sx={NavbarLoggedCreateButtonStyle(theme)}>
 						{t('create')}
 					</Button>
 				</Box>
-
 				<Box sx={NavbarLoggedActionsStyle}>
 					<MegafonoIcon />
 					<NotificationIcon />

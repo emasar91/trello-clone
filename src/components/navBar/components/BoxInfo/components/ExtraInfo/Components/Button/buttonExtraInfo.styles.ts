@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const ExtraInfoButtonStyle: SxProps<Theme> = {
@@ -11,13 +11,13 @@ export const ExtraInfoButtonStyle: SxProps<Theme> = {
 	textAlign: 'center',
 	transition: '250ms ease-out',
 	textDecoration: 'none',
-	backgroundColor: colors.white,
-	border: `1px solid ${colors.violet}`,
+	backgroundColor: colorsLanding.boxInfoExtraInfoLinkBackground,
+	border: `1px solid ${colorsLanding.boxInfoExtraInfoLinkBorder}`,
 	fontSize: '1rem',
 	padding: '0.7rem 1rem 0.8rem',
-	color: `${colors.darkBlue} !important`,
+	color: `${colorsLanding.boxInfoExtraInfoLink} !important`,
 
 	'&:hover': {
-		backgroundColor: colors.violetLight,
+		backgroundColor: colorsLanding.boxInfoExtraInfoLinkHover,
 	},
 }

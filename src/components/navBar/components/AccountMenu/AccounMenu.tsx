@@ -8,6 +8,7 @@ import {
 	Typography,
 	Box,
 	Avatar,
+	useTheme,
 } from '@mui/material'
 import { useAuth } from '@/context/useAuthContext'
 import { logout } from '@/services/AuthActions'
@@ -38,6 +39,7 @@ export default function AccountMenu() {
 	const { user } = useAuth()
 	const locale = useLocale()
 	const t = useTranslations('NavbarLogged')
+	const theme = useTheme()
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 	const [themeAnchorEl, setThemeAnchorEl] = React.useState<null | HTMLElement>(
@@ -74,7 +76,7 @@ export default function AccountMenu() {
 
 	return (
 		<Box>
-			<Box sx={AccountMenuNavbarAvatarContainerStyle}>
+			<Box sx={AccountMenuNavbarAvatarContainerStyle(theme)}>
 				<Avatar
 					src={user?.photoURL || undefined}
 					sx={AccountMenuNavbarAvatarStyle}
@@ -89,12 +91,15 @@ export default function AccountMenu() {
 				anchorEl={anchorEl}
 				open={open}
 				onClose={handleClose}
-				sx={AccountMenuStyle}
+				sx={AccountMenuStyle(theme)}
 			>
-				<Typography variant="caption" sx={AccountMenuSubtitleAccountStyle}>
+				<Typography
+					variant="caption"
+					sx={AccountMenuSubtitleAccountStyle(theme)}
+				>
 					{t('menu.account').toUpperCase()}
 				</Typography>
-				<MenuItem sx={AccountMenuAvatarContainerStyle}>
+				<MenuItem sx={AccountMenuAvatarContainerStyle} disableRipple>
 					<ListItemIcon>
 						<Avatar
 							src={user?.photoURL || undefined}
@@ -106,31 +111,34 @@ export default function AccountMenu() {
 					<ListItemText
 						primary={user?.displayName || user?.email?.split('@')[0]}
 						secondary={user?.email}
-						sx={AccountMenuAvatarInfoStyle}
+						sx={AccountMenuAvatarInfoStyle(theme)}
 					/>
 				</MenuItem>
-				<Divider sx={AccountMenuDividerStyle} />
+				<Divider sx={AccountMenuDividerStyle(theme)} />
 
-				<Typography variant="caption" sx={AccountMenuSubtitleTrelloStyle}>
+				<Typography
+					variant="caption"
+					sx={AccountMenuSubtitleTrelloStyle(theme)}
+				>
 					{t('menu.trello').toUpperCase()}
 				</Typography>
-				<MenuItem sx={AccountMenuItemStyle} disableRipple>
+				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
 					{t('menu.profile')}
 				</MenuItem>
-				<MenuItem sx={AccountMenuItemStyle} disableRipple>
+				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
 					{t('menu.activity')}
 				</MenuItem>
-				<MenuItem sx={AccountMenuItemStyle} disableRipple>
+				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
 					{t('menu.cards')}
 				</MenuItem>
-				<MenuItem sx={AccountMenuItemStyle} disableRipple>
+				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
 					{t('menu.settings')}
 				</MenuItem>
 
 				{/* Item que abre submenu */}
 				<MenuItem
 					onClick={handleThemeClick}
-					sx={AccountMenuItemThemeStyle(themeOpen)}
+					sx={AccountMenuItemThemeStyle(themeOpen, theme)}
 					disableRipple
 				>
 					{t('menu.theme')}
@@ -139,18 +147,18 @@ export default function AccountMenu() {
 					</Box>
 				</MenuItem>
 
-				<Divider sx={AccountMenuDividerStyle} />
+				<Divider sx={AccountMenuDividerStyle(theme)} />
 
-				<MenuItem sx={AccountMenuItemWorkSpaceStyle} disableRipple>
+				<MenuItem sx={AccountMenuItemWorkSpaceStyle(theme)} disableRipple>
 					<CreateWorkSpaceIcon />
 					{t('menu.createWorkspace')}
 				</MenuItem>
 
-				<Divider sx={AccountMenuDividerStyle} />
+				<Divider sx={AccountMenuDividerStyle(theme)} />
 
 				<MenuItem
 					onClick={handleLogout}
-					sx={AccountMenuItemStyle}
+					sx={AccountMenuItemStyle(theme)}
 					disableRipple
 				>
 					{t('menu.logout')}

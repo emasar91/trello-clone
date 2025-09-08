@@ -1,9 +1,9 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const MarketingTeamsIcon = () => {
 	return (
 		<svg
-			fill={colors.gray}
+			fill={colorTokens.gray}
 			width="1.2rem"
 			aria-hidden="true"
 			viewBox="0 0 63 65"

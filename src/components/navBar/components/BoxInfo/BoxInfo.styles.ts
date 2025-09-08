@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const BoxInfoContainerStyle: SxProps<Theme> = {
@@ -20,7 +20,7 @@ export const BoxInfoLeftStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	justifyContent: 'center',
 	width: 'calc(237.5px + 50vw)',
-	backgroundColor: colors.white,
+	backgroundColor: colorsLanding.boxInfoBackground,
 	padding: '2rem 0px 4.75rem',
 }
 
@@ -44,5 +44,5 @@ export const BoxInfoRightContentStyle: SxProps<Theme> = {
 
 export const BoxInfoRightContainerStyle: SxProps<Theme> = {
 	height: '-webkit-fill-available',
-	backgroundColor: colors.violetLight,
+	backgroundColor: colorsLanding.boxInfoExtraInfoBackground,
 }

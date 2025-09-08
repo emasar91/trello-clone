@@ -7,7 +7,7 @@ import Section2 from './components/Section2/Section2'
 import Section3 from './components/Section3/Section3'
 import Section4 from './components/Section4/Section4'
 import Section5 from './components/Section5/Section5'
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 
 /**
  * PageHome component that renders a video and a description of the product.
@@ -17,22 +17,25 @@ import { colors } from '@/constants'
 const PageHome = () => {
 	return (
 		<>
-			<PageContainer backgroundColor={colors.whiteBackground}>
+			<PageContainer backgroundColor={colorsLanding.homePageBackgroundSection1}>
 				<Section1 />
 				<CustomModal styles={{ width: '720px', height: '405px' }}>
 					<VideoBox VideoSrc="/assets/video/VideoTrello.mp4" />
 				</CustomModal>
 			</PageContainer>
-			<PageContainer backgroundColor={colors.white}>
+			<PageContainer backgroundColor={colorsLanding.homePageBackgroundSection2}>
 				<Section2 />
 			</PageContainer>
-			<PageContainer backgroundColor={colors.primary}>
+			<PageContainer backgroundColor={colorsLanding.homePageBackgroundSection3}>
 				<Section3 />
 			</PageContainer>
-			<PageContainer backgroundColor={colors.white} margin="-175px 0 0 0">
+			<PageContainer
+				backgroundColor={colorsLanding.homePageBackgroundSection4}
+				margin="-175px 0 0 0"
+			>
 				<Section4 />
 			</PageContainer>
-			<PageContainer backgroundColor={colors.white}>
+			<PageContainer backgroundColor={colorsLanding.homePageBackgroundSection5}>
 				<Section5 />
 			</PageContainer>
 		</>

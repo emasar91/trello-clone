@@ -4,7 +4,7 @@ import PageContainer from '../pageContainer/PageContainer'
 import { Box, Link } from '@mui/material'
 import { LogoFooter } from '@/public/assets/LogoFooter'
 import Typography from '@mui/material/Typography'
-import { colors, footerItems } from '@/constants'
+import { colorsLanding, footerItems } from '@/constants'
 import { useTranslations } from 'next-intl'
 import {
 	FooterContainerStyle,
@@ -41,7 +41,7 @@ const Footer = () => {
 	}
 
 	return (
-		<PageContainer backgroundColor={colors.darkBlue}>
+		<PageContainer backgroundColor={colorsLanding.footerBackground}>
 			<Box sx={FooterContainerStyle}>
 				<Box sx={FooterContentStyle}>
 					<Box sx={FooterLogInContainerStyle}>

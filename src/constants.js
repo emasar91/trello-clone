@@ -272,46 +272,194 @@ export const routes = [
 	'contact',
 ]
 
-export const colors = {
-	primary: '#0065ff',
+export const colorTokens = {
+	brandPrimary: '#0065ff',
 	white: '#ffffff',
-	whiteBackground: '#f3f3f5',
 	black: '#000000',
 	gray: '#7A8599',
+	grayLight: '#505f79',
+	whiteBackground: '#f3f3f5',
+	violet: '#6554c0',
+	violetLight: '#f7f5ff',
+	pink: '#f99cdb',
+	blueLight: '#00c7e5',
+	yellow: '#ffc400',
+	yellowLight: '#fffcef',
+
 	darkBlue: '#091e42',
 	darkBlueHover: '#1d478f',
-	violet: '#6554c0',
 	blueText: '#172b4d',
 	blueBackground: '#002e90',
 	iconBackground: '#dbeafe',
-	yellow: '#ffc400',
-	yellowLight: '#fffcef',
-	blueLight: '#00c7e5',
-	pink: '#f99cdb',
 	blackShadow: '#344563',
 	violetLight: '#f7f5ff',
-	grayLight: '#505f79',
 	blackBackground: '#1d2125',
+}
 
-	grayBackgroundNavbarLogged: '#282e33',
-	grayBackgroundNavbarLoggedHover: '#333c43',
+export const colorsLanding = {
+	shadow: 'rgba(0, 0, 0, 0.1)',
+	//navbar
+	loginButton: colorTokens.brandPrimary,
+	textLoginButton: colorTokens.white,
+	backgroundNavbar: colorTokens.white,
+	textTabs: colorTokens.darkBlue,
+	textTabsHover: colorTokens.brandPrimary,
+	textTabsActive: colorTokens.brandPrimary,
+	textTabsActiveText: colorTokens.brandPrimary,
+	textTabsActiveUnderline: colorTokens.brandPrimary,
+	textTabsText: colorTokens.black,
 
-	grayBordersAccountMenu: '#8c9bab',
-	textAccountMenu: '#b6c2cf',
-	hoverItemAccountMenu: '#323940',
-	accountMenuSelectedItem: '#1c2b41',
-	backgroundAccountMenu: '#282e33',
+	itemHover1: 'rgba(255, 250, 229, 0.5)',
+	itemHover2: 'rgba(222, 235, 255, 0.5)',
+	itemHover3: 'rgba(255, 242, 251, 0.5)',
+	itemHover4: 'rgba(255, 235, 229, 0.5)',
+	itemHover5: 'rgba(230, 252, 255, 0.5)',
+	itemHover6: 'rgba(227, 252, 239, 0.5)',
 
-	avatarPrimaryText: '#B6C2CF ',
-	avatarSecondaryText: '#9FADBC',
-	borderMenuAccount: '#39424a',
+	//boxinfo extrainfo navbar
+	boxInfoBackground: colorTokens.white,
+	boxInfoExtraInfoBackground: colorTokens.violetLight,
+	boxInfoExtraInfoTitle: colorTokens.darkBlue,
+	boxInfoExtraInfoItemsTitle: colorTokens.darkBlue,
+	boxInfoExtraInfoLink: colorTokens.darkBlue,
+	boxInfoExtraInfoLinkBackground: colorTokens.white,
+	boxInfoExtraInfoLinkBorder: colorTokens.violet,
+	boxInfoExtraInfoLinkHover: colorTokens.violetLight,
+	boxInfoExtraInfoIcon: colorTokens.brandPrimary,
+	boxInfoExtraInfoTitleBorder: colorTokens.violet,
 
-	hover1: 'rgba(255, 250, 229, 0.5)',
-	hover2: 'rgba(222, 235, 255, 0.5)',
-	hover3: 'rgba(255, 242, 251, 0.5)',
-	hover4: 'rgba(255, 235, 229, 0.5)',
-	hover5: 'rgba(230, 252, 255, 0.5)',
-	hover6: 'rgba(227, 252, 239, 0.5)',
+	//boxinfo extrainfo navbar
+	boxInfoTitle: colorTokens.darkBlue,
+	boxInfoTitleBorder: colorTokens.whiteBackground,
+	boxInfoLink: colorTokens.darkBlue,
+	boxInfoItemTitle: colorTokens.darkBlue,
+	boxInfoItemDescription: colorTokens.grayLight,
+	boxInfoFullWidthButtonBackground: colorTokens.white,
+	boxInfoFullWidthButtonContainer: colorTokens.yellowLight,
+	boxInfoFullWidthButtonContainerTitle: colorTokens.black,
+	boxInfoFullWidthButtonContainerDescription: colorTokens.darkBlue,
+	boxInfoFullWidthButtonHover: colorTokens.yellowLight,
+	boxInfoFullWidthButtonText: colorTokens.darkBlue,
+	boxInfoFullWidthButtonBorder: colorTokens.yellow,
+
+	//footer
+	footerBackground: colorTokens.darkBlue,
+	footerTitle: colorTokens.white,
+	footerTitleBorder: colorTokens.white,
+	footerSubtitle: colorTokens.white,
+	footerItemHover: colorTokens.blackShadow,
+
+	//mockpage
+	mockPageBackground: colorTokens.blueBackground,
+	mockPageLoginButtonBackground: colorTokens.brandPrimary,
+	mockPageLoginButtonText: colorTokens.white,
+	mockPageTitle: colorTokens.blueText,
+	mockPageSubTitle: colorTokens.gray,
+	mockPageDescription: colorTokens.darkBlue,
+	mockPageDescriptionContainerBackground: colorTokens.iconBackground,
+	mockPageIconContainerBackground: colorTokens.iconBackground,
+	//404 page
+	page404Background: colorTokens.blueBackground,
+	page404LoginButtonBackground: colorTokens.brandPrimary,
+	page404LoginButtonText: colorTokens.white,
+	page404Title: colorTokens.blueText,
+	page404SubTitle: colorTokens.gray,
+	page404Description: colorTokens.darkBlue,
+	page404DescriptionContainerBackground: colorTokens.iconBackground,
+	page404IconContainerBackground: colorTokens.iconBackground,
+
+	//login page
+	loginPageBackground: colorTokens.blueBackground,
+	loginPageContainerForm: colorTokens.white,
+	loginPageContainerFormShadow: colorTokens.blackShadow,
+	loginPageFormResetPasswordButton: colorTokens.gray,
+	loginPageFormSubmitButtonBackground: colorTokens.brandPrimary,
+	loginPageFormSubmitButtonText: colorTokens.white,
+
+	//register page
+	registerPageBackground: colorTokens.blueBackground,
+
+	//reset password page
+	resetPasswordPageBackground: colorTokens.blueBackground,
+
+	//home page
+	homePageBackgroundSection1: colorTokens.whiteBackground,
+	homePageBackgroundSection2: colorTokens.white,
+	homePageBackgroundSection3: colorTokens.brandPrimary,
+	homePageBackgroundSection4: colorTokens.white,
+	homePageBackgroundSection5: colorTokens.white,
+
+	//home page section 1
+	homePageSection1Container: colorTokens.whiteBackground,
+	homePageSection1Title: colorTokens.darkBlue,
+	homePageSection1ButtonVideo: colorTokens.brandPrimary,
+
+	//home page section 2
+	homePageSection2SubTitle: colorTokens.darkBlue,
+	homePageSection2Description: colorTokens.darkBlue,
+	homePageSection2SliderBackground: colorTokens.darkBlue,
+	homePageSection2SliderBackgroundActive: colorTokens.gray,
+	homePageSection2SliderBackgroundHover: colorTokens.iconBackground,
+	homePageSection2SliderBackgroundHoverActive: colorTokens.iconBackground,
+
+	//home page section 3
+	homePageSection3Title: colorTokens.white,
+	homePageSection3SubTitle: colorTokens.white,
+	homePageSection3CardDescription: colorTokens.darkBlue,
+	homePageSection3CardTitle: colorTokens.darkBlue,
+	homePageSection3CardBackground: colorTokens.white,
+	homePageSection3CardBackgroundShadow: colorTokens.blackShadow,
+
+	//home page section 4
+	homePageSection4Title: colorTokens.darkBlue,
+	homePageSection4SubTitle: colorTokens.darkBlue,
+	homePageSection4Description: colorTokens.darkBlue,
+	homePageSection4CardButtonBackground: colorTokens.white,
+	homePageSection4CardButtonBackgroundHover: colorTokens.violetLight,
+	homePageSection4CardButtonBorder: colorTokens.brandPrimary,
+	homePageSection4CardButtonText: colorTokens.blueText,
+	homePageSection4CardTitle: colorTokens.darkBlue,
+	homePageSection4CardDescription: colorTokens.darkBlue,
+	homePageSection4CardBackground: colorTokens.whiteBackground,
+
+	//custom slider
+	customSlider: colorTokens.darkBlue,
+	customSliderDot: colorTokens.darkBlue,
+	customSliderDotActive: colorTokens.gray,
+	customSliderArrowRightBackground: colorTokens.whiteBackground,
+	customSliderArrowRightHover: colorTokens.blueLight,
+	customSliderArrowLeftBackground: colorTokens.whiteBackground,
+	customSliderArrowLeftHover: colorTokens.blueLight,
+	customSliderLeftItemsDescription: colorTokens.darkBlue,
+	customSliderLeftItemsTitle: colorTokens.darkBlue,
+	customSliderLeftItemsActiveBorder: colorTokens.blueLight,
+	customSliderLeftItemsActiveBackground: colorTokens.white,
+}
+
+export const colorDark = {
+	...colorTokens,
+	loginButton: colorTokens.brandPrimary,
+	brandPrimaryHover: '#85b8ff',
+	blackBackground: colorTokens.blackBackground,
+	blackBackgroundLight: '#22272b',
+	blackBackgroundHover: '#282e33',
+	blackBackgroundMenu: '#282e33',
+	blackBackgroundLightHover: '#333c43',
+	brandPrimary: '#579dff',
+	grayLight: '#8c9bab',
+	blueBackgroundSelected: '#1c2b41',
+	gray: '#39424a',
+	grayLightHover: '#323940',
+	grayTextAvatar: '#B6C2CF',
+	grayTextItems: '#B6C2CF',
+	grayTextAvatarSecondary: '#9FADBC',
+}
+
+export const colorLight = {
+	...colorTokens,
+	loginButton: colorTokens.brandPrimary,
+	blackBackground: colorTokens.whiteBackground,
+	brandPrimary: colorTokens.brandPrimary,
 }
 
 export const LIGHT_THEME = 'light'

@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const CustomSliderImageStyle: SxProps<Theme> = {
@@ -34,12 +34,12 @@ export const CustomSliderTabStyle = (
 	padding: 0,
 	margin: '0px 4px !important',
 	borderRadius: '6px',
-	backgroundColor: activeIndex === index ? colors.gray : colors.darkBlue,
+	backgroundColor:
+		activeIndex === index
+			? colorsLanding.customSliderDotActive
+			: colorsLanding.customSliderDot,
 	color: 'transparent',
 	transition: 'all 0.3s ease-in-out',
-	'&:hover': {
-		backgroundColor: activeIndex === index ? colors.gray : colors.darkBlueHover,
-	},
 	'& .MuiTab-wrapper': {
 		display: 'none',
 	},
@@ -80,13 +80,13 @@ export const CustomSliderTabsArrowPanelStyle: SxProps<Theme> = {
 export const CustomSliderLeftItemsDescriptionStyle: SxProps<Theme> = {
 	fontSize: '1rem',
 	lineHeight: 1.5,
-	color: colors.darkBlue,
+	color: colorsLanding.customSliderLeftItemsDescription,
 }
 
 export const CustomSliderLeftItemsTitleStyle: SxProps<Theme> = {
 	mb: '0.5rem',
 	fontWeight: 600,
-	color: colors.darkBlue,
+	color: colorsLanding.customSliderLeftItemsTitle,
 }
 
 export const CustomSliderLeftItemsContainerStyle = (
@@ -99,10 +99,10 @@ export const CustomSliderLeftItemsContainerStyle = (
 	boxShadow: activeIndex === index ? 4 : 0,
 	borderLeft:
 		activeIndex === index
-			? `0.5rem solid ${colors.blueLight}`
+			? `0.5rem solid ${colorsLanding.customSliderLeftItemsActiveBorder}`
 			: '0.5rem solid transparent',
 	transition: 'all 0.3s ease',
-	bgcolor: colors.white,
+	bgcolor: colorsLanding.customSliderLeftItemsActiveBackground,
 })
 
 export const CustomSliderLeftItemsContainerColumnStyle: SxProps<Theme> = {
@@ -120,18 +120,18 @@ export const CustomSliderContainerStyle: SxProps<Theme> = {
 }
 
 export const CustomSliderRightIconTabStyle: SxProps<Theme> = {
-	backgroundColor: `${colors.whiteBackground} !important`,
+	backgroundColor: `${colorsLanding.customSliderArrowRightBackground} !important`,
 	padding: '0.4rem',
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
 	'&:hover svg polygon': {
-		fill: colors.blueLight,
+		fill: colorsLanding.customSliderArrowRightHover,
 	},
 }
 
 export const CustomSliderLeftIconTabStyle: SxProps<Theme> = {
-	backgroundColor: `${colors.whiteBackground} !important`,
+	backgroundColor: `${colorsLanding.customSliderArrowLeftBackground} !important`,
 	padding: '0.4rem',
 	margin: '0 1rem',
 	display: 'flex',
@@ -139,6 +139,6 @@ export const CustomSliderLeftIconTabStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	marginRight: '2rem',
 	'&:hover svg polygon': {
-		fill: colors.blueLight,
+		fill: colorsLanding.customSliderArrowLeftHover,
 	},
 }

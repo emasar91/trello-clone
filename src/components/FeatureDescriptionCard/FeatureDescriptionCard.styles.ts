@@ -1,16 +1,16 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const FeatureDescriptionCardDescriptionStyle: SxProps<Theme> = {
 	fontWeight: 400,
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection3CardDescription,
 	fontSize: '1.25rem',
 	lineHeight: 1.5,
 }
 
 export const FeatureDescriptionCardTitleStyle: SxProps<Theme> = {
 	fontFamily: 'var(--font-family-text, "Charlie Display", sans-serif)',
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection3CardTitle,
 	fontWeight: 600,
 	fontSize: '1rem',
 	lineHeight: 1.25,
@@ -35,10 +35,10 @@ export const FeatureDescriptionCardContentStyle = (
 ) => ({
 	display: 'flex',
 	flexDirection: sideImage === 'left' ? 'row' : 'row-reverse',
-	backgroundColor: colors.white,
+	backgroundColor: colorsLanding.homePageSection3CardBackground,
 	alignItems: 'center',
 	borderRadius: ' 0.5rem',
-	boxShadow: `${colors.blackShadow}8f 0px 0.5rem 1rem 0px`,
+	boxShadow: `${colorsLanding.homePageSection3CardBackgroundShadow}8f 0px 0.5rem 1rem 0px`,
 	gap: '2rem',
 	textAlign: 'left',
 	padding: '2rem',

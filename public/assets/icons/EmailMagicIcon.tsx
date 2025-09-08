@@ -1,9 +1,9 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const EmilMagicIcon = () => {
 	return (
 		<svg
-			fill={colors.violet}
+			fill={colorTokens.violet}
 			width="2rem"
 			aria-hidden="true"
 			viewBox="0 0 32 32"

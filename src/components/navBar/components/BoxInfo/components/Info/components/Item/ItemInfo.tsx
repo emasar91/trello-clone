@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { IconsDrawer } from '@/public/assets/icons/IconsDrawer'
 import { IDataInfo } from '@/types/navBar'
 import { Box, Link, Typography } from '@mui/material'
@@ -27,12 +27,12 @@ const ItemInfo = ({ data, tabSelected }: Props) => {
 	const t = useTranslations(`Drawer.${tabSelected}.info`)
 
 	const colorHover = {
-		1: colors.hover1,
-		2: colors.hover2,
-		3: colors.hover3,
-		4: colors.hover4,
-		5: colors.hover5,
-		6: colors.hover6,
+		1: colorsLanding.itemHover1,
+		2: colorsLanding.itemHover2,
+		3: colorsLanding.itemHover3,
+		4: colorsLanding.itemHover4,
+		5: colorsLanding.itemHover5,
+		6: colorsLanding.itemHover6,
 	}
 
 	const [hoverColor, setHoverColor] = useState('')

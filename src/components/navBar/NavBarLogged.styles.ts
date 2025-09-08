@@ -1,41 +1,45 @@
-import { colors } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
-export const NavbarLoggedCreateButtonStyle: SxProps<Theme> = {
+export const NavbarLoggedCreateButtonStyle = (
+	theme: Theme
+): SxProps<Theme> => ({
 	height: '32px',
 	padding: '0 8px',
-	backgroundColor: colors.primary,
-	color: colors.white,
+	backgroundColor: theme.palette.navbar.createButtonBackground,
+	color: theme.palette.navbar.createButtonText,
 	lineHeight: '32px',
 	maxWidth: '57px !important',
 	margin: '0 !important',
 	minWidth: '57px !important',
-}
+	'&:hover': {
+		backgroundColor: theme.palette.navbar.createButtonBackgroundHover,
+	},
+})
 
 export const NavbarLoggedAdormentIconStyle: SxProps<Theme> = { ml: -2 }
 
-export const NavbarLoggedSearchInputStyle: SxProps<Theme> = {
+export const NavbarLoggedSearchInputStyle = (theme: Theme): SxProps<Theme> => ({
 	height: '32px',
-	border: `1px solid ${colors.gray}`,
+	border: `1px solid ${theme.palette.navbar.searchInputBorder}`,
 	borderRadius: '4px',
-	color: colors.gray,
 	padding: '0 12px 0 30px',
 	width: '100%',
-	backgroundColor: '#22272b',
+	backgroundColor: theme.palette.navbar.searchInputBackground,
+	transition: 'background-color 0.3s ease',
 	'&:hover': {
-		backgroundColor: '#282e33',
+		backgroundColor: theme.palette.navbar.searchInputBackgroundHover,
 	},
 	'& .MuiInputBase-input': {
-		color: colors.gray,
+		color: theme.palette.navbar.searchInputText,
 		p: 0,
 		fontSize: '14px',
 		lineHeight: '20px',
 	},
 	'.MuiInputBase-input::placeholder': {
-		color: colors.gray,
+		color: theme.palette.navbar.searchInputPlaceholder,
 		opacity: 1,
 	},
-}
+})
 
 export const NavbarLoggedSearchContainerStyle: SxProps<Theme> = {
 	flex: 1,
@@ -66,7 +70,7 @@ export const NavbarLoggedSearchWrapperStyle: SxProps<Theme> = {
 	width: '100%',
 }
 
-export const NavbarLoggedLogoWrapperStyle: SxProps<Theme> = {
+export const NavbarLoggedLogoWrapperStyle = (theme: Theme): SxProps<Theme> => ({
 	display: 'flex',
 	justifyContent: 'space-between',
 	flexDirection: 'row',
@@ -75,9 +79,10 @@ export const NavbarLoggedLogoWrapperStyle: SxProps<Theme> = {
 	padding: '0 8px',
 	'&:hover': {
 		cursor: 'pointer',
-		backgroundColor: '#333c43',
+		backgroundColor: theme.palette.navbar.logoHover,
+		borderRadius: '4px',
 	},
-}
+})
 
 export const NavbarLoggedInnerWrapperStyle: SxProps<Theme> = {
 	display: 'flex',
@@ -88,11 +93,11 @@ export const NavbarLoggedInnerWrapperStyle: SxProps<Theme> = {
 	height: '32px',
 }
 
-export const NavbarLoggedContainerStyle: SxProps<Theme> = {
+export const NavbarLoggedContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	height: '48px',
 	width: '100%',
-	backgroundColor: colors.blackBackground,
+	backgroundColor: theme.palette.navbar.containerBackground,
 	display: 'flex',
 	alignItems: 'center',
 	padding: '0 8px',
-}
+})

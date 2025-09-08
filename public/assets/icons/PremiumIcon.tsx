@@ -1,9 +1,9 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const PremiumIcon = () => {
 	return (
 		<svg
-			fill={colors.pink}
+			fill={colorTokens.pink}
 			width="1.2rem"
 			aria-hidden="true"
 			viewBox="0 0 65 63"

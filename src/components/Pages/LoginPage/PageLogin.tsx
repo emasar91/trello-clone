@@ -4,13 +4,14 @@ import LoginTitle from './components/LoginTitle/LoginTitle'
 import LoginCreateAccount from './components/LoginCreateAccount/LoginCreateAccount'
 import LoginForm from './components/LoginForm/LoginForm'
 import PageContainer from '@/components/pageContainer/PageContainer'
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { Box } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { PageLoginContainerStyle } from './pageLogin.styles'
 import { signInEmail, signInGoogle } from '@/services/AuthActions'
 import { useLocale, useTranslations } from 'next-intl'
 import { toast } from 'react-toastify'
+import { FirebaseError } from 'firebase/app'
 
 const PageLogin = () => {
 	const router = useRouter()
@@ -36,8 +37,10 @@ const PageLogin = () => {
 					router.replace(`/${locale}/appTrello`)
 				}
 			}
-		} catch (error) {
-			if (error.code === 'auth/invalid-credential') {
+		} catch (error: unknown) {
+			const firebaseError = error as FirebaseError
+
+			if (firebaseError.code === 'auth/invalid-credential') {
 				toast.error(t('login.invalidCredential'))
 			} else {
 				toast.error(t('login.error'))
@@ -50,7 +53,7 @@ const PageLogin = () => {
 
 	return (
 		<Box sx={PageLoginContainerStyle}>
-			<PageContainer backgroundColor={colors.blueBackground}>
+			<PageContainer backgroundColor={colorsLanding.loginPageBackground}>
 				<LoginPageContainer register={false} recover={false}>
 					<LoginTitle />
 					<LoginForm

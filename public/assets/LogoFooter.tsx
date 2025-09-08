@@ -1,10 +1,10 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const LogoFooter = () => {
 	return (
 		<svg
 			aria-label="Atlassian Trello"
-			fill={colors.white}
+			fill={colorTokens.white}
 			height="50"
 			role="img"
 			viewBox="0 0 312 105"
@@ -19,13 +19,13 @@ export const LogoFooter = () => {
 					y1="100%"
 					y2=".016%"
 				>
-					<stop offset="0%" stopColor={colors.white} stopOpacity=".5" />
-					<stop offset="15%" stopColor={colors.white} stopOpacity=".65" />
-					<stop offset="30%" stopColor={colors.white} stopOpacity=".78" />
-					<stop offset="46%" stopColor={colors.white} stopOpacity=".88" />
-					<stop offset="62%" stopColor={colors.white} stopOpacity=".95" />
-					<stop offset="80%" stopColor={colors.white} stopOpacity=".99" />
-					<stop offset="100%" stopColor={colors.white} />
+					<stop offset="0%" stopColor={colorTokens.white} stopOpacity=".5" />
+					<stop offset="15%" stopColor={colorTokens.white} stopOpacity=".65" />
+					<stop offset="30%" stopColor={colorTokens.white} stopOpacity=".78" />
+					<stop offset="46%" stopColor={colorTokens.white} stopOpacity=".88" />
+					<stop offset="62%" stopColor={colorTokens.white} stopOpacity=".95" />
+					<stop offset="80%" stopColor={colorTokens.white} stopOpacity=".99" />
+					<stop offset="100%" stopColor={colorTokens.white} />
 				</linearGradient>
 			</defs>
 			<path

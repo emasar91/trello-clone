@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
 import { Box, Link } from '@mui/material'
 import React from 'react'
@@ -24,7 +24,7 @@ const LinkExtraInfo = ({ linkButton, linkTitle }: Props) => {
 			</Link>
 
 			<Box className="hover-arrow" sx={ExtraInfoItemTitleStyle}>
-				<ArrowRightIcon color={colors.primary} />
+				<ArrowRightIcon color={colorsLanding.boxInfoExtraInfoIcon} />
 			</Box>
 		</Box>
 	)

@@ -1,10 +1,10 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const ResetPasswordLinkStyle: SxProps<Theme> = {
 	display: 'flex',
 	justifyContent: 'start',
 	width: '100%',
-	color: colors.gray,
+	color: colorsLanding.loginPageFormResetPasswordButton,
 	fontWeight: 500,
 }

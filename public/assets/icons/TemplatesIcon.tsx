@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorTokens } from '@/constants'
 
 export const TemplatesIcon = () => {
 	return (
@@ -6,7 +6,7 @@ export const TemplatesIcon = () => {
 			aria-hidden="true"
 			width="1.2rem"
 			viewBox="0 0 48 48"
-			fill={colors.gray}
+			fill={colorTokens.gray}
 		>
 			<path d="M11 11H20.5V33H11V11Z"></path>
 			<path d="M23.5 33V11H33V33H23.5Z"></path>

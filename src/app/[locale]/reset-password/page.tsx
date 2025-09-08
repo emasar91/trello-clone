@@ -7,7 +7,7 @@ import LoginTitle from '@/components/Pages/LoginPage/components/LoginTitle/Login
 import LoginForm from '@/components/Pages/LoginPage/components/LoginForm/LoginForm'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import PageContainer from '@/components/pageContainer/PageContainer'
 import { PageLoginContainerStyle } from '@/components/Pages/LoginPage/pageLogin.styles'
 import { Box } from '@mui/material'
@@ -32,7 +32,9 @@ const RecoverPassword = () => {
 
 	return (
 		<Box sx={PageLoginContainerStyle}>
-			<PageContainer backgroundColor={colors.blueBackground}>
+			<PageContainer
+				backgroundColor={colorsLanding.resetPasswordPageBackground}
+			>
 				<LoginPageContainer register={false} recover={true}>
 					<LoginTitle recover={true} />
 					<LoginForm

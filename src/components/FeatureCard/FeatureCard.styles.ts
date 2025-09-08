@@ -1,4 +1,4 @@
-import { colors } from '@/constants'
+import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const FeatureCardButtonStyle: SxProps<Theme> = {
@@ -10,13 +10,13 @@ export const FeatureCardButtonStyle: SxProps<Theme> = {
 	textAlign: 'center',
 	transition: '250ms ease-out',
 	textDecoration: 'none',
-	backgroundColor: colors.white,
-	border: `1px solid ${colors.primary}`,
+	backgroundColor: colorsLanding.homePageSection4CardButtonBackground,
+	border: `1px solid ${colorsLanding.homePageSection4CardButtonBorder}`,
 	fontSize: '1rem',
 	padding: '0.7rem 1rem 0.8rem',
-	color: `${colors.blueText} !important`,
+	color: `${colorsLanding.homePageSection4CardButtonText} !important`,
 	'&:hover': {
-		backgroundColor: colors.violetLight,
+		backgroundColor: colorsLanding.homePageSection4CardButtonBackgroundHover,
 	},
 }
 
@@ -25,7 +25,7 @@ export const FeatureCardDescriptionStyle: SxProps<Theme> = {
 	fontWeight: 400,
 	fontSize: '1rem',
 	lineHeight: 1.5,
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection4CardDescription,
 }
 
 export const FeatureCardTitleStyle: SxProps<Theme> = {
@@ -35,7 +35,7 @@ export const FeatureCardTitleStyle: SxProps<Theme> = {
 	fontSize: '1.5rem',
 	lineHeight: '2rem',
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
-	color: colors.darkBlue,
+	color: colorsLanding.homePageSection4CardTitle,
 }
 
 export const FeatureCardContentStyle: SxProps<Theme> = {
@@ -49,8 +49,7 @@ export const FeatureCardContentStyle: SxProps<Theme> = {
 export const FeatureCardContentContainerStyle: SxProps<Theme> = {
 	padding: '1.5rem',
 	height: '100%',
-	backgroundColor: colors.whiteBackground,
-	color: colors.darkBlue,
+	backgroundColor: colorsLanding.homePageSection4CardBackground,
 	borderRadius: '0.5rem',
 	overflow: 'hidden',
 }

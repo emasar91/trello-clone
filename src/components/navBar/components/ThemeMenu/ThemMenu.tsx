@@ -6,6 +6,7 @@ import {
 	Menu,
 	MenuItem,
 	Radio,
+	useTheme,
 } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import React from 'react'
@@ -34,17 +35,23 @@ function ThemeMenu({
 }: IThemeMenu) {
 	const t = useTranslations('NavbarLogged')
 
+	const theme = useTheme()
+
 	return (
 		<Menu
 			anchorEl={themeAnchorEl}
 			open={themeOpen}
 			onClose={() => setThemeAnchorEl(null)}
-			sx={AccountMenuThemeMenuStyle}
+			sx={AccountMenuThemeMenuStyle(theme)}
 		>
 			<MenuItem
 				onClick={() => handleSelect(LIGHT_THEME)}
 				disableRipple
-				sx={AccountMenuThemeMenuContainerStyle(selectedTheme, LIGHT_THEME)}
+				sx={AccountMenuThemeMenuContainerStyle(
+					selectedTheme,
+					LIGHT_THEME,
+					theme
+				)}
 			>
 				<Radio
 					checked={selectedTheme === LIGHT_THEME}
@@ -63,14 +70,21 @@ function ThemeMenu({
 				</ListItemIcon>
 				<ListItemText
 					primary={t('menu.themeSelect.light')}
-					sx={AccountMenuThemeMenuItemStyle}
+					sx={AccountMenuThemeMenuItemStyle(
+						selectedTheme === LIGHT_THEME,
+						theme
+					)}
 				/>
 			</MenuItem>
 
 			<MenuItem
 				onClick={() => handleSelect(DARK_THEME)}
 				disableRipple
-				sx={AccountMenuThemeMenuContainerStyle(selectedTheme, DARK_THEME)}
+				sx={AccountMenuThemeMenuContainerStyle(
+					selectedTheme,
+					DARK_THEME,
+					theme
+				)}
 			>
 				<Radio
 					checked={selectedTheme === DARK_THEME}
@@ -90,7 +104,10 @@ function ThemeMenu({
 				</ListItemIcon>
 				<ListItemText
 					primary={t('menu.themeSelect.dark')}
-					sx={AccountMenuThemeMenuItemStyle}
+					sx={AccountMenuThemeMenuItemStyle(
+						selectedTheme === DARK_THEME,
+						theme
+					)}
 				/>
 			</MenuItem>
 		</Menu>
