@@ -350,5 +350,11 @@
 			"sendEmail": "Email enviado con éxito",
 			"errorSendEmail": "Hubo un problema al enviar el email"
 		}
+	},
+	"BoardsPage": {
+		"boards": "Tableros",
+		"workspaces": "Espacios de trabajo",
+		"noBoards": "No hay tableros disponibles",
+		"noWorkSpaces": "No hay espacios de trabajo disponibles"
 	}
 }

@@ -27,14 +27,14 @@ const PageLogin = () => {
 			if (typeLogin === 'google') {
 				const result = await signInGoogle(locale)
 				if (result) {
-					router.replace(`/${locale}/appTrello`)
+					router.replace(`/${locale}/u`)
 				}
 			}
 
 			if (typeLogin === 'email' && emailForm && passwordForm) {
 				const result = await signInEmail(emailForm, passwordForm, locale)
 				if (result) {
-					router.replace(`/${locale}/appTrello`)
+					router.replace(`/${locale}/u`)
 				}
 			}
 		} catch (error: unknown) {

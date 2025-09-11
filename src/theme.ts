@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles'
-import { colorDark, colorLight, colorTokens } from './constants'
+import { colorDark, colorTokens } from './constants'
 
 declare module '@mui/material/styles' {
 	interface Palette {
@@ -30,6 +30,12 @@ declare module '@mui/material/styles' {
 			itemBackgroundHover?: string
 			itemSelectedBackgroundHover?: string
 		}
+		boardsMenu: {
+			textBoards: string
+			textBoardsSelected: string
+			backgroundBoardsHover: string
+			backgroundBoardsSelected: string
+		}
 	}
 	interface PaletteOptions {
 		navbar?: {
@@ -59,6 +65,12 @@ declare module '@mui/material/styles' {
 			colorDividerMenu?: string
 			itemBackgroundHover?: string
 			itemSelectedBackgroundHover?: string
+		}
+		boardsMenu: {
+			textBoards: string
+			textBoardsSelected: string
+			backgroundBoardsHover: string
+			backgroundBoardsSelected: string
 		}
 	}
 }
@@ -103,11 +115,36 @@ export const lightTheme = createTheme({
 			backgroundColorItemSelected: colorDark.blueBackgroundSelected,
 			colorDividerMenu: colorDark.grayLight,
 		},
+		boardsMenu: {
+			textBoards: colorDark.grayTextItems,
+			textBoardsSelected: colorDark.brandPrimary,
+			backgroundBoardsHover: colorDark.grayLightHover,
+			backgroundBoardsSelected: colorDark.blueBackgroundSelected,
+		},
 	},
 	typography: {
 		fontFamily: '"Charlie Text", "Roboto", "Helvetica", "Arial", sans-serif',
 	},
 	components: {
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					'& .MuiOutlinedInput-notchedOutline': {
+						borderColor: colorDark.gray, // color por defecto
+					},
+					'&:hover .MuiOutlinedInput-notchedOutline': {
+						borderColor: colorDark.gray, // color en hover
+					},
+					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+						borderColor: colorDark.brandPrimary, // color en focus
+						borderWidth: 2,
+					},
+				},
+				input: {
+					color: colorDark.darkBlue, // color del texto
+				},
+			},
+		},
 		MuiPopover: {
 			styleOverrides: {
 				paper: {
@@ -188,11 +225,36 @@ export const darkTheme = createTheme({
 			itemBackgroundHover: colorDark.grayLightHover,
 			itemSelectedBackgroundHover: colorDark.blueBackgroundSelected,
 		},
+		boardsMenu: {
+			textBoards: colorDark.grayTextItems,
+			textBoardsSelected: colorDark.brandPrimary,
+			backgroundBoardsHover: colorDark.blackBackgroundLightHover,
+			backgroundBoardsSelected: colorDark.blueBackgroundSelected,
+		},
 	},
 	typography: {
 		fontFamily: '"Charlie Text", "Roboto", "Helvetica", "Arial", sans-serif',
 	},
 	components: {
+		MuiOutlinedInput: {
+			styleOverrides: {
+				root: {
+					'& .MuiOutlinedInput-notchedOutline': {
+						borderColor: colorDark.gray, // color por defecto
+					},
+					'&:hover .MuiOutlinedInput-notchedOutline': {
+						borderColor: colorDark.gray, // color en hover
+					},
+					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+						borderColor: colorDark.brandPrimary, // color en focus
+						borderWidth: 2,
+					},
+				},
+				input: {
+					color: colorDark.darkBlue, // color del texto
+				},
+			},
+		},
 		MuiPopover: {
 			styleOverrides: {
 				paper: {

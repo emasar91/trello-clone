@@ -34,7 +34,7 @@ const RegisterPage = () => {
 
 					const result = await signInEmail(email, password, locale)
 					if (result) {
-						router.replace(`/${locale}/appTrello`) // redirect inmediato
+						router.replace(`/${locale}/u`) // redirect inmediato
 					}
 				} catch (error: unknown) {
 					const firebaseError = error as FirebaseError

@@ -19,7 +19,7 @@ export const useProtectedRoute = (
 				router.replace(`/${locale}/`)
 			}
 			if (!isProtected && user && (pathname === `/${locale}` || isMockPublic)) {
-				router.replace(`/${locale}/appTrello`)
+				router.replace(`/${locale}/u`)
 			}
 		}
 	}, [user, loading, router, isProtected, isMockPublic, locale, pathname])

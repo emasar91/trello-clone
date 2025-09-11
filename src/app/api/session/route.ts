@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function POST(req: Request) {
 	const { token, locale } = await req.json()
 	const baseUrl = new URL(req.url).origin
-	const redirectUrl = `${baseUrl}/${locale}/appTrello`
+	const redirectUrl = `${baseUrl}/${locale}/u`
 
 	const res = NextResponse.redirect(redirectUrl)
 	res.cookies.set({

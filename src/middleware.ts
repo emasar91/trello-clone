@@ -16,14 +16,14 @@ export function middleware(req: NextRequest) {
 	const pathname = url.pathname.replace(`/${locale}/`, '').replace(/^\//, '')
 	const token = req.cookies.get(COOKIE_NAME)?.value
 
-	const isProtected = pathname.startsWith('appTrello')
+	const isProtected = pathname.startsWith('u')
 	const isAuthRoute = authRoutes.some((r) => pathname.startsWith(r))
 	const isPublicContent = publicRoutes.some((r) => pathname.startsWith(r))
 	const isHome = pathname === '' || pathname === '/'
 
 	// 1️⃣ Si logueado y va a home / login / register / reset-password / rutas públicas → redirige a appTrello
 	if (token && (isHome || isAuthRoute || isPublicContent)) {
-		url.pathname = `/${locale}/appTrello`
+		url.pathname = `/${locale}/u`
 		return NextResponse.redirect(url)
 	}
 

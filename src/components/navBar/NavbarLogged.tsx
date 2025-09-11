@@ -35,7 +35,7 @@ const NavbarLogged = () => {
 		<Box sx={NavbarLoggedContainerStyle(theme)}>
 			<Box sx={NavbarLoggedInnerWrapperStyle}>
 				<Box sx={NavbarLoggedLogoWrapperStyle(theme)}>
-					<Box component={Link} href="/appTrello">
+					<Box component={Link} href="/u">
 						<LogoIcon />
 					</Box>
 				</Box>
