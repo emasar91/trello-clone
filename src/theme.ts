@@ -6,6 +6,7 @@ declare module '@mui/material/styles' {
 		navbar: {
 			containerBackground: string
 			createButtonBackground: string
+			createButtonBackgroundHover?: string
 			createButtonText: string
 			searchInputBackground?: string
 			searchInputText?: string
@@ -35,6 +36,19 @@ declare module '@mui/material/styles' {
 			textBoardsSelected: string
 			backgroundBoardsHover: string
 			backgroundBoardsSelected: string
+		}
+		boardSection: {
+			background: string
+			seePreviousBoardsText: string
+			workspacesText: string
+			boardCardTitle: string
+			boardCardBackground: string
+			createBoardCardBackground?: string
+			borderInputsCreateBoards: string
+			backgroundWorkSpaceHover: string
+			backgroundWorkSpaceSelected: string
+			createButtonBackground: string
+			createButtonBackgroundHover: string
 		}
 	}
 	interface PaletteOptions {
@@ -71,6 +85,19 @@ declare module '@mui/material/styles' {
 			textBoardsSelected: string
 			backgroundBoardsHover: string
 			backgroundBoardsSelected: string
+		}
+		boardSection: {
+			background: string
+			seePreviousBoardsText: string
+			workspacesText: string
+			boardCardTitle: string
+			boardCardBackground: string
+			createBoardCardBackground?: string
+			borderInputsCreateBoards: string
+			backgroundWorkSpaceHover: string
+			backgroundWorkSpaceSelected: string
+			createButtonBackground: string
+			createButtonBackgroundHover: string
 		}
 	}
 }
@@ -120,6 +147,19 @@ export const lightTheme = createTheme({
 			textBoardsSelected: colorDark.brandPrimary,
 			backgroundBoardsHover: colorDark.grayLightHover,
 			backgroundBoardsSelected: colorDark.blueBackgroundSelected,
+		},
+		boardSection: {
+			background: colorDark.blackBackgroundMenu,
+			seePreviousBoardsText: colorDark.grayTextItems,
+			workspacesText: colorDark.grayTextItems,
+			boardCardTitle: colorDark.grayTextItems,
+			boardCardBackground: colorDark.blackBackground,
+			createBoardCardBackground: colorDark.grayCreateBoard,
+			borderInputsCreateBoards: colorDark.gray,
+			backgroundWorkSpaceHover: colorDark.blackBackgroundLightHover,
+			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
+			createButtonBackground: colorDark.brandPrimary,
+			createButtonBackgroundHover: colorDark.brandPrimaryHover,
 		},
 	},
 	typography: {
@@ -202,7 +242,7 @@ export const darkTheme = createTheme({
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
 			createButtonText: colorDark.black,
-			searchInputBackground: colorDark.blackBackgroundLight,
+			searchInputBackground: colorDark.blackBackgroundMenu,
 			searchInputBackgroundHover: colorDark.blackBackgroundHover,
 			searchInputText: colorDark.grayLight,
 			searchInputPlaceholder: colorDark.grayLight,
@@ -230,6 +270,19 @@ export const darkTheme = createTheme({
 			textBoardsSelected: colorDark.brandPrimary,
 			backgroundBoardsHover: colorDark.blackBackgroundLightHover,
 			backgroundBoardsSelected: colorDark.blueBackgroundSelected,
+		},
+		boardSection: {
+			background: colorDark.blackBackgroundMenu,
+			seePreviousBoardsText: colorDark.grayTextItems,
+			workspacesText: colorDark.grayTextItems,
+			boardCardTitle: colorDark.grayTextItems,
+			boardCardBackground: colorDark.blackBackground,
+			createBoardCardBackground: colorDark.grayCreateBoard,
+			borderInputsCreateBoards: colorDark.gray,
+			backgroundWorkSpaceHover: colorDark.blackBackgroundLightHover,
+			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
+			createButtonBackground: colorDark.brandPrimary,
+			createButtonBackgroundHover: colorDark.brandPrimaryHover,
 		},
 	},
 	typography: {

@@ -151,6 +151,7 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 							>
 								<Box
 									component="img"
+									loading="lazy"
 									src={t(`${item.title}.image`)}
 									alt={t(`${item.title}.title`)}
 									sx={CustomSliderImageStyle}

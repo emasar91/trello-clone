@@ -3,7 +3,6 @@ import { SxProps, Theme } from '@mui/material'
 export const MenuBoardsContainerStyle: SxProps<Theme> = {
 	minWidth: '288px',
 	paddingLeft: '32px',
-	height: 'calc(100vh - 48px)',
 	paddingTop: '40px',
 }
 

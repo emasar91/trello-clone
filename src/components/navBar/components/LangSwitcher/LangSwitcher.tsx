@@ -64,6 +64,7 @@ const LangSwitcher = () => {
 				<MenuItem onClick={() => changeLocale('es')}>
 					<Box
 						component="img"
+						loading="lazy"
 						src="/assets/esp-flag.png"
 						alt="es-flag"
 						padding={0}
@@ -74,6 +75,7 @@ const LangSwitcher = () => {
 				<MenuItem onClick={() => changeLocale('en')}>
 					<Box
 						component="img"
+						loading="lazy"
 						src="/assets/eng-flag.png"
 						alt="es-flag"
 						width={30}

@@ -354,7 +354,20 @@
 	"BoardsPage": {
 		"boards": "Boards",
 		"workspaces": "Workspaces",
+		"workspace": "Workspace",
 		"noBoards": "No boards available",
-		"noWorkSpaces": "No workspaces available"
+		"noWorkSpaces": "No workspaces available",
+		"recentlyViewed": "Recently Viewed",
+		"recently": "Recently",
+		"workspacesUser": "Your workspaces",
+		"createNewBoard": "Create a new board",
+		"remainingBoards": "remaining",
+		"backgroundSelection": "Background selection",
+		"createNewBoardTitle": "Create board",
+		"yourBoards": "Your boards",
+		"titleBoard": "Board title",
+		"writeTitle": "Write the title",
+		"requiredTitle": "👋 You must indicate the title of the board",
+		"create": "Create"
 	}
 }

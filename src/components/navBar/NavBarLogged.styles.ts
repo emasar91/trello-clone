@@ -22,9 +22,9 @@ export const NavbarLoggedSearchInputStyle = (theme: Theme): SxProps<Theme> => ({
 	height: '32px',
 	border: `1px solid ${theme.palette.navbar.searchInputBorder}`,
 	borderRadius: '4px',
-	padding: '0 12px 0 30px',
+	padding: '0 12px 0 24px',
 	width: '100%',
-	backgroundColor: theme.palette.navbar.searchInputBackground,
+	backgroundColor: 'transparent',
 	transition: 'background-color 0.3s ease',
 	'&:hover': {
 		backgroundColor: theme.palette.navbar.searchInputBackgroundHover,

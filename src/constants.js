@@ -293,7 +293,7 @@ export const colorTokens = {
 	iconBackground: '#dbeafe',
 	blackShadow: '#344563',
 	violetLight: '#f7f5ff',
-	blackBackground: '#1d2125',
+	blackBackground: '#1f1f21',
 }
 
 export const colorsLanding = {
@@ -435,15 +435,14 @@ export const colorsLanding = {
 	customSliderLeftItemsActiveBorder: colorTokens.blueLight,
 	customSliderLeftItemsActiveBackground: colorTokens.white,
 }
-
 export const colorDark = {
 	...colorTokens,
 	loginButton: colorTokens.brandPrimary,
 	brandPrimaryHover: '#85b8ff',
 	blackBackground: colorTokens.blackBackground,
 	blackBackgroundLight: '#22272b',
-	blackBackgroundHover: '#282e33',
-	blackBackgroundMenu: '#282e33',
+	blackBackgroundHover: '#2b2c2f',
+	blackBackgroundMenu: '#2b2c2f',
 	blackBackgroundLightHover: '#333c43',
 	brandPrimary: '#579dff',
 	grayLight: '#8c9bab',
@@ -453,6 +452,7 @@ export const colorDark = {
 	grayTextAvatar: '#B6C2CF',
 	grayTextItems: '#B6C2CF',
 	grayTextAvatarSecondary: '#9FADBC',
+	grayCreateBoard: '#2c2c2e',
 }
 
 export const colorLight = {
@@ -464,3 +464,25 @@ export const colorLight = {
 
 export const LIGHT_THEME = 'light'
 export const DARK_THEME = 'dark'
+
+export const BACKGROUND_IMAGES = [
+	'fondo1.jpg',
+	'fondo2.jpg',
+	'fondo3.jpg',
+	'fondo4.jpg',
+	'fondo5.jpg',
+	'fondo6.jpg',
+]
+
+export const AVATAR_BACKGROUND = [
+	'rgba(103, 162, 239, 1)',
+	'rgba(108, 194, 225, 1)',
+	'rgba(255, 153, 204, 1)',
+	'rgba(255, 102, 153, 1)',
+	'rgba(255, 204, 153, 1)',
+	'rgba(255, 153, 102, 1)',
+	'rgba(153, 204, 153, 1)',
+	'rgba(102, 153, 102, 1)',
+	'rgba(204, 153, 255, 1)',
+	'rgba(153, 102, 255, 1)',
+]

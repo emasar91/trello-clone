@@ -34,6 +34,7 @@ const LoginPageContainer: React.FunctionComponent<ILoginPageContainerProps> = ({
 				<Box sx={LoginContainerHeaderStyle}>
 					<Box
 						component="img"
+						loading="lazy"
 						width={20}
 						alt="back"
 						src="/assets/back.png"

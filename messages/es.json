@@ -354,7 +354,20 @@
 	"BoardsPage": {
 		"boards": "Tableros",
 		"workspaces": "Espacios de trabajo",
+		"workspace": "Espacio de trabajo",
 		"noBoards": "No hay tableros disponibles",
-		"noWorkSpaces": "No hay espacios de trabajo disponibles"
+		"noWorkSpaces": "No hay espacios de trabajo disponibles",
+		"recentlyViewed": "Visto recientemente",
+		"recently": "Recientes",
+		"workspacesUser": "Tus espacios de trabajo",
+		"createNewBoard": "Crear un tablero nuevo",
+		"remainingBoards": "restantes",
+		"backgroundSelection": "Selección de fondo",
+		"createNewBoardTitle": "Crear tablero",
+		"yourBoards": "Tus tableros",
+		"titleBoard": "Título del tablero",
+		"writeTitle": "Escribe el título",
+		"requiredTitle": "👋 Es necesario indicar el título del tablero",
+		"create": "Crear"
 	}
 }

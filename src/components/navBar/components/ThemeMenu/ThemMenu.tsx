@@ -62,6 +62,7 @@ function ThemeMenu({
 				<ListItemIcon>
 					<Box
 						component="img"
+						loading="lazy"
 						src="/assets/claro.svg"
 						width={64}
 						height={48}
@@ -96,6 +97,7 @@ function ThemeMenu({
 				<ListItemIcon>
 					<Box
 						component="img"
+						loading="lazy"
 						src="/assets/obscuro.svg"
 						width={64}
 						height={48}
