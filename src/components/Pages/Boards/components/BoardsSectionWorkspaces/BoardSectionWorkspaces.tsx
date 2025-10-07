@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme, Divider } from '@mui/material'
 import React from 'react'
 import BoardGrid from '../BoardsList/BoardsList'
-import { getRandomAvatarColor } from '../../Utils'
 import {
 	DividerStyle,
 	WorkSpacesAvatarContainerStyle,
@@ -15,44 +14,32 @@ import {
 } from './BoardSectionWorkspaces.styles'
 import { useTranslations } from 'next-intl'
 import { UserIcon } from '@/public/assets/icons/UserIcon'
+import { IWorkspace } from '@/types/workspaces'
 
-type IWorkspace = {
-	id: string
-	name: string
-	color: string
-	boards: {
-		id: string
-		title: string
-		image?: string
-	}[]
-}
-
-function BoardSectionWorkspaces() {
+function BoardSectionWorkspaces({
+	username,
+	workspaces,
+}: {
+	username: string
+	workspaces: IWorkspace[]
+}) {
 	const theme = useTheme()
-	const color = getRandomAvatarColor()
 	const t = useTranslations('BoardsPage')
 
 	//buscar espadcios de trabajo segun la url
-	const workspace: IWorkspace = {
-		id: 'w1',
-		name: 'Sirena',
-		color: 'royalblue',
-		boards: [
-			{ id: 'b1', title: 'Sirena trello', image: '/sirena.png' },
-			{ id: 'b2', title: 'TEST cambio', image: '/test.png' },
-		],
-	}
+	const workspace = workspaces.find((ws) => ws.name.toLowerCase() === username)
+	console.log('🚀 ~ BoardSectionWorkspaces ~ workspace:', workspace)
 
 	return (
 		<Box sx={WorkSpacesContainerStyle}>
 			<Box sx={WorkSpacesStyle}>
 				{/* Header workspace */}
 				<Box sx={WorkSpacesAvatarContainerStyle}>
-					<Box sx={WorkSpacesAvatarStyle(color)}>
-						{workspace.name.charAt(0).toUpperCase()}
+					<Box sx={WorkSpacesAvatarStyle(workspace?.avatarColor)}>
+						{workspace?.name.charAt(0).toUpperCase()}
 					</Box>
 					<Typography variant="h6" sx={WorkSpacesTitleStyle(theme)}>
-						{workspace.name}
+						{workspace?.name}
 					</Typography>
 				</Box>
 
@@ -65,7 +52,11 @@ function BoardSectionWorkspaces() {
 							{t('yourBoards')}
 						</Typography>
 					</Box>
-					<BoardGrid boards={workspace.boards} workspaceName={workspace.name} />
+					<BoardGrid
+						boards={workspace?.boards || []}
+						workspaceName={workspace?.name || ''}
+						createBoard={workspace?.boards.length === 0}
+					/>
 				</Box>
 			</Box>
 		</Box>

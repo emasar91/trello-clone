@@ -5,12 +5,7 @@ import {
 	BoardCardStyle,
 	BoardCardTitleStyle,
 } from './BoardCard.styles'
-
-type IBoard = {
-	id: string
-	title: string
-	image?: string
-}
+import { IBoard } from '@/types/workspaces'
 
 const BoardCard = ({
 	board,
@@ -25,7 +20,7 @@ const BoardCard = ({
 	const handleRedirect = () => {
 		//workspaceName es recientes se tiene que buscar el primer espacio de trabajo que tenga ese tablero
 		router.push(
-			`/b/${workspaceName.toLowerCase()}/${board.title
+			`/b/${workspaceName.toLowerCase()}/${board.name
 				.toLowerCase()
 				.replace(/\s+/g, '-')}`
 		)
@@ -38,10 +33,10 @@ const BoardCard = ({
 					component={'img'}
 					loading="lazy"
 					sx={BoardCardImageStyle}
-					src={`/assets/fondos/${board.image}`}
+					src={board.image}
 				/>
 				<Typography variant="body2" sx={BoardCardTitleStyle(theme)} noWrap>
-					{board.title}
+					{board.name}
 				</Typography>
 			</Box>
 		</Card>

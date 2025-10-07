@@ -486,3 +486,9 @@ export const AVATAR_BACKGROUND = [
 	'rgba(204, 153, 255, 1)',
 	'rgba(153, 102, 255, 1)',
 ]
+
+export const API = {
+	createWorkspacesUrl: '/api/workspaces',
+	getWorkspacesUrl: '/api/workspaces',
+	createBoardsUrl: '/api/boards',
+}

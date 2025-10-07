@@ -50,6 +50,14 @@ declare module '@mui/material/styles' {
 			createButtonBackground: string
 			createButtonBackgroundHover: string
 		}
+		modalCreateWorkspace: {
+			backgroundImageContainer: string
+			title: string
+			description: string
+			background: string
+			buttonBackgroundColor: string
+			buttonBackgroundColorHover: string
+		}
 	}
 	interface PaletteOptions {
 		navbar?: {
@@ -98,6 +106,14 @@ declare module '@mui/material/styles' {
 			backgroundWorkSpaceSelected: string
 			createButtonBackground: string
 			createButtonBackgroundHover: string
+		}
+		modalCreateWorkspace: {
+			backgroundImageContainer: string
+			title: string
+			description: string
+			background: string
+			buttonBackgroundColor: string
+			buttonBackgroundColorHover: string
 		}
 	}
 }
@@ -160,6 +176,14 @@ export const lightTheme = createTheme({
 			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
+		},
+		modalCreateWorkspace: {
+			backgroundImageContainer: colorDark.iconBackground,
+			title: colorDark.grayTextItems,
+			description: colorDark.grayTextItems,
+			background: colorDark.blackBackgroundMenu,
+			buttonBackgroundColor: colorDark.brandPrimary,
+			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
 		},
 	},
 	typography: {
@@ -283,6 +307,14 @@ export const darkTheme = createTheme({
 			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
+		},
+		modalCreateWorkspace: {
+			backgroundImageContainer: colorDark.iconBackground,
+			title: colorDark.grayTextItems,
+			description: colorDark.grayTextItems,
+			background: colorDark.blackBackgroundMenu,
+			buttonBackgroundColor: colorDark.brandPrimary,
+			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
 		},
 	},
 	typography: {

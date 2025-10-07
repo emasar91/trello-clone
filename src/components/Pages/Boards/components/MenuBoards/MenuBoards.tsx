@@ -12,8 +12,9 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useAuth } from '@/context/useAuthContext'
 import MenuWorkSpaces from '../MenuWorkSpaces/MenuWorkSpaces'
+import { IWorkspace } from '@/types/workspaces'
 
-const MenuBoards = () => {
+const MenuBoards = ({ workspaces }: { workspaces: IWorkspace[] }) => {
 	const theme = useTheme()
 	const pathname = usePathname()
 	const router = useRouter()
@@ -21,21 +22,20 @@ const MenuBoards = () => {
 	const { user } = useAuth()
 	const t = useTranslations('BoardsPage')
 
-	const username = user?.displayName || user?.email?.split('@')[0] || 'user'
+	const username =
+		user?.displayName?.toLowerCase().replace(/ /g, '') ||
+		user?.email?.split('@')[0] ||
+		'user'
 	const menuActive = pathname === `/${locale}/u/${username}/boards`
 
-	//llamar espacio de trabajo
-	const workSpaces = [
-		{ id: '1', name: 'Sirena' },
-		{ id: '2', name: 'Triton' },
-	]
-
 	const goToBoards = () => {
-		router.push(`/${locale}/u/${username}/boards`)
+		router.push(`/${locale}/u/${username}/boards?uid=${user?.uid}`)
 	}
 
 	const goToWorkspaceBoards = (workspaceName: string) => {
-		router.push(`/${locale}/w/${workspaceName.toLowerCase()}/boards`)
+		router.push(
+			`/${locale}/w/${workspaceName.toLowerCase()}/boards?uid=${user?.uid}`
+		)
 	}
 
 	return (
@@ -64,7 +64,7 @@ const MenuBoards = () => {
 					{t('workspaces')}
 				</Typography>
 				<MenuWorkSpaces
-					workSpaces={workSpaces}
+					workSpaces={workspaces as unknown as IWorkspace[]}
 					goToWorkspaceBoards={goToWorkspaceBoards}
 				/>
 			</Box>

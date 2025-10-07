@@ -13,7 +13,7 @@ export const signInGoogle = async (locale: string) => {
 	await fetch('/api/session', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ token, locale }),
+		body: JSON.stringify({ token, locale, user: result.user }),
 	})
 
 	return result.user
@@ -30,7 +30,7 @@ export const signInEmail = async (
 	await fetch('/api/session', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ token, locale }),
+		body: JSON.stringify({ token, locale, user: result.user }),
 	})
 
 	return result.user

@@ -15,7 +15,9 @@ export const WorkSpacesTitleBoardsStyle = (theme: Theme): SxProps<Theme> => ({
 	color: theme.palette.boardSection.workspacesText,
 })
 
-export const WorkSpacesAvatarStyle = (bgColor: string): SxProps<Theme> => ({
+export const WorkSpacesAvatarStyle = (
+	bgColor: string | undefined
+): SxProps<Theme> => ({
 	width: 60,
 	height: 60,
 	background: bgColor,

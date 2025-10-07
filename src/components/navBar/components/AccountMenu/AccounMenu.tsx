@@ -16,6 +16,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { UserDefaultIcon } from '@/public/assets/icons/UserDefaultIcon'
 import { CreateWorkSpaceIcon } from '@/public/assets/icons/CreateWorkSpaceIcon'
 import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
+import axios from 'axios'
+import { API } from '@/constants'
 
 import { DARK_THEME, LIGHT_THEME } from '@/constants'
 import ThemeMenu from '../ThemeMenu/ThemMenu'
@@ -34,11 +36,17 @@ import {
 	AccountMenuSubtitleAccountStyle,
 	AccountMenuSubtitleTrelloStyle,
 } from './AccountMenu.styles'
+import { useState } from 'react'
+import ModalCreateWorkspace from '../ModalCreateWorkspace/ModalCreateWorkspace'
+import { toast } from 'react-toastify'
+import NotificationContainer from '@/components/Notifications/Notifications'
+import { useWorkSpaceStore } from '@/context/useWorkSpace'
 
 export default function AccountMenu() {
 	const { user } = useAuth()
 	const locale = useLocale()
 	const t = useTranslations('NavbarLogged')
+	const tt = useTranslations('BoardsPage')
 	const theme = useTheme()
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -74,6 +82,48 @@ export default function AccountMenu() {
 		console.log('🌞 Tema elegido:', value)
 	}
 
+	const [openModal, setOpenModal] = useState(false)
+	const handleOpenModal = () => setOpenModal(true)
+	const handleCloseModal = () => setOpenModal(false)
+
+	const { setWorkSpaces } = useWorkSpaceStore()
+
+	const handleSubmit = async (
+		workspaceName: string,
+		workspaceDescription: string,
+		resetForm: () => void,
+		setLoading: (loading: boolean) => void
+	) => {
+		try {
+			const { data } = await axios.post(
+				API.createWorkspacesUrl,
+				{
+					name: workspaceName.trim(),
+					description: workspaceDescription.trim(),
+				},
+				{ withCredentials: true }
+			)
+
+			if (data.workspace) {
+				resetForm()
+				setOpenModal(false)
+				toast.success(tt('modalCreateWorkspace.successCreate'))
+				const { data } = await axios.get(
+					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
+					{
+						withCredentials: true,
+					}
+				)
+				setWorkSpaces(data)
+			}
+			// opcional: actualizar UI con data.workspace
+		} catch (err) {
+			if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
+		} finally {
+			setLoading(false)
+		}
+	}
+
 	return (
 		<Box>
 			<Box sx={AccountMenuNavbarAvatarContainerStyle(theme)}>
@@ -82,7 +132,7 @@ export default function AccountMenu() {
 					sx={AccountMenuNavbarAvatarStyle}
 					onClick={handleClick}
 				>
-					{!user?.photoURL && <UserDefaultIcon />}
+					{!user?.photoURL ? <UserDefaultIcon /> : null}
 				</Avatar>
 			</Box>
 
@@ -105,7 +155,7 @@ export default function AccountMenu() {
 							src={user?.photoURL || undefined}
 							sx={AccountMenuAvatarIconStyle}
 						>
-							{!user?.photoURL && <UserDefaultIcon />}
+							{!user?.photoURL ? <UserDefaultIcon /> : null}
 						</Avatar>
 					</ListItemIcon>
 					<ListItemText
@@ -149,7 +199,11 @@ export default function AccountMenu() {
 
 				<Divider sx={AccountMenuDividerStyle(theme)} />
 
-				<MenuItem sx={AccountMenuItemWorkSpaceStyle(theme)} disableRipple>
+				<MenuItem
+					sx={AccountMenuItemWorkSpaceStyle(theme)}
+					disableRipple
+					onClick={handleOpenModal}
+				>
 					<CreateWorkSpaceIcon />
 					{t('menu.createWorkspace')}
 				</MenuItem>
@@ -172,6 +226,13 @@ export default function AccountMenu() {
 				handleSelect={handleSelect}
 				selectedTheme={selectedTheme}
 			/>
+
+			<ModalCreateWorkspace
+				openModal={openModal}
+				handleCloseModal={handleCloseModal}
+				handleSubmit={handleSubmit}
+			/>
+			<NotificationContainer />
 		</Box>
 	)
 }

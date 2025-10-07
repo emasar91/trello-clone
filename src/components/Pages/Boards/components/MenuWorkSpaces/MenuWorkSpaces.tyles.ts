@@ -44,7 +44,9 @@ export const MenuWorkSpacesItemTextStyle = (theme: Theme): SxProps<Theme> => ({
 	},
 })
 
-export const MenuWorkSpacesIconContainerStyle: SxProps<Theme> = {
+export const MenuWorkSpacesIconContainerStyle = (
+	bgColor: string
+): SxProps<Theme> => ({
 	width: '24px',
 	height: '24px',
 	padding: '0',
@@ -52,9 +54,8 @@ export const MenuWorkSpacesIconContainerStyle: SxProps<Theme> = {
 	textAlign: 'center',
 	borderRadius: '4px',
 	fontWeight: '700',
-	background:
-		'linear-gradient(0deg,rgba(103, 162, 239, 1) 0%, rgba(108, 194, 225, 1) 100%)',
-}
+	background: bgColor,
+})
 
 export const MenuWorkSpacesItemContainerStyle: SxProps<Theme> = {
 	display: 'flex',

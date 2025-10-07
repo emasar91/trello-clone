@@ -22,16 +22,14 @@ import {
 	MenuWorkSpacesListItemStyle,
 	MenuWorkSpacesTextItemCollapsableStyle,
 } from './MenuWorkSpaces.tyles'
+import { IWorkspace } from '@/types/workspaces'
 
-type Props = {
-	workSpaces: Array<{
-		id: string
-		name: string
-	}>
+type IMenuWorkSpaces = {
+	workSpaces: IWorkspace[]
 	goToWorkspaceBoards: (workspaceName: string) => void
 }
 
-function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: Props) {
+function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 	const theme = useTheme()
 	const pathname = usePathname()
 	const locale = useLocale()
@@ -41,10 +39,10 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: Props) {
 		{}
 	)
 
-	const handleClick = (id: string) => {
+	const handleClick = (_id: string) => {
 		setOpenWorkspaces((prev) => ({
 			...prev,
-			[id]: !prev[id], // toggle solo ese
+			[_id]: !prev[_id], // toggle solo ese
 		}))
 	}
 
@@ -55,7 +53,7 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: Props) {
 		if (match) {
 			setOpenWorkspaces((prev) => ({
 				...prev,
-				[match.id]: true,
+				[match._id]: true,
 			}))
 		}
 	}, [pathname, workSpaces])
@@ -66,13 +64,15 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: Props) {
 				const menuActive =
 					pathname === `/${locale}/w/${workspace.name.toLowerCase()}/boards`
 				return (
-					<Box key={workspace.id}>
+					<Box key={workspace._id}>
 						<ListItemButton
-							onClick={() => handleClick(workspace.id)}
+							onClick={() => handleClick(workspace._id)}
 							sx={MenuWorkSpacesListItemStyle}
 						>
 							<Box sx={MenuWorkSpacesItemContainerStyle}>
-								<Box sx={MenuWorkSpacesIconContainerStyle}>
+								<Box
+									sx={MenuWorkSpacesIconContainerStyle(workspace.avatarColor)}
+								>
 									{workspace.name.charAt(0).toUpperCase()}
 								</Box>
 								<ListItemText
@@ -80,7 +80,7 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: Props) {
 									sx={MenuWorkSpacesItemTextStyle(theme)}
 								/>
 							</Box>
-							{openWorkspaces[workspace.id] ? (
+							{openWorkspaces[workspace._id] ? (
 								<ArrowLeftIcon />
 							) : (
 								<ArrowRightIcon />
@@ -88,7 +88,7 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: Props) {
 						</ListItemButton>
 
 						<Collapse
-							in={!!openWorkspaces[workspace.id]}
+							in={!!openWorkspaces[workspace._id]}
 							timeout="auto"
 							unmountOnExit
 						>

@@ -366,8 +366,19 @@
 		"createNewBoardTitle": "Crear tablero",
 		"yourBoards": "Tus tableros",
 		"titleBoard": "Título del tablero",
+		"descriptionBoard": "Descripción del tablero",
 		"writeTitle": "Escribe el título",
+		"writeDescription": "Escribe la descripción",
 		"requiredTitle": "👋 Es necesario indicar el título del tablero",
-		"create": "Crear"
+		"optionalDescription": "La descripción es opcional",
+		"create": "Crear",
+		"modalCreateWorkspace": {
+			"title": "Vamos a crear un Espacio de trabajo",
+			"subTitle": "Impulsa tu productividad facilitándoles a todos el acceso a los tableros en una única ubicación.",
+			"create": "Crear",
+			"creating": "Creando...",
+			"successCreate": "Espacio de trabajo creado con exito"
+		},
+		"createWorkspace": "Crear espacio de trabajo"
 	}
 }
