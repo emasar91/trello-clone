@@ -37,7 +37,6 @@ function BoardSectionWorkspaces({
 
 	//buscar espadcios de trabajo segun la url
 	const workspace = workspaces.find((ws) => ws.name.toLowerCase() === username)
-	console.log('🚀 ~ BoardSectionWorkspaces ~ workspaces:', workspaces)
 
 	const [openEditForm, setOpenEditForm] = useState(false)
 

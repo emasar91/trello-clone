@@ -34,7 +34,6 @@ function Boards({
 		fetchWorkspaces()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type, username, uid])
-	console.log('🚀 ~ Boards ~ type:', type)
 
 	return (
 		<Box component={'nav'} sx={BoardsContainerStyle(theme)}>

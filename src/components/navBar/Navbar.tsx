@@ -35,7 +35,7 @@ const NavBar = () => {
 
 	if (loading) return null
 
-	if (user) {
+	if (user && !loading) {
 		return <NavbarLogged />
 	}
 
