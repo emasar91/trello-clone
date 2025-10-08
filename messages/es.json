@@ -379,6 +379,15 @@
 			"creating": "Creando...",
 			"successCreate": "Espacio de trabajo creado con exito"
 		},
-		"createWorkspace": "Crear espacio de trabajo"
+		"loading": "Cargando...",
+		"menuBaord": {
+			"createBoard": "Crear tablero",
+			"successCreate": "Tablero creado con exito"
+		},
+		"createWorkspace": "Crear espacio de trabajo",
+		"cancel": "Cancelar",
+		"name": "Nombre",
+		"description": "Descripcion (Opcional)",
+		"editWorkspaceSuccess": "Espacio de trabajo editado con exito"
 	}
 }

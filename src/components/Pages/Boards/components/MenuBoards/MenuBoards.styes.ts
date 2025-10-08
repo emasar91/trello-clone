@@ -31,6 +31,7 @@ export const MenuBoardsItemContainerStyle = (
 	borderRadius: '8px',
 	marginBottom: '8px',
 	height: '36px',
+	cursor: 'pointer',
 	backgroundColor: active
 		? theme.palette.boardsMenu.backgroundBoardsSelected
 		: 'transparent',

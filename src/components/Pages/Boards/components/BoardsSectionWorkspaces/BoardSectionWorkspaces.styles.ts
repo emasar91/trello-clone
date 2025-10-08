@@ -69,3 +69,7 @@ export const DividerStyle: SxProps<Theme> = { margin: '16px 0' }
 export const WorkSpacesBoardsContainerStyle: SxProps<Theme> = {
 	paddingLeft: '16px',
 }
+
+export const WorkSpacesEditIconStyle: SxProps<Theme> = {
+	cursor: 'pointer',
+}

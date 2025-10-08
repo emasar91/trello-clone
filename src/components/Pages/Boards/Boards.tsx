@@ -8,6 +8,7 @@ import BoardSectionWorkspaces from './components/BoardsSectionWorkspaces/BoardSe
 import axios from 'axios'
 import { API } from '@/constants'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
+import NotificationContainer from '@/components/Notifications/Notifications'
 
 function Boards({
 	type,
@@ -33,6 +34,7 @@ function Boards({
 		fetchWorkspaces()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type, username, uid])
+	console.log('🚀 ~ Boards ~ type:', type)
 
 	return (
 		<Box component={'nav'} sx={BoardsContainerStyle(theme)}>
@@ -40,9 +42,12 @@ function Boards({
 			<Box component={'main'} sx={BoardsSectionStyle}>
 				{type === 'w' ? (
 					<BoardSectionWorkspaces username={username} workspaces={workspaces} />
+				) : type === 'u' ? (
+					<BoardsSectionUser workspaces={workspaces} />
 				) : (
-					<BoardsSectionUser username={username} workspaces={workspaces} />
+					<span>error</span>
 				)}
+				<NotificationContainer />
 			</Box>
 		</Box>
 	)

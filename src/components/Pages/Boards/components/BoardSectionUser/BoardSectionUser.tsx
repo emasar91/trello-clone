@@ -11,7 +11,6 @@ import {
 import { useTranslations } from 'next-intl'
 import { IBoard, IWorkspace } from '@/types/workspaces'
 import CreateWorkspaceCard from '../CreateWorkspaceCard/CreateWorkspaceCard'
-import NotificationContainer from '@/components/Notifications/Notifications'
 import ModalCreateWorkspace from '@/components/Navbar/components/ModalCreateWorkspace/ModalCreateWorkspace'
 import { useState } from 'react'
 import axios from 'axios'
@@ -21,13 +20,10 @@ import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useAuth } from '@/context/useAuthContext'
 
 export default function BoardsSectionUser({
-	username,
 	workspaces,
 }: {
-	username: string
 	workspaces: IWorkspace[]
 }) {
-	console.log('🚀 ~ BoardsSectionUser ~ workspaces:', workspaces)
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
 
@@ -35,7 +31,6 @@ export default function BoardsSectionUser({
 
 	// 2. Filtrar solo los que tengan lastOpenedAt
 	const openedBoards = allBoards.filter((b) => b.lastOpenedAt !== null)
-	console.log('🚀 ~ BoardsSectionUser ~ openedBoards:', openedBoards)
 
 	// 3. Ordenar del más reciente al más antiguo
 	openedBoards?.sort((a, b) => {
@@ -46,11 +41,6 @@ export default function BoardsSectionUser({
 	// 4. Tomar solo los 4 primeros
 	const recentBoards = openedBoards.length > 0 ? openedBoards.slice(0, 4) : []
 
-	const workspace = workspaces.find((ws) => {
-		return ws.name.toLowerCase() === username
-	})
-	console.log('🚀 ~ BoardSectionWorkspaces ~ workspace:', workspace)
-
 	const [openModal, setOpenModal] = useState(false)
 	const handleCloseModal = () => {
 		setOpenModal(false)
@@ -58,11 +48,12 @@ export default function BoardsSectionUser({
 	const { setWorkSpaces } = useWorkSpaceStore()
 	const { user } = useAuth()
 
+	const [loading, setLoading] = useState(false)
+
 	const handleSubmit = async (
 		workspaceName: string,
 		workspaceDescription: string,
-		resetForm: () => void,
-		setLoading: (loading: boolean) => void
+		resetForm: () => void
 	) => {
 		try {
 			const { data } = await axios.post(
@@ -77,7 +68,8 @@ export default function BoardsSectionUser({
 			if (data.workspace) {
 				resetForm()
 				setOpenModal(false)
-				toast.success(t('modalCreateWorkspace.successCreate'))
+				toast.success(t('menuBaord.successCreate'))
+
 				const { data } = await axios.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{
@@ -96,49 +88,53 @@ export default function BoardsSectionUser({
 
 	return (
 		<Box sx={BoardSectionUserStyle}>
-			{/* Sección Visto recientemente */}
-			<Box>
-				{recentBoards.length > 0 && (
-					<>
-						<Box sx={BoardSectionUserTitleContainerStyle}>
-							<ClockIcon />
-							<Typography variant="h6" sx={BoardSectionUserTitleStyle(theme)}>
-								{t('recentlyViewed')}
-							</Typography>
-						</Box>
-						<BoardGrid
-							boards={recentBoards}
-							createBoard={false}
-							workspaceName={t('recently')}
-						/>
-					</>
-				)}
-			</Box>
-
-			{/* Sección Workspaces */}
-			<Box>
-				<Typography
-					variant="h6"
-					sx={BoardSectionUserTitleContainerWorkspaceStyle(theme)}
-				>
-					{t('workspacesUser')}
-				</Typography>
-				{workspaces.length > 0 ? (
-					workspaces.map((ws) => (
-						<WorkspaceSection key={ws._id} workspace={ws} />
-					))
-				) : (
-					<Box onClick={() => setOpenModal(true)}>
-						<CreateWorkspaceCard remainingBoards={4} />
-						<ModalCreateWorkspace
-							openModal={openModal}
-							handleCloseModal={handleCloseModal}
-							handleSubmit={handleSubmit}
-						/>
+			{!loading && (
+				<>
+					<Box>
+						{recentBoards.length > 0 && (
+							<>
+								<Box sx={BoardSectionUserTitleContainerStyle}>
+									<ClockIcon />
+									<Typography
+										variant="h6"
+										sx={BoardSectionUserTitleStyle(theme)}
+									>
+										{t('recentlyViewed')}
+									</Typography>
+								</Box>
+								<BoardGrid
+									boards={recentBoards}
+									createBoard={false}
+									workspaceName={t('recently')}
+								/>
+							</>
+						)}
 					</Box>
-				)}
-			</Box>
-			<NotificationContainer />
+
+					<Box>
+						<Typography
+							variant="h6"
+							sx={BoardSectionUserTitleContainerWorkspaceStyle(theme)}
+						>
+							{t('workspacesUser')}
+						</Typography>
+						{workspaces.length > 0 ? (
+							workspaces.map((ws) => (
+								<WorkspaceSection key={ws._id} workspace={ws} />
+							))
+						) : (
+							<Box onClick={() => setOpenModal(true)}>
+								<CreateWorkspaceCard remainingBoards={4} />
+								<ModalCreateWorkspace
+									openModal={openModal}
+									handleCloseModal={handleCloseModal}
+									handleSubmit={handleSubmit}
+								/>
+							</Box>
+						)}
+					</Box>
+				</>
+			)}
 		</Box>
 	)
 }

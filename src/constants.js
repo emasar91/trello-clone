@@ -491,4 +491,5 @@ export const API = {
 	createWorkspacesUrl: '/api/workspaces',
 	getWorkspacesUrl: '/api/workspaces',
 	createBoardsUrl: '/api/boards',
+	updateWorkspacesUrl: '/api/workspaces',
 }

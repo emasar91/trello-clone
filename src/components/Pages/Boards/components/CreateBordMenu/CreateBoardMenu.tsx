@@ -103,7 +103,7 @@ function CreateBoardMenu({
 
 			if (data.board) {
 				resetForm()
-				toast.success(t('modalCreateWorkspace.successCreate'))
+				toast.success(t('menuBaord.successCreate'))
 				const { data } = await axios.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{

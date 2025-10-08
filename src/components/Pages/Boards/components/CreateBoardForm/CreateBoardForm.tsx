@@ -119,7 +119,7 @@ const CreateBoardForm = ({
 			{/* Espacio de trabajo */}
 			<FormControl fullWidth size="small">
 				<InputLabel shrink sx={CreateBoardFormLabelSelectStyles}>
-					{loading ? 'Cargando' : t('workspace')}
+					{loading ? t('loading') : t('workspace')}
 				</InputLabel>
 
 				<Select

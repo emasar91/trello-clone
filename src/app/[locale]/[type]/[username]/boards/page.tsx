@@ -10,6 +10,8 @@ async function Page({
 	searchParams?: { uid: string }
 }) {
 	const { type, username } = await params
+	console.log('🚀 ~ Page ~ username:', username)
+	console.log('🚀 ~ Page ~ type:', type)
 	const { uid } = (await searchParams) ?? { uid: '' }
 
 	return (

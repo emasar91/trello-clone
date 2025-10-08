@@ -14,9 +14,7 @@ const BoardGrid = ({
 	createBoard?: boolean
 }) => {
 	const availableCreate = createBoard && (!boards || boards.length < 4)
-	console.log('🚀 ~ BoardGrid ~ availableCreate:', availableCreate)
 
-	console.log('🚀 ~ BoardGrid ~ boards:', boards)
 	return (
 		<Grid sx={BoardListGridStyle}>
 			{boards.map((b) => (
