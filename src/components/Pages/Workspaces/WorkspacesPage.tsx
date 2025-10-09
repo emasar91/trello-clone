@@ -1,7 +1,10 @@
 'use client'
 import { Box, useTheme } from '@mui/material'
 import React, { useEffect } from 'react'
-import { BoardsContainerStyle, BoardsSectionStyle } from './Boards.styles'
+import {
+	BoardsContainerStyle,
+	BoardsSectionStyle,
+} from './WorkspacesPage.styles'
 import MenuBoards from './components/MenuBoards/MenuBoards'
 import BoardsSectionUser from './components/BoardSectionUser/BoardSectionUser'
 import BoardSectionWorkspaces from './components/BoardsSectionWorkspaces/BoardSectionWorkspaces'
@@ -10,7 +13,7 @@ import { API } from '@/constants'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import NotificationContainer from '@/components/Notifications/Notifications'
 
-function Boards({
+function WorkspacesPage({
 	type,
 	username,
 	uid,
@@ -52,4 +55,4 @@ function Boards({
 	)
 }
 
-export default Boards
+export default WorkspacesPage

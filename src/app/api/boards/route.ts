@@ -1,4 +1,5 @@
 import { createBoardinWorkspace } from '@/helpers/createBordInWorkpace'
+import { getBoardByNames } from '@/helpers/getBoardByName'
 import { getUserFromRequest } from '@/helpers/getUserIdFromToken'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
@@ -67,5 +68,40 @@ export async function POST(req: Request) {
 		}
 
 		return NextResponse.json({ message: 'Error interno' }, { status: 500 })
+	}
+}
+
+export async function GET(request: Request) {
+	try {
+		const { searchParams } = new URL(request.url)
+
+		const uid = searchParams.get('uid')
+		const workspaceName = searchParams.get('workspaceName')
+		const boardName = searchParams.get('boardName')
+
+		if (!uid || !workspaceName || !boardName) {
+			return NextResponse.json(
+				{ error: 'uid, workspaceName y boardName son requeridos' },
+				{ status: 400 }
+			)
+		}
+
+		const { workspace, board } = await getBoardByNames(
+			uid,
+			workspaceName,
+			boardName
+		)
+
+		return NextResponse.json({
+			workspace,
+			board,
+		})
+	} catch (error: unknown) {
+		const err = error as Error
+		console.error('Error en GET /api/boards/get:', error)
+		return NextResponse.json(
+			{ error: err.message || 'Error interno del servidor' },
+			{ status: 500 }
+		)
 	}
 }

@@ -492,4 +492,7 @@ export const API = {
 	getWorkspacesUrl: '/api/workspaces',
 	createBoardsUrl: '/api/boards',
 	updateWorkspacesUrl: '/api/workspaces',
+	getBoardByNameUrl: '/api/boards',
+	getBoardColumnsUrl: '/api/columns',
+	createColumnUrl: '/api/columns',
 }

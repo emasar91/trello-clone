@@ -1,4 +1,4 @@
-import Boards from '@/components/Pages/Boards/Boards'
+import WorkspacesPage from '@/components/Pages/Workspaces/WorkspacesPage'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 import React from 'react'
 
@@ -14,7 +14,7 @@ async function Page({
 
 	return (
 		<ProtectedPage isProtected>
-			<Boards type={type} username={username} uid={uid} />
+			<WorkspacesPage type={type} username={username} uid={uid} />
 		</ProtectedPage>
 	)
 }

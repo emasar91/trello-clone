@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
-import { getRandomAvatarColor } from '@/components/Pages/Boards/Utils'
+import { getRandomAvatarColor } from '@/components/Pages/Workspaces/Utils'
 
 interface WorkspaceRef {
 	id: ObjectId
