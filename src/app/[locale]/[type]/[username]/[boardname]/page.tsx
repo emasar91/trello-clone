@@ -1,10 +1,12 @@
 import BoardPage from '@/components/Pages/BoardPage/BoardPage'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
-function page({ params }: { params: { boardname: string; username: string } }) {
-	const { boardname, username } = params
-	console.log('🚀 ~ page ~ boardname:', boardname)
-	console.log('🚀 ~ page ~ username:', username)
+async function page({
+	params,
+}: {
+	params: { boardname: string; username: string }
+}) {
+	const { boardname, username } = await params
 	return (
 		//crear board empezar con el tablero
 		<ProtectedPage isProtected>

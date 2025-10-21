@@ -10,9 +10,12 @@ export interface IBoard {
 	lastOpenedAt: Date | null
 }
 
-export interface IBoardStore {
+interface IBoardStore {
 	board: IBoard
-	setBoard: (value: IBoard) => void
 	columns: IColumn[]
-	setColumns: (value: IColumn[]) => void
+	cardsByColumn: Record<string, ICard[]> // cards agrupadas por columnId
+	setBoard: (board: IBoard) => void
+	setColumns: (columns: IColumn[]) => void
+	setCardsForColumn: (columnId: string, cards: ICard[]) => void
+	moveCard: (cardId: string, fromColumnId: string, toColumnId: string) => void
 }

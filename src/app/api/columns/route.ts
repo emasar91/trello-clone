@@ -16,7 +16,6 @@ export async function GET(request: Request) {
 		}
 
 		const columns = (await getBoardColumns(boardId)) as IColumn[]
-		console.log('🚀 ~ GET ~ columns:', columns)
 
 		return NextResponse.json({ columns: columns }, { status: 200 })
 	} catch (error: unknown) {

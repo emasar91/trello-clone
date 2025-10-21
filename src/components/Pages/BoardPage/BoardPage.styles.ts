@@ -6,5 +6,5 @@ export const BoardsPageContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'start',
-	minHeight: 'calc(100vh - 48px)',
+	height: 'calc(100vh - 48px)',
 })
