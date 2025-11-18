@@ -58,6 +58,15 @@ declare module '@mui/material/styles' {
 			buttonBackgroundColor: string
 			buttonBackgroundColorHover: string
 		}
+		boardPage: {
+			addButtonCard: string
+			addButtonColumn: string
+			addButtonColumnHover: string
+			addButtonColumnText: string
+			blackBackgroundList: string
+			blackBackgroundCard: string
+			textGray: string
+		}
 	}
 	interface PaletteOptions {
 		navbar?: {
@@ -114,6 +123,15 @@ declare module '@mui/material/styles' {
 			background: string
 			buttonBackgroundColor: string
 			buttonBackgroundColorHover: string
+		}
+		boardPage: {
+			addButtonCard: string
+			addButtonColumn: string
+			addButtonColumnHover: string
+			addButtonColumnText: string
+			blackBackgroundList: string
+			blackBackgroundCard: string
+			textGray: string
 		}
 	}
 }
@@ -184,6 +202,15 @@ export const lightTheme = createTheme({
 			background: colorDark.blackBackgroundMenu,
 			buttonBackgroundColor: colorDark.brandPrimary,
 			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
+		},
+		boardPage: {
+			addButtonCard: colorDark.grayCreateBoard,
+			addButtonColumn: colorDark.grayCreateBoard,
+			addButtonColumnHover: colorDark.grayTransparent,
+			addButtonColumnText: colorDark.blueText,
+			blackBackgroundList: colorDark.blackBackgroundList,
+			blackBackgroundCard: colorDark.blackCard,
+			textGray: colorDark.grayTextCard,
 		},
 	},
 	typography: {
@@ -315,6 +342,15 @@ export const darkTheme = createTheme({
 			background: colorDark.blackBackgroundMenu,
 			buttonBackgroundColor: colorDark.brandPrimary,
 			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
+		},
+		boardPage: {
+			addButtonCard: colorDark.grayCreateBoard,
+			addButtonColumn: colorDark.grayTransparent,
+			addButtonColumnText: colorDark.blueText,
+			addButtonColumnHover: colorDark.grayTransparentHover,
+			blackBackgroundList: colorDark.blackBackgroundList,
+			blackBackgroundCard: colorDark.blackCard,
+			textGray: colorDark.grayTextCard,
 		},
 	},
 	typography: {

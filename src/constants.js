@@ -294,6 +294,7 @@ export const colorTokens = {
 	blackShadow: '#344563',
 	violetLight: '#f7f5ff',
 	blackBackground: '#1f1f21',
+	blackBackgroundList: '#101204',
 }
 
 export const colorsLanding = {
@@ -453,6 +454,10 @@ export const colorDark = {
 	grayTextItems: '#B6C2CF',
 	grayTextAvatarSecondary: '#9FADBC',
 	grayCreateBoard: '#2c2c2e',
+	grayTransparent: '#ffffff3d',
+	grayTransparentHover: '#00000029',
+	blackCard: '#242528',
+	grayTextCard: '#bfc1c4',
 }
 
 export const colorLight = {

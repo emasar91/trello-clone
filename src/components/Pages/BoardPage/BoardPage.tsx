@@ -8,6 +8,7 @@ import { API } from '@/constants'
 import axios from 'axios'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import { IColumn } from '@/types/columns'
+import { MultipleContainers } from './MultipleContainers/MultipleContainers'
 
 function BoardPage({
 	boardname,
@@ -137,6 +138,7 @@ function BoardPage({
 			<Box
 				sx={{
 					position: 'relative',
+					overflowX: 'auto',
 					zIndex: 1,
 					width: '100%',
 					height: '100%',
@@ -147,8 +149,7 @@ function BoardPage({
 				}}
 			>
 				{/* tus componentes aquí */}
-				{/* ... resto del contenido */}
-				crear otro
+				<MultipleContainers itemCount={15} />
 			</Box>
 		</Box>
 	)
