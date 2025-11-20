@@ -152,7 +152,7 @@ interface Props {
 		isDragOverlay: boolean
 	}): React.CSSProperties
 	wrapperStyle?(args: { index: number }): React.CSSProperties
-	items?: Items
+	items: Items
 	handle?: boolean
 	renderItem?: ItemProps['renderItem']
 	strategy?: SortingStrategy
@@ -177,7 +177,7 @@ export function MultipleContainers({
 	renderItem,
 }: Props) {
 	// items state: same shape que tenías (id -> array of item ids)
-	const [items, setItems] = useState<Items>(initialItems ?? {})
+	const [items, setItems] = useState<Items>(initialItems)
 	// container order
 	const [containers, setContainers] = useState(
 		Object.keys(items) as UniqueIdentifier[]

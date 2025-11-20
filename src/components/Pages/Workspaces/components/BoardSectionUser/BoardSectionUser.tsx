@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box, CircularProgress, Typography, useTheme } from '@mui/material'
 import BoardGrid from '../BoardsList/BoardsList'
 import WorkspaceSection from '../WorkSpaces/WorkSpaces'
 import { ClockIcon } from '@/public/assets/icons/ClockIcon'
@@ -13,11 +13,9 @@ import { IBoard, IWorkspace } from '@/types/workspaces'
 import CreateWorkspaceCard from '../CreateWorkspaceCard/CreateWorkspaceCard'
 import ModalCreateWorkspace from '@/components/Navbar/components/ModalCreateWorkspace/ModalCreateWorkspace'
 import { useState } from 'react'
-import axios from 'axios'
-import { toast } from 'react-toastify'
-import { API } from '@/constants'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useAuth } from '@/context/useAuthContext'
+import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
 
 export default function BoardsSectionUser({
 	workspaces,
@@ -48,47 +46,14 @@ export default function BoardsSectionUser({
 	const { setWorkSpaces } = useWorkSpaceStore()
 	const { user } = useAuth()
 
-	const [loading, setLoading] = useState(false)
-
-	const handleSubmit = async (
-		workspaceName: string,
-		workspaceDescription: string,
-		resetForm: () => void
-	) => {
-		try {
-			const { data } = await axios.post(
-				API.createWorkspacesUrl,
-				{
-					name: workspaceName.trim(),
-					description: workspaceDescription.trim(),
-				},
-				{ withCredentials: true }
-			)
-
-			if (data.workspace) {
-				resetForm()
-				setOpenModal(false)
-				toast.success(t('menuBaord.successCreate'))
-
-				const { data } = await axios.get(
-					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
-					{
-						withCredentials: true,
-					}
-				)
-				setWorkSpaces(data)
-			}
-			// opcional: actualizar UI con data.workspace
-		} catch (err) {
-			if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
-		} finally {
-			setLoading(false)
-		}
-	}
+	const { handleCreateWorkspace, loading: loadingWorkspace } =
+		useCreateWorkspace(user, setWorkSpaces, setOpenModal)
 
 	return (
 		<Box sx={BoardSectionUserStyle}>
-			{!loading && (
+			{loadingWorkspace ? (
+				<CircularProgress size={60} />
+			) : (
 				<>
 					<Box>
 						{recentBoards.length > 0 && (
@@ -128,7 +93,8 @@ export default function BoardsSectionUser({
 								<ModalCreateWorkspace
 									openModal={openModal}
 									handleCloseModal={handleCloseModal}
-									handleSubmit={handleSubmit}
+									handleSubmit={handleCreateWorkspace}
+									loading={loadingWorkspace}
 								/>
 							</Box>
 						)}

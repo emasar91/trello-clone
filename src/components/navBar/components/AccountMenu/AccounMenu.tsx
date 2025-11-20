@@ -16,8 +16,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import { UserDefaultIcon } from '@/public/assets/icons/UserDefaultIcon'
 import { CreateWorkSpaceIcon } from '@/public/assets/icons/CreateWorkSpaceIcon'
 import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
-import axios from 'axios'
-import { API } from '@/constants'
 
 import { DARK_THEME, LIGHT_THEME } from '@/constants'
 import ThemeMenu from '../ThemeMenu/ThemMenu'
@@ -38,15 +36,13 @@ import {
 } from './AccountMenu.styles'
 import { useState } from 'react'
 import ModalCreateWorkspace from '../ModalCreateWorkspace/ModalCreateWorkspace'
-import { toast } from 'react-toastify'
-import NotificationContainer from '@/components/Notifications/Notifications'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
+import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
 
 export default function AccountMenu() {
 	const { user } = useAuth()
 	const locale = useLocale()
 	const t = useTranslations('NavbarLogged')
-	const tt = useTranslations('BoardsPage')
 	const theme = useTheme()
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -88,41 +84,8 @@ export default function AccountMenu() {
 
 	const { setWorkSpaces } = useWorkSpaceStore()
 
-	const handleSubmit = async (
-		workspaceName: string,
-		workspaceDescription: string,
-		resetForm: () => void,
-		setLoading: (loading: boolean) => void
-	) => {
-		try {
-			const { data } = await axios.post(
-				API.createWorkspacesUrl,
-				{
-					name: workspaceName.trim(),
-					description: workspaceDescription.trim(),
-				},
-				{ withCredentials: true }
-			)
-
-			if (data.workspace) {
-				resetForm()
-				setOpenModal(false)
-				toast.success(tt('modalCreateWorkspace.successCreate'))
-				const { data } = await axios.get(
-					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
-					{
-						withCredentials: true,
-					}
-				)
-				setWorkSpaces(data)
-			}
-			// opcional: actualizar UI con data.workspace
-		} catch (err) {
-			if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
-		} finally {
-			setLoading(false)
-		}
-	}
+	const { handleCreateWorkspace, loading: loadingWorkspace } =
+		useCreateWorkspace(user, setWorkSpaces, setOpenModal)
 
 	return (
 		<Box>
@@ -230,9 +193,9 @@ export default function AccountMenu() {
 			<ModalCreateWorkspace
 				openModal={openModal}
 				handleCloseModal={handleCloseModal}
-				handleSubmit={handleSubmit}
+				handleSubmit={handleCreateWorkspace}
+				loading={loadingWorkspace}
 			/>
-			<NotificationContainer />
 		</Box>
 	)
 }

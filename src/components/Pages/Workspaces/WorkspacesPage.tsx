@@ -8,10 +8,9 @@ import {
 import MenuBoards from './components/MenuBoards/MenuBoards'
 import BoardsSectionUser from './components/BoardSectionUser/BoardSectionUser'
 import BoardSectionWorkspaces from './components/BoardsSectionWorkspaces/BoardSectionWorkspaces'
-import axios from 'axios'
-import { API } from '@/constants'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import NotificationContainer from '@/components/Notifications/Notifications'
+import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 
 function WorkspacesPage({
 	type,
@@ -26,29 +25,31 @@ function WorkspacesPage({
 
 	const { setWorkSpaces, workspaces } = useWorkSpaceStore()
 
-	const fetchWorkspaces = async () => {
-		const { data } = await axios.get(`${API.getWorkspacesUrl}?uid=${uid}`, {
-			withCredentials: true,
-		})
-		setWorkSpaces(data)
-	}
+	const { getWorkspaces, loading: loadingWorkspace } = useGetWorkspaces()
 
 	useEffect(() => {
-		fetchWorkspaces()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [type, username, uid])
+		getWorkspaces(setWorkSpaces)
+	}, [uid, getWorkspaces, setWorkSpaces])
 
 	return (
 		<Box component={'nav'} sx={BoardsContainerStyle(theme)}>
 			<MenuBoards workspaces={workspaces} />
-			<Box component={'main'} sx={BoardsSectionStyle}>
-				{type === 'w' ? (
-					<BoardSectionWorkspaces username={username} workspaces={workspaces} />
-				) : type === 'u' ? (
-					<BoardsSectionUser workspaces={workspaces} />
-				) : (
-					<span>error</span>
+			<Box component="main" sx={BoardsSectionStyle}>
+				{!loadingWorkspace && (
+					<>
+						{type === 'w' && (
+							<BoardSectionWorkspaces
+								username={username}
+								workspaces={workspaces}
+							/>
+						)}
+
+						{type === 'u' && <BoardsSectionUser workspaces={workspaces} />}
+
+						{type !== 'w' && type !== 'u' && <span>error</span>}
+					</>
 				)}
+
 				<NotificationContainer />
 			</Box>
 		</Box>

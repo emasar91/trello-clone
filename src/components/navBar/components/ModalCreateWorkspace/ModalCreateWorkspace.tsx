@@ -26,35 +26,29 @@ type IModalCreateWorkspace = {
 	handleSubmit: (
 		workspaceName: string,
 		workspaceDescription: string,
-		resetForm: () => void,
-		setLoading: (loading: boolean) => void
+		resetForm: () => void
 	) => void
+	loading: boolean
 }
 
 function ModalCreateWorkspace({
 	openModal,
 	handleCloseModal,
 	handleSubmit,
+	loading,
 }: IModalCreateWorkspace) {
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
 
 	const [workspaceName, setWorkspaceName] = useState('')
 	const [workspaceDescription, setWorkspaceDescription] = useState('')
-	const [loading, setLoading] = useState(false)
 
 	const handleOnSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		setLoading(true)
-		handleSubmit(
-			workspaceName,
-			workspaceDescription,
-			() => {
-				setWorkspaceName('')
-				setWorkspaceDescription('')
-			},
-			setLoading
-		)
+		handleSubmit(workspaceName, workspaceDescription, () => {
+			setWorkspaceName('')
+			setWorkspaceDescription('')
+		})
 	}
 
 	return (

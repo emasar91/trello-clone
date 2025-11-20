@@ -1,4 +1,5 @@
 'use client'
+'stric-mode'
 import PageHome from '@/components/Pages/PageHome/PageHome'
 import './globals.css'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'

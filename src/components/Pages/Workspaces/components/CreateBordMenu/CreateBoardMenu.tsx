@@ -17,11 +17,9 @@ import {
 	CreateBoardMenuItemSkeletonStyle,
 } from './CreateBoardMenu.styles'
 import { useTranslations } from 'next-intl'
-import { API } from '@/constants'
-import axios from 'axios'
-import { toast } from 'react-toastify'
 import { useAuth } from '@/context/useAuthContext'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
+import { useCreateBoard } from '@/hooks/useCreateBoard'
 
 type ICreateBoardMenuProps = {
 	open: boolean
@@ -74,52 +72,11 @@ function CreateBoardMenu({
 	ImageBackgroudItem.displayName = 'ImageBackgroudItem'
 
 	const { user } = useAuth()
-
-	const handleCreateBoard = async ({
-		boardName,
-		boardDescription,
-		workspaceId,
-		resetForm,
-		setLoading,
-	}: {
-		boardName: string
-		boardDescription: string
-		workspaceId: string
-		resetForm: () => void
-		setLoading: (loading: boolean) => void
-	}) => {
-		try {
-			const { data } = await axios.post(
-				API.createBoardsUrl,
-				{
-					name: boardName.trim(),
-					description: boardDescription.trim(),
-					workspaceId: workspaceId,
-					image: backgroundSelected,
-					lastOpenedAt: null,
-				},
-				{ withCredentials: true }
-			)
-
-			if (data.board) {
-				resetForm()
-				toast.success(t('menuBaord.successCreate'))
-				const { data } = await axios.get(
-					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
-					{
-						withCredentials: true,
-					}
-				)
-				setWorkSpaces(data)
-			}
-			handleClose()
-			// opcional: actualizar UI con data.workspace
-		} catch (err) {
-			if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
-		} finally {
-			setLoading(false)
-		}
-	}
+	const { handleCreateBoard } = useCreateBoard({
+		setWorkSpaces,
+		user,
+		backgroundSelected,
+	})
 
 	return (
 		<Menu

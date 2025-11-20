@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
 		}
 
-		if (user.workspaces.length > 4) {
+		if (user.workspaces.length >= 4) {
 			return NextResponse.json(
 				{ message: 'El maximo de workspaces es 4' },
 				{ status: 401 }
