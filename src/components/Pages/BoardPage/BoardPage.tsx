@@ -8,7 +8,7 @@ import { API } from '@/constants'
 import axios from 'axios'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import { IColumn } from '@/types/columns'
-import { MultipleContainers } from './MultipleContainers/MultipleContainers'
+import { ManyItems } from './ManyItems/ManyItems'
 
 function BoardPage({
 	boardname,
@@ -149,7 +149,7 @@ function BoardPage({
 				}}
 			>
 				{/* tus componentes aquí */}
-				<MultipleContainers itemCount={15} />
+				<ManyItems />
 			</Box>
 		</Box>
 	)

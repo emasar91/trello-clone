@@ -1,12 +1,11 @@
 // MultipleContainers.tsx
-import React, {
-	SetStateAction,
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-	useMemo,
-} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { unstable_batchedUpdates } from 'react-dom'
+import {
+	restrictToHorizontalAxis,
+	restrictToVerticalAxis,
+} from '@dnd-kit/modifiers'
+
 import {
 	CancelDrop,
 	closestCenter,
@@ -24,100 +23,59 @@ import {
 	useSensor,
 	MeasuringStrategy,
 	KeyboardCoordinateGetter,
-	type DragOverEvent,
-	type DragEndEvent,
 } from '@dnd-kit/core'
+
 import {
 	AnimateLayoutChanges,
 	SortableContext,
+	useSortable,
 	arrayMove,
 	defaultAnimateLayoutChanges,
 	verticalListSortingStrategy,
-	horizontalListSortingStrategy,
-	useSortable,
 	SortingStrategy,
+	horizontalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { coordinateGetter as multipleContainersCoordinateGetter } from '../utils/multipleContainersKeyboardCoordinates'
+import { coordinateGetter as multipleContainersCoordinateGetter } from './multipleContainersKeyboardCoordinates'
 
-import { Item } from '../components/Item'
-import { Container } from '../components/Container'
-import type { ContainerProps } from '../components/Container'
+import { Item, Container, ContainerProps } from '../components'
+import type { Props as ItemProps } from '../components/Item/Item'
 
-import { createRange } from '../utils/createRange'
-import { unstable_batchedUpdates } from 'react-dom'
-import { Box } from '@mui/material'
-import {
-	MultipleContainersAddButtonCardStyles,
-	MultipleContainersAddButtonColumnStyles,
-	MultipleContainersContainerStyles,
-} from './MultipleContainers.styles'
-import { Plus } from '@/public/assets/icons/Plus'
+/* Reuse your CreateCardInput component */
 import CreateCardInput from '../components/TextAreaCustom/TextAreaCustom'
+import { Box } from '@mui/material'
+import { Plus } from '@/public/assets/icons/Plus'
 
-import { getNextContainerIdFromKeys } from '../utils/getNextContainerId'
-
-/**
- * Mejoras aplicadas:
- * - Medición droppable: WhileDragging (más liviano que Always)
- * - Memoización de contenedores renderizados
- * - Callbacks memoizados
- * - Mantengo el Container que ya usás (no lo cambié)
- * - Soporte para renombrar columna (onRename en Container)
- * - Menos trabajo en animateLayoutChanges para reducir repaints
- */
-
-/* -------------------------
-   animateLayoutChanges (light)
-   ------------------------- */
-/* Usamos defaultAnimateLayoutChanges pero solo activamos cuando realmente se está
-   arrastrando un elemento (optimiza re-layouts innecesarios). */
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
-	defaultAnimateLayoutChanges({ ...args, wasDragging: !!args.isDragging })
+	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
 
-/* -------------------------
-   Types
-   ------------------------- */
-type Items = Record<UniqueIdentifier, UniqueIdentifier[]>
-type ItemStyleArgs = {
-	index: number
-	value: UniqueIdentifier
-	isDragging: boolean
-	isSorting: boolean
-	overIndex: number
-	containerId: UniqueIdentifier
-	isDragOverlay: boolean
-}
-
-/* -------------------------
-   DroppableContainer
-   ------------------------- */
-/*
-  Usamos la versión local (ligera) que llama a tu Container sin cambiar su API.
-  Recibe `label` y `onEditTitle` para renombrar.
-*/
 function DroppableContainer({
 	children,
+	disabled,
 	id,
 	items,
 	style,
-	setItems,
 	label,
 	onRemove,
-	onEditTitle,
+	onRename,
+	onCreateCard,
+	...props
 }: ContainerProps & {
+	disabled?: boolean
 	id: UniqueIdentifier
 	items: UniqueIdentifier[]
 	style?: React.CSSProperties
-	setItems: React.Dispatch<SetStateAction<Items>>
-	label: string
+	label?: string
 	onRemove?: () => void
-	onEditTitle: (value: string) => void
+	onRename?: (value: string) => void
+	onCreateCard?: (value: string) => void
 }) {
 	const {
+		active,
 		attributes,
 		isDragging,
 		listeners,
+		over,
 		setNodeRef,
 		transition,
 		transform,
@@ -127,81 +85,544 @@ function DroppableContainer({
 			type: 'container',
 			children: items,
 		},
-		// animateLayoutChanges ligero (ver arriba)
 		animateLayoutChanges,
 	})
-
-	const [showAddButton, setShowAddButton] = useState(false)
-
-	const handleAddButton = useCallback(() => setShowAddButton(true), [])
-	const removeAddButton = useCallback(() => setShowAddButton(false), [])
-
-	const handleCreateCard = useCallback(
-		(value: string) => {
-			setItems((prev) => ({
-				...prev,
-				[id]: [...(prev[id] ?? []), value],
-			}))
-			// opcional: cerrar el input después de crear
-			removeAddButton()
-		},
-		[id, setItems, removeAddButton]
-	)
-
-	// onRename se pasa al Container como onRename (tu Container ya lo soporta)
-	// No intentamos reemplazar el Container: solo le pasamos props.
+	const isOverContainer = over
+		? (id === over.id && active?.data.current?.type !== 'container') ||
+		  items.includes(over.id)
+		: false
 
 	return (
-		<Container
-			ref={setNodeRef}
+		<div
 			style={{
-				...style,
-				transition,
-				transform: CSS.Translate.toString(transform),
-				opacity: isDragging ? 0.5 : undefined,
+				display: 'flex',
+				flexDirection: 'column',
+				maxWidth: '272px',
+				width: '100%',
+				flexShrink: 0,
+				justifyContent: 'center',
+				alignItems: 'center',
+				flexWrap: 'nowrap',
 			}}
-			handleProps={{ ...attributes, ...listeners }}
-			label={label}
-			onRename={(newName: string) => onEditTitle(newName)}
-			onRemove={onRemove}
 		>
-			{children}
-
-			{!showAddButton ? (
-				<Box
-					onClick={handleAddButton}
-					sx={MultipleContainersAddButtonCardStyles}
-				>
-					<Plus />
-					Agregar tarjeta
-				</Box>
-			) : (
-				<CreateCardInput
-					onCreate={handleCreateCard}
-					onCancel={removeAddButton}
-					type="card"
-				/>
-			)}
-		</Container>
+			<Container
+				ref={disabled ? undefined : setNodeRef}
+				style={{
+					...style,
+					transition,
+					transform: CSS.Translate.toString(transform),
+					opacity: isDragging ? 0.5 : undefined,
+				}}
+				hover={isOverContainer}
+				handleprops={{
+					...attributes,
+					...listeners,
+				}}
+				label={label}
+				onRename={onRename}
+				onRemove={onRemove}
+				onCreateCard={onCreateCard}
+				{...props}
+			>
+				{children}
+				{/* Add card button / input inside container */}
+			</Container>
+		</div>
 	)
 }
+type CardItem = {
+	id: UniqueIdentifier // número o string único
+	text: string // el valor escrito por el usuario
+}
+type Items = Record<UniqueIdentifier, CardItem[]>
 
+interface Props {
+	adjustScale?: boolean
+	cancelDrop?: CancelDrop
+	columns?: number
+	containerStyle?: React.CSSProperties
+	coordinateGetter?: KeyboardCoordinateGetter
+	getItemStyles?(args: {
+		value: UniqueIdentifier
+		index: number
+		overIndex: number
+		isDragging: boolean
+		containerId: UniqueIdentifier
+		isSorting: boolean
+		isDragOverlay: boolean
+	}): React.CSSProperties
+	wrapperStyle?(args: { index: number }): React.CSSProperties
+	items?: Items
+	handle?: boolean
+	renderItem?: ItemProps['renderItem']
+	strategy?: SortingStrategy
+	modifiers?: Modifiers
+	minimal?: boolean
+	trashable?: boolean
+	scrollable?: boolean
+	vertical?: boolean
+}
+
+export const TRASH_ID = 'void'
+const PLACEHOLDER_ID = 'placeholder'
+
+export function MultipleContainers({
+	cancelDrop,
+	handle = false,
+	items: initialItems,
+	containerStyle,
+	coordinateGetter = multipleContainersCoordinateGetter,
+	getItemStyles = () => ({}),
+	wrapperStyle = () => ({}),
+	renderItem,
+}: Props) {
+	// items state: same shape que tenías (id -> array of item ids)
+	const [items, setItems] = useState<Items>(initialItems ?? {})
+	// container order
+	const [containers, setContainers] = useState(
+		Object.keys(items) as UniqueIdentifier[]
+	)
+	// titles per column (id -> title). Inicialmente title = id si no hay otro
+	const [columnTitles, setColumnTitles] = useState<Record<string, string>>(() =>
+		Object.keys(items).reduce((acc, key) => {
+			acc[key] = key
+			return acc
+		}, {} as Record<string, string>)
+	)
+
+	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
+	const lastOverId = useRef<UniqueIdentifier | null>(null)
+	const recentlyMovedToNewContainer = useRef(false)
+	const isSortingContainer =
+		activeId != null ? containers.includes(activeId) : false
+
+	/* collision detection (same que antes) */
+	const collisionDetectionStrategy: CollisionDetection = useCallback(
+		(args) => {
+			// 1) Si arrastramos una columna (activeId está en items) → ser más permisivo usando rectIntersection
+			if (activeId && activeId in items) {
+				const intersections = rectIntersection(args)
+				const overId = getFirstCollision(intersections, 'id')
+
+				if (overId != null) {
+					// Si el droppable es una columna que contiene items, intentar elegir el item más cercano dentro
+					if (overId in items) {
+						const containerItems = items[overId]
+						if (containerItems.length > 0) {
+							const containerItemIds = containerItems.map((ci) => ci.id)
+							const closest = closestCenter({
+								...args,
+								droppableContainers: args.droppableContainers.filter(
+									(container) =>
+										container.id !== overId &&
+										containerItemIds.includes(container.id)
+								),
+							})[0]?.id
+							if (closest) {
+								lastOverId.current = closest
+								return [{ id: closest }]
+							}
+						}
+					}
+
+					lastOverId.current = overId
+					return [{ id: overId }]
+				}
+
+				// fallback al último over conocido
+				if (recentlyMovedToNewContainer.current) lastOverId.current = activeId
+				return lastOverId.current ? [{ id: lastOverId.current }] : []
+			}
+
+			// 2) Si arrastramos una card → pointerWithin primero (natural), rectIntersection segundo, closestCenter fallback
+			const pointerIntersections = pointerWithin(args)
+			const intersections =
+				pointerIntersections.length > 0
+					? pointerIntersections
+					: rectIntersection(args)
+			const overId = getFirstCollision(intersections, 'id')
+
+			if (overId != null) {
+				if (overId in items) {
+					const containerItems = items[overId]
+					if (containerItems.length > 0) {
+						const containerItemIds = containerItems.map((ci) => ci.id)
+						const closest = closestCenter({
+							...args,
+							droppableContainers: args.droppableContainers.filter(
+								(container) =>
+									container.id !== overId &&
+									containerItemIds.includes(container.id)
+							),
+						})[0]?.id
+						if (closest) {
+							lastOverId.current = closest
+							return [{ id: closest }]
+						}
+					}
+				}
+
+				lastOverId.current = overId
+				return [{ id: overId }]
+			}
+
+			// 3) fallback si no hay colisión actual
+			if (recentlyMovedToNewContainer.current) lastOverId.current = activeId
+			return lastOverId.current ? [{ id: lastOverId.current }] : []
+		},
+		[activeId, items]
+	)
+
+	const [clonedItems, setClonedItems] = useState<Items | null>(null)
+	const sensors = useSensors(
+		useSensor(MouseSensor),
+		useSensor(TouchSensor),
+		useSensor(KeyboardSensor, { coordinateGetter })
+	)
+
+	const findContainer = (id: UniqueIdentifier) => {
+		if (id in items) {
+			return id
+		}
+
+		return Object.keys(items).find((key) =>
+			items[key].some((item) => item.id === id)
+		)
+	}
+
+	const getIndex = (id: UniqueIdentifier) => {
+		const container = findContainer(id)
+
+		if (!container) {
+			return -1
+		}
+
+		const index = items[container].findIndex((item) => item.id === id)
+
+		return index
+	}
+
+	const onDragCancel = () => {
+		if (clonedItems) {
+			setItems(clonedItems)
+		}
+
+		setActiveId(null)
+		setClonedItems(null)
+	}
+
+	useEffect(() => {
+		requestAnimationFrame(() => {
+			recentlyMovedToNewContainer.current = false
+		})
+	}, [items])
+	const isDraggingCard = activeId && !containers.includes(activeId)
+	const modifiers = isDraggingCard
+		? [restrictToVerticalAxis]
+		: [restrictToHorizontalAxis]
+
+	/* DnD handlers (mantengo tu lógica, ligeramente extractada) */
+	return (
+		<DndContext
+			sensors={sensors}
+			collisionDetection={collisionDetectionStrategy}
+			measuring={{
+				droppable: {
+					strategy: MeasuringStrategy.Always,
+				},
+			}}
+			onDragStart={({ active }) => {
+				setActiveId(active.id)
+				setClonedItems(items)
+			}}
+			onDragOver={({ active, over }) => {
+				const overId = over?.id
+
+				if (overId == null || overId === TRASH_ID || active.id in items) {
+					return
+				}
+
+				const overContainer = findContainer(overId)
+				const activeContainer = findContainer(active.id)
+
+				if (!overContainer || !activeContainer) {
+					return
+				}
+
+				if (activeContainer !== overContainer) {
+					setItems((items) => {
+						const activeItems = items[activeContainer]
+						const overItems = items[overContainer]
+						const overIndex = overItems.findIndex((i) => i.id === overId)
+						const activeIndex = activeItems.findIndex((i) => i.id === active.id)
+
+						let newIndex: number
+
+						if (overId in items) {
+							newIndex = overItems.length + 1
+						} else {
+							const isBelowOverItem =
+								over &&
+								active.rect.current.translated &&
+								active.rect.current.translated.top >
+									over.rect.top + over.rect.height
+
+							const modifier = isBelowOverItem ? 1 : 0
+
+							newIndex =
+								overIndex >= 0 ? overIndex + modifier : overItems.length + 1
+						}
+
+						recentlyMovedToNewContainer.current = true
+
+						return {
+							...items,
+							[activeContainer]: items[activeContainer].filter(
+								(item) => item.id !== active.id
+							),
+							[overContainer]: [
+								...items[overContainer].slice(0, newIndex),
+								items[activeContainer][activeIndex],
+								...items[overContainer].slice(
+									newIndex,
+									items[overContainer].length
+								),
+							],
+						}
+					})
+				}
+			}}
+			onDragEnd={({ active, over }) => {
+				if (active.id in items && over?.id) {
+					setContainers((containers) => {
+						const activeIndex = containers.indexOf(active.id)
+						const overIndex = containers.indexOf(over.id)
+
+						return arrayMove(containers, activeIndex, overIndex)
+					})
+				}
+
+				const activeContainer = findContainer(active.id)
+
+				if (!activeContainer) {
+					setActiveId(null)
+					return
+				}
+
+				const overId = over?.id
+
+				if (overId == null) {
+					setActiveId(null)
+					return
+				}
+
+				if (overId === TRASH_ID) {
+					setItems((items) => ({
+						...items,
+						[activeContainer]: items[activeContainer].filter(
+							(item) => item.id !== activeId
+						),
+					}))
+					setActiveId(null)
+					return
+				}
+
+				if (overId === PLACEHOLDER_ID) {
+					const newContainerId = getNextContainerId()
+
+					unstable_batchedUpdates(() => {
+						setContainers((containers) => [...containers, newContainerId])
+						setItems((items) => ({
+							...items,
+							[activeContainer]: items[activeContainer].filter(
+								(item) => item.id !== activeId
+							),
+							[newContainerId]: [
+								items[activeContainer][
+									items[activeContainer].findIndex((i) => i.id === active.id)
+								],
+							],
+						}))
+						// set default title for the new column
+						setColumnTitles((prev) => ({
+							...prev,
+							[newContainerId]: String(newContainerId),
+						}))
+						setActiveId(null)
+					})
+					return
+				}
+
+				const overContainer = findContainer(overId)
+
+				if (overContainer) {
+					const activeIndex = items[activeContainer].findIndex(
+						(i) => i.id === active.id
+					)
+					const overIndex = items[overContainer].findIndex(
+						(i) => i.id === overId
+					)
+
+					if (activeIndex !== overIndex) {
+						setItems((items) => ({
+							...items,
+							[overContainer]: arrayMove(
+								items[overContainer],
+								activeIndex,
+								overIndex
+							),
+						}))
+					}
+				}
+
+				setActiveId(null)
+			}}
+			cancelDrop={cancelDrop}
+			onDragCancel={onDragCancel}
+			modifiers={modifiers}
+		>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'start',
+					gap: '12px',
+				}}
+			>
+				<SortableContext
+					items={[...containers, PLACEHOLDER_ID]}
+					strategy={horizontalListSortingStrategy}
+				>
+					{containers.map((containerId) => (
+						<DroppableContainer
+							key={containerId}
+							id={containerId}
+							label={columnTitles[String(containerId)] ?? String(containerId)}
+							items={(items[containerId] ?? []).map((item) => item.id)}
+							style={containerStyle}
+							onRemove={() => handleRemove(containerId)}
+							onRename={(newTitle: string) =>
+								setColumnTitles((prev) => ({
+									...prev,
+									[String(containerId)]: newTitle.trim(),
+								}))
+							}
+							onCreateCard={(value: string) => {
+								const newItem: CardItem = {
+									id: `${String(containerId)}-${Date.now()}`,
+									text: value,
+								}
+								setItems((prev) => ({
+									...prev,
+									[containerId]: [...(prev[containerId] ?? []), newItem],
+								}))
+							}}
+						>
+							<SortableContext
+								items={(items[containerId] ?? []).map((i) => i.id)}
+								strategy={verticalListSortingStrategy}
+							>
+								{items[containerId].map((value, index) => {
+									return (
+										<SortableItem
+											disabled={isSortingContainer}
+											key={value.id}
+											id={value.id}
+											index={index}
+											handle={handle}
+											style={getItemStyles}
+											wrapperStyle={wrapperStyle}
+											displayValue={value.text}
+											renderItem={renderItem}
+											containerId={containerId}
+											getIndex={getIndex}
+										/>
+									)
+								})}
+							</SortableContext>
+						</DroppableContainer>
+					))}
+				</SortableContext>
+				{/* Add column input (toggle) */}
+				<ColumnAdder
+					onCreate={(title) => {
+						handleAddColumnWithTitle(title)
+					}}
+				/>
+			</div>
+		</DndContext>
+	)
+
+	function handleRemove(containerID: UniqueIdentifier) {
+		setContainers((containers) => containers.filter((id) => id !== containerID))
+		setItems((prev) => {
+			const next = { ...prev }
+			delete next[containerID]
+			return next
+		})
+		setColumnTitles((prev) => {
+			const next = { ...prev }
+			delete next[containerID]
+			return next
+		})
+	}
+
+	function handleAddColumnWithTitle(title?: string) {
+		const newContainerId = getNextContainerId()
+
+		unstable_batchedUpdates(() => {
+			setContainers((containers) => [...containers, newContainerId])
+			setItems((items) => ({
+				...items,
+				[newContainerId]: [],
+			}))
+			setColumnTitles((t) => ({
+				...t,
+				[newContainerId]: title?.trim() ?? String(newContainerId),
+			}))
+		})
+	}
+
+	function getNextContainerId() {
+		const containerIds = Object.keys(items)
+		const lastContainerId = containerIds[containerIds.length - 1] ?? 'A'
+		// If lastContainerId is single char we increment char, otherwise append char
+		if (lastContainerId.length === 1) {
+			return String.fromCharCode(lastContainerId.charCodeAt(0) + 1)
+		}
+		return `${lastContainerId}1`
+	}
+}
 /* -------------------------
-   SortableItem
+   helper: SortableItem (igual que antes)
    ------------------------- */
 interface SortableItemProps {
 	containerId: UniqueIdentifier
 	id: UniqueIdentifier
 	index: number
-	style(args: ItemStyleArgs): React.CSSProperties
+	handle: boolean
+	disabled?: boolean
+	displayValue: React.ReactNode
+	style(args: {
+		value: UniqueIdentifier
+		index: number
+		overIndex: number
+		isDragging: boolean
+		containerId: UniqueIdentifier
+		isSorting: boolean
+		isDragOverlay: boolean
+	}): React.CSSProperties
 	getIndex(id: UniqueIdentifier): number
-	renderItem(): React.ReactElement | null
+	renderItem?: ItemProps['renderItem']
 	wrapperStyle({ index }: { index: number }): React.CSSProperties
 }
 
-const SortableItem = React.memo(function SortableItem({
+function SortableItem({
+	disabled,
 	id,
 	index,
+	handle,
+	displayValue,
 	renderItem,
 	style,
 	containerId,
@@ -210,42 +631,40 @@ const SortableItem = React.memo(function SortableItem({
 }: SortableItemProps) {
 	const {
 		setNodeRef,
-		setActivatorNodeRef,
 		listeners,
 		isDragging,
 		isSorting,
 		over,
+		overIndex,
 		transform,
 		transition,
-	} = useSortable({ id })
-
-	// pequeño mount status para animar entrada (reducido)
-	const [mounted, setMounted] = useState(false)
-	useEffect(() => {
-		const t = setTimeout(() => setMounted(true), 200)
-		return () => clearTimeout(t)
-	}, [])
-
+	} = useSortable({
+		id,
+	})
+	const mounted = useMountStatus()
 	const mountedWhileDragging = isDragging && !mounted
 
 	return (
 		<Item
-			ref={setNodeRef}
-			value={id}
+			ref={disabled ? undefined : setNodeRef}
+			value={displayValue}
 			dragging={isDragging}
 			sorting={isSorting}
-			handleProps={{ ref: setActivatorNodeRef }}
+			handle={handle}
 			index={index}
 			wrapperStyle={wrapperStyle({ index })}
-			style={style({
-				index,
-				value: id,
-				isDragging,
-				isSorting,
-				overIndex: over ? getIndex(over.id) : -1,
-				containerId,
-				isDragOverlay: false,
-			})}
+			style={{
+				...style({
+					index,
+					value: id,
+					isDragging,
+					isSorting,
+					overIndex: over ? getIndex(over.id) : overIndex,
+					containerId,
+					isDragOverlay: false,
+				}),
+			}}
+			color={getColor(id)}
 			transition={transition}
 			transform={transform}
 			fadeIn={mountedWhileDragging}
@@ -253,392 +672,80 @@ const SortableItem = React.memo(function SortableItem({
 			renderItem={renderItem}
 		/>
 	)
-})
-
-/* -------------------------
-   MultipleContainers (main)
-   ------------------------- */
-interface Props {
-	adjustScale?: boolean
-	cancelDrop?: CancelDrop
-	containerStyle?: React.CSSProperties
-	coordinateGetter?: KeyboardCoordinateGetter
-	getItemStyles?(args: ItemStyleArgs): React.CSSProperties
-	wrapperStyle?(args: { index: number }): React.CSSProperties
-	itemCount?: number
-	items?: Items
-	renderItem?: () => React.ReactElement | null
-	strategyContainer?: SortingStrategy
-	strategyItem?: SortingStrategy
-	modifiers?: Modifiers
-	trashable?: boolean
-	vertical?: boolean
 }
 
-export const MultipleContainers = ({
-	itemCount = 13,
-	cancelDrop,
-	items: initialItems,
-	containerStyle,
-	coordinateGetter = multipleContainersCoordinateGetter,
-	getItemStyles = () => ({}),
-	wrapperStyle = () => ({}),
-	modifiers,
-	renderItem = () => null,
-	strategyContainer = horizontalListSortingStrategy,
-	strategyItem = verticalListSortingStrategy,
-}: Props) => {
-	// items state (cards grouped by containerId)
-	const [items, setItems] = useState<Items>(
-		() =>
-			initialItems ?? {
-				A: createRange(itemCount, (i) => `A${i + 1}`),
-				B: createRange(itemCount, (i) => `B${i + 1}`),
-				C: createRange(itemCount, (i) => `C${i + 1}`),
-			}
-	)
+function useMountStatus() {
+	const [isMounted, setIsMounted] = useState(false)
 
-	// containers is the ordering of container ids
-	const [containers, setContainers] = useState<UniqueIdentifier[]>(() =>
-		Object.keys(items)
-	)
-
-	// titles map for containers: containerId -> title
-	const [columnTitles, setColumnTitles] = useState<Record<string, string>>(
-		() => {
-			const keys = Object.keys(items)
-			const map: Record<string, string> = {}
-			for (const key of keys) map[key] = key // default title = id (A,B,C...)
-			return map
-		}
-	)
-
-	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
-	const lastOverId = useRef<UniqueIdentifier | null>(null)
-	const recentlyMovedToNewContainer = useRef(false)
-	const [clonedItems, setClonedItems] = useState<Items | null>(null)
-
-	/* ------------------ sensors (memo) ------------------ */
-	const sensors = useSensors(
-		useSensor(MouseSensor),
-		useSensor(TouchSensor),
-		useSensor(KeyboardSensor, { coordinateGetter })
-	)
-
-	/* -------- findContainer (memoized) -------- */
-	const findContainer = useCallback(
-		(id: UniqueIdentifier) => {
-			if (id in items) return id
-			return Object.keys(items).find((key) => items[key].includes(id))
-		},
-		[items]
-	)
-
-	const getIndex = useCallback(
-		(id: UniqueIdentifier) => {
-			const container = findContainer(id)
-			if (!container) return -1
-			return items[container].indexOf(id)
-		},
-		[findContainer, items]
-	)
-
-	/* -------- collision detection (optimized) -------- */
-	const collisionDetectionStrategy: CollisionDetection = useCallback(
-		(args) => {
-			// If dragging a container itself, use closestCenter among container droppables
-			if (activeId && activeId in items) {
-				return closestCenter({
-					...args,
-					droppableContainers: args.droppableContainers.filter(
-						(c) => c.id in items
-					),
-				})
-			}
-
-			// pointer -> rect fallback
-			const pointerIntersections = pointerWithin(args)
-			const intersections =
-				pointerIntersections.length > 0
-					? pointerIntersections
-					: rectIntersection(args)
-			let overId = getFirstCollision(intersections, 'id')
-
-			if (overId != null) {
-				// if over a container droppable that itself contains items, find the nearest item inside it
-				if (overId in items) {
-					const containerItems = items[overId]
-					if (containerItems.length > 0) {
-						overId = closestCenter({
-							...args,
-							droppableContainers: args.droppableContainers.filter(
-								(container) =>
-									container.id !== overId &&
-									containerItems.includes(container.id)
-							),
-						})[0]?.id
-					}
-				}
-
-				lastOverId.current = overId
-				return [{ id: overId }]
-			}
-
-			// fallback to last cached
-			if (recentlyMovedToNewContainer.current) lastOverId.current = activeId
-			return lastOverId.current
-				? [{ id: lastOverId.current as UniqueIdentifier }]
-				: []
-		},
-		[activeId, items]
-	)
-
-	/* -------- effect to reset flag -------- */
 	useEffect(() => {
-		requestAnimationFrame(() => {
-			recentlyMovedToNewContainer.current = false
-		})
-	}, [items])
+		const timeout = setTimeout(() => setIsMounted(true), 500)
 
-	/* -------- onDragCancel -------- */
-	const onDragCancel = useCallback(() => {
-		if (clonedItems) setItems(clonedItems)
-		setActiveId(null)
-		setClonedItems(null)
-	}, [clonedItems])
-
-	/* -------- remove container -------- */
-	const handleRemove = useCallback((containerID: UniqueIdentifier) => {
-		setContainers((prev) => prev.filter((id) => id !== containerID))
-		setItems((prev) => {
-			const next = { ...prev }
-			delete next[containerID as string]
-			return next
-		})
-		setColumnTitles((prev) => {
-			const next = { ...prev }
-			delete next[containerID as string]
-			return next
-		})
+		return () => clearTimeout(timeout)
 	}, [])
 
-	/* -------- add column (title optional) -------- */
-	const handleAddColumn = useCallback(
-		(title?: string) => {
-			const newContainerId = getNextContainerIdFromKeys(Object.keys(items))
-			unstable_batchedUpdates(() => {
-				setContainers((c) => [...c, newContainerId])
-				setItems((it) => ({ ...it, [newContainerId]: [] }))
-				setColumnTitles((t) => ({
-					...t,
-					[newContainerId]: title?.trim() ?? String(newContainerId),
-				}))
-			})
-		},
-		[items]
-	)
+	return isMounted
+}
 
-	/* -------- DnD handlers -------- */
-	const handleDragStart = useCallback(
-		({ active }: { active: { id: UniqueIdentifier } }) => {
-			setActiveId(active.id)
-			setClonedItems(items)
-		},
-		[items]
-	)
+/* -------------------------
+   small ColumnAdder component to place CreateCardInput for columns
+   ------------------------- */
+function ColumnAdder({ onCreate }: { onCreate: (title: string) => void }) {
+	const [show, setShow] = useState(false)
 
-	const handleDragOver = useCallback(
-		({ active, over }: DragOverEvent) => {
-			const overId = over?.id
-			if (overId == null || active.id in items) return
-
-			const overContainer = findContainer(overId)
-			const activeContainer = findContainer(active.id)
-			if (!overContainer || !activeContainer) return
-
-			if (activeContainer !== overContainer) {
-				setItems((items) => {
-					const activeItems = items[activeContainer]
-					const overItems = items[overContainer]
-					const overIndex = overItems.indexOf(overId)
-					const activeIndex = activeItems.indexOf(active.id)
-
-					let newIndex: number
-					if (overId in items) {
-						newIndex = overItems.length + 1
-					} else {
-						const isBelow =
-							over &&
-							active.rect.current.translated &&
-							active.rect.current.translated.top >
-								over.rect.top + over.rect.height
-						newIndex =
-							overIndex >= 0
-								? overIndex + (isBelow ? 1 : 0)
-								: overItems.length + 1
-					}
-
-					recentlyMovedToNewContainer.current = true
-
-					return {
-						...items,
-						[activeContainer]: items[activeContainer].filter(
-							(it) => it !== active.id
-						),
-						[overContainer]: [
-							...items[overContainer].slice(0, newIndex),
-							items[activeContainer][activeIndex],
-							...items[overContainer].slice(newIndex),
-						],
-					}
-				})
-			}
-		},
-		[findContainer, items]
-	)
-
-	const handleDragEnd = useCallback(
-		({ active, over }: DragEndEvent) => {
-			// reorder containers if we dragged a container
-			if (active.id in items && over?.id) {
-				setContainers((containers) => {
-					const activeIndex = containers.indexOf(active.id)
-					const overIndex = containers.indexOf(over.id)
-					return arrayMove(containers, activeIndex, overIndex)
-				})
-			}
-
-			const activeContainer = findContainer(active.id)
-			if (!activeContainer) {
-				setActiveId(null)
-				return
-			}
-
-			const overId = over?.id
-			if (overId == null) {
-				setActiveId(null)
-				return
-			}
-
-			const overContainer = findContainer(overId)
-			if (overContainer) {
-				const activeIndex = items[activeContainer].indexOf(active.id)
-				const overIndex = items[overContainer].indexOf(overId)
-				if (activeIndex !== overIndex) {
-					setItems((items) => ({
-						...items,
-						[overContainer]: arrayMove(
-							items[overContainer],
-							activeIndex,
-							overIndex
-						),
-					}))
-				}
-			}
-
-			setActiveId(null)
-		},
-		[findContainer, items]
-	)
-
-	/* -------- memoized rendered containers to avoid re-create -------- */
-	const renderedContainers = useMemo(() => {
-		return containers.map((containerId) => {
-			const title = columnTitles[String(containerId)] ?? String(containerId)
-			return (
-				<DroppableContainer
-					key={String(containerId)}
-					id={String(containerId)}
-					label={title}
-					items={items[containerId] ?? []}
-					style={containerStyle}
-					setItems={setItems}
-					onRemove={() => handleRemove(containerId)}
-					onEditTitle={(newTitle) =>
-						setColumnTitles((prev) => ({
-							...prev,
-							[String(containerId)]: newTitle.trim(),
-						}))
-					}
-				>
-					<SortableContext
-						items={items[containerId] ?? []}
-						strategy={strategyItem}
-					>
-						{(items[containerId] ?? []).map((value, index) => (
-							<SortableItem
-								key={value}
-								id={value}
-								index={index}
-								style={getItemStyles}
-								wrapperStyle={wrapperStyle}
-								renderItem={renderItem}
-								containerId={containerId}
-								getIndex={getIndex}
-							/>
-						))}
-					</SortableContext>
-				</DroppableContainer>
-			)
-		})
-		// dependencias controladas para minimizar renders
-	}, [
-		containers,
-		columnTitles,
-		items,
-		containerStyle,
-		strategyItem,
-		getItemStyles,
-		wrapperStyle,
-		renderItem,
-		getIndex,
-		handleRemove,
-		setItems,
-	])
-
-	/* -------- add column toggle -------- */
-	const [showAddColumn, setShowAddColumn] = useState(false)
-	const handleAddColumnButton = useCallback(() => setShowAddColumn(true), [])
-	const removeAddColumnButton = useCallback(() => setShowAddColumn(false), [])
-
-	/* -------- render -------- */
-	return (
-		<DndContext
-			sensors={sensors}
-			collisionDetection={collisionDetectionStrategy}
-			autoScroll
-			// Use while-dragging measuring to reduce layout thrash
-			measuring={{ droppable: { strategy: MeasuringStrategy.WhileDragging } }}
-			onDragStart={handleDragStart}
-			onDragOver={handleDragOver}
-			onDragEnd={handleDragEnd}
-			cancelDrop={cancelDrop}
-			onDragCancel={onDragCancel}
-			modifiers={modifiers}
-		>
-			<Box sx={MultipleContainersContainerStyles}>
-				<SortableContext items={containers} strategy={strategyContainer}>
-					{renderedContainers}
-				</SortableContext>
+	if (!show) {
+		return (
+			<Box
+				onClick={() => setShow(true)}
+				sx={{
+					cursor: 'pointer',
+					userSelect: 'none',
+					backgroundColor: '#ffffff3d',
+					padding: '8px 12px',
+					fontSize: 14,
+					marginTop: '12px',
+					display: 'inline-flex',
+					alignItems: 'center',
+					gap: '8px',
+					borderRadius: '8px',
+					width: '272px',
+					height: '44px',
+					'&:hover': {
+						backgroundColor: 'rgba(255, 255, 255, 0.20)',
+					},
+				}}
+			>
+				<Plus />
+				Añade otra lista
 			</Box>
+		)
+	}
 
-			{!showAddColumn ? (
-				<Box
-					onClick={handleAddColumnButton}
-					sx={MultipleContainersAddButtonColumnStyles}
-				>
-					Add Column
-				</Box>
-			) : (
-				<CreateCardInput
-					onCreate={(title) => {
-						handleAddColumn(title)
-						setShowAddColumn(false)
-					}}
-					onCancel={removeAddColumnButton}
-					type={'column'}
-				/>
-			)}
-		</DndContext>
+	return (
+		<CreateCardInput
+			type="column"
+			onCreate={(title) => {
+				onCreate(title)
+				setShow(false)
+			}}
+			onCancel={() => setShow(false)}
+		/>
 	)
+}
+
+/* -------------------------
+   utils
+   ------------------------- */
+function getColor(id: UniqueIdentifier) {
+	switch (String(id)[0]) {
+		case 'A':
+			return '#7193f1'
+		case 'B':
+			return '#ffda6c'
+		case 'C':
+			return '#00bcd4'
+		case 'D':
+			return '#ef769f'
+	}
+
+	return undefined
 }

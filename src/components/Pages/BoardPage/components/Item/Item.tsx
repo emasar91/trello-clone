@@ -1,107 +1,140 @@
 import React, { useEffect } from 'react'
-import { Box } from '@mui/material'
-import { Handle } from '../Handle'
-import { Remove } from '../Remove'
-
-import {
-	wrapperStyles,
-	itemStyles,
-	handleContainerStyles,
-	removeContainerStyles,
-	valueStyles,
-} from './Item.styles'
-import { useTheme } from '@mui/material'
+import type { DraggableSyntheticListeners } from '@dnd-kit/core'
 import type { Transform } from '@dnd-kit/utilities'
-import type { ButtonProps } from '../Button'
-
-interface Props {
+import './item.css'
+import { useTheme } from '@mui/material/styles'
+export interface Props {
 	dragOverlay?: boolean
-	dragging?: boolean
-	sorting?: boolean
+	color?: string
 	disabled?: boolean
+	dragging?: boolean
+	handle?: boolean
+	height?: number
+	index?: number
 	fadeIn?: boolean
-	handleProps?: ButtonProps & {
-		ref?:
-			| ((instance: HTMLButtonElement | null) => void)
-			| React.Ref<HTMLButtonElement>
-	}
-	listeners?: React.DOMAttributes<HTMLElement>
-	onRemove?: React.MouseEventHandler<HTMLButtonElement>
+	transform?: Transform | null
+	listeners?: DraggableSyntheticListeners
+	sorting?: boolean
 	style?: React.CSSProperties
 	transition?: string | null
-	transform?: Transform | null
-	value?: React.ReactNode
 	wrapperStyle?: React.CSSProperties
-	index?: number
-	renderItem?: () => React.ReactElement | null
+	value: React.ReactNode
+	onRemove?(): void
+	renderItem?(args: {
+		dragOverlay: boolean
+		dragging: boolean
+		sorting: boolean
+		index: number | undefined
+		fadeIn: boolean
+		listeners: DraggableSyntheticListeners
+		ref: React.Ref<HTMLElement>
+		style: React.CSSProperties | undefined
+		transform: Props['transform']
+		transition: Props['transition']
+		value: Props['value']
+	}): React.ReactElement | null
 }
 
 export const Item = React.memo(
-	React.forwardRef<HTMLLIElement, Props>((props, ref) => {
-		const theme = useTheme()
-
-		const {
-			dragOverlay,
-			dragging,
-			disabled,
-			fadeIn,
-			handleProps,
-			listeners,
-			onRemove,
-			style,
-			transition,
-			transform,
-			value,
-			wrapperStyle,
-		} = props
-
-		useEffect(() => {
-			if (dragOverlay) {
+	React.forwardRef<HTMLLIElement, Props>(
+		(
+			{
+				color,
+				dragOverlay,
+				dragging,
+				disabled,
+				fadeIn,
+				handle,
+				index,
+				listeners,
+				renderItem,
+				sorting,
+				style,
+				transition,
+				transform,
+				value,
+				wrapperStyle,
+				...props
+			},
+			ref
+		) => {
+			const theme = useTheme()
+			useEffect(() => {
+				if (!dragOverlay) return
 				document.body.style.cursor = 'grabbing'
 				return () => {
 					document.body.style.cursor = ''
 				}
-			}
-		}, [dragOverlay])
+			}, [dragOverlay])
 
-		return (
-			<Box
-				component="li"
-				ref={ref}
-				sx={wrapperStyles({
+			return renderItem ? (
+				renderItem({
+					dragOverlay: Boolean(dragOverlay),
+					dragging: Boolean(dragging),
+					sorting: Boolean(sorting),
+					index,
+					fadeIn: Boolean(fadeIn),
+					listeners,
+					ref,
+					style,
 					transform,
-					fadeIn,
-					dragOverlay,
 					transition,
-					wrapperStyle,
-				})}
-				style={wrapperStyle}
-			>
-				<Box
-					sx={itemStyles({
-						transform,
-						dragging,
-						dragOverlay,
-						disabled,
-						theme,
-					})}
-					style={style}
+					value,
+				})
+			) : (
+				<li
+					ref={ref}
+					className={`Wrapper
+						${fadeIn ? 'fadeIn' : ''}
+						${sorting ? 'sorting' : ''}
+						${dragOverlay ? 'dragOverlay' : ''}
+					`}
+					style={
+						{
+							...wrapperStyle,
+							transition: [transition, wrapperStyle?.transition]
+								.filter(Boolean)
+								.join(', '),
+							'--translate-x': transform
+								? `${Math.round(transform.x)}px`
+								: undefined,
+							'--translate-y': transform
+								? `${Math.round(transform.y)}px`
+								: undefined,
+							'--scale-x': transform?.scaleX
+								? `${transform.scaleX}`
+								: undefined,
+							'--scale-y': transform?.scaleY
+								? `${transform.scaleY}`
+								: undefined,
+							'--index': index,
+							'--color': color,
+						} as React.CSSProperties
+					}
 				>
-					<Box sx={handleContainerStyles}>
-						<Handle
-							{...handleProps}
-							{...listeners}
-							style={{ padding: '10px' }}
-						/>
-					</Box>
-
-					<Box sx={valueStyles}>{value}</Box>
-
-					<Box className="Remove" sx={removeContainerStyles}>
-						{onRemove && <Remove onClick={onRemove} />}
-					</Box>
-				</Box>
-			</Box>
-		)
-	})
+					<div
+						className={`Item
+							${dragging ? 'dragging' : ''}
+							${handle ? 'withHandle' : ''}
+							${dragOverlay ? 'dragOverlay' : ''}
+							${disabled ? 'disabled' : ''}
+							${color ? 'color' : ''}
+						`}
+						style={{
+							...style,
+							backgroundColor: theme.palette.boardPage.blackBackgroundCard,
+							color: theme.palette.boardPage.textGray,
+							width: '100%',
+						}}
+						data-cypress="draggable-item"
+						{...(!handle ? listeners : undefined)}
+						{...props}
+						tabIndex={!handle ? 0 : undefined}
+					>
+						{value}
+					</div>
+				</li>
+			)
+		}
+	)
 )

@@ -5,105 +5,120 @@ export const ContainerHeaderStyles = (theme: Theme): SxProps<Theme> => ({
 	padding: '5px 20px',
 	paddingRight: '8px',
 	alignItems: 'center',
+	justifyContent: 'space-between',
 	backgroundColor: theme.palette.boardPage.blackBackgroundList,
 	borderTopLeftRadius: 5,
 	borderTopRightRadius: 5,
 	borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
+	'&:hover .actions > *': {
+		opacity: 1,
+	},
 })
-
-export const ContainerDragHandleStyles = {
-	marginLeft: '-12px',
-}
-
-export const ContainerLabelStyles = {
-	width: '100%',
-	textAlign: 'left',
-}
 
 export const ContainerActionsStyles = {
 	display: 'flex',
+	'& > *:first-child:not(:last-child)': {
+		opacity: 1,
+	},
+
+	'& > *:first-child:not(:last-child):focus-visible': {
+		opacity: 1,
+	},
 }
 
-export const ContainerStyles = {
+interface ContainerProps {
+	horizontal?: boolean
+	hover?: boolean
+	shadow?: boolean
+	unstyled?: boolean
+	placeholder?: boolean
+	theme: Theme
+	style?: React.CSSProperties
+}
+
+export const ContainerStyles = ({
+	horizontal,
+	hover,
+	shadow,
+	unstyled,
+	placeholder,
+	theme,
+	style,
+}: ContainerProps) => ({
 	display: 'flex',
 	flexDirection: 'column',
-	gridAutoRows: 'max-content',
 	overflow: 'hidden',
 	boxSizing: 'border-box',
-	appearance: 'none',
 	outline: 'none',
-	minWidth: '272px',
 	margin: '10px',
-	borderRadius: '5px',
-	minHeight: '200px',
+	marginBottom: '0',
+	maxWidth: '272px',
+	width: '100%',
+	flexShrink: 0,
+	borderTopLeftRadius: '12px',
+	borderTopRightRadius: '12px',
+	borderBottomLeftRadius: '0',
+	borderBottomRightRadius: '0',
 	transition: 'background-color 350ms ease',
-	border: '1px solid rgba(0, 0, 0, 0.05)',
+	backgroundColor: 'transparent',
 	fontSize: '1em',
-	'& ul': {
-		display: 'grid',
+
+	// ---- ul ----
+	'& ol': {
+		boxSizing: 'border-box',
+		display: 'flex',
+		flexDirection: 'column',
 		gap: '10px',
-		gridTemplateColumns: 'repeat(var(--columns, 1), 1fr)',
+		padding: '0 8px 8px 8px',
 		listStyle: 'none',
-		padding: '4px 8px',
-		margin: 0,
+		overflowY: 'auto',
+		width: '100%',
+		overflowX: 'hidden',
+		backgroundColor: theme.palette.boardPage.blackBackgroundList,
+		scrollbarWidth: 'thin', // Adjust width for vertical scrollbars
+		scrollbarColor: '#6e6f68 #101204',
 	},
+
+	// ---- placeholder ----
+	...(placeholder && {
+		justifyContent: 'center',
+		alignItems: 'center',
+		cursor: 'pointer',
+		color: 'rgba(0, 0, 0, 0.5)',
+		backgroundColor: 'transparent',
+		borderStyle: 'dashed',
+		borderColor: 'rgba(0, 0, 0, 0.08)',
+		'&:hover': {
+			borderColor: 'rgba(0, 0, 0, 0.15)',
+		},
+	}),
+
+	// ---- hover ----
+	...(hover && {
+		border: `3px solid ${theme.palette.primary.main}`,
+	}),
+
+	// ---- unstyled ----
+	...(unstyled && {
+		overflow: 'visible',
+		backgroundColor: 'transparent !important',
+		border: 'none !important',
+	}),
+
+	// ---- horizontal ----
+	...(horizontal && {
+		width: '100%',
+	}),
+
+	// ---- shadow ----
+	...(shadow && {
+		boxShadow: '0 1px 10px 0 rgba(34, 33, 81, 0.1)',
+	}),
+
+	// ---- focus-visible ----
 	'&:focus-visible': {
 		borderColor: 'transparent',
-		boxShadow: '0 0 0 2px rgba(255, 255, 255, 0), 0 0px 0px 2px #4c9ffe',
+		boxShadow: `0 0 0 2px transparent, 0 0 0 2px ${theme.palette.primary.main}`,
 	},
-	'&::-webkit-scrollbar': {
-		display: 'none',
-	},
-	'&::-webkit-scrollbar-track': {
-		display: 'none',
-	},
-	'&::-webkit-scrollbar-thumb': {
-		display: 'none',
-	},
-}
-
-export const unstyledStyles = {
-	overflow: 'visible',
-	backgroundColor: 'transparent !important',
-	border: 'none !important',
-}
-
-export const horizontalStyles = {
-	width: '100%',
-	'& ul': {
-		gridAutoFlow: 'column',
-	},
-}
-
-export const placeholderStyles = {
-	justifyContent: 'center',
-	alignItems: 'center',
-	cursor: 'pointer',
-	color: 'rgba(0, 0, 0, 0.5)',
-	backgroundColor: 'transparent',
-	borderStyle: 'dashed',
-	borderColor: 'rgba(0, 0, 0, 0.08)',
-	'&:hover': {
-		borderColor: 'rgba(0, 0, 0, 0.15)',
-	},
-}
-
-export const scrollableStyles = {
-	'& ul': {
-		overflowY: 'auto',
-	},
-}
-
-export const shadowStyles = {
-	boxShadow: '0 1px 10px 0 rgba(34, 33, 81, 0.1)',
-}
-
-export const ContainerListStyles = (theme: Theme): SxProps<Theme> => ({
-	backgroundColor: theme.palette.boardPage.blackBackgroundList,
-	borderBottomLeftRadius: '5px',
-	borderBottomRightRadius: '5px',
-	padding: '4px',
-	'& .MuiList-root': {
-		padding: '4px',
-	},
+	...style,
 })

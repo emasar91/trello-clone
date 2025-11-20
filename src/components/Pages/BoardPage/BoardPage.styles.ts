@@ -7,4 +7,6 @@ export const BoardsPageContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	justifyContent: 'center',
 	alignItems: 'start',
 	height: 'calc(100vh - 48px)',
+	scrollbarWidth: 'thin', // Adjust width for vertical scrollbars
+	scrollbarColor: '#6e6f68 #101204',
 })

@@ -1,148 +1,129 @@
-import React, { forwardRef, useState } from 'react'
-import { Box, List, useTheme, IconButton } from '@mui/material'
-import type { ButtonProps } from '../Button'
-
-import { Handle } from '../Handle'
-import { Remove } from '../Remove'
-
+// Container.tsx
+import React, { forwardRef, useState, useEffect, useCallback } from 'react'
+import { Handle, Remove } from '../Item'
 import {
 	ContainerActionsStyles,
-	ContainerDragHandleStyles,
 	ContainerHeaderStyles,
-	ContainerLabelStyles,
-	ContainerListStyles,
 	ContainerStyles,
-	horizontalStyles,
-	placeholderStyles,
-	scrollableStyles,
-	shadowStyles,
-	unstyledStyles,
 } from './Container.styles'
+import { Box, useTheme } from '@mui/material'
 import { Plus } from '@/public/assets/icons/Plus'
+import CreateCardInput from '../TextAreaCustom/TextAreaCustom'
 
-export interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props {
 	children: React.ReactNode
-	columns?: number
 	label?: string
-	horizontal?: boolean
-	hover?: boolean
-	handleProps?: ButtonProps
-	scrollable?: boolean
-	shadow?: boolean
-	placeholder?: boolean
-	unstyled?: boolean
-	onClick?(): void
+	style?: React.CSSProperties
 	onRemove?(): void
-
-	// NUEVO ➜ callback para guardar cambios
-	onRename?: (newName: string) => void
+	onRename?: (title: string) => void // 👈 NUEVO
+	handleprops?: React.ButtonHTMLAttributes<HTMLButtonElement>
+	onCreateCard?: (value: string) => void
 }
 
-export const Container = forwardRef<HTMLDivElement, Props>(
+export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 	(
-		{
-			children,
-			columns = 1,
-			handleProps,
-			horizontal,
-			onClick,
-			onRemove,
-			label,
-			placeholder,
-			scrollable,
-			shadow,
-			unstyled,
-			onRename,
-			...props
-		}: Props,
+		{ children, label, onRename, onRemove, handleprops, style, onCreateCard },
 		ref
 	) => {
 		const theme = useTheme()
-
 		const [editing, setEditing] = useState(false)
-		const [tempName, setTempName] = useState(label || '')
+		const [value, setValue] = useState(label ?? '')
 
-		const save = () => {
-			setEditing(false)
-			if (tempName.trim() && tempName !== label) {
-				onRename?.(tempName.trim())
-			} else {
-				setTempName(label || '')
+		// 👈 Si el label cambia desde afuera, actualizamos el input
+		useEffect(() => {
+			setValue(label ?? '')
+		}, [label])
+
+		const finish = () => {
+			if (onRename && value.trim()) {
+				onRename(value.trim())
 			}
-		}
-
-		const cancel = () => {
 			setEditing(false)
-			setTempName(label || '')
 		}
 
+		const [showAddCard, setShowAddCard] = useState(false)
+		const handleOpenAddCard = useCallback(() => setShowAddCard(true), [])
+		const handleCloseAddCard = useCallback(() => setShowAddCard(false), [])
+
+		const handleCreateCard = useCallback(
+			(value: string) => {
+				onCreateCard?.(value)
+				handleCloseAddCard()
+			},
+			[onCreateCard, handleCloseAddCard]
+		)
 		return (
 			<Box
-				{...props}
-				ref={ref}
-				sx={{
-					...ContainerStyles,
-					'--columns': columns,
-					...(unstyled ? unstyledStyles : {}),
-					...(horizontal ? horizontalStyles : {}),
-					...(placeholder ? placeholderStyles : {}),
-					...(scrollable ? scrollableStyles : {}),
-					...(shadow ? shadowStyles : {}),
-				}}
-				onClick={onClick}
-				tabIndex={onClick ? 0 : undefined}
+				ref={ref as React.Ref<HTMLDivElement>}
+				sx={ContainerStyles({ theme, style })}
 			>
-				{label ? (
-					<Box sx={ContainerHeaderStyles(theme)}>
-						<Box sx={ContainerDragHandleStyles}>
-							<Handle {...handleProps} />
-						</Box>
+				<Box sx={ContainerHeaderStyles(theme)} onClick={() => setEditing(true)}>
+					{editing ? (
+						<input
+							autoFocus
+							value={value}
+							onChange={(e) => setValue(e.target.value)}
+							onBlur={finish}
+							onKeyDown={(e) => e.key === 'Enter' && finish()}
+							// 👇 Para que NO active drag mientras escribís
+							onMouseDown={(e) => e.stopPropagation()}
+							style={{ width: '100%', fontSize: '1rem', border: 'none' }}
+						/>
+					) : (
+						label
+					)}
 
-						{/* === TÍTULO O INPUT EDITABLE === */}
-						<Box sx={ContainerLabelStyles}>
-							{editing ? (
-								<input
-									autoFocus
-									value={tempName}
-									onChange={(e) => setTempName(e.target.value)}
-									onBlur={save}
-									onKeyDown={(e) => {
-										if (e.key === 'Enter') save()
-										if (e.key === 'Escape') cancel()
-									}}
-									style={{
-										width: '100%',
-										fontSize: 'inherit',
-										fontWeight: 'inherit',
-										border: '1px solid #ccc',
-										borderRadius: 4,
-										padding: '2px 4px',
-									}}
-								/>
-							) : (
-								label
-							)}
-						</Box>
-
-						{/* === ICONOS DE ACCIÓN === */}
-						<Box sx={ContainerActionsStyles}>
-							{/* Botón para editar */}
-							<IconButton size="small" onClick={() => setEditing(true)}>
-								<Plus />
-							</IconButton>
-
-							{/* Botón para borrar */}
-							{onRemove && <Remove onClick={onRemove} />}
+					<Box sx={ContainerActionsStyles}>
+						{onRemove && <Remove onClick={onRemove} />}
+						{/* 👈 Drag solo si NO estás editando */}
+						{!editing && <Handle {...handleprops} />}
+					</Box>
+				</Box>
+				<ol>{children}</ol>
+				{!showAddCard ? (
+					<Box
+						onClick={handleOpenAddCard}
+						sx={{
+							cursor: 'pointer',
+							userSelect: 'none',
+							display: 'flex',
+							alignItems: 'center',
+							gap: 1,
+							width: '272px',
+							backgroundColor: theme.palette.boardPage.blackBackgroundList,
+							borderBottomRightRadius: '12px',
+							borderBottomLeftRadius: '12px',
+						}}
+					>
+						<Box
+							sx={{
+								display: 'flex',
+								alignItems: 'center',
+								borderRadius: '8px',
+								fontSize: 14,
+								padding: '8px 12px',
+								margin: '0 8px 8px 8px',
+								gap: 1,
+								width: '100%',
+								'&:hover': {
+									backgroundColor: '#2a2c21',
+								},
+							}}
+						>
+							<Plus />
+							Agregar tarjeta
 						</Box>
 					</Box>
-				) : null}
-
-				<List component="ul" sx={ContainerListStyles(theme)}>
-					{children}
-				</List>
+				) : (
+					<CreateCardInput
+						type="card"
+						onCreate={handleCreateCard}
+						onCancel={handleCloseAddCard}
+					/>
+				)}
 			</Box>
 		)
 	}
 )
 
-Container.displayName = 'Container'
+export default Container.displayName = 'Container'
