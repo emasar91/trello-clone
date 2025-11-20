@@ -585,12 +585,15 @@ export function MultipleContainers({
 
 	function getNextContainerId() {
 		const containerIds = Object.keys(items)
-		const lastContainerId = containerIds[containerIds.length - 1] ?? 'A'
-		// If lastContainerId is single char we increment char, otherwise append char
-		if (lastContainerId.length === 1) {
-			return String.fromCharCode(lastContainerId.charCodeAt(0) + 1)
-		}
-		return `${lastContainerId}1`
+
+		const lastId =
+			containerIds
+				.map((id) => parseInt(id.replace('col-', ''), 10))
+				.filter((n) => !isNaN(n)) // solo números válidos
+				.sort((a, b) => a - b)
+				.pop() || 0
+
+		return `col-${lastId + 1}`
 	}
 }
 /* -------------------------
