@@ -18,7 +18,7 @@ import { CreateWorkSpaceIcon } from '@/public/assets/icons/CreateWorkSpaceIcon'
 import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
 
 import { DARK_THEME, LIGHT_THEME } from '@/constants'
-import ThemeMenu from '../ThemeMenu/ThemMenu'
+import ThemeMenu from '../ThemeMenu/ThemeMenu'
 import {
 	AccountMenuAvatarContainerStyle,
 	AccountMenuAvatarIconStyle,
@@ -38,12 +38,14 @@ import { useState } from 'react'
 import ModalCreateWorkspace from '../ModalCreateWorkspace/ModalCreateWorkspace'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
+import { useThemeStore } from '@/context/useTheme'
 
 export default function AccountMenu() {
 	const { user } = useAuth()
 	const locale = useLocale()
 	const t = useTranslations('NavbarLogged')
 	const theme = useTheme()
+	const toggleTheme = useThemeStore((s) => s.toggleTheme)
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 	const [themeAnchorEl, setThemeAnchorEl] = React.useState<null | HTMLElement>(
@@ -75,7 +77,7 @@ export default function AccountMenu() {
 
 	const handleSelect = (value: typeof LIGHT_THEME | typeof DARK_THEME) => {
 		setSelectedTheme(value)
-		console.log('🌞 Tema elegido:', value)
+		toggleTheme()
 	}
 
 	const [openModal, setOpenModal] = useState(false)
