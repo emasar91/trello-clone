@@ -130,11 +130,18 @@ function DroppableContainer({
 		</div>
 	)
 }
+
 type CardItem = {
 	id: UniqueIdentifier // número o string único
 	text: string // el valor escrito por el usuario
 }
-type Items = Record<UniqueIdentifier, CardItem[]>
+
+type ColumnData = {
+	title: string
+	items: CardItem[]
+}
+
+type Items = Record<UniqueIdentifier, ColumnData>
 
 interface Props {
 	adjustScale?: boolean
@@ -176,19 +183,11 @@ export function MultipleContainers({
 	wrapperStyle = () => ({}),
 	renderItem,
 }: Props) {
-	// items state: same shape que tenías (id -> array of item ids)
 	const [items, setItems] = useState<Items>(initialItems)
-	// container order
 	const [containers, setContainers] = useState(
-		Object.keys(items) as UniqueIdentifier[]
+		Object.keys(initialItems) as UniqueIdentifier[]
 	)
-	// titles per column (id -> title). Inicialmente title = id si no hay otro
-	const [columnTitles, setColumnTitles] = useState<Record<string, string>>(() =>
-		Object.keys(items).reduce((acc, key) => {
-			acc[key] = key
-			return acc
-		}, {} as Record<string, string>)
-	)
+	// NOTE: titles now live inside items[containerId].title
 
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
 	const lastOverId = useRef<UniqueIdentifier | null>(null)
@@ -196,7 +195,7 @@ export function MultipleContainers({
 	const isSortingContainer =
 		activeId != null ? containers.includes(activeId) : false
 
-	/* collision detection (same que antes) */
+	/* collision detection (adaptado al nuevo shape) */
 	const collisionDetectionStrategy: CollisionDetection = useCallback(
 		(args) => {
 			// 1) Si arrastramos una columna (activeId está en items) → ser más permisivo usando rectIntersection
@@ -207,7 +206,7 @@ export function MultipleContainers({
 				if (overId != null) {
 					// Si el droppable es una columna que contiene items, intentar elegir el item más cercano dentro
 					if (overId in items) {
-						const containerItems = items[overId]
+						const containerItems = items[overId].items
 						if (containerItems.length > 0) {
 							const containerItemIds = containerItems.map((ci) => ci.id)
 							const closest = closestCenter({
@@ -244,7 +243,7 @@ export function MultipleContainers({
 
 			if (overId != null) {
 				if (overId in items) {
-					const containerItems = items[overId]
+					const containerItems = items[overId].items
 					if (containerItems.length > 0) {
 						const containerItemIds = containerItems.map((ci) => ci.id)
 						const closest = closestCenter({
@@ -286,7 +285,7 @@ export function MultipleContainers({
 		}
 
 		return Object.keys(items).find((key) =>
-			items[key].some((item) => item.id === id)
+			items[key].items.some((item) => item.id === id)
 		)
 	}
 
@@ -297,7 +296,7 @@ export function MultipleContainers({
 			return -1
 		}
 
-		const index = items[container].findIndex((item) => item.id === id)
+		const index = items[container].items.findIndex((item) => item.id === id)
 
 		return index
 	}
@@ -321,7 +320,7 @@ export function MultipleContainers({
 		? [restrictToVerticalAxis]
 		: [restrictToHorizontalAxis]
 
-	/* DnD handlers (mantengo tu lógica, ligeramente extractada) */
+	/* DnD handlers (mantengo tu lógica, adaptada al nuevo tipo) */
 	return (
 		<DndContext
 			sensors={sensors}
@@ -351,8 +350,8 @@ export function MultipleContainers({
 
 				if (activeContainer !== overContainer) {
 					setItems((items) => {
-						const activeItems = items[activeContainer]
-						const overItems = items[overContainer]
+						const activeItems = items[activeContainer].items
+						const overItems = items[overContainer].items
 						const overIndex = overItems.findIndex((i) => i.id === overId)
 						const activeIndex = activeItems.findIndex((i) => i.id === active.id)
 
@@ -365,7 +364,7 @@ export function MultipleContainers({
 								over &&
 								active.rect.current.translated &&
 								active.rect.current.translated.top >
-									over.rect.top + over.rect.height
+									(over?.rect.top ?? 0) + (over?.rect.height ?? 0)
 
 							const modifier = isBelowOverItem ? 1 : 0
 
@@ -377,17 +376,20 @@ export function MultipleContainers({
 
 						return {
 							...items,
-							[activeContainer]: items[activeContainer].filter(
-								(item) => item.id !== active.id
-							),
-							[overContainer]: [
-								...items[overContainer].slice(0, newIndex),
-								items[activeContainer][activeIndex],
-								...items[overContainer].slice(
-									newIndex,
-									items[overContainer].length
+							[activeContainer]: {
+								...items[activeContainer],
+								items: items[activeContainer].items.filter(
+									(item) => item.id !== active.id
 								),
-							],
+							},
+							[overContainer]: {
+								...items[overContainer],
+								items: [
+									...overItems.slice(0, newIndex),
+									items[activeContainer].items[activeIndex],
+									...overItems.slice(newIndex, overItems.length),
+								],
+							},
 						}
 					})
 				}
@@ -419,9 +421,12 @@ export function MultipleContainers({
 				if (overId === TRASH_ID) {
 					setItems((items) => ({
 						...items,
-						[activeContainer]: items[activeContainer].filter(
-							(item) => item.id !== activeId
-						),
+						[activeContainer]: {
+							...items[activeContainer],
+							items: items[activeContainer].items.filter(
+								(item) => item.id !== activeId
+							),
+						},
 					}))
 					setActiveId(null)
 					return
@@ -432,22 +437,29 @@ export function MultipleContainers({
 
 					unstable_batchedUpdates(() => {
 						setContainers((containers) => [...containers, newContainerId])
-						setItems((items) => ({
-							...items,
-							[activeContainer]: items[activeContainer].filter(
-								(item) => item.id !== activeId
-							),
-							[newContainerId]: [
-								items[activeContainer][
-									items[activeContainer].findIndex((i) => i.id === active.id)
-								],
-							],
-						}))
-						// set default title for the new column
-						setColumnTitles((prev) => ({
-							...prev,
-							[newContainerId]: String(newContainerId),
-						}))
+						setItems((items) => {
+							// mover el item desde activeContainer -> newContainerId
+							const itemIndex = items[activeContainer].items.findIndex(
+								(i) => i.id === active.id
+							)
+							const movingItem =
+								itemIndex >= 0 ? items[activeContainer].items[itemIndex] : null
+
+							return {
+								...items,
+								[activeContainer]: {
+									...items[activeContainer],
+									items: items[activeContainer].items.filter(
+										(item) => item.id !== active.id
+									),
+								},
+								[newContainerId]: {
+									title: String(newContainerId),
+									items: movingItem ? [movingItem] : [],
+								},
+							}
+						})
+						// set default title for the new column is already set above
 						setActiveId(null)
 					})
 					return
@@ -456,21 +468,24 @@ export function MultipleContainers({
 				const overContainer = findContainer(overId)
 
 				if (overContainer) {
-					const activeIndex = items[activeContainer].findIndex(
+					const activeIndex = items[activeContainer].items.findIndex(
 						(i) => i.id === active.id
 					)
-					const overIndex = items[overContainer].findIndex(
+					const overIndex = items[overContainer].items.findIndex(
 						(i) => i.id === overId
 					)
 
 					if (activeIndex !== overIndex) {
 						setItems((items) => ({
 							...items,
-							[overContainer]: arrayMove(
-								items[overContainer],
-								activeIndex,
-								overIndex
-							),
+							[overContainer]: {
+								...items[overContainer],
+								items: arrayMove(
+									items[overContainer].items,
+									activeIndex,
+									overIndex
+								),
+							},
 						}))
 					}
 				}
@@ -497,14 +512,17 @@ export function MultipleContainers({
 						<DroppableContainer
 							key={containerId}
 							id={containerId}
-							label={columnTitles[String(containerId)] ?? String(containerId)}
-							items={(items[containerId] ?? []).map((item) => item.id)}
+							label={items[containerId]?.title ?? String(containerId)}
+							items={(items[containerId]?.items ?? []).map((item) => item.id)}
 							style={containerStyle}
 							onRemove={() => handleRemove(containerId)}
 							onRename={(newTitle: string) =>
-								setColumnTitles((prev) => ({
+								setItems((prev) => ({
 									...prev,
-									[String(containerId)]: newTitle.trim(),
+									[containerId]: {
+										...prev[containerId],
+										title: newTitle.trim(),
+									},
 								}))
 							}
 							onCreateCard={(value: string) => {
@@ -514,15 +532,18 @@ export function MultipleContainers({
 								}
 								setItems((prev) => ({
 									...prev,
-									[containerId]: [...(prev[containerId] ?? []), newItem],
+									[containerId]: {
+										...prev[containerId],
+										items: [...(prev[containerId]?.items ?? []), newItem],
+									},
 								}))
 							}}
 						>
 							<SortableContext
-								items={(items[containerId] ?? []).map((i) => i.id)}
+								items={(items[containerId]?.items ?? []).map((i) => i.id)}
 								strategy={verticalListSortingStrategy}
 							>
-								{items[containerId].map((value, index) => {
+								{(items[containerId]?.items ?? []).map((value, index) => {
 									return (
 										<SortableItem
 											disabled={isSortingContainer}
@@ -560,11 +581,6 @@ export function MultipleContainers({
 			delete next[containerID]
 			return next
 		})
-		setColumnTitles((prev) => {
-			const next = { ...prev }
-			delete next[containerID]
-			return next
-		})
 	}
 
 	function handleAddColumnWithTitle(title?: string) {
@@ -574,11 +590,10 @@ export function MultipleContainers({
 			setContainers((containers) => [...containers, newContainerId])
 			setItems((items) => ({
 				...items,
-				[newContainerId]: [],
-			}))
-			setColumnTitles((t) => ({
-				...t,
-				[newContainerId]: title?.trim() ?? String(newContainerId),
+				[newContainerId]: {
+					title: title?.trim() ?? String(newContainerId),
+					items: [],
+				},
 			}))
 		})
 	}

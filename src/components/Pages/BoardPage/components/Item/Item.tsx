@@ -125,6 +125,7 @@ export const Item = React.memo(
 							backgroundColor: theme.palette.boardPage.blackBackgroundCard,
 							color: theme.palette.boardPage.textGray,
 							width: '100%',
+							whiteSpace: 'break-spaces',
 						}}
 						data-cypress="draggable-item"
 						{...(!handle ? listeners : undefined)}

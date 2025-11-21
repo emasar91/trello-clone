@@ -22,8 +22,6 @@ function BoardPage({
 	const { setBoard, board, setColumns, columns, setCardsForColumn } =
 		useStoreBoard()
 
-	console.log(board, columns)
-
 	const { loading } = useBoardData({
 		boardname,
 		workspace,
@@ -38,11 +36,11 @@ function BoardPage({
 	if (loading) return <div>Cargando...</div>
 	return (
 		<Box component={'main'} sx={BoardsPageContainerStyle(theme)}>
-			{board.image && (
+			{board?.image && (
 				<Box
 					component="img"
-					src={board.image}
-					alt={board.name}
+					src={board?.image}
+					alt={board?.name}
 					sx={{
 						position: 'absolute',
 						top: 48,

@@ -1,5 +1,7 @@
+import { IBoard, IBoardStore } from '@/types/boards'
+import { ICard } from '@/types/card'
+import { IColumn } from '@/types/columns'
 import { create } from 'zustand'
-import { IBoard, IBoardStore, IColumn, ICard } from '@/types'
 
 const initialBoard: IBoard = {
 	_id: '',
@@ -13,78 +15,26 @@ const initialBoard: IBoard = {
 	lastOpenedAt: null,
 }
 
-export const useStoreBoard = create<IBoardStore>((set, get) => ({
+const initialValue: IBoardStore = {
 	board: initialBoard,
 	columns: [],
-	cardsByColumn: {}, // { columnId: ICard[] }
-	cardsOrder: {}, // { columnId: string[] }
+	cardsByColumn: {},
+	setBoard: () => {},
+	setColumns: () => {},
+	setCardsForColumn: () => {},
+}
 
+export const useStoreBoard = create<IBoardStore>((set) => ({
+	...initialValue,
 	// 👉 Set board
-	setBoard: (board) => set({ board }),
+	setBoard: (board: IBoard) => set({ board }),
 
 	// 👉 Set columns
-	setColumns: (columns) => set({ columns }),
+	setColumns: (columns: IColumn[]) => set({ columns }),
 
 	// 👉 Set cards (y su orden)
-	setCardsForColumn: (columnId, cards) =>
+	setCardsForColumn: (columnId: string, cards: ICard[]) =>
 		set((state) => ({
 			cardsByColumn: { ...state.cardsByColumn, [columnId]: cards },
-			cardsOrder: {
-				...state.cardsOrder,
-				[columnId]: cards.map((c) => c._id.toString()),
-			},
 		})),
-
-	// 👉 Mover card dentro o entre columnas (DnD)
-	moveCard: (cardId, fromColumnId, toColumnId, newIndex) => {
-		const { cardsByColumn, cardsOrder } = get()
-
-		const fromCards = cardsByColumn[fromColumnId] || []
-		const toCards = cardsByColumn[toColumnId] || []
-
-		const fromOrder = cardsOrder[fromColumnId] || []
-		const toOrder = cardsOrder[toColumnId] || []
-
-		// 1. Sacar la card
-		const movedCard = fromCards.find((c) => c._id.toString() === cardId)
-		if (!movedCard) return
-
-		// 2. Actualizar arrays
-		const updatedFromCards = fromCards.filter(
-			(c) => c._id.toString() !== cardId
-		)
-		const updatedFromOrder = fromOrder.filter((id) => id !== cardId)
-
-		const updatedToCards = [...toCards]
-		updatedToCards.splice(newIndex, 0, { ...movedCard, columnId: toColumnId })
-
-		const updatedToOrder = [...toOrder]
-		updatedToOrder.splice(newIndex, 0, cardId)
-
-		// 3. Setear estado final
-		set({
-			cardsByColumn: {
-				...cardsByColumn,
-				[fromColumnId]: updatedFromCards,
-				[toColumnId]: updatedToCards,
-			},
-			cardsOrder: {
-				...cardsOrder,
-				[fromColumnId]: updatedFromOrder,
-				[toColumnId]: updatedToOrder,
-			},
-		})
-	},
-
-	// 👉 (Opcional) actualizar contenido de una card
-	updateCardContent: (columnId, cardId, newData) => {
-		set((state) => ({
-			cardsByColumn: {
-				...state.cardsByColumn,
-				[columnId]: state.cardsByColumn[columnId].map((card) =>
-					card._id === cardId ? { ...card, ...newData } : card
-				),
-			},
-		}))
-	},
 }))

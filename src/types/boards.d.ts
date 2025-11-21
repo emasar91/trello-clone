@@ -17,5 +17,4 @@ interface IBoardStore {
 	setBoard: (board: IBoard) => void
 	setColumns: (columns: IColumn[]) => void
 	setCardsForColumn: (columnId: string, cards: ICard[]) => void
-	moveCard: (cardId: string, fromColumnId: string, toColumnId: string) => void
 }

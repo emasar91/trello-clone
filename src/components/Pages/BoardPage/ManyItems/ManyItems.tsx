@@ -1,46 +1,48 @@
 import { useStoreBoard } from '@/context/useStoreBoard'
 import { MultipleContainers } from '../MultipleContainers/MultipleContainers'
 import { useMemo } from 'react'
+import { ICard } from '@/types/card'
 
 export const ManyItems = () => {
-	const initials = {
-		B: [
-			{ id: 'B1', text: 'B1' },
-			{ id: 'B2', text: 'B2' },
-			{ id: 'B3', text: 'B3' },
-		],
-	}
+	const { columns, cardsByColumn } = useStoreBoard()
 
-	const itemsFormatted = () => {
-		const { columns, cardsByColumn } = useStoreBoard()
+	const itemsFormatted = useMemo(() => {
+		const result: Record<
+			string,
+			{
+				title: string
+				items: { id: string; text: string }[]
+			}
+		> = {}
 
-		// 👇 transforma los datos en formato { A: [{ id, text }], B: [...] }
-		const items = useMemo(() => {
-			const result: Record<string, { id: string; text: string }[]> = {}
+		// 🔹 Ordenar columnas por order antes de mapear
+		const orderedColumns = [...columns].sort((a, b) => a.order - b.order)
 
-			columns.forEach((col) => {
-				const colId = col.name.toString()
-				const cards = cardsByColumn[colId] || []
+		orderedColumns.forEach((col) => {
+			const colId = col._id.toString()
+			let cards = cardsByColumn[colId] || []
 
-				result[colId] = cards.map((card) => ({
+			// 🔹 Ordenar cards por order
+			cards = [...cards].sort((a, b) => a.order - b.order)
+
+			result[colId] = {
+				title: col.name,
+				items: cards.map((card: ICard) => ({
 					id: card._id.toString(),
-					text: card.title || 'Sin título',
-				}))
-			})
+					text: card.title,
+				})),
+			}
+		})
 
-			return result
-		}, [columns, cardsByColumn])
+		return result
+	}, [columns, cardsByColumn])
 
-		return items
-	}
-
-	const items = itemsFormatted()
 	return (
 		<MultipleContainers
 			containerStyle={{
 				maxHeight: '85vh',
 			}}
-			items={items}
+			items={itemsFormatted}
 			scrollable
 		/>
 	)

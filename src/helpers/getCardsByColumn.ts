@@ -8,7 +8,7 @@ export async function getCardsByColumn(columnId: string | ObjectId) {
 	const cardsCollection = db.collection<ICard>('cards')
 
 	const columnObjectId = toObjectId(columnId) as ObjectId
-
+	console.log(columnId)
 	const cards = await cardsCollection
 		.find({ columnId: columnObjectId })
 		.sort({ order: 1 })
