@@ -31,7 +31,7 @@
 	width: 100%;
 	border-radius: 8px;
 	white-space: nowrap;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 .Wrapper.fadeIn {
