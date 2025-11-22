@@ -45,6 +45,8 @@ import type { Props as ItemProps } from '../components/Item/Item'
 import CreateCardInput from '../components/TextAreaCustom/TextAreaCustom'
 import { Box } from '@mui/material'
 import { Plus } from '@/public/assets/icons/Plus'
+import { useStoreBoard } from '@/context/useStoreBoard'
+import { useCreateCard } from '@/hooks/useCreateCard'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -131,17 +133,17 @@ function DroppableContainer({
 	)
 }
 
-type CardItem = {
+export type CardItem = {
 	id: UniqueIdentifier // número o string único
 	text: string // el valor escrito por el usuario
 }
 
-type ColumnData = {
+export type ColumnData = {
 	title: string
 	items: CardItem[]
 }
 
-type Items = Record<UniqueIdentifier, ColumnData>
+export type Items = Record<UniqueIdentifier, ColumnData>
 
 interface Props {
 	adjustScale?: boolean
@@ -311,16 +313,25 @@ export function MultipleContainers({
 	}
 
 	useEffect(() => {
+		console.log(items, 'ITEMS')
+		console.log(containers, 'containers')
+	}, [items, containers])
+
+	useEffect(() => {
 		requestAnimationFrame(() => {
 			recentlyMovedToNewContainer.current = false
 		})
 	}, [items])
+
 	const isDraggingCard = activeId && !containers.includes(activeId)
 	const modifiers = isDraggingCard
 		? [restrictToVerticalAxis]
 		: [restrictToHorizontalAxis]
+	const {
+		board: { _id: boardId, userId },
+	} = useStoreBoard()
+	const { createCardInColumn } = useCreateCard({ setItems, boardId, userId }) // 👈 UNA sola vez
 
-	/* DnD handlers (mantengo tu lógica, adaptada al nuevo tipo) */
 	return (
 		<DndContext
 			sensors={sensors}
@@ -436,7 +447,11 @@ export function MultipleContainers({
 					const newContainerId = getNextContainerId()
 
 					unstable_batchedUpdates(() => {
-						setContainers((containers) => [...containers, newContainerId])
+						setContainers((containers) => {
+							const newContainers = [...containers, newContainerId]
+							console.log(newContainers, 'columnas')
+							return newContainers
+						})
 						setItems((items) => {
 							// mover el item desde activeContainer -> newContainerId
 							const itemIndex = items[activeContainer].items.findIndex(
@@ -444,8 +459,7 @@ export function MultipleContainers({
 							)
 							const movingItem =
 								itemIndex >= 0 ? items[activeContainer].items[itemIndex] : null
-
-							return {
+							const newItems = {
 								...items,
 								[activeContainer]: {
 									...items[activeContainer],
@@ -458,6 +472,8 @@ export function MultipleContainers({
 									items: movingItem ? [movingItem] : [],
 								},
 							}
+							console.log(newItems)
+							return newItems
 						})
 						// set default title for the new column is already set above
 						setActiveId(null)
@@ -476,17 +492,20 @@ export function MultipleContainers({
 					)
 
 					if (activeIndex !== overIndex) {
-						setItems((items) => ({
-							...items,
-							[overContainer]: {
-								...items[overContainer],
-								items: arrayMove(
-									items[overContainer].items,
-									activeIndex,
-									overIndex
-								),
-							},
-						}))
+						setItems((prev) => {
+							const newItems = {
+								...prev,
+								[overContainer]: {
+									...prev[overContainer],
+									items: arrayMove(
+										prev[overContainer].items,
+										activeIndex,
+										overIndex
+									),
+								},
+							}
+							return newItems
+						})
 					}
 				}
 
@@ -525,19 +544,8 @@ export function MultipleContainers({
 									},
 								}))
 							}
-							onCreateCard={(value: string) => {
-								const newItem: CardItem = {
-									id: `${String(containerId)}-${Date.now()}`,
-									text: value,
-								}
-								setItems((prev) => ({
-									...prev,
-									[containerId]: {
-										...prev[containerId],
-										items: [...(prev[containerId]?.items ?? []), newItem],
-									},
-								}))
-							}}
+							onCreateCard={createCardInColumn(containerId)}
+							// onCreateCard={() => {}}
 						>
 							<SortableContext
 								items={(items[containerId]?.items ?? []).map((i) => i.id)}
