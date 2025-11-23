@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import type { IColumn } from '@/types/columns'
 import { getBoardColumns } from '@/helpers/getBoardColumns'
 import { createColumn } from '@/helpers/createColumnInBoard'
+import { updateColumnName } from '@/helpers/updateColumnName'
 
 export async function GET(request: Request) {
 	try {
@@ -53,6 +54,44 @@ export async function POST(request: Request) {
 		console.error('Error en POST /api/columns/create:', error)
 		return NextResponse.json(
 			{ error: err.message || 'Error interno del servidor' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function PUT(request: Request) {
+	try {
+		const { columnId, newName } = await request.json()
+
+		if (!columnId || !newName?.trim()) {
+			return NextResponse.json(
+				{ error: 'columnId y newName son requeridos' },
+				{ status: 400 }
+			)
+		}
+
+		// 🔥 Llamamos a DB
+		const updatedColumn = await updateColumnName(columnId, newName.trim())
+
+		console.log('📌 updatedColumn =>', updatedColumn)
+
+		// ⚠ Control correcto
+		// 🟢 AHORA — si llega null es porque no se modificó nada
+		if (!updatedColumn) {
+			return NextResponse.json(
+				{ error: 'No se pudo actualizar la columna' },
+				{ status: 400 }
+			)
+		}
+
+		return NextResponse.json(
+			{ success: true, column: updatedColumn },
+			{ status: 200 }
+		)
+	} catch (error) {
+		console.error('❌ Error en PUT /api/columns/update:', error)
+		return NextResponse.json(
+			{ error: 'Error interno del servidor' },
 			{ status: 500 }
 		)
 	}

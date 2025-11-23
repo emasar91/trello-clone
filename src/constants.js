@@ -502,4 +502,5 @@ export const API = {
 	createColumnUrl: '/api/columns',
 	getCardsByColumnUrl: '/api/cards',
 	createCardUrl: '/api/cards',
+	updateColumnUrl: '/api/columns',
 }

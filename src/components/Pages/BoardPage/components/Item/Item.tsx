@@ -5,7 +5,6 @@ import './item.css'
 import { useTheme } from '@mui/material/styles'
 export interface Props {
 	dragOverlay?: boolean
-	color?: string
 	disabled?: boolean
 	dragging?: boolean
 	handle?: boolean
@@ -39,7 +38,6 @@ export const Item = React.memo(
 	React.forwardRef<HTMLLIElement, Props>(
 		(
 			{
-				color,
 				dragOverlay,
 				dragging,
 				disabled,
@@ -108,7 +106,6 @@ export const Item = React.memo(
 								? `${transform.scaleY}`
 								: undefined,
 							'--index': index,
-							'--color': color,
 						} as React.CSSProperties
 					}
 				>
@@ -118,7 +115,6 @@ export const Item = React.memo(
 							${handle ? 'withHandle' : ''}
 							${dragOverlay ? 'dragOverlay' : ''}
 							${disabled ? 'disabled' : ''}
-							${color ? 'color' : ''}
 						`}
 						style={{
 							...style,

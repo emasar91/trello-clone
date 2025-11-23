@@ -47,6 +47,9 @@ import { Box } from '@mui/material'
 import { Plus } from '@/public/assets/icons/Plus'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import { useCreateCard } from '@/hooks/useCreateCard'
+import { useCreateColumn } from '@/hooks/useCreateColumn'
+import { useAuth } from '@/context/useAuthContext'
+import { useUpdateColumnName } from '@/hooks/useUpdateColumnName'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -330,7 +333,17 @@ export function MultipleContainers({
 	const {
 		board: { _id: boardId, userId },
 	} = useStoreBoard()
-	const { createCardInColumn } = useCreateCard({ setItems, boardId, userId }) // 👈 UNA sola vez
+	const { user } = useAuth()
+	const { createCardInColumn } = useCreateCard({ setItems, boardId, userId })
+
+	const { createColumnInBoard } = useCreateColumn({
+		setItems,
+		setContainers,
+		boardId,
+		user: user!,
+	})
+
+	const { updateColumnName } = useUpdateColumnName({ setItems })
 
 	return (
 		<DndContext
@@ -535,17 +548,8 @@ export function MultipleContainers({
 							items={(items[containerId]?.items ?? []).map((item) => item.id)}
 							style={containerStyle}
 							onRemove={() => handleRemove(containerId)}
-							onRename={(newTitle: string) =>
-								setItems((prev) => ({
-									...prev,
-									[containerId]: {
-										...prev[containerId],
-										title: newTitle.trim(),
-									},
-								}))
-							}
+							onRename={updateColumnName(containerId)}
 							onCreateCard={createCardInColumn(containerId)}
-							// onCreateCard={() => {}}
 						>
 							<SortableContext
 								items={(items[containerId]?.items ?? []).map((i) => i.id)}
@@ -592,18 +596,9 @@ export function MultipleContainers({
 	}
 
 	function handleAddColumnWithTitle(title?: string) {
-		const newContainerId = getNextContainerId()
-
-		unstable_batchedUpdates(() => {
-			setContainers((containers) => [...containers, newContainerId])
-			setItems((items) => ({
-				...items,
-				[newContainerId]: {
-					title: title?.trim() ?? String(newContainerId),
-					items: [],
-				},
-			}))
-		})
+		if (title?.trim()) {
+			createColumnInBoard()(title.trim())
+		}
 	}
 
 	function getNextContainerId() {
@@ -690,7 +685,6 @@ function SortableItem({
 					isDragOverlay: false,
 				}),
 			}}
-			color={getColor(id)}
 			transition={transition}
 			transform={transform}
 			fadeIn={mountedWhileDragging}
@@ -756,22 +750,4 @@ function ColumnAdder({ onCreate }: { onCreate: (title: string) => void }) {
 			onCancel={() => setShow(false)}
 		/>
 	)
-}
-
-/* -------------------------
-   utils
-   ------------------------- */
-function getColor(id: UniqueIdentifier) {
-	switch (String(id)[0]) {
-		case 'A':
-			return '#7193f1'
-		case 'B':
-			return '#ffda6c'
-		case 'C':
-			return '#00bcd4'
-		case 'D':
-			return '#ef769f'
-	}
-
-	return undefined
 }

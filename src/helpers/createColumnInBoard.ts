@@ -23,12 +23,22 @@ export async function createColumn(
 
 	const createdAt = new Date()
 
+	let finalOrder = order
+	if (finalOrder === undefined) {
+		const lastColumn = await columnsCollection
+			.find({ boardId: boardObjectId })
+			.sort({ order: -1 })
+			.limit(1)
+			.toArray()
+
+		finalOrder = lastColumn.length > 0 ? lastColumn[0].order + 1 : 0
+	}
 	// 1️⃣ Crear la nueva columna
 	const newColumn: IColumn = {
 		boardId: boardObjectId,
 		userId: user?._id,
 		name,
-		order: order ?? 0,
+		order: finalOrder,
 		createdAt,
 		updatedAt: null,
 	}
