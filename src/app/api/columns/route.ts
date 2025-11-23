@@ -73,8 +73,6 @@ export async function PUT(request: Request) {
 		// 🔥 Llamamos a DB
 		const updatedColumn = await updateColumnName(columnId, newName.trim())
 
-		console.log('📌 updatedColumn =>', updatedColumn)
-
 		// ⚠ Control correcto
 		// 🟢 AHORA — si llega null es porque no se modificó nada
 		if (!updatedColumn) {

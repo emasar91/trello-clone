@@ -1,14 +1,13 @@
 // hooks/useUpdateColumnName.ts
 import { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { API } from '@/constants'
+import { UniqueIdentifier } from '@dnd-kit/core'
 import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 
 interface Props {
-	setItems: React.Dispatch<
-		React.SetStateAction<Record<string, { title: string; items: Items[] }>>
-	>
+	setItems: React.Dispatch<React.SetStateAction<Items>>
 }
 
 export const useUpdateColumnName = ({ setItems }: Props) => {
@@ -16,7 +15,7 @@ export const useUpdateColumnName = ({ setItems }: Props) => {
 	const didFetch = useRef(false)
 
 	const updateColumnName = useCallback(
-		(containerId: string) => async (newName: string) => {
+		(containerId: UniqueIdentifier) => async (newName: string) => {
 			if (didFetch.current) return
 			if (!newName?.trim()) return
 
