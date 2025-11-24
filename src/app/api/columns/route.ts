@@ -61,7 +61,7 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
 	try {
-		const { columnId, newName } = await request.json()
+		const { columnId, newName, boardId } = await request.json()
 
 		if (!columnId || !newName?.trim()) {
 			return NextResponse.json(
@@ -71,7 +71,11 @@ export async function PUT(request: Request) {
 		}
 
 		// 🔥 Llamamos a DB
-		const updatedColumn = await updateColumnName(columnId, newName.trim())
+		const updatedColumn = await updateColumnName(
+			columnId,
+			newName.trim(),
+			boardId
+		)
 
 		// ⚠ Control correcto
 		// 🟢 AHORA — si llega null es porque no se modificó nada

@@ -27,12 +27,12 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 	) => {
 		const theme = useTheme()
 		const [editing, setEditing] = useState(false)
-		const [value, setValue] = useState(label ?? '')
+		const [value, setValue] = useState('')
 
 		// 👈 Si el label cambia desde afuera, actualizamos el input
 		useEffect(() => {
 			setValue(label ?? '')
-		}, [label])
+		}, [editing])
 
 		const finish = () => {
 			if (onRename && value.trim()) {

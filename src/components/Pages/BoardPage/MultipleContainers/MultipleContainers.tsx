@@ -50,6 +50,7 @@ import { useCreateCard } from '@/hooks/useCreateCard'
 import { useCreateColumn } from '@/hooks/useCreateColumn'
 import { useAuth } from '@/context/useAuthContext'
 import { useUpdateColumnName } from '@/hooks/useUpdateColumnName'
+import { toast } from 'react-toastify'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -334,7 +335,12 @@ export function MultipleContainers({
 		board: { _id: boardId, userId },
 	} = useStoreBoard()
 	const { user } = useAuth()
-	const { createCardInColumn } = useCreateCard({ setItems, boardId, userId })
+	const { createCardInColumn } = useCreateCard({
+		setItems,
+		boardId,
+		userId,
+		items,
+	})
 
 	const { createColumnInBoard } = useCreateColumn({
 		setItems,
@@ -343,7 +349,7 @@ export function MultipleContainers({
 		user: user!,
 	})
 
-	const { updateColumnName } = useUpdateColumnName({ setItems })
+	const { updateColumnName } = useUpdateColumnName({ setItems, items })
 
 	return (
 		<DndContext
@@ -462,7 +468,6 @@ export function MultipleContainers({
 					unstable_batchedUpdates(() => {
 						setContainers((containers) => {
 							const newContainers = [...containers, newContainerId]
-							console.log(newContainers, 'columnas')
 							return newContainers
 						})
 						setItems((items) => {
@@ -485,7 +490,6 @@ export function MultipleContainers({
 									items: movingItem ? [movingItem] : [],
 								},
 							}
-							console.log(newItems)
 							return newItems
 						})
 						// set default title for the new column is already set above
@@ -548,7 +552,7 @@ export function MultipleContainers({
 							items={(items[containerId]?.items ?? []).map((item) => item.id)}
 							style={containerStyle}
 							onRemove={() => handleRemove(containerId)}
-							onRename={updateColumnName(containerId)}
+							onRename={updateColumnName(containerId, boardId)}
 							onCreateCard={createCardInColumn(containerId)}
 						>
 							<SortableContext
@@ -596,6 +600,14 @@ export function MultipleContainers({
 	}
 
 	function handleAddColumnWithTitle(title?: string) {
+		const titleAlreadyExists = Object.values(items).some(
+			(container) => container.title === title
+		)
+
+		if (titleAlreadyExists) {
+			toast.error('Ya existe una columna con el mismo nombre')
+			return
+		}
 		if (title?.trim()) {
 			createColumnInBoard()(title.trim())
 		}
