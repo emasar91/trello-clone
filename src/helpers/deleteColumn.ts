@@ -26,13 +26,15 @@ export async function deleteColumnAndCards(
 	await cardsCollection.deleteMany({ columnId: toObjectId(columnId) })
 
 	// 3️⃣ Eliminar columna
-	await columnsCollection.deleteOne({ _id: toObjectId(columnId) })
+	await columnsCollection.deleteOne({ _id: toObjectId(columnId) as ObjectId })
 
 	// 4️⃣ Actualizar tablero — remover columna del board
+	const columnObjectId = toObjectId(columnId)
 	await boardsCollection.updateOne(
-		{ _id: toObjectId(boardId) },
+		{ _id: toObjectId(boardId) as ObjectId },
 		{
-			$pull: { columns: toObjectId(columnId) },
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			$pull: { columns: columnObjectId as any },
 			$set: { updatedAt: new Date() },
 		}
 	)

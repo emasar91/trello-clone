@@ -1,7 +1,13 @@
 'use client'
 
 import React from 'react'
-import { BoardsPageContainerStyle } from './BoardPage.styles'
+import {
+	BoardContentStyle,
+	BoardImageStyle,
+	BoardsPageContainerStyle,
+	ErrorContainerStyle,
+	LoadingContainerStyle,
+} from './BoardPage.styles'
 import { Box, CircularProgress, useTheme } from '@mui/material'
 import { useAuth } from '@/context/useAuthContext'
 import { useStoreBoard } from '@/context/useStoreBoard'
@@ -34,36 +40,17 @@ function BoardPage({
 	})
 
 	if (error) {
-		return (
-			<Box
-				sx={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					gap: 2,
-				}}
-			>
-				{error}
-			</Box>
-		)
+		return <Box sx={ErrorContainerStyle}>{error}</Box>
 	}
 
 	if (loading)
 		return (
-			<Box
-				sx={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					gap: 2,
-				}}
-			>
+			<Box sx={LoadingContainerStyle}>
 				<CircularProgress />
 				Cargando tablero...
 			</Box>
 		)
 
-	console.log('🚀 ~ BoardPage ~ loading:', loading)
 	return (
 		<Box component={'main'} sx={BoardsPageContainerStyle(theme)}>
 			{board?.image && (
@@ -71,32 +58,10 @@ function BoardPage({
 					component="img"
 					src={board?.image}
 					alt={board?.name}
-					sx={{
-						position: 'absolute',
-						top: 48,
-						left: 0,
-						width: '100%',
-						height: 'calc(100vh - 48px)',
-						objectFit: 'cover',
-						filter: 'brightness(0.8)', // opcional, para oscurecer un poco el fondo
-					}}
+					sx={BoardImageStyle}
 				/>
 			)}
-
-			{/* Contenido encima */}
-			<Box
-				sx={{
-					position: 'relative',
-					overflowX: 'auto',
-					zIndex: 1,
-					width: '100%',
-					height: '100%',
-					display: 'flex',
-					flexDirection: 'row',
-					p: 2,
-					color: 'white',
-				}}
-			>
+			<Box sx={BoardContentStyle}>
 				<ManyItems />
 			</Box>
 			<NotificationContainer />
