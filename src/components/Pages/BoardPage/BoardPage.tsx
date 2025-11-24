@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { BoardsPageContainerStyle } from './BoardPage.styles'
-import { Box, useTheme } from '@mui/material'
+import { Box, CircularProgress, useTheme } from '@mui/material'
 import { useAuth } from '@/context/useAuthContext'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import { ManyItems } from './ManyItems/ManyItems'
@@ -22,7 +22,7 @@ function BoardPage({
 	const { setBoard, board, setColumns, columns, setCardsForColumn } =
 		useStoreBoard()
 
-	const { loading } = useBoardData({
+	const { loading, error } = useBoardData({
 		boardname,
 		workspace,
 		userUid: user?.uid,
@@ -33,7 +33,37 @@ function BoardPage({
 		setCardsForColumn,
 	})
 
-	if (loading) return <div>Cargando...</div>
+	if (error) {
+		return (
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: 2,
+				}}
+			>
+				{error}
+			</Box>
+		)
+	}
+
+	if (loading)
+		return (
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: 2,
+				}}
+			>
+				<CircularProgress />
+				Cargando tablero...
+			</Box>
+		)
+
+	console.log('🚀 ~ BoardPage ~ loading:', loading)
 	return (
 		<Box component={'main'} sx={BoardsPageContainerStyle(theme)}>
 			{board?.image && (

@@ -67,6 +67,12 @@ declare module '@mui/material/styles' {
 			blackBackgroundCard: string
 			textGray: string
 		}
+		modal: {
+			backgroundColor: string
+			textColor: string
+			buttonColor: string
+			buttonHoverColor: string
+		}
 	}
 	interface PaletteOptions {
 		navbar?: {
@@ -132,6 +138,12 @@ declare module '@mui/material/styles' {
 			blackBackgroundList: string
 			blackBackgroundCard: string
 			textGray: string
+		}
+		modal: {
+			backgroundColor: string
+			textColor: string
+			buttonColor: string
+			buttonHoverColor: string
 		}
 	}
 }
@@ -211,6 +223,12 @@ export const lightTheme = createTheme({
 			blackBackgroundList: colorDark.blackBackgroundList,
 			blackBackgroundCard: colorDark.blackCard,
 			textGray: colorDark.grayTextCard,
+		},
+		modal: {
+			backgroundColor: colorDark.blackCard,
+			textColor: colorDark.grayTextCard,
+			buttonColor: colorDark.brandPrimary,
+			buttonHoverColor: colorDark.brandPrimaryHover,
 		},
 	},
 	typography: {
@@ -351,6 +369,12 @@ export const darkTheme = createTheme({
 			blackBackgroundList: colorDark.blackBackgroundList,
 			blackBackgroundCard: colorDark.blackCard,
 			textGray: colorDark.grayTextCard,
+		},
+		modal: {
+			backgroundColor: colorDark.blackCard,
+			textColor: colorDark.grayTextCard,
+			buttonColor: colorDark.brandPrimary,
+			buttonHoverColor: colorDark.brandPrimaryHover,
 		},
 	},
 	typography: {

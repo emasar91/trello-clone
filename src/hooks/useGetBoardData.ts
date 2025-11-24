@@ -1,10 +1,11 @@
+// useBoardData.ts
+
 import { useEffect, useRef, useState, useCallback } from 'react'
 import axios from 'axios'
 import { API } from '@/constants'
 import { IColumn } from '@/types/columns'
 import { ICard } from '@/types/card'
 import { IBoard } from '@/types/boards'
-import { toast } from 'react-toastify'
 
 type UseBoardDataProps = {
 	boardname: string
@@ -28,6 +29,7 @@ export const useBoardData = ({
 	setCardsForColumn,
 }: UseBoardDataProps) => {
 	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState<string | null>(null) // 👈 Nuevo
 
 	/** 🔹 Fetch Board */
 	const fetchBoard = useCallback(async () => {
@@ -40,15 +42,16 @@ export const useBoardData = ({
 				)}&boardName=${encodeURIComponent(boardname)}`,
 				{ withCredentials: true }
 			)
-			setBoard(data.board)
-		} catch (err) {
-			if (axios.isAxiosError(err)) {
-				toast.error(
-					err.response?.data?.message || 'Error al obtener el tablero'
-				)
-			} else {
-				toast.error('Error inesperado')
+
+			// 🛑 VALIDACIÓN: si no existe el tablero → error inmediato
+			if (!data?.board || !data.board._id) {
+				setError('No se encontró el tablero — Está roto o fue eliminado')
+				return
 			}
+
+			setBoard(data.board)
+		} catch {
+			setError('Error al obtener el tablero')
 		}
 	}, [boardname, workspace, userUid, setBoard])
 
@@ -59,20 +62,23 @@ export const useBoardData = ({
 				`${API.getBoardColumnsUrl}?boardId=${board._id}`,
 				{ withCredentials: true }
 			)
-			setColumns(data.columns)
-		} catch (err) {
-			if (axios.isAxiosError(err)) {
-				toast.error(
-					err.response?.data?.message || 'Error al obtener las columnas'
-				)
-			} else {
-				toast.error('Error inesperado')
+
+			// 🛑 VALIDACIÓN: tablero sin columnas = tablero roto
+			if (!data?.columns || data.columns.length === 0) {
+				setError('El tablero está roto — No tiene columnas')
+				return
 			}
+
+			setColumns(data.columns)
+		} catch {
+			setError('Error al obtener las columnas')
 		}
 	}, [board._id, setColumns])
 
 	/** 🔹 Fetch Cards por columna */
 	const fetchCards = useCallback(async () => {
+		if (columns.length === 0) return // Ya está manejado arriba
+
 		try {
 			await Promise.all(
 				columns.map(async (column) => {
@@ -80,22 +86,16 @@ export const useBoardData = ({
 						`${API.getCardsByColumnUrl}?columnId=${column._id}`,
 						{ withCredentials: true }
 					)
-					setCardsForColumn(column._id.toString(), data.cards)
+					setCardsForColumn(column._id.toString(), data.cards || [])
 				})
 			)
-			setLoading(false) // 👈 SOLO ACÁ
-		} catch (err) {
-			if (axios.isAxiosError(err)) {
-				toast.error(
-					err.response?.data?.message || 'Error al obtener las tarjetas'
-				)
-			} else {
-				toast.error('Error inesperado')
-			}
+			setLoading(false)
+		} catch {
+			setError('Error al obtener las tarjetas')
 		}
 	}, [columns, setCardsForColumn])
 
-	/** ⛔ Control Strict Mode */
+	/** Strict Mode Control */
 	const boardFetched = useRef(false)
 	useEffect(() => {
 		if (!boardFetched.current && boardname && workspace) {
@@ -106,19 +106,19 @@ export const useBoardData = ({
 
 	const columnsFetched = useRef(false)
 	useEffect(() => {
-		if (board._id && !columnsFetched.current) {
+		if (board._id && !columnsFetched.current && !error) {
 			columnsFetched.current = true
 			fetchColumns()
 		}
-	}, [board._id, fetchColumns])
+	}, [board._id, fetchColumns, error])
 
 	const cardsFetched = useRef(false)
 	useEffect(() => {
-		if (columns.length > 0 && !cardsFetched.current) {
+		if (columns.length > 0 && !cardsFetched.current && !error) {
 			cardsFetched.current = true
 			fetchCards()
 		}
-	}, [columns, fetchCards])
+	}, [columns, fetchCards, error])
 
-	return { loading }
+	return { loading, error } // 👈 IMPORTANTÍSIMO
 }

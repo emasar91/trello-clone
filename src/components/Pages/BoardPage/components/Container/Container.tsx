@@ -35,6 +35,10 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 		}, [editing, label])
 
 		const finish = () => {
+			if (value.trim() === label) {
+				setEditing(false)
+				return
+			}
 			if (onRename && value.trim()) {
 				onRename(value.trim())
 			}
@@ -57,7 +61,10 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 				ref={ref as React.Ref<HTMLDivElement>}
 				sx={ContainerStyles({ theme, style })}
 			>
-				<Box sx={ContainerHeaderStyles(theme)} onClick={() => setEditing(true)}>
+				<Box
+					sx={ContainerHeaderStyles(theme)}
+					onDoubleClick={() => setEditing(true)}
+				>
 					{editing ? (
 						<input
 							autoFocus

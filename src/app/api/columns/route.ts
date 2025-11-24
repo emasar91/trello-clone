@@ -3,6 +3,7 @@ import type { IColumn } from '@/types/columns'
 import { getBoardColumns } from '@/helpers/getBoardColumns'
 import { createColumn } from '@/helpers/createColumnInBoard'
 import { updateColumnName } from '@/helpers/updateColumnName'
+import { deleteColumnAndCards } from '@/helpers/deleteColumn'
 
 export async function GET(request: Request) {
 	try {
@@ -94,6 +95,26 @@ export async function PUT(request: Request) {
 		console.error('❌ Error en PUT /api/columns/update:', error)
 		return NextResponse.json(
 			{ error: 'Error interno del servidor' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function DELETE(req: Request) {
+	try {
+		const { columnId, boardId } = await req.json()
+
+		if (!columnId || !boardId) {
+			return NextResponse.json({ error: 'Faltan datos' }, { status: 400 })
+		}
+
+		await deleteColumnAndCards(columnId, boardId)
+
+		return NextResponse.json({ success: true })
+	} catch (error) {
+		console.error('❌ Error eliminando columna:', error)
+		return NextResponse.json(
+			{ error: 'Error al eliminar columna' },
 			{ status: 500 }
 		)
 	}

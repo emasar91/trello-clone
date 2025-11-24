@@ -51,6 +51,8 @@ import { useCreateColumn } from '@/hooks/useCreateColumn'
 import { useAuth } from '@/context/useAuthContext'
 import { useUpdateColumnName } from '@/hooks/useUpdateColumnName'
 import { toast } from 'react-toastify'
+import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
+import { useDeleteColumn } from '@/hooks/useDeleteColumn'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -277,6 +279,7 @@ export function MultipleContainers({
 		},
 		[activeId, items]
 	)
+	const { deleteColumn, loading } = useDeleteColumn({ setItems })
 
 	const [clonedItems, setClonedItems] = useState<Items | null>(null)
 	const sensors = useSensors(
@@ -348,8 +351,21 @@ export function MultipleContainers({
 		boardId,
 		user: user!,
 	})
+	const [openModal, setOpenModal] = useState(false)
+	const [selectedContainerId, setSelectedContainerId] =
+		useState<UniqueIdentifier | null>(null)
 
 	const { updateColumnName } = useUpdateColumnName({ setItems, items })
+
+	const handleRemoveColumns = (containerId: UniqueIdentifier) => {
+		const itemsContainer = items[containerId]
+		if (itemsContainer?.items.length) {
+			setSelectedContainerId(containerId)
+			setOpenModal(true)
+		} else {
+			handleRemove(containerId)
+		}
+	}
 
 	return (
 		<DndContext
@@ -551,7 +567,7 @@ export function MultipleContainers({
 							label={items[containerId]?.title ?? String(containerId)}
 							items={(items[containerId]?.items ?? []).map((item) => item.id)}
 							style={containerStyle}
-							onRemove={() => handleRemove(containerId)}
+							onRemove={() => handleRemoveColumns(containerId)}
 							onRename={updateColumnName(containerId, boardId)}
 							onCreateCard={createCardInColumn(containerId)}
 						>
@@ -586,17 +602,34 @@ export function MultipleContainers({
 						handleAddColumnWithTitle(title)
 					}}
 				/>
+				<ModalConfirm
+					open={openModal}
+					onClose={() => setOpenModal(false)}
+					onConfirm={handleRemove}
+					title="¿Estás seguro de eliminar esta columna?"
+					message="Tambien se eliminaran las tarjetas que contiene, esta acción no se puede deshacer?"
+					selectedContainerId={selectedContainerId}
+					loading={loading}
+				/>
 			</div>
 		</DndContext>
 	)
 
-	function handleRemove(containerID: UniqueIdentifier) {
+	function handleRemove(containerID: UniqueIdentifier | null) {
+		if (!containerID) return
+		if (containers.length === 1) {
+			toast.error('El tablero no puede quedar sin columnas')
+			return
+		}
+
+		deleteColumn(containerID, boardId)
 		setContainers((containers) => containers.filter((id) => id !== containerID))
 		setItems((prev) => {
 			const next = { ...prev }
 			delete next[containerID]
 			return next
 		})
+		setOpenModal(false)
 	}
 
 	function handleAddColumnWithTitle(title?: string) {
