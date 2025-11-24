@@ -94,7 +94,7 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 				}
 			}
 		},
-		[setItems, boardId, userId]
+		[setItems, boardId, userId, items]
 	)
 
 	return { createCardInColumn, loading }

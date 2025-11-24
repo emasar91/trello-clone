@@ -32,7 +32,7 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 		// 👈 Si el label cambia desde afuera, actualizamos el input
 		useEffect(() => {
 			setValue(label ?? '')
-		}, [editing])
+		}, [editing, label])
 
 		const finish = () => {
 			if (onRename && value.trim()) {
