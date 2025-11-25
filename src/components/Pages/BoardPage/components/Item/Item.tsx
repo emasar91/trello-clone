@@ -3,6 +3,7 @@ import type { DraggableSyntheticListeners } from '@dnd-kit/core'
 import type { Transform } from '@dnd-kit/utilities'
 import './item.css'
 import { useTheme } from '@mui/material/styles'
+import { EyeIcon } from '@/public/assets/icons/EyeIcon'
 export interface Props {
 	dragOverlay?: boolean
 	disabled?: boolean
@@ -19,6 +20,7 @@ export interface Props {
 	wrapperStyle?: React.CSSProperties
 	value: React.ReactNode
 	onRemove?(): void
+	setOpenModalItem: React.Dispatch<React.SetStateAction<boolean>>
 	renderItem?(args: {
 		dragOverlay: boolean
 		dragging: boolean
@@ -52,6 +54,7 @@ export const Item = React.memo(
 				transform,
 				value,
 				wrapperStyle,
+				setOpenModalItem,
 				...props
 			},
 			ref
@@ -82,6 +85,7 @@ export const Item = React.memo(
 			) : (
 				<li
 					ref={ref}
+					onDoubleClick={() => alert('double click')}
 					className={`Wrapper
 						${fadeIn ? 'fadeIn' : ''}
 						${sorting ? 'sorting' : ''}
@@ -106,6 +110,11 @@ export const Item = React.memo(
 								? `${transform.scaleY}`
 								: undefined,
 							'--index': index,
+							display: 'flex',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							backgroundColor: theme.palette.boardPage.blackBackgroundCard,
+							color: theme.palette.boardPage.textGray,
 						} as React.CSSProperties
 					}
 				>
@@ -130,6 +139,15 @@ export const Item = React.memo(
 					>
 						{value}
 					</div>
+					<span
+						onClick={(e) => {
+							e.stopPropagation()
+							setOpenModalItem(true)
+						}}
+						style={{ cursor: 'pointer', padding: '0 10px' }}
+					>
+						<EyeIcon />
+					</span>
 				</li>
 			)
 		}

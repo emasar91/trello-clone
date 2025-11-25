@@ -53,6 +53,7 @@ import { useUpdateColumnName } from '@/hooks/useUpdateColumnName'
 import { toast } from 'react-toastify'
 import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
 import { useDeleteColumn } from '@/hooks/useDeleteColumn'
+import ModalItem from '../components/Item/components/ModalItem/ModalItem'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -589,6 +590,7 @@ export function MultipleContainers({
 											renderItem={renderItem}
 											containerId={containerId}
 											getIndex={getIndex}
+											selectedItemId={value.id}
 										/>
 									)
 								})}
@@ -669,6 +671,7 @@ interface SortableItemProps {
 	handle: boolean
 	disabled?: boolean
 	displayValue: React.ReactNode
+	selectedItemId: UniqueIdentifier
 	style(args: {
 		value: UniqueIdentifier
 		index: number
@@ -694,6 +697,7 @@ function SortableItem({
 	containerId,
 	getIndex,
 	wrapperStyle,
+	selectedItemId,
 }: SortableItemProps) {
 	const {
 		setNodeRef,
@@ -709,33 +713,43 @@ function SortableItem({
 	})
 	const mounted = useMountStatus()
 	const mountedWhileDragging = isDragging && !mounted
+	const [openModalItem, setOpenModalItem] = useState(false)
 
 	return (
-		<Item
-			ref={disabled ? undefined : setNodeRef}
-			value={displayValue}
-			dragging={isDragging}
-			sorting={isSorting}
-			handle={handle}
-			index={index}
-			wrapperStyle={wrapperStyle({ index })}
-			style={{
-				...style({
-					index,
-					value: id,
-					isDragging,
-					isSorting,
-					overIndex: over ? getIndex(over.id) : overIndex,
-					containerId,
-					isDragOverlay: false,
-				}),
-			}}
-			transition={transition}
-			transform={transform}
-			fadeIn={mountedWhileDragging}
-			listeners={listeners}
-			renderItem={renderItem}
-		/>
+		<>
+			<Item
+				ref={disabled ? undefined : setNodeRef}
+				value={displayValue}
+				dragging={isDragging}
+				sorting={isSorting}
+				handle={handle}
+				index={index}
+				wrapperStyle={wrapperStyle({ index })}
+				style={{
+					...style({
+						index,
+						value: id,
+						isDragging,
+						isSorting,
+						overIndex: over ? getIndex(over.id) : overIndex,
+						containerId,
+						isDragOverlay: false,
+					}),
+				}}
+				transition={transition}
+				transform={transform}
+				fadeIn={mountedWhileDragging}
+				listeners={listeners}
+				renderItem={renderItem}
+				setOpenModalItem={setOpenModalItem}
+			/>
+			<ModalItem
+				open={openModalItem}
+				onClose={() => setOpenModalItem(false)}
+				cardId={selectedItemId}
+				columnId={containerId}
+			/>
+		</>
 	)
 }
 

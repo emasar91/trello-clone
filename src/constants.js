@@ -492,6 +492,15 @@ export const AVATAR_BACKGROUND = [
 	'rgba(153, 102, 255, 1)',
 ]
 
+export const TAGS = [
+	'#216e4e',
+	'#7f5f01',
+	'#9e4c00',
+	'#ae2e24',
+	'#803fa5',
+	'#1558bc',
+]
+
 export const API = {
 	createWorkspacesUrl: '/api/workspaces',
 	getWorkspacesUrl: '/api/workspaces',
