@@ -41,7 +41,6 @@ import { coordinateGetter as multipleContainersCoordinateGetter } from './multip
 import { Item, Container, ContainerProps } from '../components'
 import type { Props as ItemProps } from '../components/Item/Item'
 
-/* Reuse your CreateCardInput component */
 import CreateCardInput from '../components/TextAreaCustom/TextAreaCustom'
 import { Box } from '@mui/material'
 import { Plus } from '@/public/assets/icons/Plus'
@@ -54,6 +53,7 @@ import { toast } from 'react-toastify'
 import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
 import { useDeleteColumn } from '@/hooks/useDeleteColumn'
 import ModalItem from '../components/Item/components/ModalItem/ModalItem'
+import { MultipleContainersAddColumnStyles } from './MultipleContainers.styles'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -773,26 +773,7 @@ function ColumnAdder({ onCreate }: { onCreate: (title: string) => void }) {
 
 	if (!show) {
 		return (
-			<Box
-				onClick={() => setShow(true)}
-				sx={{
-					cursor: 'pointer',
-					userSelect: 'none',
-					backgroundColor: '#ffffff3d',
-					padding: '8px 12px',
-					fontSize: 14,
-					marginTop: '12px',
-					display: 'inline-flex',
-					alignItems: 'center',
-					gap: '8px',
-					borderRadius: '8px',
-					width: '272px',
-					height: '44px',
-					'&:hover': {
-						backgroundColor: 'rgba(255, 255, 255, 0.20)',
-					},
-				}}
-			>
+			<Box onClick={() => setShow(true)} sx={MultipleContainersAddColumnStyles}>
 				<Plus />
 				Añade otra lista
 			</Box>
