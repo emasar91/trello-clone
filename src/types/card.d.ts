@@ -8,18 +8,11 @@ export interface ICardHistory {
 }
 
 export interface ICardComment {
-	authorId: ObjectId
+	authorId: string | ObjectId
 	text: string
 	createdAt: Date
 	editedAt: Date | null
-}
-
-export interface ICardModification {
-	field: string
-	oldValue: string | object | null
-	newValue: string | object | null
-	at: Date
-	byUserId: ObjectId | null
+	authorName: string | ObjectId
 }
 
 export interface ICard {
@@ -34,6 +27,5 @@ export interface ICard {
 	updatedAt: Date | null
 	history: ICardHistory[]
 	comments: ICardComment[]
-	modifications: ICardModification[]
 	order: number
 }

@@ -54,6 +54,7 @@ import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
 import { useDeleteColumn } from '@/hooks/useDeleteColumn'
 import ModalItem from '../components/Item/components/ModalItem/ModalItem'
 import { MultipleContainersAddColumnStyles } from './MultipleContainers.styles'
+import type { ICardComment } from '@/types/card'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -143,6 +144,7 @@ function DroppableContainer({
 export type CardItem = {
 	id: UniqueIdentifier // número o string único
 	text: string // el valor escrito por el usuario
+	comments?: ICardComment[] // comentarios de la tarjeta
 }
 
 export type ColumnData = {
@@ -591,6 +593,8 @@ export function MultipleContainers({
 											containerId={containerId}
 											getIndex={getIndex}
 											selectedItemId={value.id}
+											setItems={setItems}
+											items={items}
 										/>
 									)
 								})}
@@ -672,6 +676,8 @@ interface SortableItemProps {
 	disabled?: boolean
 	displayValue: React.ReactNode
 	selectedItemId: UniqueIdentifier
+	setItems: React.Dispatch<React.SetStateAction<Items>>
+	items: Items
 	style(args: {
 		value: UniqueIdentifier
 		index: number
@@ -698,6 +704,8 @@ function SortableItem({
 	getIndex,
 	wrapperStyle,
 	selectedItemId,
+	setItems,
+	items,
 }: SortableItemProps) {
 	const {
 		setNodeRef,
@@ -748,6 +756,8 @@ function SortableItem({
 				onClose={() => setOpenModalItem(false)}
 				cardId={selectedItemId}
 				columnId={containerId}
+				items={items}
+				setItems={setItems}
 			/>
 		</>
 	)

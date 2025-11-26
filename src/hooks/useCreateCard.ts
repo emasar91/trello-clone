@@ -58,7 +58,7 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 							boardId,
 							columnId: containerId,
 							userId,
-							description: null,
+							description: '',
 							priorityColor: null,
 						},
 						{ withCredentials: true }

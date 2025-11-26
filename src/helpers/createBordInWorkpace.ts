@@ -77,7 +77,7 @@ export async function createBoardinWorkspace({
 			}
 		)
 	} catch (error) {
-		console.log('🚀 ~ createBoardinWorkspace ~ error:', error)
+		console.error(error)
 	}
 
 	return { ...newBoard, _id: boardId }

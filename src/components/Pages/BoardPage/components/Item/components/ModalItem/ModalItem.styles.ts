@@ -11,6 +11,5 @@ export const ModalItemContainerStyles = (theme: Theme): SxProps<Theme> => ({
 	bgcolor: theme.palette.modal.backgroundColor,
 	outline: 'none',
 	boxShadow: 24,
-	p: 4,
 	borderRadius: '8px',
 })

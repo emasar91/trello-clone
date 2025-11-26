@@ -46,7 +46,6 @@ export async function createCard(data: CreateCardData) {
 			},
 		],
 		comments: [],
-		modifications: [],
 	}
 
 	const result = await cardsCollection.insertOne(newCard)

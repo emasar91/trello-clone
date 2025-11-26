@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getCardsByColumn } from '@/helpers/getCardsByColumn'
 import { createCard } from '@/helpers/createCardInColumn'
+import { updateCard } from '@/helpers/updateCard'
+import { ICard, ICardComment } from '@/types/card'
 
 /**
  * GET /api/cards?columnId=xxxxx
@@ -41,6 +43,88 @@ export async function POST(req: Request) {
 		console.error('Error al crear tarjeta:', err)
 		return NextResponse.json(
 			{ error: 'Error al crear tarjeta' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function PUT(req: Request) {
+	try {
+		const body = await req.json()
+
+		// Validar que tenga id
+		if (!body?.cardId) {
+			return NextResponse.json(
+				{ error: 'Falta el ID de la tarjeta' },
+				{ status: 400 }
+			)
+		}
+
+		if (!body?.boardId) {
+			return NextResponse.json(
+				{ error: 'Falta el ID del tablero' },
+				{ status: 400 }
+			)
+		}
+		if (!body?.columnId) {
+			return NextResponse.json(
+				{ error: 'Falta el ID de la columna' },
+				{ status: 400 }
+			)
+		}
+		const {
+			cardId,
+			boardId,
+			columnId,
+			title,
+			description,
+			priorityColor,
+			comments,
+			order,
+			history,
+		} = body
+
+		// 🔥 TRANSFORMAR COMENTARIOS SOLO SI VIENEN
+		let parsedComments
+		if (comments !== undefined) {
+			parsedComments = comments.map((c: ICardComment) => ({
+				...c,
+				createdAt: new Date(c.createdAt),
+				editedAt: c.editedAt ? new Date(c.editedAt) : null,
+			}))
+		}
+
+		// Crear objeto dinámico con solo lo que llegó
+		const dataToUpdate: Partial<ICard> = {}
+
+		if (title !== undefined) dataToUpdate.title = title
+		if (description !== undefined) dataToUpdate.description = description
+		if (priorityColor !== undefined) dataToUpdate.priorityColor = priorityColor
+		if (comments !== undefined) dataToUpdate.comments = parsedComments // ← AQUÍ
+		if (order !== undefined) dataToUpdate.order = order
+		if (history !== undefined) dataToUpdate.history = history
+
+		// Si no hay nada para actualizar
+		if (Object.keys(dataToUpdate).length === 0) {
+			return NextResponse.json(
+				{ error: 'No se recibieron campos para actualizar' },
+				{ status: 400 }
+			)
+		}
+
+		// Actualizar en la DB
+		const updatedCard = await updateCard({
+			_id: cardId,
+			boardId,
+			columnId,
+			...dataToUpdate,
+		})
+
+		return NextResponse.json({ card: updatedCard }, { status: 200 })
+	} catch (err) {
+		console.error('Error al actualizar tarjeta:', err)
+		return NextResponse.json(
+			{ error: 'Error al actualizar tarjeta' },
 			{ status: 500 }
 		)
 	}

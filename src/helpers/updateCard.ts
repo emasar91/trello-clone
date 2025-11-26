@@ -1,0 +1,75 @@
+// lib/cards/updateCard.ts
+import { ObjectId } from 'mongodb'
+import { getDB } from './getDB'
+import { toObjectId } from './utils'
+import type { ICard } from '@/types/card'
+
+type UpdateCardData = Partial<Omit<ICard, '_id'>> & {
+	_id: string // obligatorio para buscar la card
+}
+
+export async function updateCard(data: UpdateCardData) {
+	const db = await getDB()
+	const cardsCollection = db.collection<ICard>('cards')
+	const boardsCollection = db.collection<ICard>('boards')
+	const columnsCollection = db.collection<ICard>('columns')
+
+	// Validar ID obligatorio
+	if (!data._id) throw new Error('El ID de la tarjeta es obligatorio')
+
+	// 🔹 Construir objeto dinámico SOLO con lo que venga
+	const fieldsToUpdate: Record<string, unknown> = {}
+	const allowedFields: (keyof Omit<
+		ICard,
+		'_id' | 'boardId' | 'columnId' | 'userId' | 'createdAt'
+	>)[] = [
+		'title',
+		'description',
+		'priorityColor',
+		'comments',
+		'order',
+		'history',
+	]
+
+	allowedFields.forEach((field) => {
+		if (data[field] !== undefined) {
+			fieldsToUpdate[field] = data[field]
+		}
+	})
+
+	// Si no vino ningún campo, evitar el update vacío
+	if (Object.keys(fieldsToUpdate).length === 0) {
+		throw new Error('No se enviaron datos para actualizar')
+	}
+
+	// Actualizar updatedAt SIEMPRE
+	fieldsToUpdate.updatedAt = new Date()
+
+	// 🔹 Ejecutar actualización
+	const result = await cardsCollection.findOneAndUpdate(
+		{ _id: toObjectId(data._id) as ObjectId },
+		{ $set: fieldsToUpdate },
+		{ returnDocument: 'after' }
+	)
+
+	if (!result) {
+		throw new Error('Tarjeta no encontrada')
+	} else {
+		// Only update board if boardId is provided
+		if (data.boardId) {
+			await boardsCollection.updateOne(
+				{ _id: toObjectId(data.boardId) as ObjectId },
+				{ $set: { updatedAt: new Date() } }
+			)
+		}
+		// Only update column if columnId is provided
+		if (data.columnId) {
+			await columnsCollection.updateOne(
+				{ _id: toObjectId(data.columnId) as ObjectId },
+				{ $set: { updatedAt: new Date() } }
+			)
+		}
+	}
+
+	return result // Card ya actualizada
+}
