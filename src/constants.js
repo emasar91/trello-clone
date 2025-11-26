@@ -503,14 +503,15 @@ export const TAGS = [
 
 export const API = {
 	createWorkspacesUrl: '/api/workspaces',
+	updateWorkspacesUrl: '/api/workspaces',
 	getWorkspacesUrl: '/api/workspaces',
 	createBoardsUrl: '/api/boards',
-	updateWorkspacesUrl: '/api/workspaces',
 	getBoardByNameUrl: '/api/boards',
 	getBoardColumnsUrl: '/api/columns',
 	createColumnUrl: '/api/columns',
-	getCardsByColumnUrl: '/api/cards',
-	createCardUrl: '/api/cards',
 	updateColumnUrl: '/api/columns',
 	deleteColumnUrl: '/api/columns',
+	createCardUrl: '/api/cards',
+	updateCardUrl: '/api/cards',
+	getCardsByColumnUrl: '/api/cards',
 }
