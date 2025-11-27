@@ -14,6 +14,7 @@ interface IEditDescription {
 	setDescription: React.Dispatch<React.SetStateAction<string>>
 	setShowEditDescription: React.Dispatch<React.SetStateAction<boolean>>
 	cardSelected: ICard
+	onSubmit: () => void
 }
 
 const EditDescription = ({
@@ -21,6 +22,7 @@ const EditDescription = ({
 	setDescription,
 	setShowEditDescription,
 	cardSelected,
+	onSubmit,
 }: IEditDescription) => {
 	const theme = useTheme()
 	return (
@@ -32,19 +34,21 @@ const EditDescription = ({
 					const text = e.target.value
 					const lines = text.split('\n')
 
-					if (lines.length <= 4) {
+					if (lines.length <= 3) {
 						setDescription(text)
 					}
 				}}
 				multiline
-				rows={4}
+				rows={3}
 				variant="outlined"
 				fullWidth
-				maxRows={4}
+				maxRows={3}
 				sx={EditDescriptionInputStyles(theme)}
 			/>
 			<Box sx={EditDescriptionButtonsContainerStyles}>
-				<Button variant="contained">Guardar</Button>
+				<Button variant="contained" onClick={onSubmit}>
+					Guardar
+				</Button>
 				<Button
 					sx={EditDescriptionButtonCancelStyles(theme)}
 					onClick={() => {

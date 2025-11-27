@@ -18,6 +18,7 @@ import {
 	ModalItemCreateCommentButtonStyles,
 	ModalItemDescriptionContainerStyles,
 	ModalItemDescriptionContentContainerStyles,
+	ModalItemDescriptionTextStyles,
 	ModalItemDescriptionTitleContainerStyles,
 	ModalItemDescriptionTitleStyles,
 	ModalItemDescriptionTypographyStyles,
@@ -43,6 +44,8 @@ import EditDescription from './components/EditDescription/EditDescription'
 import ItemComment from './components/ItemComment/ItemComment'
 import Header from './components/Header/Header'
 import { useUpdateCardPriority } from '@/hooks/useUptadeCardTags'
+import { useUpdateCardTitle } from '@/hooks/useUpdateCardTitle'
+import { useUpdateCardDescription } from '@/hooks/useUpdateCardDescription'
 
 type Props = {
 	open: boolean
@@ -126,6 +129,18 @@ function ModalConfirm({
 		boardId,
 	})
 
+	const { updateCardTitle } = useUpdateCardTitle({
+		items,
+		setItems,
+		boardId,
+	})
+
+	const { updateCardDescription } = useUpdateCardDescription({
+		items,
+		setItems,
+		boardId,
+	})
+
 	const handleAddComment = (type: 'new' | 'edit') => {
 		if (!user) return
 		const id = type === 'new' ? crypto.randomUUID() : showEditComment.id
@@ -177,6 +192,23 @@ function ModalConfirm({
 		setComments(newComments)
 	}
 
+	const handleEditTitle = () => {
+		if (title.trim() === '') {
+			return
+		}
+		updateCardTitle(cardId, title)
+		setIsEditingTitle(false)
+		setTitle(cardSelected?.title || '')
+	}
+
+	const handleEditDescription = () => {
+		if (description.trim() === '') {
+			return
+		}
+		updateCardDescription(cardId, description)
+		setShowEditDescription(false)
+	}
+
 	return (
 		<Modal open={open} onClose={onClose} sx={{ p: '24px' }}>
 			<Box sx={ModalItemContainerStyles(theme)}>
@@ -186,6 +218,7 @@ function ModalConfirm({
 					title={title}
 					setTitle={setTitle}
 					onClose={onClose}
+					onSubmit={handleEditTitle}
 				/>
 				<Divider />
 				<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -248,9 +281,12 @@ function ModalConfirm({
 									setDescription={setDescription}
 									setShowEditDescription={setShowEditDescription}
 									cardSelected={cardSelected}
+									onSubmit={handleEditDescription}
 								/>
 							) : (
-								<Typography>{cardSelected?.description}</Typography>
+								<Typography sx={ModalItemDescriptionTextStyles(theme)}>
+									{cardSelected?.description}
+								</Typography>
 							)}
 						</Box>
 					</Box>

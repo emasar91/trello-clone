@@ -97,7 +97,15 @@ export async function PUT(req: Request) {
 		// Crear objeto dinámico con solo lo que llegó
 		const dataToUpdate: Partial<ICard> = {}
 
-		if (title !== undefined) dataToUpdate.title = title
+		if (title !== undefined) {
+			if (title.trim() === '') {
+				return NextResponse.json(
+					{ error: 'El título no puede estar vacío' },
+					{ status: 400 }
+				)
+			}
+			dataToUpdate.title = title
+		}
 		if (description !== undefined) dataToUpdate.description = description
 		if (priorityColor !== undefined) dataToUpdate.priorityColor = priorityColor
 		if (comments !== undefined) dataToUpdate.comments = parsedComments // ← AQUÍ
@@ -121,11 +129,10 @@ export async function PUT(req: Request) {
 		})
 
 		return NextResponse.json({ card: updatedCard }, { status: 200 })
-	} catch (err) {
-		console.error('Error al actualizar tarjeta:', err)
-		return NextResponse.json(
-			{ error: 'Error al actualizar tarjeta' },
-			{ status: 500 }
-		)
+	} catch (err: unknown) {
+		const error = err as Error
+
+		console.error('Error al actualizar tarjeta:', error)
+		return NextResponse.json({ message: error.message }, { status: 500 })
 	}
 }

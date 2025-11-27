@@ -45,6 +45,11 @@ export async function updateCard(data: UpdateCardData) {
 	// Actualizar updatedAt SIEMPRE
 	fieldsToUpdate.updatedAt = new Date()
 
+	const duplicateTitle = await cardsCollection.findOne({ title: data.title })
+	if (duplicateTitle) {
+		throw new Error('El título ya existe en otra card')
+	}
+
 	// 🔹 Ejecutar actualización
 	const result = await cardsCollection.findOneAndUpdate(
 		{ _id: toObjectId(data._id) as ObjectId },

@@ -193,3 +193,17 @@ export const ModalItemTagButtonStyles = (theme: Theme): SxProps<Theme> => ({
 		filter: 'brightness(1.2)',
 	},
 })
+
+export const ModalItemDescriptionTextStyles = (
+	theme: Theme
+): SxProps<Theme> => ({
+	color: theme.palette.modal.textColor,
+	fontSize: '14px',
+	lineHeight: '20px',
+	bgcolor: theme.palette.modal.modalBackground,
+	borderRadius: '8px',
+	width: '100%',
+	padding: '6px 12px',
+	wordBreak: 'break-word',
+	margin: '4px 0',
+})
