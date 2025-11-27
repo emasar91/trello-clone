@@ -581,10 +581,6 @@ export function MultipleContainers({
 								strategy={verticalListSortingStrategy}
 							>
 								{(items[containerId]?.items ?? []).map((value, index) => {
-									console.log(
-										'🚀 ~ MultipleContainers ~ value.priorityColor:',
-										value.priorityColor
-									)
 									return (
 										<SortableItem
 											disabled={isSortingContainer}

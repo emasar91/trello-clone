@@ -42,7 +42,6 @@ export const useUpdateCardPriority = ({ setItems, items, boardId }: Props) => {
 			const idx = prevItemsCopy[columnId].items.findIndex(
 				(c) => c.id === cardId
 			)
-			console.log('🚀 ~ useUpdateCardPriority ~ idx:', idx)
 			if (idx === -1) return
 
 			// 3️⃣ Optimistic UI

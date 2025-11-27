@@ -34,7 +34,6 @@ export const ManyItems = () => {
 
 		return result
 	}, [columns, cardsByColumn])
-	console.log('🚀 ~ ManyItems ~ cardsByColumn:', cardsByColumn)
 	return (
 		<MultipleContainers
 			containerStyle={{

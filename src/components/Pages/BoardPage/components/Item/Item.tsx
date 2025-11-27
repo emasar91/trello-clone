@@ -61,7 +61,6 @@ export const Item = React.memo(
 			},
 			ref
 		) => {
-			console.log('🚀 ~ priorityColor:', tags)
 			const theme = useTheme()
 			useEffect(() => {
 				if (!dragOverlay) return
