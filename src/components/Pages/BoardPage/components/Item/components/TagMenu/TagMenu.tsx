@@ -21,6 +21,7 @@ import {
 	TagMenuTypographyStyle,
 } from './TagMenu.styles'
 import { CloseIcon } from '@/public/assets/icons/CloseIcon'
+import { UniqueIdentifier } from '@dnd-kit/core'
 
 type ICreateBoardMenuProps = {
 	open: boolean
@@ -28,6 +29,8 @@ type ICreateBoardMenuProps = {
 	anchorEl: null | HTMLElement
 	setSelectedTags: (tags: string[]) => void
 	selectedTags: string[]
+	onSubmit: (cardId: UniqueIdentifier, tags: string[]) => void
+	cardId: UniqueIdentifier
 }
 
 type ImageItemProps = {
@@ -41,6 +44,8 @@ function TagMenu({
 	anchorEl,
 	setSelectedTags,
 	selectedTags,
+	onSubmit,
+	cardId,
 }: ICreateBoardMenuProps) {
 	const theme = useTheme()
 
@@ -51,6 +56,7 @@ function TagMenu({
 			? selectedTags.filter((tag) => tag !== imgSrc) // si ya está → se quita
 			: [...selectedTags, imgSrc] // si no está → se agrega
 		setSelectedTags(newTags)
+		onSubmit(cardId, newTags)
 	}
 
 	const TagItem = memo(({ onClick, imgSrc }: ImageItemProps) => (

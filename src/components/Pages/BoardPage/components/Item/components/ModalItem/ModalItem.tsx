@@ -5,23 +5,44 @@ import {
 	Button,
 	Divider,
 	Modal,
-	TextField,
 	Typography,
 	useTheme,
 } from '@mui/material'
 import React, { useRef, useState } from 'react'
-import { ModalItemContainerStyles } from './ModalItem.styles'
+import {
+	ModalItemActivityContainerStyles,
+	ModalItemActivityContentContainerStyles,
+	ModalItemActivityTitleContainerStyles,
+	ModalItemActivityTypographyStyles,
+	ModalItemContainerStyles,
+	ModalItemCreateCommentButtonStyles,
+	ModalItemDescriptionContainerStyles,
+	ModalItemDescriptionContentContainerStyles,
+	ModalItemDescriptionTitleContainerStyles,
+	ModalItemDescriptionTitleStyles,
+	ModalItemDescriptionTypographyStyles,
+	ModalItemEditDescriptionButtonStyles,
+	ModalItemTagButtonStyles,
+	ModalItemTagContentContainerStyles,
+	ModalItemTagItemStyles,
+	ModalItemTagsContainerStyles,
+	ModalItemTagTitleStyles,
+	ModalItemUnsavedChangesStyles,
+} from './ModalItem.styles'
 import { DescriptionIcon } from '@/public/assets/icons/DescriptionIcon'
 import { ActivityIcon } from '@/public/assets/icons/ActivityIcon'
-import { CloseIcon } from '@/public/assets/icons/CloseIcon'
 import { TagIcon } from '@/public/assets/icons/TagIcon'
 import TagMenu from '../TagMenu/TagMenu'
 import { Plus } from '@/public/assets/icons/Plus'
 import { useAuth } from '@/context/useAuthContext'
-import { formatCommentDate } from './utils/formatCommentDate'
 import { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { useUpdateCardComments } from '@/hooks/useUpdateCardComments'
 import { ICardComment } from '@/types/card'
+import CreateEditComment from './components/CreateEditComment/CreateEditComment'
+import EditDescription from './components/EditDescription/EditDescription'
+import ItemComment from './components/ItemComment/ItemComment'
+import Header from './components/Header/Header'
+import { useUpdateCardPriority } from '@/hooks/useUptadeCardTags'
 
 type Props = {
 	open: boolean
@@ -67,13 +88,27 @@ function ModalConfirm({
 	const [isEditingTitle, setIsEditingTitle] = useState(false)
 	const [title, setTitle] = useState(cardSelected?.title || '')
 
-	const [selectedTags, setSelectedTags] = useState<string[]>([])
+	const [selectedTags, setSelectedTags] = useState<string[]>(
+		cardSelected?.priorityColor || []
+	)
 	const [showEditDescription, setShowEditDescription] = useState(false)
-	const [description, setDescription] = useState(
+	const [description, setDescription] = useState<string>(
 		cardSelected?.description || ''
 	)
 
 	const [showCreateComment, setShowCreateComment] = useState(false)
+	const [showEditComment, setShowEditComment] = useState<{
+		show: boolean
+		id: string
+		createdAt: Date | string
+	}>({
+		show: false,
+		id: '',
+		createdAt: '',
+	})
+
+	const [editComment, setEditComment] = useState('')
+
 	const [comments, setComments] = useState<ICardComment[]>(
 		cardSelected?.comments || []
 	)
@@ -85,27 +120,48 @@ function ModalConfirm({
 		boardId,
 	})
 
-	const handleAddComment = () => {
-		if (!user) return
+	const { updateCardPriority } = useUpdateCardPriority({
+		items,
+		setItems,
+		boardId,
+	})
 
+	const handleAddComment = (type: 'new' | 'edit') => {
+		if (!user) return
+		const id = type === 'new' ? crypto.randomUUID() : showEditComment.id
 		const comment: ICardComment = {
-			text: newComment!,
-			createdAt: new Date(),
-			editedAt: null,
+			_id: id,
+			text: type === 'new' ? newComment! : editComment,
+			createdAt:
+				type === 'new'
+					? new Date()
+					: new Date(showEditComment?.createdAt || new Date()),
+			editedAt: type === 'edit' ? new Date() : null,
 			authorId: user.uid, // string — lo convertimos en backend
 			authorName: user.displayName || 'User',
 		}
-
 		// Construir el array nuevo y enviarlo
-		const newComments = [...comments, comment]
+		const newComments =
+			type === 'new'
+				? [...comments, comment]
+				: comments.map((c) => (c._id === id ? comment : c))
 
 		// Llamás al hook pasando el array completo (así el backend recibe array)
-		updateCardComments(cardId, newComments)
+		updateCardComments(cardId, newComments, type)
 
 		if (comment.text.trim() !== '') {
-			setComments((prev) => [...prev, comment])
-			setNewComment('')
-			setShowCreateComment(false)
+			setComments((prev) =>
+				type === 'new'
+					? [...prev, comment]
+					: comments.map((c) => (c._id === id ? comment : c))
+			)
+			if (type === 'new') {
+				setNewComment('')
+				setShowCreateComment(false)
+			} else {
+				setEditComment('')
+				setShowEditComment({ show: false, id: '', createdAt: '' })
+			}
 		}
 	}
 
@@ -115,128 +171,39 @@ function ModalConfirm({
 		return dateB.getTime() - dateA.getTime() // más nuevo primero
 	})
 
+	const handleDeleteComment = (comment: ICardComment) => {
+		const newComments = comments.filter((c) => c !== comment)
+		updateCardComments(cardId, newComments, 'delete')
+		setComments(newComments)
+	}
+
 	return (
 		<Modal open={open} onClose={onClose} sx={{ p: '24px' }}>
 			<Box sx={ModalItemContainerStyles(theme)}>
-				<Box
-					sx={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						padding: '16px 24px',
-						height: '64px',
-					}}
-				>
-					{!isEditingTitle ? (
-						<Typography
-							onClick={() => setIsEditingTitle(true)}
-							variant="h6"
-							sx={{
-								fontSize: '20px',
-								lineHeight: '32px',
-								fontWeight: 'bold',
-								color: theme.palette.modal.textColor,
-							}}
-						>
-							{title.charAt(0).toUpperCase() + title.slice(1)}
-						</Typography>
-					) : (
-						<TextField
-							autoFocus
-							fullWidth
-							value={title}
-							onChange={(e) => setTitle(e.target.value)}
-							onBlur={() => setIsEditingTitle(false)}
-							sx={{
-								maxWidth: '50%',
-								input: {
-									fontSize: '20px',
-									lineHeight: '32px',
-									fontWeight: 'bold',
-									color: theme.palette.modal.textColor,
-									padding: '4px 8px',
-								},
-							}}
-						/>
-					)}
-					<Box
-						onClick={onClose}
-						sx={{ cursor: 'pointer', color: theme.palette.modal.textColor }}
-					>
-						<CloseIcon />
-					</Box>
-				</Box>
-
+				<Header
+					isEditingTitle={isEditingTitle}
+					setIsEditingTitle={setIsEditingTitle}
+					title={title}
+					setTitle={setTitle}
+					onClose={onClose}
+				/>
 				<Divider />
 				<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-					<Box
-						sx={{
-							display: 'flex',
-							alignItems: 'center',
-							bgcolor: theme.palette.modal.backgroundColor,
-							flexDirection: 'column',
-							justifyContent: 'start',
-							gap: '16px',
-							width: '100%',
-							padding: '24px',
-							marginTop: '16px',
-						}}
-					>
-						<Box
-							sx={{
-								display: 'flex',
-								alignItems: 'start',
-								justifyContent: 'start',
-								width: '100%',
-								gap: '8px',
-								color: theme.palette.modal.textColor,
-								flexDirection: 'column',
-							}}
-						>
-							<Box
-								ref={etiquetasRef}
-								sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-							>
+					<Box sx={ModalItemDescriptionContainerStyles(theme)}>
+						<Box sx={ModalItemTagContentContainerStyles(theme)}>
+							<Box ref={etiquetasRef} sx={ModalItemDescriptionTypographyStyles}>
 								<TagIcon />
-								<Typography
-									sx={{
-										fontWeight: 'bold',
-										lineHeight: '20px',
-										fontSize: '14px',
-										color: theme.palette.modal.textColor,
-									}}
-								>
+								<Typography sx={ModalItemTagTitleStyles(theme)}>
 									Etiquetas
 								</Typography>
 							</Box>
-							<Box sx={{ display: 'flex', gap: '8px' }}>
+							<Box sx={ModalItemTagsContainerStyles}>
 								{selectedTags.map((tag) => (
-									<Box
-										key={tag}
-										sx={{
-											backgroundColor: tag,
-											borderRadius: '4px',
-											height: '32px',
-											width: '48px',
-											color: theme.palette.modal.textColor,
-										}}
-									/>
+									<Box key={tag} sx={ModalItemTagItemStyles(theme, tag)} />
 								))}
 								<Button
 									onClick={handleClick}
-									sx={{
-										bgcolor: '#303134',
-										width: '32px',
-										height: '32px',
-										minWidth: '32px',
-										padding: '0',
-										margin: '0',
-										overflow: 'hidden',
-										boxSizing: 'border-box',
-										color: theme.palette.modal.textColor,
-										'&:hover': {
-											filter: 'brightness(1.2)',
-										},
-									}}
+									sx={ModalItemTagButtonStyles(theme)}
 								>
 									<Plus />
 								</Button>
@@ -244,70 +211,31 @@ function ModalConfirm({
 							<TagMenu
 								selectedTags={selectedTags}
 								setSelectedTags={setSelectedTags}
+								onSubmit={updateCardPriority}
 								open={openMenu}
+								cardId={cardId}
 								handleClose={handleClose}
 								anchorEl={anchorEl}
 							/>
 						</Box>
-						<Box
-							sx={{
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'start',
-								width: '100%',
-								gap: '8px',
-								color: theme.palette.modal.textColor,
-								flexDirection: 'column',
-							}}
-						>
-							<Box
-								sx={{
-									display: 'flex',
-									alignItems: 'center',
-									gap: '8px',
-									width: '100%',
-									justifyContent: 'space-between',
-								}}
-							>
-								<Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+						<Box sx={ModalItemDescriptionContentContainerStyles(theme)}>
+							<Box sx={ModalItemDescriptionTitleContainerStyles}>
+								<Box sx={ModalItemDescriptionTypographyStyles}>
 									<DescriptionIcon />
-									<Typography
-										sx={{
-											fontWeight: 'bold',
-											lineHeight: '20px',
-											fontSize: '14px',
-											color: theme.palette.modal.textColor,
-										}}
-									>
+									<Typography sx={ModalItemDescriptionTitleStyles(theme)}>
 										Descripción
 									</Typography>
 								</Box>
-								<Box sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+								<Box sx={ModalItemDescriptionTypographyStyles}>
 									{description !== cardSelected?.description && (
-										<Typography
-											sx={{
-												color: theme.palette.modal.textColor,
-												fontWeight: 'bold',
-												fontSize: '11px',
-												lineHeight: '16px',
-												border: '1px solid #fca700',
-												borderRadius: '4px',
-												padding: '0 2px',
-											}}
-										>
+										<Typography sx={ModalItemUnsavedChangesStyles(theme)}>
 											CAMBIOS SIN GUARDAR
 										</Typography>
 									)}
 
 									<Button
 										onClick={() => setShowEditDescription(true)}
-										sx={{
-											bgcolor: '#303134',
-											color: theme.palette.modal.textColor,
-											'&:hover': {
-												filter: 'brightness(1.2)',
-											},
-										}}
+										sx={ModalItemEditDescriptionButtonStyles(theme)}
 									>
 										Editar
 									</Button>
@@ -315,131 +243,30 @@ function ModalConfirm({
 							</Box>
 
 							{showEditDescription ? (
-								<Box
-									sx={{
-										display: 'flex',
-										alignItems: 'center',
-										justifyContent: 'start',
-										width: '100%',
-										gap: '8px',
-										flexDirection: 'column',
-									}}
-								>
-									<TextField
-										value={description}
-										autoFocus
-										onChange={(e) => {
-											const text = e.target.value
-											const lines = text.split('\n')
-
-											if (lines.length <= 4) {
-												setDescription(text)
-											}
-										}}
-										multiline
-										rows={4}
-										variant="outlined"
-										fullWidth
-										maxRows={4}
-										sx={{
-											borderColor: 'red',
-											'& .MuiInputBase-input': {
-												color: theme.palette.modal.textColor,
-												borderColor: 'red',
-											},
-											'& .MuiInputBase-root': {
-												borderColor: 'red',
-											},
-										}}
-									/>
-									<Box
-										sx={{
-											display: 'flex',
-											gap: '8px',
-											justifyContent: 'start',
-											alignItems: 'center',
-											width: '100%',
-										}}
-									>
-										<Button variant="contained">Guardar</Button>
-										<Button
-											sx={{
-												color: theme.palette.modal.textColor,
-												'&:hover': {
-													bgcolor: '#303134',
-													filter: 'brightness(1.2)',
-												},
-											}}
-											onClick={() => {
-												setDescription(cardSelected?.description)
-												setShowEditDescription(false)
-											}}
-										>
-											{description !== cardSelected?.description
-												? 'Descartar cambios'
-												: 'Cancelar'}
-										</Button>
-									</Box>
-								</Box>
+								<EditDescription
+									description={description}
+									setDescription={setDescription}
+									setShowEditDescription={setShowEditDescription}
+									cardSelected={cardSelected}
+								/>
 							) : (
 								<Typography>{cardSelected?.description}</Typography>
 							)}
 						</Box>
 					</Box>
-					<Box
-						sx={{
-							display: 'flex',
-							alignItems: 'start',
-							justifyContent: 'start',
-							bgcolor: '#18191a',
-							width: '100%',
-							padding: '24px',
-							paddingTop: '40px',
-							flexDirection: 'column',
-							gap: '14px',
-							maxHeight: '50vh',
-							overflowY: 'auto',
-							scrollbarWidth: 'thin',
-							scrollbarColor: '#6e6f68 #101204',
-						}}
-					>
-						<Box
-							sx={{
-								display: 'flex',
-								alignItems: 'center',
-								gap: '8px',
-								width: '100%',
-								color: theme.palette.modal.textColor,
-							}}
-						>
+					<Box sx={ModalItemActivityContainerStyles(theme)}>
+						<Box sx={ModalItemActivityTitleContainerStyles(theme)}>
 							<ActivityIcon />
-							<Typography
-								sx={{
-									fontWeight: 'bold',
-									lineHeight: '20px',
-									fontSize: '14px',
-									color: theme.palette.modal.textColor,
-								}}
-							>
+							<Typography sx={ModalItemActivityTypographyStyles(theme)}>
 								Comentarios y Actividad
 							</Typography>
 							{newComment !== '' && (
-								<Typography
-									sx={{
-										color: theme.palette.modal.textColor,
-										fontWeight: 'bold',
-										fontSize: '11px',
-										lineHeight: '16px',
-										border: '1px solid #fca700',
-										borderRadius: '4px',
-										padding: '0 2px',
-									}}
-								>
+								<Typography sx={ModalItemUnsavedChangesStyles(theme)}>
 									CAMBIOS SIN GUARDAR
 								</Typography>
 							)}
 						</Box>
-						<Box sx={{ width: '100%' }}>
+						<Box sx={ModalItemActivityContentContainerStyles}>
 							{!showCreateComment ? (
 								<Button
 									variant="contained"
@@ -447,139 +274,51 @@ function ModalConfirm({
 									disableElevation
 									disableRipple
 									onClick={() => setShowCreateComment(true)}
-									sx={{
-										color: theme.palette.modal.textColor,
-										fontWeight: 'bold',
-										bgcolor: '#242528',
-										padding: '6px 12px',
-										textAlign: 'start',
-										borderRadius: '8px',
-										boxShadow: 0,
-										justifyContent: 'flex-start', // ⭐ CLAVE
-										':hover': {
-											bgcolor: '#303134',
-											filter: 'brightness(1.2)',
-											boxShadow: 0,
-										},
-									}}
+									sx={ModalItemCreateCommentButtonStyles(theme)}
 								>
 									Escribe un comentario...
 								</Button>
 							) : (
-								<Box
-									sx={{
-										width: '100%',
-										display: 'flex',
-										flexDirection: 'column',
-										gap: '8px',
-									}}
-								>
-									<TextField
-										multiline
-										autoFocus
-										rows={4}
-										variant="outlined"
-										fullWidth
-										maxRows={4}
-										value={newComment}
-										onChange={(e) => {
-											const text = e.target.value
-											const lines = text.split('\n')
-
-											if (lines.length <= 4) {
-												setNewComment(e.target.value)
-											}
-										}}
-										sx={{
-											borderColor: 'red',
-											'& .MuiInputBase-input': {
-												color: theme.palette.modal.textColor,
-												borderColor: 'red',
-											},
-											'& .MuiInputBase-root': {
-												borderColor: 'red',
-											},
-										}}
-									/>
-									<Box
-										sx={{
-											display: 'flex',
-											gap: '8px',
-											justifyContent: 'start',
-											alignItems: 'center',
-											width: '100%',
-										}}
-									>
-										<Button variant="contained" onClick={handleAddComment}>
-											Guardar
-										</Button>
-										<Button
-											sx={{
-												color: theme.palette.modal.textColor,
-												'&:hover': {
-													bgcolor: '#303134',
-													filter: 'brightness(1.2)',
-												},
-											}}
-											onClick={() => {
-												setShowCreateComment(false)
-											}}
-										>
-											Cancelar
-										</Button>
-									</Box>
-								</Box>
+								<CreateEditComment
+									value={newComment}
+									type="new"
+									setvalue={setNewComment}
+									onSubmit={() => handleAddComment('new')}
+									setShow={setShowCreateComment}
+								/>
 							)}
 
-							{sortedComments.map((comment) => (
-								<Box
-									key={comment.createdAt.toString()}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										gap: '8px',
-										width: '100%',
-										marginTop: '8px',
-									}}
-								>
-									<Box
-										sx={{ display: 'flex', gap: '8px', alignItems: 'center' }}
-									>
-										<Typography
-											sx={{
-												color: theme.palette.modal.textColor,
-												fontSize: '14px',
-												lineHeight: '20px',
-											}}
-										>
-											{String(comment.authorName)}
-										</Typography>
-										<Typography
-											sx={{
-												color: '#669df1',
-												fontSize: '12px',
-												lineHeight: '20px',
-											}}
-										>
-											{formatCommentDate(comment.createdAt)}
-										</Typography>
-									</Box>
-									<Typography
-										sx={{
-											color: theme.palette.modal.textColor,
-											fontSize: '14px',
-											lineHeight: '20px',
-											bgcolor: '#242528',
-											borderRadius: '8px',
-											width: '100%',
-											padding: '6px 12px',
-											wordBreak: 'break-word',
-										}}
-									>
-										{comment.text}
-									</Typography>
-								</Box>
-							))}
+							{sortedComments.map((comment) => {
+								return showEditComment.id === comment._id ? (
+									<CreateEditComment
+										key={comment._id}
+										type="edit"
+										value={editComment}
+										setvalue={setEditComment}
+										onSubmit={() => handleAddComment('edit')}
+										setShow={() =>
+											setShowEditComment({
+												show: false,
+												id: '',
+												createdAt: '',
+											})
+										}
+									/>
+								) : (
+									<ItemComment
+										key={comment._id}
+										comment={comment}
+										onEdit={() =>
+											setShowEditComment({
+												id: comment._id,
+												show: true,
+												createdAt: comment.createdAt,
+											})
+										}
+										onDelete={() => handleDeleteComment(comment)}
+									/>
+								)
+							})}
 						</Box>
 					</Box>
 				</Box>

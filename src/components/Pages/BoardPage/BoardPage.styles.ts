@@ -8,7 +8,7 @@ export const BoardsPageContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	alignItems: 'start',
 	height: 'calc(100vh - 48px)',
 	scrollbarWidth: 'thin', // Adjust width for vertical scrollbars
-	scrollbarColor: '#6e6f68 #101204',
+	scrollbarColor: `${theme.palette.scrollbar.color1} ${theme.palette.scrollbar.color2}`,
 })
 
 export const ErrorContainerStyle: SxProps<Theme> = {

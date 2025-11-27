@@ -69,9 +69,15 @@ declare module '@mui/material/styles' {
 		}
 		modal: {
 			backgroundColor: string
+			backgroundColorActivity: string
 			textColor: string
 			buttonColor: string
 			buttonHoverColor: string
+			modalBackground: string
+		}
+		scrollbar: {
+			color1: string
+			color2: string
 		}
 	}
 	interface PaletteOptions {
@@ -141,9 +147,15 @@ declare module '@mui/material/styles' {
 		}
 		modal: {
 			backgroundColor: string
+			backgroundColorActivity: string
 			textColor: string
 			buttonColor: string
 			buttonHoverColor: string
+			modalBackground: string
+		}
+		scrollbar: {
+			color1: string
+			color2: string
 		}
 	}
 }
@@ -229,6 +241,12 @@ export const lightTheme = createTheme({
 			textColor: colorDark.grayTextCard,
 			buttonColor: colorDark.brandPrimary,
 			buttonHoverColor: colorDark.brandPrimaryHover,
+			backgroundColorActivity: colorDark.blackCardDark,
+			modalBackground: colorDark.modalBackground,
+		},
+		scrollbar: {
+			color1: colorDark.scrollbarColor1,
+			color2: colorDark.scrollbarColor2,
 		},
 	},
 	typography: {
@@ -375,6 +393,12 @@ export const darkTheme = createTheme({
 			textColor: colorDark.grayTextCard,
 			buttonColor: colorDark.brandPrimary,
 			buttonHoverColor: colorDark.brandPrimaryHover,
+			backgroundColorActivity: colorDark.blackCardDark,
+			modalBackground: colorDark.modalBackground,
+		},
+		scrollbar: {
+			color1: colorDark.scrollbarColor1,
+			color2: colorDark.scrollbarColor2,
 		},
 	},
 	typography: {

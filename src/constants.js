@@ -458,6 +458,10 @@ export const colorDark = {
 	grayTransparentHover: '#00000029',
 	blackCard: '#242528',
 	grayTextCard: '#bfc1c4',
+	blackCardDark: '#18191a',
+	scrollbarColor1: '#6e6f68',
+	scrollbarColor2: '#101204',
+	modalBackground: '#303134',
 }
 
 export const colorLight = {

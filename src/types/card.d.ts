@@ -8,6 +8,7 @@ export interface ICardHistory {
 }
 
 export interface ICardComment {
+	_id: string
 	authorId: string | ObjectId
 	text: string
 	createdAt: Date
@@ -22,7 +23,7 @@ export interface ICard {
 	userId: ObjectId
 	title: string
 	description: string | null
-	priorityColor: string | null
+	priorityColor: string[] | null
 	createdAt: Date
 	updatedAt: Date | null
 	history: ICardHistory[]

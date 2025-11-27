@@ -54,7 +54,7 @@ import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
 import { useDeleteColumn } from '@/hooks/useDeleteColumn'
 import ModalItem from '../components/Item/components/ModalItem/ModalItem'
 import { MultipleContainersAddColumnStyles } from './MultipleContainers.styles'
-import type { ICardComment } from '@/types/card'
+import type { ICard } from '@/types/card'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -141,15 +141,17 @@ function DroppableContainer({
 	)
 }
 
-export type CardItem = {
-	id: UniqueIdentifier // número o string único
-	text: string // el valor escrito por el usuario
-	comments?: ICardComment[] // comentarios de la tarjeta
-}
+// export type ICard = {
+// 	id: UniqueIdentifier // número o string único
+// 	text: string // el valor escrito por el usuario
+// 	comments?: ICardComment[] // comentarios de la tarjeta
+// 	priorityColor: string[] | null
+// }
+export type ColumnItem = ICard & { id: string; text: string }
 
 export type ColumnData = {
 	title: string
-	items: CardItem[]
+	items: ColumnItem[]
 }
 
 export type Items = Record<UniqueIdentifier, ColumnData>
@@ -225,7 +227,7 @@ export function MultipleContainers({
 								droppableContainers: args.droppableContainers.filter(
 									(container) =>
 										container.id !== overId &&
-										containerItemIds.includes(container.id)
+										containerItemIds.includes(String(container.id))
 								),
 							})[0]?.id
 							if (closest) {
@@ -262,7 +264,7 @@ export function MultipleContainers({
 							droppableContainers: args.droppableContainers.filter(
 								(container) =>
 									container.id !== overId &&
-									containerItemIds.includes(container.id)
+									containerItemIds.includes(String(container.id))
 							),
 						})[0]?.id
 						if (closest) {
@@ -579,6 +581,10 @@ export function MultipleContainers({
 								strategy={verticalListSortingStrategy}
 							>
 								{(items[containerId]?.items ?? []).map((value, index) => {
+									console.log(
+										'🚀 ~ MultipleContainers ~ value.priorityColor:',
+										value.priorityColor
+									)
 									return (
 										<SortableItem
 											disabled={isSortingContainer}
@@ -595,6 +601,7 @@ export function MultipleContainers({
 											selectedItemId={value.id}
 											setItems={setItems}
 											items={items}
+											tags={value.priorityColor}
 										/>
 									)
 								})}
@@ -678,6 +685,7 @@ interface SortableItemProps {
 	selectedItemId: UniqueIdentifier
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
+	tags: string[] | null
 	style(args: {
 		value: UniqueIdentifier
 		index: number
@@ -706,6 +714,7 @@ function SortableItem({
 	selectedItemId,
 	setItems,
 	items,
+	tags,
 }: SortableItemProps) {
 	const {
 		setNodeRef,
@@ -744,6 +753,7 @@ function SortableItem({
 						isDragOverlay: false,
 					}),
 				}}
+				tags={tags}
 				transition={transition}
 				transform={transform}
 				fadeIn={mountedWhileDragging}

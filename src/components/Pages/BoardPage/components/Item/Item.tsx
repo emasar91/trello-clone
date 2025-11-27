@@ -19,6 +19,7 @@ export interface Props {
 	transition?: string | null
 	wrapperStyle?: React.CSSProperties
 	value: React.ReactNode
+	tags: string[] | null
 	onRemove?(): void
 	setOpenModalItem: React.Dispatch<React.SetStateAction<boolean>>
 	renderItem?(args: {
@@ -54,11 +55,13 @@ export const Item = React.memo(
 				transform,
 				value,
 				wrapperStyle,
+				tags,
 				setOpenModalItem,
 				...props
 			},
 			ref
 		) => {
+			console.log('🚀 ~ priorityColor:', tags)
 			const theme = useTheme()
 			useEffect(() => {
 				if (!dragOverlay) return
@@ -119,35 +122,75 @@ export const Item = React.memo(
 					}
 				>
 					<div
-						className={`Item
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							width: '100%',
+						}}
+					>
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+							}}
+						>
+							<div
+								className={`Item
 							${dragging ? 'dragging' : ''}
 							${handle ? 'withHandle' : ''}
 							${dragOverlay ? 'dragOverlay' : ''}
 							${disabled ? 'disabled' : ''}
 						`}
-						style={{
-							...style,
-							backgroundColor: theme.palette.boardPage.blackBackgroundCard,
-							color: theme.palette.boardPage.textGray,
-							width: '100%',
-							whiteSpace: 'break-spaces',
-						}}
-						data-cypress="draggable-item"
-						{...(!handle ? listeners : undefined)}
-						{...props}
-						tabIndex={!handle ? 0 : undefined}
-					>
-						{value}
+								style={{
+									...style,
+									backgroundColor: theme.palette.boardPage.blackBackgroundCard,
+									color: theme.palette.boardPage.textGray,
+									width: '100%',
+									whiteSpace: 'break-spaces',
+								}}
+								data-cypress="draggable-item"
+								{...(!handle ? listeners : undefined)}
+								{...props}
+								tabIndex={!handle ? 0 : undefined}
+							>
+								{value}
+							</div>
+							<span
+								onClick={(e) => {
+									e.stopPropagation()
+									setOpenModalItem(true)
+								}}
+								style={{ cursor: 'pointer', padding: '0 10px' }}
+							>
+								<EyeIcon />
+							</span>
+						</div>
+
+						{tags && (
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: '5px',
+									marginBottom: '5px',
+									marginLeft: '4px',
+								}}
+							>
+								{tags.map((color: string) => (
+									<span
+										key={color}
+										style={{
+											backgroundColor: color,
+											width: '37px',
+											height: '8px',
+											borderRadius: '5px',
+										}}
+									></span>
+								))}
+							</div>
+						)}
 					</div>
-					<span
-						onClick={(e) => {
-							e.stopPropagation()
-							setOpenModalItem(true)
-						}}
-						style={{ cursor: 'pointer', padding: '0 10px' }}
-					>
-						<EyeIcon />
-					</span>
 				</li>
 			)
 		}

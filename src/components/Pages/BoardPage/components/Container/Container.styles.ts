@@ -76,7 +76,7 @@ export const ContainerStyles = ({
 		overflowX: 'hidden',
 		backgroundColor: theme.palette.boardPage.blackBackgroundList,
 		scrollbarWidth: 'thin', // Adjust width for vertical scrollbars
-		scrollbarColor: '#6e6f68 #101204',
+		scrollbarColor: `${theme.palette.scrollbar.color1} ${theme.palette.scrollbar.color2}`,
 	},
 
 	// ---- placeholder ----

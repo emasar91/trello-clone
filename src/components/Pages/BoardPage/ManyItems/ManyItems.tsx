@@ -1,5 +1,8 @@
 import { useStoreBoard } from '@/context/useStoreBoard'
-import { MultipleContainers } from '../MultipleContainers/MultipleContainers'
+import {
+	MultipleContainers,
+	Items,
+} from '../MultipleContainers/MultipleContainers'
 import { useMemo } from 'react'
 import { ICard } from '@/types/card'
 
@@ -7,13 +10,7 @@ export const ManyItems = () => {
 	const { columns, cardsByColumn } = useStoreBoard()
 
 	const itemsFormatted = useMemo(() => {
-		const result: Record<
-			string,
-			{
-				title: string
-				items: { id: string; text: string }[]
-			}
-		> = {}
+		const result: Items = {}
 
 		// 🔹 Ordenar columnas por order antes de mapear
 		const orderedColumns = [...columns].sort((a, b) => a.order - b.order)
@@ -30,12 +27,14 @@ export const ManyItems = () => {
 				items: cards.map((card: ICard) => ({
 					id: card._id.toString(),
 					text: card.title,
+					...card,
 				})),
 			}
 		})
 
 		return result
 	}, [columns, cardsByColumn])
+	console.log('🚀 ~ ManyItems ~ cardsByColumn:', cardsByColumn)
 	return (
 		<MultipleContainers
 			containerStyle={{
