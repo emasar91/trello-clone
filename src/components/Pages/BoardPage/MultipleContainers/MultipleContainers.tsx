@@ -37,12 +37,9 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { coordinateGetter as multipleContainersCoordinateGetter } from './multipleContainersKeyboardCoordinates'
 
-import { Item, Container, ContainerProps } from '../components'
+import { Container, ContainerProps } from '../components'
 import type { Props as ItemProps } from '../components/Item/Item'
 
-import CreateCardInput from '../components/TextAreaCustom/TextAreaCustom'
-import { Box } from '@mui/material'
-import { Plus } from '@/public/assets/icons/Plus'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import { useCreateCard } from '@/hooks/useCreateCard'
 import { useCreateColumn } from '@/hooks/useCreateColumn'
@@ -50,13 +47,17 @@ import { useAuth } from '@/context/useAuthContext'
 import { toast } from 'react-toastify'
 import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
 import { useDeleteColumn } from '@/hooks/useDeleteColumn'
-import ModalItem from '../components/Item/components/ModalItem/ModalItem'
-import { MultipleContainersAddColumnStyles } from './MultipleContainers.styles'
+import {
+	MultipleContainersDroppableContainerStyles,
+	MultipleContainersSortableContextContainerStyles,
+} from './MultipleContainers.styles'
 import type { ICard } from '@/types/card'
 import { useUpdateColumn } from '@/hooks/useUpdateColumn'
 import { unstable_batchedUpdates } from 'react-dom'
 import { useUpdateColumnsOrder } from '@/hooks/useUpdateColumnOrder'
 import { useUpdateAllOrders } from '@/hooks/useUpdateCardOrder'
+import ColumnAdder from './components/ColumnAdder/ColumnAdder'
+import SortableItem from './components/SorteableItem/SorteableItem'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -105,18 +106,7 @@ function DroppableContainer({
 		: false
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				maxWidth: '272px',
-				width: '100%',
-				flexShrink: 0,
-				justifyContent: 'center',
-				alignItems: 'center',
-				flexWrap: 'nowrap',
-			}}
-		>
+		<div style={MultipleContainersDroppableContainerStyles}>
 			<Container
 				ref={disabled ? undefined : setNodeRef}
 				style={{
@@ -137,18 +127,11 @@ function DroppableContainer({
 				{...props}
 			>
 				{children}
-				{/* Add card button / input inside container */}
 			</Container>
 		</div>
 	)
 }
 
-// export type ICard = {
-// 	id: UniqueIdentifier // número o string único
-// 	text: string // el valor escrito por el usuario
-// 	comments?: ICardComment[] // comentarios de la tarjeta
-// 	priorityColor: string[] | null
-// }
 export type ColumnItem = ICard & { id: string; text: string }
 
 export type ColumnData = {
@@ -613,14 +596,7 @@ export function MultipleContainers({
 			onDragCancel={onDragCancel}
 			modifiers={modifiers}
 		>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'row',
-					alignItems: 'start',
-					gap: '12px',
-				}}
-			>
+			<div style={MultipleContainersSortableContextContainerStyles}>
 				<SortableContext
 					items={[...containers, PLACEHOLDER_ID]}
 					strategy={horizontalListSortingStrategy}
@@ -727,143 +703,4 @@ export function MultipleContainers({
 
 		return `col-${lastId + 1}`
 	}
-}
-/* -------------------------
-   helper: SortableItem (igual que antes)
-   ------------------------- */
-interface SortableItemProps {
-	containerId: UniqueIdentifier
-	id: UniqueIdentifier
-	index: number
-	handle: boolean
-	disabled?: boolean
-	displayValue: React.ReactNode
-	selectedItemId: UniqueIdentifier
-	setItems: React.Dispatch<React.SetStateAction<Items>>
-	items: Items
-	tags: string[] | null
-	style(args: {
-		value: UniqueIdentifier
-		index: number
-		overIndex: number
-		isDragging: boolean
-		containerId: UniqueIdentifier
-		isSorting: boolean
-		isDragOverlay: boolean
-	}): React.CSSProperties
-	getIndex(id: UniqueIdentifier): number
-	renderItem?: ItemProps['renderItem']
-	wrapperStyle({ index }: { index: number }): React.CSSProperties
-}
-
-function SortableItem({
-	disabled,
-	id,
-	index,
-	handle,
-	displayValue,
-	renderItem,
-	style,
-	containerId,
-	getIndex,
-	wrapperStyle,
-	selectedItemId,
-	setItems,
-	items,
-	tags,
-}: SortableItemProps) {
-	const {
-		setNodeRef,
-		listeners,
-		isDragging,
-		isSorting,
-		over,
-		overIndex,
-		transform,
-		transition,
-	} = useSortable({
-		id,
-	})
-	const mounted = useMountStatus()
-	const mountedWhileDragging = isDragging && !mounted
-	const [openModalItem, setOpenModalItem] = useState(false)
-
-	return (
-		<>
-			<Item
-				ref={disabled ? undefined : setNodeRef}
-				value={displayValue}
-				dragging={isDragging}
-				sorting={isSorting}
-				handle={handle}
-				index={index}
-				wrapperStyle={wrapperStyle({ index })}
-				style={{
-					...style({
-						index,
-						value: id,
-						isDragging,
-						isSorting,
-						overIndex: over ? getIndex(over.id) : overIndex,
-						containerId,
-						isDragOverlay: false,
-					}),
-				}}
-				tags={tags}
-				transition={transition}
-				transform={transform}
-				fadeIn={mountedWhileDragging}
-				listeners={listeners}
-				renderItem={renderItem}
-				setOpenModalItem={setOpenModalItem}
-			/>
-			<ModalItem
-				open={openModalItem}
-				onClose={() => setOpenModalItem(false)}
-				cardId={selectedItemId}
-				columnId={containerId}
-				items={items}
-				setItems={setItems}
-			/>
-		</>
-	)
-}
-
-function useMountStatus() {
-	const [isMounted, setIsMounted] = useState(false)
-
-	useEffect(() => {
-		const timeout = setTimeout(() => setIsMounted(true), 500)
-
-		return () => clearTimeout(timeout)
-	}, [])
-
-	return isMounted
-}
-
-/* -------------------------
-   small ColumnAdder component to place CreateCardInput for columns
-   ------------------------- */
-function ColumnAdder({ onCreate }: { onCreate: (title: string) => void }) {
-	const [show, setShow] = useState(false)
-
-	if (!show) {
-		return (
-			<Box onClick={() => setShow(true)} sx={MultipleContainersAddColumnStyles}>
-				<Plus />
-				Añade otra lista
-			</Box>
-		)
-	}
-
-	return (
-		<CreateCardInput
-			type="column"
-			onCreate={(title) => {
-				onCreate(title)
-				setShow(false)
-			}}
-			onCancel={() => setShow(false)}
-		/>
-	)
 }

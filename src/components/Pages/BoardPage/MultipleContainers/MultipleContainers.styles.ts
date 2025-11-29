@@ -1,4 +1,4 @@
-import { SxProps, Theme } from '@mui/material'
+import { CSSProperties, SxProps, Theme } from '@mui/material'
 
 export const MultipleContainersAddButtonColumnStyles: SxProps<Theme> = (
 	theme: Theme
@@ -35,20 +35,20 @@ export const MultipleContainersContainerStyles: SxProps<Theme> = {
 	gridAutoFlow: 'column',
 }
 
-export const MultipleContainersAddColumnStyles: SxProps<Theme> = {
-	cursor: 'pointer',
-	userSelect: 'none',
-	backgroundColor: '#ffffff3d',
-	padding: '8px 12px',
-	fontSize: 14,
-	marginTop: '12px',
-	display: 'inline-flex',
+export const MultipleContainersDroppableContainerStyles: CSSProperties = {
+	display: 'flex',
+	flexDirection: 'column',
+	maxWidth: '272px',
+	width: '100%',
+	flexShrink: 0,
+	justifyContent: 'center',
 	alignItems: 'center',
-	gap: '8px',
-	borderRadius: '8px',
-	width: '272px',
-	height: '44px',
-	'&:hover': {
-		backgroundColor: 'rgba(255, 255, 255, 0.20)',
-	},
+	flexWrap: 'nowrap',
+}
+
+export const MultipleContainersSortableContextContainerStyles: CSSProperties = {
+	display: 'flex',
+	flexDirection: 'row',
+	alignItems: 'start',
+	gap: '12px',
 }
