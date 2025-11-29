@@ -2,10 +2,7 @@
 import { API } from '@/constants'
 import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
-import type {
-	Items,
-	CardItem,
-} from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
+import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { ObjectId } from 'mongodb'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { toast } from 'react-toastify'
@@ -28,7 +25,7 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 				if (!title?.trim()) return
 
 				const tempId = `${containerId}-${Date.now()}`
-				const newLocalCard: CardItem = { id: tempId, text: title }
+				const newLocalCard = { id: tempId, text: title }
 				const cardTitleAlreadyExists = Object.values(items).some((container) =>
 					container.items.some((card) => card.text === title)
 				)
@@ -75,6 +72,7 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 							updated[i] = {
 								id: String(realCard._id),
 								text: realCard.title,
+								order: realCard.order,
 							}
 						}
 

@@ -1,6 +1,5 @@
 // MultipleContainers.tsx
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { unstable_batchedUpdates } from 'react-dom'
 import {
 	restrictToHorizontalAxis,
 	restrictToVerticalAxis,
@@ -48,13 +47,16 @@ import { useStoreBoard } from '@/context/useStoreBoard'
 import { useCreateCard } from '@/hooks/useCreateCard'
 import { useCreateColumn } from '@/hooks/useCreateColumn'
 import { useAuth } from '@/context/useAuthContext'
-import { useUpdateColumnName } from '@/hooks/useUpdateColumnName'
 import { toast } from 'react-toastify'
 import ModalConfirm from '../components/ModalConfirm/ModalConfirm'
 import { useDeleteColumn } from '@/hooks/useDeleteColumn'
 import ModalItem from '../components/Item/components/ModalItem/ModalItem'
 import { MultipleContainersAddColumnStyles } from './MultipleContainers.styles'
 import type { ICard } from '@/types/card'
+import { useUpdateColumn } from '@/hooks/useUpdateColumn'
+import { unstable_batchedUpdates } from 'react-dom'
+import { useUpdateColumnsOrder } from '@/hooks/useUpdateColumnOrder'
+import { useUpdateAllOrders } from '@/hooks/useUpdateCardOrder'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -298,7 +300,7 @@ export function MultipleContainers({
 			return id
 		}
 
-		return Object.keys(items).find((key) =>
+		return Object.keys(items)?.find((key) =>
 			items[key].items.some((item) => item.id === id)
 		)
 	}
@@ -323,11 +325,25 @@ export function MultipleContainers({
 		setActiveId(null)
 		setClonedItems(null)
 	}
+	const {
+		board: { _id: boardId, userId },
+	} = useStoreBoard()
+	const { user } = useAuth()
+	const { updateColumnsOrder } = useUpdateColumnsOrder(boardId)
+
+	const { updateAllOrders } = useUpdateAllOrders(boardId)
+
+	// después de hacer el drag
+
+	const initialLoadRef = useRef(true)
 
 	useEffect(() => {
-		console.log(items, 'ITEMS')
-		console.log(containers, 'containers')
-	}, [items, containers])
+		if (initialLoadRef.current) {
+			initialLoadRef.current = false
+			return
+		}
+		updateColumnsOrder(containers)
+	}, [containers, updateColumnsOrder])
 
 	useEffect(() => {
 		requestAnimationFrame(() => {
@@ -339,10 +355,7 @@ export function MultipleContainers({
 	const modifiers = isDraggingCard
 		? [restrictToVerticalAxis]
 		: [restrictToHorizontalAxis]
-	const {
-		board: { _id: boardId, userId },
-	} = useStoreBoard()
-	const { user } = useAuth()
+
 	const { createCardInColumn } = useCreateCard({
 		setItems,
 		boardId,
@@ -360,7 +373,7 @@ export function MultipleContainers({
 	const [selectedContainerId, setSelectedContainerId] =
 		useState<UniqueIdentifier | null>(null)
 
-	const { updateColumnName } = useUpdateColumnName({ setItems, items })
+	const { updateColumn } = useUpdateColumn({ setItems, items })
 
 	const handleRemoveColumns = (containerId: UniqueIdentifier) => {
 		const itemsContainer = items[containerId]
@@ -370,6 +383,32 @@ export function MultipleContainers({
 		} else {
 			handleRemove(containerId)
 		}
+	}
+
+	const updateOrders = (
+		data: Items,
+		activeContainerId: UniqueIdentifier,
+		overContainerId: UniqueIdentifier
+	) => {
+		// Hacemos un shallow copy del objeto original, para no mutarlo directamente
+		const newData = { ...data }
+
+		// Función que reasigna order según index + 1
+		const reassignOrder = (containerId: UniqueIdentifier) => {
+			const items = newData[containerId]?.items
+			if (!items) return
+
+			newData[containerId].items = items.map((item, index) => ({
+				...item,
+				order: index + 1, // 👈 se reasigna acá
+			}))
+		}
+
+		// Solo a estos dos contenedores
+		reassignOrder(activeContainerId)
+		reassignOrder(overContainerId)
+
+		return newData
 	}
 
 	return (
@@ -424,8 +463,7 @@ export function MultipleContainers({
 						}
 
 						recentlyMovedToNewContainer.current = true
-
-						return {
+						const newItems = {
 							...items,
 							[activeContainer]: {
 								...items[activeContainer],
@@ -442,6 +480,14 @@ export function MultipleContainers({
 								],
 							},
 						}
+						const result = updateOrders(
+							newItems,
+							activeContainer, // p.ej: "691f6787722b2f9c87c83e60"
+							overContainer // p.ej: "691f6787722b2f9c87c83e61"
+						)
+						updateAllOrders(newItems) // <-- listo, manda TODO de una
+
+						return result
 					})
 				}
 			}}
@@ -470,15 +516,18 @@ export function MultipleContainers({
 				}
 
 				if (overId === TRASH_ID) {
-					setItems((items) => ({
-						...items,
-						[activeContainer]: {
-							...items[activeContainer],
-							items: items[activeContainer].items.filter(
-								(item) => item.id !== activeId
-							),
-						},
-					}))
+					setItems((items) => {
+						const newItems = {
+							...items,
+							[activeContainer]: {
+								...items[activeContainer],
+								items: items[activeContainer].items.filter(
+									(item) => item.id !== activeId
+								),
+							},
+						}
+						return newItems
+					})
 					setActiveId(null)
 					return
 				}
@@ -511,6 +560,9 @@ export function MultipleContainers({
 									items: movingItem ? [movingItem] : [],
 								},
 							}
+
+							updateAllOrders(newItems) // <-- listo, manda TODO de una
+
 							return newItems
 						})
 						// set default title for the new column is already set above
@@ -542,7 +594,15 @@ export function MultipleContainers({
 									),
 								},
 							}
-							return newItems
+
+							const result = updateOrders(
+								newItems,
+								activeContainer,
+								overContainer
+							)
+							updateAllOrders(newItems) // 1 sola vez!
+
+							return result
 						})
 					}
 				}
@@ -573,7 +633,7 @@ export function MultipleContainers({
 							items={(items[containerId]?.items ?? []).map((item) => item.id)}
 							style={containerStyle}
 							onRemove={() => handleRemoveColumns(containerId)}
-							onRename={updateColumnName(containerId, boardId)}
+							onRename={updateColumn(containerId, boardId)}
 							onCreateCard={createCardInColumn(containerId)}
 						>
 							<SortableContext

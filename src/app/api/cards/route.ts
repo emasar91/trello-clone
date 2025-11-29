@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server'
 import { getCardsByColumn } from '@/helpers/getCardsByColumn'
 import { createCard } from '@/helpers/createCardInColumn'
 import { updateCard } from '@/helpers/updateCard'
-import { ICard, ICardComment } from '@/types/card'
+import { updateCardsOrder } from '@/helpers/updateCardsOrder'
+import type { ICard } from '@/types/card'
 
 /**
  * GET /api/cards?columnId=xxxxx
@@ -48,30 +49,22 @@ export async function POST(req: Request) {
 	}
 }
 
+// app/api/cards/route.ts
+
 export async function PUT(req: Request) {
 	try {
 		const body = await req.json()
 
-		// Validar que tenga id
-		if (!body?.cardId) {
+		// 🧠 MODO MASIVO (una sola llamada)
+		if (Array.isArray(body)) {
+			const result = await updateCardsOrder(body)
 			return NextResponse.json(
-				{ error: 'Falta el ID de la tarjeta' },
-				{ status: 400 }
+				{ success: true, modified: result?.modifiedCount ?? 0 },
+				{ status: 200 }
 			)
 		}
 
-		if (!body?.boardId) {
-			return NextResponse.json(
-				{ error: 'Falta el ID del tablero' },
-				{ status: 400 }
-			)
-		}
-		if (!body?.columnId) {
-			return NextResponse.json(
-				{ error: 'Falta el ID de la columna' },
-				{ status: 400 }
-			)
-		}
+		// 🧩 MODO NORMAL – 1 CARD
 		const {
 			cardId,
 			boardId,
@@ -84,43 +77,20 @@ export async function PUT(req: Request) {
 			history,
 		} = body
 
-		// 🔥 TRANSFORMAR COMENTARIOS SOLO SI VIENEN
-		let parsedComments
-		if (comments !== undefined) {
-			parsedComments = comments.map((c: ICardComment) => ({
-				...c,
-				createdAt: new Date(c.createdAt),
-				editedAt: c.editedAt ? new Date(c.editedAt) : null,
-			}))
-		}
+		if (!cardId || !boardId || !columnId)
+			return NextResponse.json(
+				{ error: 'Faltan campos obligatorios' },
+				{ status: 400 }
+			)
 
-		// Crear objeto dinámico con solo lo que llegó
 		const dataToUpdate: Partial<ICard> = {}
-
-		if (title !== undefined) {
-			if (title.trim() === '') {
-				return NextResponse.json(
-					{ error: 'El título no puede estar vacío' },
-					{ status: 400 }
-				)
-			}
-			dataToUpdate.title = title
-		}
+		if (title !== undefined) dataToUpdate.title = title
 		if (description !== undefined) dataToUpdate.description = description
 		if (priorityColor !== undefined) dataToUpdate.priorityColor = priorityColor
-		if (comments !== undefined) dataToUpdate.comments = parsedComments // ← AQUÍ
+		if (comments !== undefined) dataToUpdate.comments = comments
 		if (order !== undefined) dataToUpdate.order = order
 		if (history !== undefined) dataToUpdate.history = history
 
-		// Si no hay nada para actualizar
-		if (Object.keys(dataToUpdate).length === 0) {
-			return NextResponse.json(
-				{ error: 'No se recibieron campos para actualizar' },
-				{ status: 400 }
-			)
-		}
-
-		// Actualizar en la DB
 		const updatedCard = await updateCard({
 			_id: cardId,
 			boardId,
@@ -129,10 +99,11 @@ export async function PUT(req: Request) {
 		})
 
 		return NextResponse.json({ card: updatedCard }, { status: 200 })
-	} catch (err: unknown) {
-		const error = err as Error
-
-		console.error('Error al actualizar tarjeta:', error)
-		return NextResponse.json({ message: error.message }, { status: 500 })
+	} catch (err) {
+		console.error('Error en PUT:', err)
+		return NextResponse.json(
+			{ message: 'Error interno del servidor' },
+			{ status: 500 }
+		)
 	}
 }

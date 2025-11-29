@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server'
 import type { IColumn } from '@/types/columns'
 import { getBoardColumns } from '@/helpers/getBoardColumns'
 import { createColumn } from '@/helpers/createColumnInBoard'
-import { updateColumnName } from '@/helpers/updateColumnName'
+import { updateColumn } from '@/helpers/updateColumn'
 import { deleteColumnAndCards } from '@/helpers/deleteColumn'
+import { updateColumnOrders } from '@/helpers/updateColumnOrders'
 
 export async function GET(request: Request) {
 	try {
@@ -60,32 +61,41 @@ export async function POST(request: Request) {
 	}
 }
 
+// /api/columns/update/route.ts
+
 export async function PUT(request: Request) {
 	try {
-		const { columnId, newName, boardId } = await request.json()
+		const body = await request.json()
 
-		if (!columnId || !newName?.trim()) {
+		// 🔹 Si es ARRAY → actualizar orden
+		const { columnsOrder } = body
+		if (Array.isArray(columnsOrder)) {
+			const updated = await updateColumnOrders(columnsOrder)
+			return NextResponse.json({ success: true, updated }, { status: 200 })
+		}
+
+		// 🔹 Si NO es array → actualizamos 1 columna (comportamiento actual)
+		const { columnId, newName, order, boardId } = body
+
+		if (!columnId) {
 			return NextResponse.json(
-				{ error: 'columnId y newName son requeridos' },
+				{ error: 'columnId es requerido' },
 				{ status: 400 }
 			)
 		}
 
-		// 🔥 Llamamos a DB
-		const updatedColumn = await updateColumnName(
-			columnId,
-			newName.trim(),
-			boardId
-		)
+		const updateFields: { name?: string; order?: number } = {}
+		if (newName?.trim()) updateFields.name = newName.trim()
+		if (order !== undefined) updateFields.order = order
 
-		// ⚠ Control correcto
-		// 🟢 AHORA — si llega null es porque no se modificó nada
-		if (!updatedColumn) {
+		if (Object.keys(updateFields).length === 0) {
 			return NextResponse.json(
-				{ error: 'No se pudo actualizar la columna' },
+				{ error: 'No se envió ningún dato para actualizar' },
 				{ status: 400 }
 			)
 		}
+
+		const updatedColumn = await updateColumn(columnId, boardId, updateFields)
 
 		return NextResponse.json(
 			{ success: true, column: updatedColumn },

@@ -15,7 +15,7 @@ interface Props {
 	label?: string
 	style?: React.CSSProperties
 	onRemove?(): void
-	onRename?: (title: string) => void // 👈 NUEVO
+	onRename?: (data: { newName: string }) => void // 👈 NUEVO
 	handleprops?: React.ButtonHTMLAttributes<HTMLButtonElement>
 	onCreateCard?: (value: string) => void
 }
@@ -40,7 +40,7 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 				return
 			}
 			if (onRename && value.trim()) {
-				onRename(value.trim())
+				onRename({ newName: value.trim() })
 			}
 			setEditing(false)
 		}

@@ -1,4 +1,4 @@
-// hooks/useUpdateColumnName.ts
+// hooks/useUpdateColumn.ts
 import { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { API } from '@/constants'
 import { UniqueIdentifier } from '@dnd-kit/core'
@@ -12,17 +12,23 @@ interface Props {
 	items: Items
 }
 
-export const useUpdateColumnName = ({ setItems, items }: Props) => {
+interface UpdateData {
+	newName?: string
+	order?: number
+}
+
+export const useUpdateColumn = ({ setItems, items }: Props) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 
-	const updateColumnName = useCallback(
+	/**   👇 retorna una función que recebe los datos a modificar   */
+	const updateColumn = useCallback(
 		(containerId: UniqueIdentifier, boardId: string | ObjectId) => {
-			return async (newName: string) => {
+			return async (data: UpdateData) => {
 				if (didFetch.current) return
-				if (!newName?.trim()) return
+				if (!data.newName?.trim()) return
 
-				const titleFixed = newName.trim()
+				const titleFixed = data.newName.trim()
 
 				const titleAlreadyExists = Object.values(items).some(
 					(container) => container.title === titleFixed
@@ -45,13 +51,14 @@ export const useUpdateColumnName = ({ setItems, items }: Props) => {
 					},
 				}))
 
+				// 🔥 Enviar al back
 				try {
 					await axios.put(
 						API.updateColumnUrl, // '/api/columns/update'
 						{
 							columnId: containerId,
-							newName: titleFixed,
 							boardId: boardId.toString(),
+							...data, // 👈 dinámico: name? order?
 						},
 						{ withCredentials: true }
 					)
@@ -78,5 +85,5 @@ export const useUpdateColumnName = ({ setItems, items }: Props) => {
 		[setItems, items]
 	)
 
-	return { updateColumnName, loading }
+	return { updateColumn, loading }
 }

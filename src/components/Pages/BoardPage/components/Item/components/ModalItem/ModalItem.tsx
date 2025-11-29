@@ -73,7 +73,7 @@ function ModalConfirm({
 
 	const { user } = useAuth()
 
-	const cardSelected = cardsByColumn[columnId].find(
+	const cardSelected = cardsByColumn[columnId]?.find(
 		(item) => item._id === cardId
 	)
 	const etiquetasRef = useRef<HTMLSpanElement | null>(null)

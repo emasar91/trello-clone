@@ -34,6 +34,7 @@ export const ManyItems = () => {
 
 		return result
 	}, [columns, cardsByColumn])
+
 	return (
 		<MultipleContainers
 			containerStyle={{
