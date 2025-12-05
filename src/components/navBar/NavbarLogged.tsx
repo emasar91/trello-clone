@@ -39,7 +39,6 @@ const NavbarLogged = () => {
 						<LogoIcon />
 					</Box>
 				</Box>
-				``
 				<Box sx={NavbarLoggedSearchSectionStyle}>
 					<Box sx={NavbarLoggedSearchWrapperStyle}>
 						<Box sx={NavbarLoggedSearchContainerStyle}>

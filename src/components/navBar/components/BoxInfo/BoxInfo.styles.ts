@@ -2,7 +2,11 @@ import { colorsLanding } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const BoxInfoContainerStyle: SxProps<Theme> = {
-	'.MuiDrawer-paper': { marginTop: '60px !important', width: '100%' },
+	'.MuiDrawer-paper': {
+		marginTop: '60px !important',
+		width: '100%',
+		backgroundColor: colorsLanding.boxInfoBackground,
+	},
 	height: '100%',
 	display: 'block',
 }
