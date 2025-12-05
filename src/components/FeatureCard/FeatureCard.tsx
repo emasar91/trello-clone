@@ -45,7 +45,7 @@ function FeatureCard({ title, translate }: Props) {
 					<Box>
 						<Box
 							component={Link}
-							href={t(`${title}.buttonLink`)}
+							href={'/' + t(`${title}.buttonLink`)}
 							sx={FeatureCardButtonStyle}
 						>
 							{t(`${title}.button`)}

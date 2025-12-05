@@ -23,7 +23,6 @@ type Props = { data: IExtraInfo; tabSelected: string }
  */
 const ItemExtraInfo = ({ data, tabSelected }: Props) => {
 	const t = useTranslations(`Drawer.${tabSelected}.extraInfo`)
-
 	return (
 		<Box>
 			{(data.items ?? []).map((item, index) => (
@@ -31,7 +30,7 @@ const ItemExtraInfo = ({ data, tabSelected }: Props) => {
 					key={`index-${index}`}
 					sx={ExtraInfoItemContainerStyle}
 					component={Link}
-					href={t(`items.${item.link}`)}
+					href={'/' + t(`items.${item.link}`)}
 				>
 					<Box key={`index-${index}-${item.title}`}>
 						<Box

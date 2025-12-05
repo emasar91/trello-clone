@@ -12,11 +12,10 @@ async function getCurrentPath(params: { mock?: string[] }) {
 export default async function MockRoute({
 	params,
 }: {
-	params: Promise<{ mock?: string[] }>
+	params: { mock?: string[] }
 }) {
-	const currentPath = await getCurrentPath(await params)
+	const currentPath = await getCurrentPath(params)
 
-	console.log('🚀 ~ MockRoute ~ currentPath:', currentPath)
 	if (!routes.includes(currentPath)) {
 		return notFound()
 	}

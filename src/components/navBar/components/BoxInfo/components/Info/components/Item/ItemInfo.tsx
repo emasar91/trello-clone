@@ -42,12 +42,13 @@ const ItemInfo = ({ data, tabSelected }: Props) => {
 		return values[Math.floor(Math.random() * values.length)]
 	}
 
+	console.log('🚀 ~ ItemInfo ~ data.items:', data.items)
 	return (
 		<>
 			{(data.items ?? []).map((item, index) => (
 				<Box
 					component={Link}
-					href={t(`items.${item.link}`)}
+					href={'/' + t(`items.${item.link}`)}
 					key={`index-${index}`}
 					sx={ItemInfoContainerStyle(hoverColor)}
 					onMouseEnter={() => setHoverColor(() => getRandomColor())}

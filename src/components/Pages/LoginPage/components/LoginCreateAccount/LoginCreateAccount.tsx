@@ -15,7 +15,7 @@ const LoginCreateAccount = ({}) => {
 		<Box sx={LoginCreateAccountContainerStyle}>
 			<Typography>{t('noAccount')}</Typography>
 			<Button component={Link} href="/register">
-				{'Registrar'}
+				{t('record')}
 			</Button>
 		</Box>
 	)

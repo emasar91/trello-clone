@@ -40,7 +40,7 @@ const ExtraInfo = ({ data, tabSelected }: Props) => {
 				{data.link && (
 					<LinkExtraInfo
 						linkButton={t(`${data.linkText}`)}
-						linkTitle={t(`${data.link}`)}
+						linkTitle={'/' + t(`${data.link}`)}
 					/>
 				)}
 			</Box>
@@ -48,7 +48,7 @@ const ExtraInfo = ({ data, tabSelected }: Props) => {
 			{data.button && (
 				<ButtonExtraInfo
 					text={t(`${data.button}`)}
-					linkButton={data.buttonLink ? t(data.buttonLink) : ''}
+					linkButton={data.buttonLink ? '/' + t(data.buttonLink) : ''}
 				/>
 			)}
 		</Box>

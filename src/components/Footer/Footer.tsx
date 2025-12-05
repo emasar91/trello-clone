@@ -57,7 +57,7 @@ const Footer = () => {
 								<Box
 									key={`index-${index}-${item}`}
 									component={Link}
-									href={t(`items.${item}.link`)}
+									href={'/' + t(`items.${item}.link`)}
 									sx={FooterItemsContainerStyle}
 								>
 									<Typography sx={FooterTitleStyle}>

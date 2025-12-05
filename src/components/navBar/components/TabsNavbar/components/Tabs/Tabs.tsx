@@ -33,7 +33,7 @@ const Tabs = () => {
 		setDrawerOpen(!!value.drawer)
 		setBoxInfo(value.drawer as IDrawer)
 		if (!value.drawer) {
-			window.location.href = t(`${value.tab}.link`)
+			window.location.href = '/' + t(`${value.tab}.link`)
 		}
 	}
 

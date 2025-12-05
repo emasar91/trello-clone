@@ -51,7 +51,7 @@ const ItemFullWidth = ({ data, tabSelected }: Props) => {
 					</Box>
 					<Box
 						component={Link}
-						href={t(`items.${item.link}`)}
+						href={'/' + t(`items.${item.link}`)}
 						sx={ItemFullWidthButtonStyle}
 					>
 						{t(`items.${item.button}`)}

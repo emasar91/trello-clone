@@ -27,34 +27,34 @@
 				"items": {
 					"inbox": "Inbox",
 					"inboxDescription": "Capture every vital detail from emails, Slack, and more directly into your Trello Inbox.",
-					"inboxLink": "inbox",
+					"inboxLink": "mock/inbox",
 
 					"planner": "Planner",
 					"plannerDescription": "Sync your calendar and allocate focused time slots to boost productivity.",
-					"plannerLink": "planner",
+					"plannerLink": "mock/planner",
 
 					"automation": "Automation",
 					"automationDescription": "Automate tasks and workflows with Butler automation.",
-					"automationLink": "butler-automation",
+					"automationLink": "mock/butler-automation",
 
 					"power-ups": "Power-ups",
 					"powerUpsDescription": "Power up your teams by linking their favorite tools with Trello plugins.",
-					"power-upsLink": "power-ups",
+					"power-upsLink": "mock/power-ups",
 
 					"templates": "Templates",
 					"templatesDescription": "Give your team a blueprint for success with easy-to-use templates from industry leaders and the Trello community.",
-					"templatesLink": "templates",
+					"templatesLink": "mock/templates",
 
 					"integrations": "Integrations",
 					"integrationsDescription": "Find the apps your team is already using or discover new ways to get work done in Trello.",
-					"integrationsLink": "integrations"
+					"integrationsLink": "mock/integrations"
 				}
 			},
 			"extraInfo": {
 				"featuresExtraTitle": "Meet Trello",
 				"featuresExtraDescription": "Trello makes it easy for your team to get work done. No matter the project, workflow, or type of team, Trello can help keep things organized. It’s simple – sign-up, create a board, and you’re off! Productivity awaits.",
 				"featuresExtraButton": "Check out Trello",
-				"featuresExtraButtonLink": "/tour"
+				"featuresExtraButtonLink": "mock/tour"
 			}
 		},
 		"solutions": {
@@ -63,27 +63,27 @@
 				"items": {
 					"marketingTeams": "Marketing Teams",
 					"marketingTeamsDescription": "Whether launching a new product, campaign, or creating content, Trello helps marketing teams succeed.",
-					"marketingTeamsLink": "teams/marketing",
+					"marketingTeamsLink": "mock/teams/marketing",
 
 					"productManagement": "Product Management",
 					"productManagementDescription": "Use Trello’s management boards and roadmap features to simplify complex projects and processes.",
-					"productManagementLink": "/teams/product",
+					"productManagementLink": "mock/teams/product",
 
 					"engineeringTeams": "Engineering Teams",
 					"engineeringTeamsDescription": "Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.",
-					"engineeringTeamsLink": "/teams/engineering",
+					"engineeringTeamsLink": "mock/teams/engineering",
 
 					"designTeams": "Design Teams",
 					"designTeamsDescription": "Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.",
-					"designTeamsLink": "/teams/design",
+					"designTeamsLink": "mock/teams/design",
 
 					"startups": "Startups",
 					"startupsDescription": "From hitting revenue goals to managing workflows, small businesses thrive with Trello.",
-					"startupsLink": "/teams/startups",
+					"startupsLink": "mock/teams/startups",
 
 					"remoteTeams": "Remote Teams",
 					"remoteTeamsDescription": "Keep your remote team connected and motivated, no matter where they’re located around the world.",
-					"remoteTeamsLink": "/teams/remote-team-management"
+					"remoteTeamsLink": "mock/teams/remote-team-management"
 				}
 			},
 			"extraInfo": {
@@ -92,15 +92,15 @@
 				"items": {
 					"title1": "Use case: Task management",
 					"description1": "Track progress of tasks in one convenient place with a visual layout that adds ‘ta-da’ to your to-do’s.",
-					"link1": "/use-cases/task-management",
+					"link1": "mock/use-cases/task-management",
 					"title2": "Use case: Resource hub",
 					"description2": "Save hours when you give teams a well-designed hub to find information easily and quickly.",
-					"link2": "/use-cases/resource-hub",
+					"link2": "mock/use-cases/resource-hub",
 					"title3": "Use case: Project management",
 					"description3": "Keep projects organized, deadlines on track, and teammates aligned with Trello.",
-					"link3": "/use-cases/project-management"
+					"link3": "mock/use-cases/project-management"
 				},
-				"solutionsExtraLink": "/use-cases",
+				"solutionsExtraLink": "mock/use-cases",
 				"solutionsExtraLinkText": "See all use cases"
 			}
 		},
@@ -109,31 +109,31 @@
 				"items": {
 					"standard": "Standard",
 					"standardDescription": "For teams that need to manage more work and scale collaboration.",
-					"standardLink": "/standard",
+					"standardLink": "mock/standard",
 
 					"premium": "Premium",
 					"premiumDescription": "Best for teams up to 100 that need to track multiple projects and visualize work in a variety of ways.",
-					"premiumLink": "/premium",
+					"premiumLink": "mock/premium",
 
 					"enterprise": "Enterprise",
 					"enterpriseDescription": "Everything your enterprise teams and admins need to manage projects.",
-					"enterpriseLink": "/enterprise",
+					"enterpriseLink": "mock/enterprise",
 
 					"free": "Free plan",
 					"freeDescription": "For individuals or small teams looking to keep work organized.",
 					"freeButton": "Take a tour of Trello",
-					"freeLink": "/tour"
+					"freeLink": "mock/tour"
 				}
 			},
 			"extraInfo": {
 				"plansExtraTitle": "Compare plans & pricing",
 				"plansExtraDescription": "Whether you’re a team of 2 or 2,000, Trello’s flexible pricing model means you only pay for what you need.",
 				"plansExtraButton": "View trello pricing",
-				"plansExtraButtonLink": "/pricing"
+				"plansExtraButtonLink": "mock/pricing"
 			}
 		},
 		"pricing": {
-			"link": "/pricing"
+			"link": "mock/pricing"
 		},
 		"resources": {
 			"info": {
@@ -141,34 +141,34 @@
 				"items": {
 					"trelloGuide": "Trello guide",
 					"trelloGuideDescription": "Our easy to follow workflow guide will take you from project set-up to Trello expert in no time.",
-					"trelloGuideLink": "/guide",
+					"trelloGuideLink": "mock/guide",
 
 					"remoteWorkGuide": "Remote work guide",
 					"remoteWorkGuideDescription": "The complete guide to setting up your team for remote work success.",
-					"remoteWorkGuideLink": "/guide/remote-work",
+					"remoteWorkGuideLink": "mock/guide/remote-work",
 
 					"webinars": "Webinars",
 					"webinarsDescription": "Enjoy our free Trello webinars and become a productivity professional.",
-					"webinarsLink": "/webinars",
+					"webinarsLink": "mock/webinars",
 
 					"customersStories": "Customer stories",
 					"customersStoriesDescription": "See how businesses have adopted Trello as a vital part of their workflow.",
-					"customersStoriesLink": "/customers",
+					"customersStoriesLink": "mock/customers",
 
 					"developers": "Developers",
 					"developersDescription": "The sky's the limit in what you can deliver to Trello users in your Power-Up!",
-					"developersLink": "/trello/developers",
+					"developersLink": "mock/trello/developers",
 
 					"helpResources": "Help resources",
 					"helpResourcesDescription": "Need help? Articles and FAQs to get you unstuck.",
-					"helpResourcesLink": "trello/help"
+					"helpResourcesLink": "mock/trello/help"
 				}
 			},
 			"extraInfo": {
 				"resourcesExtraTitle": "Helping teams work better, together",
 				"resourcesExtraDescription": "Discover Trello use cases, productivity tips, best practices for team collaboration, and expert remote work advice.",
 				"resourcesExtraButton": "Check out the Trello blog",
-				"resourcesExtraButtonLink": "/blog/trello"
+				"resourcesExtraButtonLink": "mock/blog/trello"
 			}
 		}
 	},
@@ -230,21 +230,21 @@
 					"description": "Connect the apps you are already using into your Trello workflow or add a Power-Up to fine-tune your specific needs.",
 					"image": "/assets/integration.svg",
 					"button": "Browse Integrations",
-					"buttonLink": "/integrations"
+					"buttonLink": "mock/integrations"
 				},
 				"ButlerAutomation": {
 					"title": "Butler Automation",
 					"description": "No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.",
 					"image": "/assets/ButlerAutomation.svg",
 					"button": "Get to know Automation",
-					"buttonLink": "/butler-automation"
+					"buttonLink": "mock/butler-automation"
 				},
 				"CardMirroring": {
 					"title": "Card mirroring",
 					"description": "View all your to-dos from multiple boards in one place. Mirror a card to keep track of work wherever you need it!",
 					"image": "/assets/CardMirroring.svg",
 					"button": "Compare plans",
-					"buttonLink": "/pricing"
+					"buttonLink": "mock/pricing"
 				}
 			}
 		},
@@ -276,22 +276,22 @@
 			"AboutTrello": {
 				"title": "About Trello",
 				"subTitle": "What’s behind the boards.",
-				"link": "/about"
+				"link": "mock/about"
 			},
 			"Jobs": {
 				"title": "Jobs",
 				"subTitle": "Learn about open roles on the Trello team.",
-				"link": "/company/careers"
+				"link": "mock/company/careers"
 			},
 			"Apps": {
 				"title": "Apps",
 				"subTitle": "Download the Trello App for your Desktop or Mobile devices.",
-				"link": "/platforms"
+				"link": "mock/platforms"
 			},
 			"ContactUs": {
 				"title": "ContactUs",
 				"subTitle": "Need anything? Get in touch and we can help.",
-				"link": "/contact"
+				"link": "mock/contact"
 			}
 		}
 	},
@@ -313,6 +313,7 @@
 		"login": "Sign in to continue",
 		"recover": "Recover password",
 		"noAccount": "Don't have an account?",
+		"record": "Register",
 		"form": {
 			"google": "Sign In with Google",
 			"recoverPassword": "Send email",
