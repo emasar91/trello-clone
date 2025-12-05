@@ -12,7 +12,7 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
 	mode: 'dark',
 	theme: darkTheme,
 	toggleTheme: () => {
-		const nextMode = get().mode === 'light' ? 'dark' : 'light'
+		const nextMode = get().mode === 'light' ? 'light' : 'dark'
 		set({
 			mode: nextMode,
 			theme: nextMode === 'light' ? lightTheme : darkTheme,
