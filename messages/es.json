@@ -377,7 +377,9 @@
 			"subTitle": "Impulsa tu productividad facilitándoles a todos el acceso a los tableros en una única ubicación.",
 			"create": "Crear",
 			"creating": "Creando...",
-			"successCreate": "Espacio de trabajo creado con exito"
+			"successCreate": "Espacio de trabajo creado con exito",
+			"name": "Nombre del Espacio de trabajo",
+			"description": "Descripción (Opcional)"
 		},
 		"loading": "Cargando...",
 		"menuBaord": {
@@ -388,6 +390,35 @@
 		"cancel": "Cancelar",
 		"name": "Nombre",
 		"description": "Descripcion (Opcional)",
-		"editWorkspaceSuccess": "Espacio de trabajo editado con exito"
+		"editWorkspaceSuccess": "Espacio de trabajo editado con exito",
+		"delete": "Eliminar",
+		"container": {
+			"addCard": "Agregar tarjeta"
+		},
+		"enterNameList": "Introduce un nombre de lista",
+		"enterTitle": "Introduce un título",
+		"addColumn": "Añadir Columna",
+		"addCard": "Añadir Tarjeta",
+		"loadingBoard": "Cargando tablero...",
+		"modalConfirm": {
+			"title": "¿Estás seguro de eliminar esta columna?",
+			"description": "Tambien se eliminaran las tarjetas que contiene, esta acción no se puede deshacer?"
+		},
+		"errorEmpty": "El tablero no puede quedar sin columnas",
+		"errorColumnExists": "Ya existe una columna con el mismo nombre"
+	},
+	"ModalItem": {
+		"tags": "Etiquetas",
+		"description": "Descripcion (Opcional)",
+		"unsavedChanges": "CAMBIOS SIN GUARDAR",
+		"editDescription": "Editar",
+		"commentsAndActivity": "Comentarios y Actividad",
+		"writeComment": "Escribe un comentario...",
+		"delete": "Eliminar",
+		"save": "Guardar",
+		"cancel": "Cancelar",
+		"discardChanges": "Descartar cambios",
+		"recently": "Recientemente",
+		"update": "Actualizar"
 	}
 }

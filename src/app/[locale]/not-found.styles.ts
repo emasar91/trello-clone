@@ -27,6 +27,10 @@ export const NotFoundButtonStyle: SxProps<Theme> = {
 	backgroundColor: colorsLanding.page404LoginButtonBackground,
 }
 
+export const NotFoundButtonHomeStyle: SxProps<Theme> = {
+	color: colorsLanding.page404LoginButtonText,
+}
+
 export const NotFoundTitleStyle: SxProps<Theme> = {
 	marginBottom: '0.5rem',
 	fontSize: '1.5rem',

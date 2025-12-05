@@ -1,4 +1,3 @@
-// MultipleContainers.tsx
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
 	restrictToHorizontalAxis,
@@ -58,6 +57,8 @@ import { useUpdateColumnsOrder } from '@/hooks/useUpdateColumnOrder'
 import { useUpdateAllOrders } from '@/hooks/useUpdateCardOrder'
 import ColumnAdder from './components/ColumnAdder/ColumnAdder'
 import SortableItem from './components/SorteableItem/SorteableItem'
+import { useTranslations } from 'next-intl'
+import { getNextContainerId } from '../utils/getNextContainerId'
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
@@ -181,6 +182,8 @@ export function MultipleContainers({
 	wrapperStyle = () => ({}),
 	renderItem,
 }: Props) {
+	const t = useTranslations('BoardsPage')
+
 	const [items, setItems] = useState<Items>(initialItems)
 	const [containers, setContainers] = useState(
 		Object.keys(initialItems) as UniqueIdentifier[]
@@ -516,7 +519,7 @@ export function MultipleContainers({
 				}
 
 				if (overId === PLACEHOLDER_ID) {
-					const newContainerId = getNextContainerId()
+					const newContainerId = getNextContainerId(items)
 
 					unstable_batchedUpdates(() => {
 						setContainers((containers) => {
@@ -651,8 +654,8 @@ export function MultipleContainers({
 					open={openModal}
 					onClose={() => setOpenModal(false)}
 					onConfirm={handleRemove}
-					title="¿Estás seguro de eliminar esta columna?"
-					message="Tambien se eliminaran las tarjetas que contiene, esta acción no se puede deshacer?"
+					title={t('modalConfirm.title')}
+					message={t('modalConfirm.description')}
 					selectedContainerId={selectedContainerId}
 					loading={loading}
 				/>
@@ -663,7 +666,7 @@ export function MultipleContainers({
 	function handleRemove(containerID: UniqueIdentifier | null) {
 		if (!containerID) return
 		if (containers.length === 1) {
-			toast.error('El tablero no puede quedar sin columnas')
+			toast.error(t('errorEmpty'))
 			return
 		}
 
@@ -683,24 +686,11 @@ export function MultipleContainers({
 		)
 
 		if (titleAlreadyExists) {
-			toast.error('Ya existe una columna con el mismo nombre')
+			toast.error(t('errorColumnExists'))
 			return
 		}
 		if (title?.trim()) {
 			createColumnInBoard()(title.trim())
 		}
-	}
-
-	function getNextContainerId() {
-		const containerIds = Object.keys(items)
-
-		const lastId =
-			containerIds
-				.map((id) => parseInt(id.replace('col-', ''), 10))
-				.filter((n) => !isNaN(n)) // solo números válidos
-				.sort((a, b) => a - b)
-				.pop() || 0
-
-		return `col-${lastId + 1}`
 	}
 }

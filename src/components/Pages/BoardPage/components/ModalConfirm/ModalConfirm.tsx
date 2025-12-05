@@ -15,6 +15,7 @@ import {
 	ModalConfirmDescriptionStyles,
 	ModalConfirmTitleStyles,
 } from './ModalConfirm.styles'
+import { useTranslations } from 'next-intl'
 
 type Props = {
 	open: boolean
@@ -36,6 +37,7 @@ function ModalConfirm({
 	loading,
 }: Props) {
 	const theme = useTheme()
+	const t = useTranslations('BoardsPage')
 
 	return (
 		<Modal open={open} onClose={onClose}>
@@ -57,11 +59,11 @@ function ModalConfirm({
 						{loading ? (
 							<CircularProgress size={14} color="inherit" />
 						) : (
-							'Eliminar'
+							t('delete')
 						)}
 					</Button>
 					<Button onClick={onClose} sx={ModalConfirmButtonStyles(theme)}>
-						Cancelar
+						{t('cancel')}
 					</Button>
 				</Box>
 			</Box>

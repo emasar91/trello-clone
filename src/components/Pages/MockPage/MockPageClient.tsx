@@ -3,6 +3,7 @@
 import { NoDisponibleIcon } from '@/public/assets/icons/NoDisponibleIcon'
 import { Box, Button, Card, CardContent, Typography } from '@mui/material'
 import {
+	MockPageButtonHomeStyle,
 	MockPageButtonsContainerStyle,
 	MockPageButtonStyle,
 	MockPageCardContainerStyle,
@@ -55,7 +56,12 @@ export default function MockPageClient({ route }: MockPageProps) {
 						>
 							{t('buttonLogin')}
 						</Button>
-						<Button component="a" href="/" variant="outlined">
+						<Button
+							component="a"
+							href="/"
+							variant="outlined"
+							sx={MockPageButtonHomeStyle}
+						>
 							{t('buttonHome')}
 						</Button>
 					</Box>

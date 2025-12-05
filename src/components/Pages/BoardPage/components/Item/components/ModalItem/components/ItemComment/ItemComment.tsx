@@ -11,6 +11,7 @@ import {
 	ItemCommentContainerStyles,
 	ItemCommentDateStyles,
 } from './itemComment.styles'
+import { useLocale, useTranslations } from 'next-intl'
 
 type Props = {
 	comment: ICardComment
@@ -20,6 +21,8 @@ type Props = {
 
 const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 	const theme = useTheme()
+	const t = useTranslations('ModalItem')
+	const locale = useLocale()
 
 	return (
 		<Box key={comment.createdAt.toString()} sx={ItemCommentContainerStyles}>
@@ -28,7 +31,7 @@ const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 					{String(comment.authorName)}
 				</Typography>
 				<Typography sx={ItemCommentDateStyles}>
-					{formatCommentDate(comment.editedAt || comment.createdAt)}
+					{formatCommentDate(comment.editedAt || comment.createdAt, locale)}
 				</Typography>
 			</Box>
 			<Typography sx={ItemCommentCommentTextStyles(theme)}>
@@ -36,10 +39,10 @@ const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 			</Typography>
 			<Box sx={ItemCommentButtonsContainerStyles}>
 				<Button sx={ItemCommentButtonStyles(theme)} onClick={onEdit}>
-					Editar
+					{t('editDescription')}
 				</Button>
 				<Button sx={ItemCommentButtonStyles(theme)} onClick={onDelete}>
-					Eliminar
+					{t('delete')}
 				</Button>
 			</Box>
 		</Box>

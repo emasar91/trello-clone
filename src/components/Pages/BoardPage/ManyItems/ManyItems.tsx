@@ -12,14 +12,12 @@ export const ManyItems = () => {
 	const itemsFormatted = useMemo(() => {
 		const result: Items = {}
 
-		// 🔹 Ordenar columnas por order antes de mapear
 		const orderedColumns = [...columns].sort((a, b) => a.order - b.order)
 
 		orderedColumns.forEach((col) => {
 			const colId = col._id.toString()
 			let cards = cardsByColumn[colId] || []
 
-			// 🔹 Ordenar cards por order
 			cards = [...cards].sort((a, b) => a.order - b.order)
 
 			result[colId] = {

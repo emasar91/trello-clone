@@ -121,21 +121,6 @@ db.createCollection('cards', {
 				createdAt: { bsonType: 'date' },
 				updatedAt: { bsonType: ['date', 'null'] },
 
-				// historiales de cambios y pasos por columnas
-				history: {
-					bsonType: ['array'],
-					items: {
-						bsonType: 'object',
-						required: ['fromColumnId', 'toColumnId', 'at'],
-						properties: {
-							fromColumnId: { bsonType: ['objectId', 'null'] },
-							toColumnId: { bsonType: 'objectId' },
-							at: { bsonType: 'date' },
-							byUserId: { bsonType: ['objectId', 'null'] },
-						},
-					},
-				},
-
 				// comentarios embebidos (puede crecer; si esperás muchos comentarios, considerá colección aparte)
 				comments: {
 					bsonType: ['array'],

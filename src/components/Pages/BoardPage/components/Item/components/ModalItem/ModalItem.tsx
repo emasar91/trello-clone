@@ -46,7 +46,7 @@ import Header from './components/Header/Header'
 import { useUpdateCardPriority } from '@/hooks/useUptadeCardTags'
 import { useUpdateCardTitle } from '@/hooks/useUpdateCardTitle'
 import { useUpdateCardDescription } from '@/hooks/useUpdateCardDescription'
-
+import { useTranslations } from 'next-intl'
 type Props = {
 	open: boolean
 	onClose: () => void
@@ -68,6 +68,8 @@ function ModalConfirm({
 		cardsByColumn,
 		board: { _id: boardId },
 	} = useStoreBoard()
+
+	const t = useTranslations('ModalItem')
 
 	const theme = useTheme()
 
@@ -221,13 +223,13 @@ function ModalConfirm({
 					onSubmit={handleEditTitle}
 				/>
 				<Divider />
-				<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+				<Box display={'flex'} justifyContent={'space-between'}>
 					<Box sx={ModalItemDescriptionContainerStyles(theme)}>
 						<Box sx={ModalItemTagContentContainerStyles(theme)}>
 							<Box ref={etiquetasRef} sx={ModalItemDescriptionTypographyStyles}>
 								<TagIcon />
 								<Typography sx={ModalItemTagTitleStyles(theme)}>
-									Etiquetas
+									{t('tags')}
 								</Typography>
 							</Box>
 							<Box sx={ModalItemTagsContainerStyles}>
@@ -256,13 +258,13 @@ function ModalConfirm({
 								<Box sx={ModalItemDescriptionTypographyStyles}>
 									<DescriptionIcon />
 									<Typography sx={ModalItemDescriptionTitleStyles(theme)}>
-										Descripción
+										{t('description')}
 									</Typography>
 								</Box>
 								<Box sx={ModalItemDescriptionTypographyStyles}>
 									{description !== cardSelected?.description && (
 										<Typography sx={ModalItemUnsavedChangesStyles(theme)}>
-											CAMBIOS SIN GUARDAR
+											{t('unsavedChanges')}
 										</Typography>
 									)}
 
@@ -270,7 +272,7 @@ function ModalConfirm({
 										onClick={() => setShowEditDescription(true)}
 										sx={ModalItemEditDescriptionButtonStyles(theme)}
 									>
-										Editar
+										{t('editDescription')}
 									</Button>
 								</Box>
 							</Box>
@@ -284,9 +286,11 @@ function ModalConfirm({
 									onSubmit={handleEditDescription}
 								/>
 							) : (
-								<Typography sx={ModalItemDescriptionTextStyles(theme)}>
-									{cardSelected?.description}
-								</Typography>
+								cardSelected?.description && (
+									<Typography sx={ModalItemDescriptionTextStyles(theme)}>
+										{cardSelected?.description}
+									</Typography>
+								)
 							)}
 						</Box>
 					</Box>
@@ -294,11 +298,11 @@ function ModalConfirm({
 						<Box sx={ModalItemActivityTitleContainerStyles(theme)}>
 							<ActivityIcon />
 							<Typography sx={ModalItemActivityTypographyStyles(theme)}>
-								Comentarios y Actividad
+								{t('commentsAndActivity')}
 							</Typography>
 							{newComment !== '' && (
 								<Typography sx={ModalItemUnsavedChangesStyles(theme)}>
-									CAMBIOS SIN GUARDAR
+									{t('unsavedChanges')}
 								</Typography>
 							)}
 						</Box>
@@ -312,7 +316,7 @@ function ModalConfirm({
 									onClick={() => setShowCreateComment(true)}
 									sx={ModalItemCreateCommentButtonStyles(theme)}
 								>
-									Escribe un comentario...
+									{t('writeComment')}
 								</Button>
 							) : (
 								<CreateEditComment

@@ -22,6 +22,7 @@ import {
 } from './TagMenu.styles'
 import { CloseIcon } from '@/public/assets/icons/CloseIcon'
 import { UniqueIdentifier } from '@dnd-kit/core'
+import { useTranslations } from 'next-intl'
 
 type ICreateBoardMenuProps = {
 	open: boolean
@@ -48,13 +49,12 @@ function TagMenu({
 	cardId,
 }: ICreateBoardMenuProps) {
 	const theme = useTheme()
-
-	// 🟢 Guardamos un array con todos los tags seleccionados
+	const t = useTranslations('ModalItem')
 
 	const toggleTag = (imgSrc: string) => {
 		const newTags = selectedTags.includes(imgSrc)
-			? selectedTags.filter((tag) => tag !== imgSrc) // si ya está → se quita
-			: [...selectedTags, imgSrc] // si no está → se agrega
+			? selectedTags.filter((tag) => tag !== imgSrc)
+			: [...selectedTags, imgSrc]
 		setSelectedTags(newTags)
 		onSubmit(cardId, newTags)
 	}
@@ -68,7 +68,7 @@ function TagMenu({
 
 	return (
 		<Menu
-			id="create-board-menu"
+			id="tags-menu"
 			anchorEl={anchorEl}
 			open={open}
 			onClose={handleClose}
@@ -83,7 +83,7 @@ function TagMenu({
 				<Box sx={TagMenuBackgroundSelectionStyles}>
 					<Box sx={TagMenuTypographyContainerStyle}>
 						<Typography variant="h6" sx={TagMenuTypographyStyle(theme)}>
-							Etiquetas
+							{t('tags')}
 						</Typography>
 						<Box sx={{ cursor: 'pointer' }} onClick={handleClose}>
 							<CloseIcon />

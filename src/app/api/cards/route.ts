@@ -74,7 +74,6 @@ export async function PUT(req: Request) {
 			priorityColor,
 			comments,
 			order,
-			history,
 		} = body
 
 		if (!cardId || !boardId || !columnId)
@@ -89,7 +88,6 @@ export async function PUT(req: Request) {
 		if (priorityColor !== undefined) dataToUpdate.priorityColor = priorityColor
 		if (comments !== undefined) dataToUpdate.comments = comments
 		if (order !== undefined) dataToUpdate.order = order
-		if (history !== undefined) dataToUpdate.history = history
 
 		const updatedCard = await updateCard({
 			_id: cardId,

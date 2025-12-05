@@ -8,6 +8,7 @@ import {
 	EditDescriptionContainerStyles,
 	EditDescriptionInputStyles,
 } from './EditDescription.styles'
+import { useTranslations } from 'next-intl'
 
 interface IEditDescription {
 	description: string
@@ -25,6 +26,9 @@ const EditDescription = ({
 	onSubmit,
 }: IEditDescription) => {
 	const theme = useTheme()
+
+	const t = useTranslations('ModalItem')
+
 	return (
 		<Box sx={EditDescriptionContainerStyles}>
 			<TextField
@@ -47,7 +51,7 @@ const EditDescription = ({
 			/>
 			<Box sx={EditDescriptionButtonsContainerStyles}>
 				<Button variant="contained" onClick={onSubmit}>
-					Guardar
+					{t('save')}
 				</Button>
 				<Button
 					sx={EditDescriptionButtonCancelStyles(theme)}
@@ -57,8 +61,8 @@ const EditDescription = ({
 					}}
 				>
 					{description !== cardSelected?.description
-						? 'Descartar cambios'
-						: 'Cancelar'}
+						? t('discardChanges')
+						: t('cancel')}
 				</Button>
 			</Box>
 		</Box>

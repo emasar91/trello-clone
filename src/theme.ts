@@ -66,6 +66,7 @@ declare module '@mui/material/styles' {
 			blackBackgroundList: string
 			blackBackgroundCard: string
 			textGray: string
+			addButtonCardHover: string
 		}
 		modal: {
 			backgroundColor: string
@@ -144,6 +145,7 @@ declare module '@mui/material/styles' {
 			blackBackgroundList: string
 			blackBackgroundCard: string
 			textGray: string
+			addButtonCardHover: string
 		}
 		modal: {
 			backgroundColor: string
@@ -235,6 +237,7 @@ export const lightTheme = createTheme({
 			blackBackgroundList: colorDark.blackBackgroundList,
 			blackBackgroundCard: colorDark.blackCard,
 			textGray: colorDark.grayTextCard,
+			addButtonCardHover: colorDark.cardBackgroundHover,
 		},
 		modal: {
 			backgroundColor: colorDark.blackCard,
@@ -387,6 +390,7 @@ export const darkTheme = createTheme({
 			blackBackgroundList: colorDark.blackBackgroundList,
 			blackBackgroundCard: colorDark.blackCard,
 			textGray: colorDark.grayTextCard,
+			addButtonCardHover: colorDark.cardBackgroundHover,
 		},
 		modal: {
 			backgroundColor: colorDark.blackCard,

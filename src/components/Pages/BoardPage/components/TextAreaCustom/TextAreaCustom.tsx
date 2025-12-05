@@ -10,6 +10,7 @@ import {
 } from './TextAreaCustom.styles'
 import { Box, Button, useTheme } from '@mui/material'
 import { CloseIcon } from '@/public/assets/icons/CloseIcon'
+import { useTranslations } from 'next-intl'
 
 interface Props {
 	onCreate: (title: string) => void
@@ -19,6 +20,8 @@ interface Props {
 
 export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 	const theme = useTheme()
+	const t = useTranslations('BoardsPage')
+
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -122,11 +125,7 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 				value={value}
 				onChange={(e) => handleChange(e.target.value)}
 				onKeyDown={handleKeyDown}
-				placeholder={
-					type === 'column'
-						? 'Introduce un nombre de lista'
-						: 'Introduce un título'
-				}
+				placeholder={type === 'column' ? t('enterNameList') : t('enterTitle')}
 				maxLength={type === 'column' ? 25 : 80}
 				minRows={type === 'card' ? 1 : undefined}
 				maxRows={type === 'card' ? 3 : undefined}
@@ -143,7 +142,7 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 
 			<Box sx={ButtonContainerStyles}>
 				<Button onClick={finish} sx={ButtonStyles(theme)}>
-					{type === 'column' ? 'Añadir Columna' : 'Añadir Tarjeta'}
+					{type === 'column' ? t('addColumn') : t('addCard')}
 				</Button>
 
 				<div onClick={handleCancel} style={{ cursor: 'pointer' }}>

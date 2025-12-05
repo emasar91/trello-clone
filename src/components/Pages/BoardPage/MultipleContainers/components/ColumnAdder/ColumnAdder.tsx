@@ -3,15 +3,17 @@ import { Box } from '@mui/material'
 import { Plus } from '@/public/assets/icons/Plus'
 import CreateCardInput from '../../../components/TextAreaCustom/TextAreaCustom'
 import { ColumnAdderAddColumnStyles } from './ColumnAdder.styles'
+import { useTranslations } from 'next-intl'
 
 const ColumnAdder = ({ onCreate }: { onCreate: (title: string) => void }) => {
 	const [show, setShow] = useState(false)
+	const t = useTranslations('BoardsPage')
 
 	if (!show) {
 		return (
 			<Box onClick={() => setShow(true)} sx={ColumnAdderAddColumnStyles}>
 				<Plus />
-				Añade otra lista
+				{t('addColumn')}
 			</Box>
 		)
 	}

@@ -22,14 +22,7 @@ export async function updateCard(data: UpdateCardData) {
 	const allowedFields: (keyof Omit<
 		ICard,
 		'_id' | 'boardId' | 'columnId' | 'userId' | 'createdAt'
-	>)[] = [
-		'title',
-		'description',
-		'priorityColor',
-		'comments',
-		'order',
-		'history',
-	]
+	>)[] = ['title', 'description', 'priorityColor', 'comments', 'order']
 
 	allowedFields.forEach((field) => {
 		if (data[field] !== undefined) {

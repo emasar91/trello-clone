@@ -2,6 +2,7 @@
 
 import { Box, Button, Card, CardContent, Typography } from '@mui/material'
 import {
+	NotFoundButtonHomeStyle,
 	NotFoundButtonsContainerStyle,
 	NotFoundButtonStyle,
 	NotFoundCardContainerStyle,
@@ -46,7 +47,12 @@ export default function NotFound() {
 						>
 							{t('buttonLogin')}
 						</Button>
-						<Button component="a" href="/" variant="outlined">
+						<Button
+							sx={NotFoundButtonHomeStyle}
+							component="a"
+							href="/"
+							variant="outlined"
+						>
 							{t('buttonHome')}
 						</Button>
 					</Box>

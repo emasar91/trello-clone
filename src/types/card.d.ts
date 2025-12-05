@@ -1,12 +1,5 @@
 import { ObjectId } from 'mongodb'
 
-export interface ICardHistory {
-	fromColumnId: ObjectId | null
-	toColumnId: ObjectId
-	at: Date
-	byUserId: ObjectId | null
-}
-
 export interface ICardComment {
 	_id: string
 	authorId: string | ObjectId
@@ -26,7 +19,6 @@ export interface ICard {
 	priorityColor: string[] | null
 	createdAt: Date
 	updatedAt: Date | null
-	history: ICardHistory[]
 	comments: ICardComment[]
 	order: number
 }

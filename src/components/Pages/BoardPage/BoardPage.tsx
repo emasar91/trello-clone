@@ -14,6 +14,7 @@ import { useStoreBoard } from '@/context/useStoreBoard'
 import { ManyItems } from './ManyItems/ManyItems'
 import { useBoardData } from '@/hooks/useGetBoardData'
 import NotificationContainer from '@/components/Notifications/Notifications'
+import { useTranslations } from 'next-intl'
 
 function BoardPage({
 	boardname,
@@ -24,6 +25,7 @@ function BoardPage({
 }) {
 	const theme = useTheme()
 	const { user } = useAuth()
+	const t = useTranslations('BoardsPage')
 
 	const { setBoard, board, setColumns, columns, setCardsForColumn } =
 		useStoreBoard()
@@ -47,7 +49,7 @@ function BoardPage({
 		return (
 			<Box sx={LoadingContainerStyle}>
 				<CircularProgress />
-				Cargando tablero...
+				{t('loadingBoard')}
 			</Box>
 		)
 

@@ -37,14 +37,6 @@ export async function createCard(data: CreateCardData) {
 		order: order, // si no se define, va al final
 
 		// 👇 SECCIÓN OBLIGATORIA SEGÚN TU TIPO
-		history: [
-			{
-				fromColumnId: null,
-				toColumnId: toObjectId(data.columnId) as ObjectId,
-				at: now,
-				byUserId: toObjectId(data.userId) as ObjectId,
-			},
-		],
 		comments: [],
 	}
 

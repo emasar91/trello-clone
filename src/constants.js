@@ -250,6 +250,7 @@ export const routes = [
 	'teams/engineering',
 	'teams/design',
 	'teams/startups',
+	'teams/butler-automation',
 	'teams/remote-team-management',
 	'use-cases/task-management',
 	'use-cases/resource-hub',
@@ -270,6 +271,7 @@ export const routes = [
 	'company/careers',
 	'platforms',
 	'contact',
+	'trello/help',
 ]
 
 export const colorTokens = {
@@ -354,7 +356,7 @@ export const colorsLanding = {
 	mockPageBackground: colorTokens.blueBackground,
 	mockPageLoginButtonBackground: colorTokens.brandPrimary,
 	mockPageLoginButtonText: colorTokens.white,
-	mockPageTitle: colorTokens.blueText,
+	mockPageTitle: colorTokens.white,
 	mockPageSubTitle: colorTokens.gray,
 	mockPageDescription: colorTokens.darkBlue,
 	mockPageDescriptionContainerBackground: colorTokens.iconBackground,
@@ -363,7 +365,7 @@ export const colorsLanding = {
 	page404Background: colorTokens.blueBackground,
 	page404LoginButtonBackground: colorTokens.brandPrimary,
 	page404LoginButtonText: colorTokens.white,
-	page404Title: colorTokens.blueText,
+	page404Title: colorTokens.white,
 	page404SubTitle: colorTokens.gray,
 	page404Description: colorTokens.darkBlue,
 	page404DescriptionContainerBackground: colorTokens.iconBackground,
@@ -462,6 +464,7 @@ export const colorDark = {
 	scrollbarColor1: '#6e6f68',
 	scrollbarColor2: '#101204',
 	modalBackground: '#303134',
+	cardBackgroundHover: '#2a2c21',
 }
 
 export const colorLight = {

@@ -27,6 +27,10 @@ export const MockPageButtonStyle: SxProps<Theme> = {
 	backgroundColor: colorsLanding.mockPageLoginButtonBackground,
 }
 
+export const MockPageButtonHomeStyle: SxProps<Theme> = {
+	color: colorsLanding.mockPageLoginButtonText,
+}
+
 export const MockPageTitleStyle: SxProps<Theme> = {
 	marginBottom: '0.5rem',
 	fontSize: '1.5rem',

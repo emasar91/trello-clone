@@ -73,7 +73,7 @@ function ModalCreateWorkspace({
 
 						<TextField
 							fullWidth
-							label="Nombre del Espacio de trabajo"
+							label={t('modalCreateWorkspace.name')}
 							variant="outlined"
 							value={workspaceName}
 							sx={ModalCreateWorkspaceInputStyle(theme)}
@@ -82,7 +82,7 @@ function ModalCreateWorkspace({
 
 						<TextField
 							fullWidth
-							label="Descripción (Opcional)"
+							label={t('modalCreateWorkspace.description')}
 							multiline
 							rows={4}
 							variant="outlined"

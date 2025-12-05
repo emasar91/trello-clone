@@ -6,6 +6,7 @@ import {
 	CreateEditCommentContainerStyles,
 	CreateEditCommentInputStyles,
 } from './CreateEditComment.styles'
+import { useTranslations } from 'next-intl'
 
 type Props = {
 	value: string
@@ -23,6 +24,8 @@ const CreateEditComment = ({
 	type = 'new',
 }: Props) => {
 	const theme = useTheme()
+	const t = useTranslations('ModalItem')
+
 	return (
 		<Box sx={CreateEditCommentContainerStyles(type)}>
 			<TextField
@@ -45,7 +48,7 @@ const CreateEditComment = ({
 			/>
 			<Box sx={CreateEditCommentButtonsContainerStyles}>
 				<Button variant="contained" onClick={onSubmit}>
-					Guardar
+					{type === 'new' ? t('save') : t('update')}
 				</Button>
 				<Button
 					sx={CreateEditCommentButtonCancelStyles(theme)}
@@ -53,7 +56,7 @@ const CreateEditComment = ({
 						setShow(false)
 					}}
 				>
-					Cancelar
+					{t('cancel')}
 				</Button>
 			</Box>
 		</Box>

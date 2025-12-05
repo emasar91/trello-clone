@@ -122,3 +122,31 @@ export const ContainerStyles = ({
 	},
 	...style,
 })
+
+export const ContainerContentAddCardStyles = (
+	theme: Theme
+): SxProps<Theme> => ({
+	display: 'flex',
+	alignItems: 'center',
+	borderRadius: '8px',
+	fontSize: 14,
+	padding: '8px 12px',
+	margin: '0 8px 8px 8px',
+	gap: 1,
+	width: '100%',
+	'&:hover': {
+		backgroundColor: theme.palette.boardPage.addButtonCardHover,
+	},
+})
+
+export const ContainerAddCardStyles = (theme: Theme): SxProps<Theme> => ({
+	cursor: 'pointer',
+	userSelect: 'none',
+	display: 'flex',
+	alignItems: 'center',
+	gap: 1,
+	width: '272px',
+	backgroundColor: theme.palette.boardPage.blackBackgroundList,
+	borderBottomRightRadius: '12px',
+	borderBottomLeftRadius: '12px',
+})

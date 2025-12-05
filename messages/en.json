@@ -366,8 +366,59 @@
 		"createNewBoardTitle": "Create board",
 		"yourBoards": "Your boards",
 		"titleBoard": "Board title",
+		"descriptionBoard": "Description (Optional)",
 		"writeTitle": "Write the title",
+		"writeDescription": "Write the description",
 		"requiredTitle": "👋 You must indicate the title of the board",
-		"create": "Create"
+		"optionalDescription": "Description is optional",
+		"create": "Create",
+		"modalCreateWorkspace": {
+			"title": "Let's create a workspace",
+			"subTitle": "Impulsa tu productividad facilitándoles a todos el acceso a los tableros en una única ubicación.",
+			"create": "Create",
+			"creating": "Creating...",
+			"successCreate": "Workspace created successfully",
+			"name": "Workspace name",
+			"description": "Description (Optional)"
+		},
+		"loading": "Loading...",
+		"menuBaord": {
+			"createBoard": "Create board",
+			"successCreate": "Board created successfully"
+		},
+		"createWorkspace": "Create workspace",
+		"cancel": "Cancel",
+		"name": "Name",
+		"description": "Description (Optional)",
+		"editWorkspaceSuccess": "Workspace edited successfully",
+		"delete": "Delete",
+		"container": {
+			"addCard": "Add card"
+		},
+		"enterNameList": "Enter a list name",
+		"enterTitle": "Enter a title",
+		"addColumn": "Add Column",
+		"addCard": "Add Card",
+		"loadingBoard": "Loading board...",
+		"modalConfirm": {
+			"title": "Are you sure you want to delete this column?",
+			"description": "Also the cards that contain will be deleted, this action cannot be undone?"
+		},
+		"errorEmpty": "The board cannot be left without columns",
+		"errorColumnExists": "A column with the same name already exists"
+	},
+	"ModalItem": {
+		"tags": "Tags",
+		"description": "Description (Optional)",
+		"unsavedChanges": "UNSAVED CHANGES",
+		"editDescription": "Edit",
+		"commentsAndActivity": "Comments and Activity",
+		"writeComment": "Write a comment...",
+		"delete": "Delete",
+		"save": "Save",
+		"cancel": "Cancel",
+		"discardChanges": "Discard changes",
+		"recently": "Recently",
+		"update": "Update"
 	}
 }
