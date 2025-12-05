@@ -45,7 +45,7 @@ export default function AccountMenu() {
 	const locale = useLocale()
 	const t = useTranslations('NavbarLogged')
 	const theme = useTheme()
-	const toggleTheme = useThemeStore((s) => s.toggleTheme)
+	const toggleTheme = useThemeStore((s) => s.setMode)
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 	const [themeAnchorEl, setThemeAnchorEl] = React.useState<null | HTMLElement>(
@@ -73,11 +73,11 @@ export default function AccountMenu() {
 
 	const [selectedTheme, setSelectedTheme] = React.useState<
 		typeof LIGHT_THEME | typeof DARK_THEME
-	>(LIGHT_THEME)
+	>(theme.palette.mode === 'dark' ? DARK_THEME : LIGHT_THEME)
 
 	const handleSelect = (value: typeof LIGHT_THEME | typeof DARK_THEME) => {
 		setSelectedTheme(value)
-		toggleTheme()
+		toggleTheme(value)
 	}
 
 	const [openModal, setOpenModal] = useState(false)

@@ -1,8 +1,31 @@
 'use client'
+
+import { useEffect, useState } from 'react'
+import { ThemeProvider, CssBaseline } from '@mui/material'
 import { useThemeStore } from '@/context/useTheme'
-import { ThemeProvider } from '@mui/material/styles'
 
 export function ThemeWrapper({ children }: { children: React.ReactNode }) {
-	const { theme } = useThemeStore()
-	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+	const { mode, theme, setMode } = useThemeStore()
+	const [hydrated, setHydrated] = useState(false)
+
+	useEffect(() => {
+		// Hidratar manualmente el store
+		useThemeStore.persist.rehydrate()
+		setHydrated(true)
+	}, [])
+
+	useEffect(() => {
+		if (hydrated) {
+			setMode(mode) // Recalcular theme una vez cargado
+		}
+	}, [hydrated, mode, setMode])
+
+	if (!hydrated) return null // Evita flash incorrecto
+
+	return (
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			{children}
+		</ThemeProvider>
+	)
 }
