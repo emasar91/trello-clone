@@ -59,12 +59,12 @@ async function InnerLayout({
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<ThemeWrapper>
 							<AuthProvider>
-								<div className="flex flex-col min-h-screen">
-									<NavBar />
+								<div>
+									{/* <NavBar /> */}
 									<main className="flex-1 flex flex-col items-center justify-center">
 										{children}
 									</main>
-									<Footer />
+									{/* <Footer /> */}
 								</div>
 							</AuthProvider>
 						</ThemeWrapper>

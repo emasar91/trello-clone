@@ -7,6 +7,9 @@ export const Section2TitleStyle: SxProps<Theme> = {
 	lineHeight: 1.33333,
 	fontWeight: 500,
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
+	'@media (max-width: 768px)': {
+		fontSize: '1.5rem',
+	},
 }
 
 export const Section2SubtitleStyle: SxProps<Theme> = {
@@ -29,6 +32,7 @@ export const Section2TextContainerStyle: SxProps<Theme> = {
 	justifyContent: 'flex-start',
 	display: 'flex',
 	flexWrap: 'wrap',
+	width: '100%',
 	marginLeft: '-1rem',
 	marginRight: '-1rem',
 }
@@ -40,6 +44,9 @@ export const Section2TextContentStyle: SxProps<Theme> = {
 	flex: '0 0 auto',
 	width: '58.3333%',
 	padding: '1rem',
+	'@media (max-width: 768px)': {
+		width: '100%',
+	},
 }
 
 export const Section2ImageSliderStyle: SxProps<Theme> = {

@@ -11,21 +11,22 @@ import {
 	FeatureCardTitleStyle,
 } from './FeatureCard.styles'
 
-type Props = { title: string; translate: string }
+type Props = { title: string; translate: string; index: number }
 
 /**
  * The FeatureCard component renders a feature card with image, title, description and button.
  *
- * @param {{ title: string, translate: string }} props
+ * @param {{ title: string, translate: string ,index: number}} props
  * @returns {JSX.Element}
  * @example
  * <FeatureCard title="analytics" translate="translation" />
  */
-function FeatureCard({ title, translate }: Props) {
+function FeatureCard({ title, translate, index }: Props) {
+	console.log('🚀 ~ FeatureCard ~ index:', index)
 	const t = useTranslations(translate)
 
 	return (
-		<Box sx={FeatureCardContianerStyle}>
+		<Box sx={FeatureCardContianerStyle(index)}>
 			<Box sx={FeatureCardContentContainerStyle}>
 				<Box sx={FeatureCardContentStyle}>
 					<Box

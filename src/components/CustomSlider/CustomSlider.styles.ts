@@ -6,6 +6,8 @@ export const CustomSliderImageStyle: SxProps<Theme> = {
 	height: 'auto',
 	borderRadius: 2,
 	pointerEvents: 'none',
+	boxShadow:
+		'rgba(9, 30, 66, 0.2) 0px 3px 5px, rgba(9, 30, 66, 0.31) 0px 0px 1px',
 }
 
 export const CustomSliderImageContainerStyle: SxProps<Theme> = {
@@ -21,6 +23,10 @@ export const CustomSliderContentContainerStyle = (
 	mawHeight: showLeftItems ? 450 : 300,
 	mx: 'auto',
 	cursor: isDragging ? 'grabbing' : 'grab',
+	'@media (max-width: 1200px)': {
+		maxWidth: showLeftItems ? 640 : 720,
+		mawHeight: showLeftItems ? 350 : 250,
+	},
 })
 
 export const CustomSliderTabStyle = (
@@ -109,7 +115,10 @@ export const CustomSliderLeftItemsContainerColumnStyle: SxProps<Theme> = {
 	display: 'flex',
 	flexDirection: 'column',
 	gap: 2,
-	minWidth: 200,
+	width: '33%',
+	'@media (max-width: 990px)': {
+		width: '100%',
+	},
 }
 
 export const CustomSliderContainerStyle: SxProps<Theme> = {
@@ -117,6 +126,10 @@ export const CustomSliderContainerStyle: SxProps<Theme> = {
 	flexDirection: 'row',
 	gap: 4,
 	padding: '1rem 1rem 5rem',
+	width: '100%',
+	'@media (max-width: 990px)': {
+		flexDirection: 'column-reverse',
+	},
 }
 
 export const CustomSliderRightIconTabStyle: SxProps<Theme> = {

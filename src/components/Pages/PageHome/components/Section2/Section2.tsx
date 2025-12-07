@@ -14,7 +14,7 @@ const Section2 = () => {
 	const t = useTranslations('PageHome.section2')
 
 	return (
-		<Box>
+		<>
 			<Box sx={Section2TextContainerStyle}>
 				<Box sx={Section2TextContentStyle}>
 					<Box>
@@ -38,7 +38,7 @@ const Section2 = () => {
 				items={itemsSliderSection2}
 				translate={'PageHome.section2.slider.items'}
 			/>
-		</Box>
+		</>
 	)
 }
 

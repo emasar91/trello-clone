@@ -21,7 +21,7 @@ const Section1 = () => {
 	return (
 		<Box sx={PageHomeContainerStyle}>
 			<Box sx={PageHomeContentStyle}>
-				<Box>
+				<>
 					<Typography variant="h1" sx={PageHomeTitleStyle}>
 						{t('title')}
 					</Typography>
@@ -29,7 +29,7 @@ const Section1 = () => {
 					<Typography sx={PageHomeDescriptionStyle}>
 						{t('description')}
 					</Typography>
-				</Box>
+				</>
 
 				<Box sx={PageHomeLinkContainerStyle} onClick={() => setOpenModal(true)}>
 					<Typography sx={PageHomeLinkStyle}>{t('watchVideo')}</Typography>

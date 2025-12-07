@@ -26,9 +26,16 @@ export const FeatureDescriptionCardTitleContainerStyle: SxProps<Theme> = {
 }
 
 export const FeatureDescriptionCardTitleAndDescriptionContainerStyle: SxProps<Theme> =
-	{ padding: '0px 2rem', width: '45%' }
+	{
+		padding: '0px 2rem',
+		width: '45%',
+		'@media (max-width: 990px)': { width: '100%' },
+	}
 
-export const FeatureDescriptionCardImageStyle: SxProps<Theme> = { width: '55%' }
+export const FeatureDescriptionCardImageStyle: SxProps<Theme> = {
+	width: '55%',
+	'@media (max-width: 990px)': { width: '90%' },
+}
 
 export const FeatureDescriptionCardContentStyle = (
 	sideImage: 'left' | 'right'
@@ -42,6 +49,12 @@ export const FeatureDescriptionCardContentStyle = (
 	gap: '2rem',
 	textAlign: 'left',
 	padding: '2rem',
+	'@media (max-width: 990px)': {
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: '1rem',
+	},
 })
 
 export const FeatureDescriptionCardContainerStyle: SxProps<Theme> = {

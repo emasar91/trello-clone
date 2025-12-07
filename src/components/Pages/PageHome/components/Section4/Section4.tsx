@@ -15,7 +15,7 @@ import {
 const Section4 = () => {
 	const t = useTranslations('PageHome.section4')
 	return (
-		<Box>
+		<>
 			<Box sx={Section4TextContainerStyle}>
 				<Typography sx={Section4SubTitleStyle}>{t('subTitle')}</Typography>
 				<Typography sx={Section4TitleStyle}>{t('title')}</Typography>
@@ -29,10 +29,11 @@ const Section4 = () => {
 						key={`index-${index}`}
 						title={item.title}
 						translate={'PageHome.section4.items'}
+						index={index}
 					/>
 				))}
 			</Box>
-		</Box>
+		</>
 	)
 }
 

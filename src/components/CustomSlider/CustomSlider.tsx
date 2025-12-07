@@ -21,6 +21,7 @@ import React from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowLeftIcon } from '@/public/assets/icons/ArrowLeftIcon'
 import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
+import { useWindowSize } from '@/hooks/useWindowsSize'
 
 type Props = {
 	showLeftItems: boolean
@@ -40,12 +41,14 @@ type Props = {
 export function CustomSlider({ showLeftItems, items, translate }: Props) {
 	const [isDragging, setIsDragging] = useState(false)
 	const [activeIndex, setActiveIndex] = useState(0)
-	const sliderRef = useRef<Slider | null>(null)
+	const sliderRefImages = useRef<Slider | null>(null)
+	const sliderRefLeft = useRef<Slider | null>(null)
 	const t = useTranslations(translate)
 
 	const internalSetActiveIndex = (index: number) => {
-		setActiveIndex?.(index)
-		sliderRef.current?.slickGoTo(index)
+		setActiveIndex(index)
+		sliderRefImages.current?.slickGoTo(index)
+		sliderRefLeft.current?.slickGoTo(index)
 	}
 
 	const settings = {
@@ -56,39 +59,69 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		beforeChange: (_: number, next: number) => {
-			setActiveIndex?.(next)
+			setActiveIndex(next)
+			sliderRefLeft.current?.slickGoTo(next)
+			sliderRefImages.current?.slickGoTo(next)
 		},
 	}
 
+	const width = useWindowSize()
+
 	return (
 		<Box sx={CustomSliderContainerStyle}>
-			{showLeftItems && (
-				<Box sx={CustomSliderLeftItemsContainerColumnStyle}>
-					{items.map((item, index) => (
-						<Box
-							key={`item-${index}`}
-							onClick={() => internalSetActiveIndex(index)}
-							sx={CustomSliderLeftItemsContainerStyle(activeIndex, index)}
-						>
-							<Typography variant="h6" sx={CustomSliderLeftItemsTitleStyle}>
-								{t(`${item.title}.title`)}
-							</Typography>
-							<Typography
-								component={'p'}
-								sx={CustomSliderLeftItemsDescriptionStyle}
+			{showLeftItems &&
+				(width !== null && width > 990 ? (
+					<Box sx={CustomSliderLeftItemsContainerColumnStyle}>
+						{items.map((item, index) => (
+							<Box
+								key={`item-${index}`}
+								onClick={() => internalSetActiveIndex(index)}
+								sx={CustomSliderLeftItemsContainerStyle(activeIndex, index)}
 							>
-								{t(`${item.title}.description`)}
-							</Typography>
-						</Box>
-					))}
-				</Box>
-			)}
+								<Typography variant="h6" sx={CustomSliderLeftItemsTitleStyle}>
+									{t(`${item.title}.title`)}
+								</Typography>
+								<Typography
+									component={'p'}
+									sx={CustomSliderLeftItemsDescriptionStyle}
+								>
+									{t(`${item.title}.description`)}
+								</Typography>
+							</Box>
+						))}
+					</Box>
+				) : (
+					<Slider ref={sliderRefLeft} {...settings}>
+						{items.map((item, index) => (
+							<Box
+								key={`item-${index}`}
+								onClick={() => internalSetActiveIndex(index)}
+								sx={CustomSliderLeftItemsContainerStyle(activeIndex, index)}
+							>
+								<Typography variant="h6" sx={CustomSliderLeftItemsTitleStyle}>
+									{t(`${item.title}.title`)}
+								</Typography>
+								<Typography
+									component={'p'}
+									sx={CustomSliderLeftItemsDescriptionStyle}
+								>
+									{t(`${item.title}.description`)}
+								</Typography>
+							</Box>
+						))}
+					</Slider>
+				))}
 
 			<Box
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					gap: '1.5rem',
+					'@media (max-width: 990px)': {
+						flexDirection: 'column-reverse',
+						justifyContent: 'center',
+						alignItems: 'center',
+					},
 				}}
 			>
 				<Box sx={{ display: 'flex', gap: '1.5rem' }}>
@@ -109,7 +142,7 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 						))}
 					</Tabs>
 
-					{!showLeftItems && (
+					{!showLeftItems && width !== null && width > 990 && (
 						<Box sx={CustomSliderTabsArrowPanelStyle}>
 							<IconButton
 								onClick={() =>
@@ -143,7 +176,7 @@ export function CustomSlider({ showLeftItems, items, translate }: Props) {
 					onMouseUp={() => setIsDragging(false)}
 					onMouseLeave={() => setIsDragging(false)}
 				>
-					<Slider ref={sliderRef} {...settings}>
+					<Slider ref={sliderRefImages} {...settings}>
 						{items.map((item, index) => (
 							<Box
 								key={`index-${index}-${item.title}`}

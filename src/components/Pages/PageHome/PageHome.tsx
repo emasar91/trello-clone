@@ -19,7 +19,9 @@ const PageHome = () => {
 		<>
 			<PageContainer backgroundColor={colorsLanding.homePageBackgroundSection1}>
 				<Section1 />
-				<CustomModal styles={{ width: '720px', height: '405px' }}>
+				<CustomModal
+					styles={{ width: '720px', height: 'auto', maxWidth: '80%' }}
+				>
 					<VideoBox VideoSrc="/assets/video/VideoTrello.mp4" />
 				</CustomModal>
 			</PageContainer>

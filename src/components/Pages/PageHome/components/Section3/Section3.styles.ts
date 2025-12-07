@@ -17,6 +17,9 @@ export const Section3TitleStyle: SxProps<Theme> = {
 	fontFamily: "var(--font-family-text, 'Charlie Display', sans-serif)",
 	textAlign: 'center',
 	marginTop: '0.5rem',
+	'@media (max-width: 768px)': {
+		fontSize: '1.5rem',
+	},
 }
 
 export const Section3SubTitleStyle: SxProps<Theme> = {
@@ -30,4 +33,7 @@ export const Section3SubTitleStyle: SxProps<Theme> = {
 export const Section3ConainterTitleAndSubStyle: SxProps<Theme> = {
 	width: '66.6667%',
 	padding: '4rem 1rem',
+	'@media (max-width: 768px)': {
+		width: '100%',
+	},
 }

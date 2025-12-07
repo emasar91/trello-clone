@@ -54,9 +54,17 @@ export const FeatureCardContentContainerStyle: SxProps<Theme> = {
 	overflow: 'hidden',
 }
 
-export const FeatureCardContianerStyle: SxProps<Theme> = {
+export const FeatureCardContianerStyle = (index: number): SxProps<Theme> => ({
 	display: 'block',
 	flex: '0 0 auto',
 	width: '33.3333%',
 	padding: '1rem',
-}
+	'@media (max-width: 990px)': {
+		marginLeft: index !== 2 ? '0' : '25%',
+		width: '50%',
+	},
+	'@media (max-width: 768px)': {
+		width: '100%',
+		marginLeft: 0,
+	},
+})
