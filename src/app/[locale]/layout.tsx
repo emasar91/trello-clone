@@ -60,11 +60,11 @@ async function InnerLayout({
 						<ThemeWrapper>
 							<AuthProvider>
 								<div>
-									{/* <NavBar /> */}
+									<NavBar />
 									<main className="flex-1 flex flex-col items-center justify-center">
 										{children}
 									</main>
-									{/* <Footer /> */}
+									<Footer />
 								</div>
 							</AuthProvider>
 						</ThemeWrapper>

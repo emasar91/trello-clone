@@ -351,6 +351,7 @@ export const colorsLanding = {
 	footerTitleBorder: colorTokens.white,
 	footerSubtitle: colorTokens.white,
 	footerItemHover: colorTokens.blackShadow,
+	footerBorder: colorTokens.grayLight,
 
 	//mockpage
 	mockPageBackground: colorTokens.blueBackground,

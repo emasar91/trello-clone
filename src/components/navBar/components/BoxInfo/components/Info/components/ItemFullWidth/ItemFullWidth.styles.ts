@@ -5,7 +5,9 @@ export const ItemFullWidthContainerStyle: SxProps<Theme> = {
 	width: '100%',
 }
 
-export const ItemFullWidthContentContainerStyle: SxProps<Theme> = {
+export const ItemFullWidthContentContainerStyle = (
+	mobileMenu: boolean
+): SxProps<Theme> => ({
 	textalign: 'left',
 	padding: ' 1.5rem',
 	display: 'flex',
@@ -13,10 +15,10 @@ export const ItemFullWidthContentContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 	margin: '0px auto',
 	gap: '1rem',
-	maxWidth: '712px',
+	maxWidth: mobileMenu ? '100%' : '712px',
 	backgroundColor: colorsLanding.boxInfoFullWidthButtonContainer,
 	boxSizing: 'border-box',
-}
+})
 
 export const ItemFullWidthButtonStyle: SxProps<Theme> = {
 	userselect: 'none',

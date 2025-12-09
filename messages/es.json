@@ -12,6 +12,7 @@
 	},
 
 	"NavBar": {
+		"back": "Atrás",
 		"tabs": {
 			"features": "Características",
 			"solutions": "Soluciones",

@@ -1,0 +1,81 @@
+/* contenedor */
+.menu {
+	width: 30px;
+	height: 20px;
+	position: relative;
+	display: inline-block;
+	padding: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* barras base */
+.bar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background-color: #333;
+	display: block;
+	transform-origin: center;
+	transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.5s ease,
+		background-color 0.5s ease;
+}
+
+/* posiciones cerradas (por defecto) */
+.bar1 {
+	top: 0;
+}
+.bar2 {
+	top: 9px;
+}
+.bar3 {
+	top: 18px;
+}
+
+/* --- estado OPEN: transformaciones finales --- */
+.menu.open .bar1 {
+	/* mueve hacia el centro y gira */
+	transform: translateY(9px) rotate(45deg);
+}
+
+.menu.open .bar3 {
+	/* mueve hacia el centro y gira opuesto */
+	transform: translateY(-9px) rotate(-45deg);
+}
+
+/* la barra central se achica para desaparecer */
+.menu.open .bar2 {
+	transform: scaleX(0);
+	opacity: 0;
+}
+
+/* --- para que al cerrar la barra central "crezca" con delay --- */
+/* regla por defecto (cerrado) para la barra2: queremos que tenga delay al pasar de closed<-open */
+.menu .bar2 {
+	transform: scaleX(1);
+	opacity: 1;
+	transition: transform 260ms cubic-bezier(0.2, 0.9, 0.3, 1), opacity 200ms ease;
+	/* cuando está cerrada, si acabamos de quitar .open queremos que la barra tarde un pelín en reaparecer */
+	/* esto aplica cuando el contenedor NO tiene .open */
+}
+
+/* regla que aplica sólo cuando NO está abierta — agrega delay al reaparecer */
+.menu:not(.open) .bar2 {
+	transition-delay: 120ms;
+}
+
+/* regla que aplica sólo cuando SÍ está abierta — desaparecer sin delay */
+.menu.open .bar2 {
+	transition-delay: 0ms;
+}
+
+/* pequeño ajuste visual al hacer foco (opcional) */
+.menu:focus {
+	outline: none;
+}
+.menu:focus .bar {
+	background-color: #111;
+}

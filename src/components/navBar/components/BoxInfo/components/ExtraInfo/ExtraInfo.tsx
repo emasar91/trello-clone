@@ -11,6 +11,7 @@ import LinkExtraInfo from './Components/Link/LinkExtraInfo'
 type Props = {
 	data: IExtraInfo
 	tabSelected: string
+	mobileMenu?: boolean
 }
 
 /**
@@ -24,18 +25,20 @@ type Props = {
  * @param tabSelected - the selected tab in the Navbar
  * @returns a JSX element for the ExtraInfo section
  */
-const ExtraInfo = ({ data, tabSelected }: Props) => {
+const ExtraInfo = ({ data, tabSelected, mobileMenu = false }: Props) => {
 	const t = useTranslations(`Drawer.${tabSelected}.extraInfo`)
 
 	return (
 		<Box sx={ExtraInfoStyle}>
 			<Box>
-				<TitleExtraInfo text={t(`${data.title}`)} />
+				<TitleExtraInfo text={t(`${data.title}`)} mobileMenu={mobileMenu} />
 
 				{data.description && (
 					<DescriptionExtraInfo text={t(`${data.description}`)} />
 				)}
-				{data.items && <ItemExtraInfo data={data} tabSelected={tabSelected} />}
+				{data.items && !mobileMenu && (
+					<ItemExtraInfo data={data} tabSelected={tabSelected} />
+				)}
 
 				{data.link && (
 					<LinkExtraInfo

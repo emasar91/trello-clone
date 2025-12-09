@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography'
 import React from 'react'
 import { ExtraInfoTitleStyle } from './TitleExtraInfo.styles'
 
-type Props = { text: string }
+type Props = { text: string; mobileMenu?: boolean }
 
 /**
  * TitleExtraInfo component that renders a title text using Typography component
@@ -13,9 +13,9 @@ type Props = { text: string }
  * @returns {JSX.Element} A Typography component displaying the title text.
  */
 
-const TitleExtraInfo = ({ text }: Props) => {
+const TitleExtraInfo = ({ text, mobileMenu }: Props) => {
 	return (
-		<Typography variant="h3" sx={ExtraInfoTitleStyle}>
+		<Typography variant="h3" sx={ExtraInfoTitleStyle(mobileMenu)}>
 			{text}
 		</Typography>
 	)

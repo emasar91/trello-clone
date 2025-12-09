@@ -13,7 +13,7 @@ import {
 	ItemFullWidthTitleStyle,
 } from './ItemFullWidth.styles'
 
-type Props = { data: IDataInfo; tabSelected: string }
+type Props = { data: IDataInfo; tabSelected: string; mobileMenu?: boolean }
 
 /**
  * ItemFullWidth is a MUI Box component that renders a full-width item for the drawer,
@@ -25,13 +25,16 @@ type Props = { data: IDataInfo; tabSelected: string }
  *
  * @returns {ReactElement} - The rendered component.
  */
-const ItemFullWidth = ({ data, tabSelected }: Props) => {
+const ItemFullWidth = ({ data, tabSelected, mobileMenu = false }: Props) => {
 	const t = useTranslations(`Drawer.${tabSelected}.info`)
 
 	return (
 		<Box sx={ItemFullWidthContainerStyle}>
 			{(data.itemsFullWidth ?? []).map((item, index) => (
-				<Box key={`index-${index}`} sx={ItemFullWidthContentContainerStyle}>
+				<Box
+					key={`index-${index}`}
+					sx={ItemFullWidthContentContainerStyle(mobileMenu)}
+				>
 					<Box key={`index-${index}`} sx={{ marginTop: '-1rem' }}>
 						<Box sx={ItemFullWidthTitleContainerStyle}>
 							{item.icon && (

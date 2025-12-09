@@ -12,6 +12,7 @@
 	},
 
 	"NavBar": {
+		"back": "Back",
 		"tabs": {
 			"features": "Features",
 			"solutions": "Solutions",

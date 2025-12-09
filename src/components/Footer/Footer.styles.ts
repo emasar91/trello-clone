@@ -24,17 +24,23 @@ export const FooterItemsContainerStyle: SxProps<Theme> = {
 	flexDirection: 'column',
 	textDecoration: 'none',
 	'&:hover': { backgroundColor: colorsLanding.footerItemHover },
+	'@media (max-width: 990px)': {
+		width: '100%',
+		borderBottom: `1px solid ${colorsLanding.footerBorder}`,
+		padding: '1rem 0',
+	},
 }
 
 export const FooterItemRowStyle: SxProps<Theme> = {
 	display: 'flex',
 	width: '83.3333%',
 	flexDirection: 'row',
+	'@media (max-width: 990px)': { flexDirection: 'column', width: '100%' },
 }
 
 export const FooterLogInStyle: SxProps<Theme> = {
 	color: colorsLanding.footerTitle,
-	'&:hover': { borderBottom: `1px solid ${colorsLanding.footerTitleBorder}` },
+	'&:hover': { borderBottom: `1px solid ${colorsLanding.footerBorder}` },
 }
 
 export const FooterLogInLinkStyle: SxProps<Theme> = {
@@ -50,6 +56,15 @@ export const FooterLogInContainerStyle: SxProps<Theme> = {
 	flexDirection: 'column',
 	position: 'relative',
 	top: '25px',
+	'@media (max-width: 990px)': {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginBottom: '2rem',
+		paddingBottom: '2rem',
+		borderBottom: `1px solid ${colorsLanding.footerBorder}`,
+	},
 }
 
 export const FooterContentStyle: SxProps<Theme> = {
@@ -57,6 +72,15 @@ export const FooterContentStyle: SxProps<Theme> = {
 	height: '130px',
 	padding: '1rem ',
 	margin: '2rem 0',
+	flexDirection: 'row',
+	'@media (max-width: 990px)': {
+		flexDirection: 'column',
+		width: '100%',
+		height: 'auto',
+	},
 }
 
-export const FooterContainerStyle: SxProps<Theme> = { display: 'flex' }
+export const FooterContainerStyle: SxProps<Theme> = {
+	display: 'flex',
+	'@media (max-width: 990px)': { width: '100%' },
+}

@@ -35,9 +35,9 @@ export interface ITab {
 }
 
 export interface IDataInfo {
-	title: string | undefined
-	items: ITabItem[] | undefined
-	itemsFullWidth: ITabItem[] | undefined
+	title?: string
+	items?: ITabItem[]
+	itemsFullWidth?: ITabItem[]
 }
 
 export type TabsOptions =
