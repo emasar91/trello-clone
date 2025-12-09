@@ -20,6 +20,10 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
 }) => (
 	<Box>
 		<Button
+			sx={{
+				width: '100%',
+				marginTop: '1rem',
+			}}
 			onClick={onClick}
 			startIcon={
 				<Box component={'img'} src={'/assets/googleIcon.png'} width={40} />

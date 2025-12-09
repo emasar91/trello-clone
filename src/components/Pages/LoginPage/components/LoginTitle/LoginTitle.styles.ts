@@ -9,4 +9,4 @@ export const LoginTitleContainerStyle: SxProps<Theme> = {
 	alignItems: 'center',
 }
 
-export const LoginTitleSubtitleStyle: SxProps<Theme> = { marginTop: '5rem' }
+export const LoginTitleSubtitleStyle: SxProps<Theme> = { marginTop: '2rem' }

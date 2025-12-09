@@ -100,13 +100,16 @@ const NavBar = () => {
 						</Box>
 					</Box>
 					{width ? (
-						<Box
-							onClick={() => {
-								setOpen(!open)
-							}}
-							sx={NavBarBurguerMenuContainerStyle}
-						>
-							<BurguerIconMenu />
+						<Box display={'flex'} gap={'1rem'} alignItems={'center'}>
+							<LangSwitcher />
+							<Box
+								onClick={() => {
+									setOpen(!open)
+								}}
+								sx={NavBarBurguerMenuContainerStyle}
+							>
+								<BurguerIconMenu />
+							</Box>
 						</Box>
 					) : (
 						<>

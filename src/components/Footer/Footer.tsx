@@ -46,7 +46,7 @@ const Footer = () => {
 				<Box sx={FooterContentStyle}>
 					<Box sx={FooterLogInContainerStyle}>
 						<LogoFooter />
-						<Box component={Link} href="/loging" sx={FooterLogInLinkStyle}>
+						<Box component={Link} href="/login" sx={FooterLogInLinkStyle}>
 							<Typography sx={FooterLogInStyle}>{t('loging')}</Typography>
 						</Box>
 					</Box>
