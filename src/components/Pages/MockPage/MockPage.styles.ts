@@ -11,6 +11,7 @@ export const MockPageContainerStyle = {
 	justifyContent: 'center',
 	alignItems: 'center',
 	width: '100%',
+	marginTop: '3rem',
 	backgroundColor: colorsLanding.mockPageBackground,
 }
 
