@@ -36,7 +36,7 @@ export async function getBoardByNames(
 	const board = await boardsCollection.findOne({
 		userId: user?._id,
 		workspaceId: workspace._id,
-		name: boardName,
+		name: boardName.toLowerCase(),
 	})
 
 	if (!board) {

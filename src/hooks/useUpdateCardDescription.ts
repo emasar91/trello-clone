@@ -70,8 +70,6 @@ export const useUpdateCardDescription = ({
 					},
 					{ withCredentials: true }
 				)
-
-				toast.success('Descripción actualizada')
 			} catch (err) {
 				console.error(err)
 				toast.error('Error al actualizar la descripción')

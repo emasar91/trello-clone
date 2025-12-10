@@ -149,4 +149,5 @@ export const ContainerAddCardStyles = (theme: Theme): SxProps<Theme> => ({
 	backgroundColor: theme.palette.boardPage.blackBackgroundList,
 	borderBottomRightRadius: '12px',
 	borderBottomLeftRadius: '12px',
+	marginTop: '-1px',
 })

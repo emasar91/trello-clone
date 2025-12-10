@@ -2,7 +2,8 @@ import { ObjectId } from 'mongodb'
 
 export const toObjectId = (value: string | ObjectId) => {
 	try {
-		return new ObjectId(value)
+		const objectId = new ObjectId(value)
+		return objectId
 	} catch {
 		return value // si ya es un ObjectId válido
 	}

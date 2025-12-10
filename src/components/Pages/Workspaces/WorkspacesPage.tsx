@@ -1,6 +1,6 @@
 'use client'
-import { Box, useTheme } from '@mui/material'
-import React, { useEffect } from 'react'
+import { Box, CircularProgress, useMediaQuery, useTheme } from '@mui/material'
+import React, { useLayoutEffect } from 'react'
 import {
 	BoardsContainerStyle,
 	BoardsSectionStyle,
@@ -27,15 +27,25 @@ function WorkspacesPage({
 
 	const { getWorkspaces, loading: loadingWorkspace } = useGetWorkspaces()
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		getWorkspaces(setWorkSpaces)
 	}, [uid, getWorkspaces, setWorkSpaces])
+	const width = useMediaQuery('(min-width:600px)')
 
 	return (
 		<Box component={'nav'} sx={BoardsContainerStyle(theme)}>
-			<MenuBoards workspaces={workspaces} />
+			{width && <MenuBoards workspaces={workspaces} />}
 			<Box component="main" sx={BoardsSectionStyle}>
-				{!loadingWorkspace && (
+				{loadingWorkspace ? (
+					<Box
+						display="flex"
+						justifyContent="center"
+						alignItems="center"
+						height={'80dvh'}
+					>
+						<CircularProgress size={60} />
+					</Box>
+				) : (
 					<>
 						{type === 'w' && (
 							<BoardSectionWorkspaces

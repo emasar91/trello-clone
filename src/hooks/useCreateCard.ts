@@ -2,8 +2,11 @@
 import { API } from '@/constants'
 import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
-import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
-import { ObjectId } from 'mongodb'
+import type {
+	Items,
+	ColumnItem,
+} from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
+import type { ObjectId } from 'mongodb'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { toast } from 'react-toastify'
 
@@ -25,7 +28,21 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 				if (!title?.trim()) return
 
 				const tempId = `${containerId}-${Date.now()}`
-				const newLocalCard = { id: tempId, text: title }
+				const newLocalCard: ColumnItem = {
+					id: tempId,
+					text: title,
+					_id: 'temp-id' as unknown as ObjectId,
+					boardId: boardId as unknown as ObjectId,
+					columnId: containerId as unknown as ObjectId,
+					userId,
+					title,
+					description: '',
+					priorityColor: [],
+					createdAt: new Date(),
+					updatedAt: null,
+					comments: [],
+					order: items[containerId]?.items?.length || 0,
+				}
 				const cardTitleAlreadyExists = Object.values(items).some((container) =>
 					container.items.some((card) => card.text === title)
 				)
@@ -70,9 +87,17 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 
 						if (i !== -1) {
 							updated[i] = {
+								...realCard,
 								id: String(realCard._id),
 								text: realCard.title,
-								order: realCard.order,
+								_id: realCard._id as unknown as ObjectId,
+								boardId: realCard.boardId as unknown as ObjectId,
+								columnId: realCard.columnId as unknown as ObjectId,
+								userId: realCard.userId as unknown as ObjectId,
+								createdAt: new Date(realCard.createdAt),
+								updatedAt: realCard.updatedAt
+									? new Date(realCard.updatedAt)
+									: null,
 							}
 						}
 
@@ -81,8 +106,6 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 							[containerId]: { ...prev[containerId], items: updated },
 						}
 					})
-
-					toast.success('Tarjeta creada')
 				} catch (err) {
 					console.error(err)
 					toast.error('Error al crear tarjeta')

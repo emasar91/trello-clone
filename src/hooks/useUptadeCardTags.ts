@@ -61,8 +61,6 @@ export const useUpdateCardPriority = ({ setItems, items, boardId }: Props) => {
 					},
 					{ withCredentials: true }
 				)
-
-				toast.success('Tags actualizados')
 			} catch (err) {
 				console.error(err)
 				toast.error('Error al actualizar tags')

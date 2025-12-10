@@ -62,8 +62,6 @@ export const useUpdateColumn = ({ setItems, items }: Props) => {
 						},
 						{ withCredentials: true }
 					)
-
-					toast.success('Columna actualizada')
 				} catch (err) {
 					console.error(err)
 					toast.error('Error al actualizar columna')

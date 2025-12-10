@@ -20,15 +20,21 @@ function FormEditWorkspace({
 	handleClose,
 	onSubmit,
 	defaultName,
+	defaultDescription,
 	loading,
 }: {
 	handleClose: () => void
-	onSubmit: (value1: string, value2: string, resetForm: () => void) => void
+	onSubmit: (
+		newData: { newName: string; newDescription: string },
+		defaultName: string,
+		resetForm: () => void
+	) => void
 	defaultName: string
+	defaultDescription: string
 	loading: boolean
 }) {
 	const [newWorkspaceName, setNewWorkspaceName] = useState(defaultName)
-	const [newDescription, setNewDescription] = useState('')
+	const [newDescription, setNewDescription] = useState(defaultDescription)
 
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
@@ -39,7 +45,13 @@ function FormEditWorkspace({
 	}
 
 	const handleSubmit = () => {
-		onSubmit(newWorkspaceName, newDescription, resetForm)
+		const newData = {
+			newName: newWorkspaceName === defaultName ? '' : newWorkspaceName.trim(),
+			newDescription:
+				newDescription === defaultDescription ? '' : newDescription.trim(),
+		}
+
+		onSubmit(newData, defaultName, resetForm)
 	}
 
 	return (

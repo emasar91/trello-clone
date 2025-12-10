@@ -94,6 +94,7 @@ export async function PUT(req: Request) {
 				? String(body.description).trim()
 				: undefined
 
+		// 🚫 Si ambos vienen vacíos, error
 		if (!name && !description) {
 			return NextResponse.json(
 				{ message: 'Debe enviar nombre o descripción para actualizar' },
@@ -101,6 +102,7 @@ export async function PUT(req: Request) {
 			)
 		}
 
+		// 🚫 workspaceId requerido
 		if (!workspaceId) {
 			return NextResponse.json(
 				{ message: 'ID de workspace requerido' },
@@ -108,24 +110,34 @@ export async function PUT(req: Request) {
 			)
 		}
 
-		const workspaces = (await getWorkspaces(
-			user.uid
-		)) as unknown as IWorkspace[]
+		// 🛠 Construir objeto dinámico
+		const updateData: { name?: string; description?: string } = {}
+		if (name) updateData.name = name
+		if (description) updateData.description = description
 
-		const exists = workspaces.some((ws) => ws.name.toString() === name)
+		// 👀 Validar duplicado solo si se quiere actualizar el nombre
+		if (updateData.name) {
+			const workspaces = (await getWorkspaces(
+				user.uid
+			)) as unknown as IWorkspace[]
 
-		if (exists) {
-			return NextResponse.json(
-				{ message: 'Ya tienes un workspace con ese nombre' },
-				{ status: 409 }
+			const exists = workspaces.some(
+				(ws) => ws.name.toString() === updateData.name
 			)
+
+			if (exists) {
+				return NextResponse.json(
+					{ message: 'Ya tienes un workspace con ese nombre' },
+					{ status: 409 }
+				)
+			}
 		}
+
 		// 4️⃣ Llamar al helper que actualiza en MongoDB
 		const result = await editWorkspace({
 			userId: user.uid,
 			workspaceId,
-			name,
-			description,
+			...updateData, // <---- solo manda lo que corresponde
 		})
 
 		return NextResponse.json({ workspace: result }, { status: 200 })

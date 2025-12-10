@@ -1,7 +1,4 @@
-import { HelpIcon } from '@/public/assets/icons/HelpIcon'
 import { LogoIcon } from '@/public/assets/icons/LogoIcon'
-import { MegafonoIcon } from '@/public/assets/icons/MegafonoIcon'
-import { NotificationIcon } from '@/public/assets/icons/NotificationIcon'
 import { SearchIcon } from '@/public/assets/icons/SearchIcon'
 import {
 	Box,
@@ -11,7 +8,7 @@ import {
 	Link,
 	useTheme,
 } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import AccountMenu from './components/AccountMenu/AccounMenu'
 import {
 	NavbarLoggedActionsStyle,
@@ -26,10 +23,23 @@ import {
 	NavbarLoggedSearchWrapperStyle,
 } from './NavBarLogged.styles'
 import { useTranslations } from 'next-intl'
+import CreateBoardMenu from '../Pages/Workspaces/components/CreateBordMenu/CreateBoardMenu'
 
 const NavbarLogged = () => {
 	const t = useTranslations('NavbarLogged')
 	const theme = useTheme()
+
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget)
+	}
+
+	const handleClose = () => {
+		setAnchorEl(null)
+	}
+
+	const open = Boolean(anchorEl)
 
 	return (
 		<Box sx={NavbarLoggedContainerStyle(theme)}>
@@ -58,15 +68,20 @@ const NavbarLogged = () => {
 							/>
 						</Box>
 					</Box>
-					<Button variant="contained" sx={NavbarLoggedCreateButtonStyle(theme)}>
+					<Button
+						variant="contained"
+						sx={NavbarLoggedCreateButtonStyle(theme)}
+						onClick={handleClick}
+					>
 						{t('create')}
 					</Button>
+					<CreateBoardMenu
+						open={open}
+						handleClose={handleClose}
+						anchorEl={anchorEl}
+					/>
 				</Box>
 				<Box sx={NavbarLoggedActionsStyle}>
-					<MegafonoIcon />
-					<NotificationIcon />
-					<HelpIcon />
-
 					<AccountMenu />
 				</Box>
 			</Box>

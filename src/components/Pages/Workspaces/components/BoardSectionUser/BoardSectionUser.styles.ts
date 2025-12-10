@@ -4,7 +4,6 @@ export const BoardSectionUserStyle: SxProps<Theme> = {
 	maxWidth: '914px',
 	width: '100%',
 	overflowY: 'auto',
-	margin: '40px 210px 0 210px',
 	display: 'flex',
 	flexDirection: 'column',
 	gap: '32px',

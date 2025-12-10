@@ -51,6 +51,7 @@ export const NavbarLoggedActionsStyle: SxProps<Theme> = {
 	gap: 1,
 	justifyContent: 'center',
 	alignItems: 'center',
+	marginLeft: '1rem',
 }
 
 export const NavbarLoggedSearchSectionStyle: SxProps<Theme> = {

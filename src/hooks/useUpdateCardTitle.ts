@@ -67,8 +67,6 @@ export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
 					},
 					{ withCredentials: true }
 				)
-
-				toast.success('Título actualizado')
 			} catch (err) {
 				if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
 				setItems(items) // rollback

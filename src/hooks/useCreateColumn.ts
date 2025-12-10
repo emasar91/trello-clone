@@ -4,12 +4,17 @@ import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import type { UniqueIdentifier } from '@dnd-kit/core'
-import { CardItem } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { User } from 'firebase/auth'
+import { ICard } from '@/types/card'
 
 interface Props {
 	setItems: React.Dispatch<
-		React.SetStateAction<Record<string, { title: string; items: CardItem[] }>>
+		React.SetStateAction<
+			Record<
+				string,
+				{ title: string; items: (ICard & { id: string; text: string })[] }
+			>
+		>
 	>
 	setContainers: React.Dispatch<React.SetStateAction<UniqueIdentifier[]>>
 	boardId: string
@@ -64,7 +69,6 @@ export const useCreateColumn = ({
 					return copy
 				})
 
-				toast.success('Columna creada')
 				return realId
 			} catch (err) {
 				console.error(err)

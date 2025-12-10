@@ -15,33 +15,29 @@ export const useDeleteColumn = ({
 	const didFetch = useRef(false)
 
 	const deleteColumn = useCallback(
-		(columnId: UniqueIdentifier, boardId: string) => {
+		async (columnId: UniqueIdentifier, boardId: string) => {
 			if (didFetch.current) return
 			didFetch.current = true
 			setLoading(true)
 
-			// 🟡 Optimistic UI → sacamos la columna y sus cards del front
+			// 🟡 OPTIMISTIC UI: eliminar la columna del estado antes de la respuesta
 			setItems((prev) => {
 				const newItems = { ...prev }
 				delete newItems[columnId]
 				return newItems
 			})
 
-			axios
-				.delete(API.deleteColumnUrl, {
+			try {
+				await axios.delete(API.deleteColumnUrl, {
 					data: { columnId, boardId },
 					withCredentials: true,
 				})
-				.then(() => {
-					toast.success('Columna eliminada')
-				})
-				.catch(() => {
-					toast.error('Error al eliminar columna')
-				})
-				.finally(() => {
-					setLoading(false)
-					didFetch.current = false
-				})
+			} catch {
+				toast.error('Error al eliminar columna')
+			} finally {
+				setLoading(false)
+				didFetch.current = false
+			}
 		},
 		[setItems]
 	)

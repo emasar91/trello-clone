@@ -5,7 +5,7 @@ export const ModalItemContainerStyles = (theme: Theme): SxProps<Theme> => ({
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
-	width: '100%',
+	width: '80%',
 	maxWidth: '1080px',
 	bgcolor: theme.palette.modal.backgroundColor,
 	outline: 'none',
@@ -45,6 +45,10 @@ export const ModalItemUnsavedChangesStyles = (
 	border: '1px solid #fca700',
 	borderRadius: '4px',
 	padding: '0 2px',
+	'@media ( max-width: 600px)': {
+		wordBreak: 'break-word',
+		textAlign: 'center',
+	},
 })
 
 export const ModalItemActivityTypographyStyles = (
@@ -112,6 +116,17 @@ export const ModalItemDescriptionTypographyStyles: SxProps<Theme> = {
 	gap: '8px',
 }
 
+export const ModalItemDescriptionTypographyRightStyles: SxProps<Theme> = {
+	display: 'flex',
+	alignItems: 'center',
+	gap: '8px',
+	'@media (max-width: 600px)': {
+		flexDirection: 'column-reverse',
+		gap: '4px',
+		alignItems: 'end',
+	},
+}
+
 export const ModalItemDescriptionTitleStyles = (
 	theme: Theme
 ): SxProps<Theme> => ({
@@ -165,6 +180,7 @@ export const ModalItemTagTitleStyles = (theme: Theme): SxProps<Theme> => ({
 export const ModalItemTagsContainerStyles: SxProps<Theme> = {
 	display: 'flex',
 	gap: '8px',
+	flexWrap: 'wrap',
 }
 
 export const ModalItemTagItemStyles = (

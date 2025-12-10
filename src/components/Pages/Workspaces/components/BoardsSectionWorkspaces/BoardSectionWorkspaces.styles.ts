@@ -44,15 +44,16 @@ export const WorkSpacesContainerStyle: SxProps<Theme> = {
 	justifyContent: 'center',
 	alignItems: 'start',
 	padding: '0 48px 52px 48px',
+	height: '100%',
 }
 
 export const WorkSpacesStyle: SxProps<Theme> = {
 	maxWidth: '914px',
 	width: '100%',
 	overflowY: 'auto',
-	margin: '40px 210px 0 210px',
 	display: 'flex',
 	flexDirection: 'column',
+	height: '100%',
 }
 
 export const WorkSpacesBoardsAvatarContainerStyle: SxProps<Theme> = {

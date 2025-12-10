@@ -39,7 +39,7 @@ export async function createBoardinWorkspace({
 	// 3️⃣ Chequear duplicado (nombre)
 	const existing = await boardsCollection.findOne({
 		workspaceId: workspaceObjectId,
-		name,
+		name: name.toLowerCase(),
 	})
 	if (existing) {
 		throw new Error(`El workspace ya tiene un tablero con el nombre "${name}"`)
@@ -49,7 +49,7 @@ export async function createBoardinWorkspace({
 	const newBoard = {
 		workspaceId: workspaceObjectId,
 		userId: userObjectId,
-		name,
+		name: name.toLowerCase(),
 		description,
 		createdAt: new Date(),
 		updatedAt: null,

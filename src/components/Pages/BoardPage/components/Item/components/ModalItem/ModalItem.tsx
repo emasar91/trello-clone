@@ -21,6 +21,7 @@ import {
 	ModalItemDescriptionTextStyles,
 	ModalItemDescriptionTitleContainerStyles,
 	ModalItemDescriptionTitleStyles,
+	ModalItemDescriptionTypographyRightStyles,
 	ModalItemDescriptionTypographyStyles,
 	ModalItemEditDescriptionButtonStyles,
 	ModalItemTagButtonStyles,
@@ -223,7 +224,15 @@ function ModalConfirm({
 					onSubmit={handleEditTitle}
 				/>
 				<Divider />
-				<Box display={'flex'} justifyContent={'space-between'}>
+				<Box
+					display={'flex'}
+					justifyContent={'space-between'}
+					sx={{
+						'@media (max-width: 900px)': {
+							flexDirection: 'column',
+						},
+					}}
+				>
 					<Box sx={ModalItemDescriptionContainerStyles(theme)}>
 						<Box sx={ModalItemTagContentContainerStyles(theme)}>
 							<Box ref={etiquetasRef} sx={ModalItemDescriptionTypographyStyles}>
@@ -261,7 +270,7 @@ function ModalConfirm({
 										{t('description')}
 									</Typography>
 								</Box>
-								<Box sx={ModalItemDescriptionTypographyStyles}>
+								<Box sx={ModalItemDescriptionTypographyRightStyles}>
 									{description !== cardSelected?.description && (
 										<Typography sx={ModalItemUnsavedChangesStyles(theme)}>
 											{t('unsavedChanges')}

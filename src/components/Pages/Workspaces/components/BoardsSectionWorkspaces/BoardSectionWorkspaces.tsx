@@ -59,10 +59,21 @@ function BoardSectionWorkspaces({
 		setWorkSpaces,
 		handleCloseEditForm
 	)
+	console.log(
+		'🚀 ~ BoardSectionWorkspaces ~ loadingWorkspace:',
+		loadingWorkspace
+	)
 	return (
 		<Box sx={WorkSpacesContainerStyle}>
 			{loadingWorkspace ? (
-				<CircularProgress size={60} />
+				<Box
+					display="flex"
+					justifyContent="center"
+					alignItems="center"
+					height={'80dvh'}
+				>
+					<CircularProgress size={60} />
+				</Box>
 			) : (
 				<Box sx={WorkSpacesStyle}>
 					{/* Header workspace */}
@@ -71,6 +82,7 @@ function BoardSectionWorkspaces({
 							handleClose={handleCloseEditForm}
 							onSubmit={handleEditWorkspace}
 							defaultName={workspace?.name || ''}
+							defaultDescription={workspace?.description || ''}
 							loading={loadingWorkspace}
 						/>
 					) : (

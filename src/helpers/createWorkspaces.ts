@@ -46,7 +46,7 @@ export async function createWorkspaceForUser({
 	// 2️⃣ Chequear si ya existe un workspace con ese nombre
 	const existing = await workspacesCollection.findOne({
 		userId: userObjectId,
-		name,
+		name: name.toLowerCase(),
 	})
 	if (existing) {
 		throw new Error(`El usuario ya tiene un workspace con el nombre "${name}"`)
@@ -55,7 +55,7 @@ export async function createWorkspaceForUser({
 	// 3️⃣ Crear el workspace
 	const newWorkspace = {
 		userId: userObjectId,
-		name,
+		name: name.toLowerCase(),
 		description,
 		createdAt: new Date(),
 		updatedAt: null,
@@ -72,7 +72,7 @@ export async function createWorkspaceForUser({
 		{ _id: userObjectId },
 		{
 			$push: {
-				workspaces: { id: workspaceId, name },
+				workspaces: { id: workspaceId, name: name.toLowerCase() },
 			},
 		}
 	)

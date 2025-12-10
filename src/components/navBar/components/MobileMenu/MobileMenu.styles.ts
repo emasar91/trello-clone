@@ -9,7 +9,7 @@ export const MobileMenuContainerStyle: SxProps<Theme> = {
 }
 
 export const MobileMenuListStyle: SxProps<Theme> = {
-	margin: '0 1rem',
+	margin: '0 1rem 1.5rem 1rem',
 	textDecoration: 'none',
 }
 

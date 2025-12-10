@@ -22,8 +22,8 @@ export const useEditWorkspace = (
 	const didFetch = useRef(false)
 
 	const handleEditWorkspace = async (
-		newName: string,
-		newDescription: string,
+		newData: { newName: string; newDescription: string },
+		defaultName: string,
 		resetForm: () => void
 	) => {
 		if (didFetch.current) return
@@ -35,8 +35,8 @@ export const useEditWorkspace = (
 			const { data } = await axios.put(
 				API.updateWorkspacesUrl,
 				{
-					name: newName.trim(),
-					description: newDescription.trim(),
+					name: newData.newName.trim(),
+					description: newData.newDescription.trim(),
 					workspaceId: workspace?._id,
 				},
 				{ withCredentials: true }
@@ -56,9 +56,13 @@ export const useEditWorkspace = (
 				setWorkSpaces(workspaces)
 
 				// 🔁 actualizar la URL con el nuevo nombre
+				const nameWorkspace =
+					newData.newName.trim() === '' ? defaultName : newData.newName.trim()
+
 				setTimeout(() => {
+					setLoading(false)
 					router.replace(
-						`/${locale}/w/${newName.toLowerCase().trim()}/boards?uid=${
+						`/${locale}/w/${nameWorkspace.toLowerCase().trim()}/boards?uid=${
 							user?.uid
 						}`
 					)

@@ -15,4 +15,5 @@ export const BoardsSectionStyle: SxProps<Theme> = {
 	justifyContent: 'center',
 	alignItems: 'start',
 	padding: '0 48px 52px 48px',
+	height: '80dvh',
 }

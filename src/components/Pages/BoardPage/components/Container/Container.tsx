@@ -60,6 +60,11 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 			},
 			[onCreateCard, handleCloseAddCard]
 		)
+
+		const handleLongPress = () => setEditing(true)
+
+		let pressTimer: NodeJS.Timeout
+
 		return (
 			<Box
 				ref={ref as React.Ref<HTMLDivElement>}
@@ -68,6 +73,10 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 				<Box
 					sx={ContainerHeaderStyles(theme)}
 					onDoubleClick={() => setEditing(true)}
+					onTouchStart={() => {
+						pressTimer = setTimeout(handleLongPress, 500)
+					}}
+					onTouchEnd={() => clearTimeout(pressTimer)}
 				>
 					{editing ? (
 						<input
@@ -88,7 +97,7 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 						{!editing && <Handle {...handleprops} />}
 					</Box>
 				</Box>
-				<ol>{children}</ol>
+				<ol style={{ marginTop: '-1px' }}>{children}</ol>
 				{!showAddCard ? (
 					<Box onClick={handleOpenAddCard} sx={ContainerAddCardStyles(theme)}>
 						<Box sx={ContainerContentAddCardStyles(theme)}>
