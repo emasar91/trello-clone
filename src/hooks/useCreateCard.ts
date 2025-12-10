@@ -1,6 +1,5 @@
 // hooks/useCreateCard.ts
 import { API } from '@/constants'
-import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import type {
 	Items,
@@ -9,6 +8,7 @@ import type {
 import type { ObjectId } from 'mongodb'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { toast } from 'react-toastify'
+import api from '@/lib/axiosClient'
 
 interface Props {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
@@ -65,7 +65,7 @@ export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
 				}))
 
 				try {
-					const { data } = await axios.post(
+					const { data } = await api.post(
 						API.createCardUrl, // ej: '/api/cards/create'
 						{
 							title,

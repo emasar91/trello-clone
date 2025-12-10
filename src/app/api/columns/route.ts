@@ -5,9 +5,15 @@ import { createColumn } from '@/helpers/createColumnInBoard'
 import { updateColumn } from '@/helpers/updateColumn'
 import { deleteColumnAndCards } from '@/helpers/deleteColumn'
 import { updateColumnOrders } from '@/helpers/updateColumnOrders'
+import { getUserFromRequest } from '@/helpers/getUserIdFromToken'
 
 export async function GET(request: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const { searchParams } = new URL(request.url)
 		const boardId = searchParams.get('boardId')
 
@@ -33,6 +39,11 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const body = await request.json()
 		const { boardId, userId, name, order } = body
 
@@ -65,6 +76,11 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const body = await request.json()
 
 		// 🔹 Si es ARRAY → actualizar orden
@@ -112,6 +128,11 @@ export async function PUT(request: Request) {
 
 export async function DELETE(req: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const { columnId, boardId } = await req.json()
 
 		if (!columnId || !boardId) {

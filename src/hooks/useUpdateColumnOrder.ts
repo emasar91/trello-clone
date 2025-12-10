@@ -1,9 +1,9 @@
 // hooks/useUpdateColumnsOrder.ts
 import { API } from '@/constants'
-import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { UniqueIdentifier } from '@dnd-kit/core'
+import api from '@/lib/axiosClient'
 
 export const useUpdateColumnsOrder = (boardId: string) => {
 	const [loading, setLoading] = useState(false)
@@ -19,7 +19,7 @@ export const useUpdateColumnsOrder = (boardId: string) => {
 			setLoading(true)
 
 			try {
-				await axios.put(
+				await api.put(
 					API.updateColumnUrl,
 					{
 						boardId,

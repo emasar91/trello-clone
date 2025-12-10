@@ -8,6 +8,11 @@ import { getWorkspaces } from '@/helpers/getWorkspaces'
 
 export async function GET(request: Request) {
 	// en este ejemplo el userId viene como query param: /api/workspaces?userId=123
+	// 1️⃣ Obtener usuario autenticado
+	const user = await getUserFromRequest()
+	if (!user) {
+		return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
+	}
 	const { searchParams } = new URL(request.url)
 	const uid = searchParams.get('uid')
 
@@ -22,11 +27,10 @@ export async function GET(request: Request) {
 
 export async function POST(req: Request) {
 	try {
-		// 1) Obtener userId (ObjectId) desde la cookie validada
+		// 1️⃣ Obtener usuario autenticado
 		const user = await getUserFromRequest()
-
 		if (!user) {
-			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+			return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 		}
 
 		if (user.workspaces.length >= 4) {
@@ -58,15 +62,15 @@ export async function POST(req: Request) {
 	} catch (err: unknown) {
 		const error = err as Error
 
-		console.error('POST /api/workspaces error:', error?.message || error)
+		console.error('POST /api/workspaces error:', error)
 
 		if (
-			error.message?.includes('Token inválido') ||
-			error.message?.includes('No autorizado')
+			error.message?.includes('TOKEN_INVALID') ||
+			error.message?.includes('TOKEN_EXPIRED')
 		) {
-			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+			return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 		}
-		if (error.message?.includes('Usuario no encontrado')) {
+		if (error.message?.includes('USER_NOT_FOUND')) {
 			return NextResponse.json({ message: error.message }, { status: 401 })
 		}
 		if (error.message?.includes('ya tiene un workspace')) {
@@ -78,11 +82,10 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
 	try {
-		// 1️⃣ Obtener usuario autenticado desde la cookie
+		// 1️⃣ Obtener usuario autenticado
 		const user = await getUserFromRequest()
-
 		if (!user) {
-			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+			return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 		}
 
 		// 3️⃣ Leer body
@@ -148,14 +151,14 @@ export async function PUT(req: Request) {
 
 		// 🔒 Errores de autorización
 		if (
-			error.message?.includes('Token inválido') ||
-			error.message?.includes('No autorizado')
+			error.message?.includes('TOKEN_INVALID') ||
+			error.message?.includes('TOKEN_EXPIRED')
 		) {
-			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+			return NextResponse.json({ message: 'TOKEN_MISSING' }, { status: 401 })
 		}
 
 		// 👤 Usuario no encontrado
-		if (error.message?.includes('Usuario no encontrado')) {
+		if (error.message?.includes('USER_NOT_FOUND')) {
 			return NextResponse.json({ message: error.message }, { status: 401 })
 		}
 

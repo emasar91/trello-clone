@@ -8,7 +8,13 @@ import {
 import { useTranslations } from 'next-intl'
 import CreateBoardMenu from '../CreateBordMenu/CreateBoardMenu'
 
-const CreateBoardCard = ({ remainingBoards }: { remainingBoards: number }) => {
+const CreateBoardCard = ({
+	remainingBoards,
+	workspaceName,
+}: {
+	remainingBoards: number
+	workspaceName: string
+}) => {
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
 
@@ -41,6 +47,7 @@ const CreateBoardCard = ({ remainingBoards }: { remainingBoards: number }) => {
 				open={open}
 				handleClose={handleClose}
 				anchorEl={anchorEl}
+				workspaceName={workspaceName}
 			/>
 		</>
 	)

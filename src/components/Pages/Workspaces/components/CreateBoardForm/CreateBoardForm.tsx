@@ -8,7 +8,7 @@ import {
 	Button,
 	useTheme,
 } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import {
 	CreateBoardFormContainerStyles,
@@ -25,6 +25,7 @@ import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 
 const CreateBoardForm = ({
 	onSubmit,
+	workspaceName,
 }: {
 	onSubmit: (args: {
 		boardName: string
@@ -32,6 +33,7 @@ const CreateBoardForm = ({
 		workspaceId: string
 		resetForm: () => void
 	}) => void
+	workspaceName?: string
 }) => {
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
@@ -43,9 +45,23 @@ const CreateBoardForm = ({
 
 	const { getWorkspaces, loading: loadingWorkspace } = useGetWorkspaces()
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		getWorkspaces(setWorkspaceAvailable)
-	}, [getWorkspaces])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	// 📌 Cuando se cargan, buscamos el de la prop workspaceName
+	useEffect(() => {
+		if (!workspaceName || workspaceAvailable.length === 0) return
+
+		const found = workspaceAvailable.find(
+			(w) => w.name.toLowerCase() === workspaceName.toLowerCase()
+		)
+
+		if (found) {
+			setWorkspace(found)
+		}
+	}, [workspaceAvailable, workspaceName])
 
 	const resetForm = () => {
 		setTitle('')

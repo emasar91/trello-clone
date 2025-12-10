@@ -1,34 +1,27 @@
-// lib/auth.ts
 import { cookies } from 'next/headers'
 import { getDB } from '@/helpers/getDB'
-import { COOKIE_NAME } from '@/middleware' // si lo tenés definido
 import admin from '@/config/firebaseAdmin'
 import { IUser } from '@/types/user'
+import { COOKIE_NAME } from '@/middleware'
 
-export async function getUserFromRequest(): Promise<IUser> {
-	// cookies() sólo funciona en entorno server (route handlers, server components)
-	const cookieStore = cookies()
-	const cookie = (await cookieStore).get(COOKIE_NAME ?? 'authToken') // fallback a 'authToken'
-	const token = cookie?.value
-	if (!token) {
-		throw new Error('No autorizado: token faltante')
-	}
-
-	let decoded: admin.auth.DecodedIdToken
+export async function getUserFromRequest() {
 	try {
-		decoded = await admin.auth().verifyIdToken(token)
-	} catch (err) {
-		console.error('Error verificando ID token:', err)
-		throw new Error('Token inválido')
+		const cookieStore = cookies()
+		const cookie = (await cookieStore).get(COOKIE_NAME ?? 'authToken')
+		const token = cookie?.value
+
+		if (!token) return null
+
+		const decoded = await admin.auth().verifyIdToken(token)
+		const db = await getDB()
+		const user = await db.collection('users').findOne({ uid: decoded.uid })
+
+		if (!user) return null
+
+		return { ...user, uid: user._id.toString() } as IUser
+	} catch (err: unknown) {
+		const error = err as Error
+		console.error('Error verificando ID token:', error)
+		return null
 	}
-
-	const db = await getDB()
-	const usersCollection = db.collection('users')
-	const user = await usersCollection.findOne({ uid: decoded.uid })
-
-	if (!user) {
-		throw new Error('Usuario no encontrado')
-	}
-
-	return { ...user, uid: user._id.toString() } as IUser
 }

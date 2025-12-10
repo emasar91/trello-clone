@@ -1,4 +1,5 @@
 import { API } from '@/constants'
+import api from '@/lib/axiosClient'
 import { IWorkspace } from '@/types/workspaces'
 import axios from 'axios'
 import { User } from 'firebase/auth'
@@ -60,7 +61,7 @@ export const useCreateBoard = ({
 		if (didFetch.current) return
 		didFetch.current = true
 		try {
-			const { data } = await axios.post(
+			const { data } = await api.post(
 				API.createBoardsUrl,
 				{
 					name: boardName.trim(),
@@ -76,14 +77,15 @@ export const useCreateBoard = ({
 				await createDefaultColumns(data.board._id)
 				resetForm()
 				toast.success(t('menuBaord.successCreate'))
-				const { data: workspaces } = await axios.get(
+				const { data: workspaces } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{ withCredentials: true }
 				)
 				setWorkSpaces(workspaces)
 			}
 		} catch (err) {
-			if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
+			if (axios.isAxiosError(err) && err.status !== 401)
+				toast.error(err.response?.data?.message)
 		} finally {
 			setLoading(false)
 			didFetch.current = false // 👈 importante para poder volver a usar el hook en otro submit

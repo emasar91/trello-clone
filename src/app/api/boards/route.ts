@@ -50,14 +50,14 @@ export async function POST(req: Request) {
 		console.error('POST /api/boards error:', error?.message || error)
 
 		if (
-			error.message?.includes('No autorizado') ||
-			error.message?.includes('Token inválido')
+			error.message?.includes('TOKEN_INVALID') ||
+			error.message?.includes('TOKEN_EXPIRED')
 		) {
-			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+			return NextResponse.json({ message: error.message }, { status: 401 })
 		}
 
 		if (
-			error.message?.includes('Usuario no encontrado') ||
+			error.message?.includes('USER_NOT_FOUND') ||
 			error.message?.includes('Workspace no encontrado')
 		) {
 			return NextResponse.json({ message: error.message }, { status: 404 })
@@ -73,6 +73,11 @@ export async function POST(req: Request) {
 
 export async function GET(request: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const { searchParams } = new URL(request.url)
 
 		const uid = searchParams.get('uid')

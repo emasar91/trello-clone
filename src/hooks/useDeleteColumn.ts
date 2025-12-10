@@ -1,10 +1,10 @@
 // hooks/useDeleteColumn.ts
-import axios from 'axios'
 import { useState, useRef, useCallback } from 'react'
 import { API } from '@/constants'
 import { toast } from 'react-toastify'
 import { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { UniqueIdentifier } from '@dnd-kit/core'
+import api from '@/lib/axiosClient'
 
 export const useDeleteColumn = ({
 	setItems,
@@ -28,7 +28,7 @@ export const useDeleteColumn = ({
 			})
 
 			try {
-				await axios.delete(API.deleteColumnUrl, {
+				await api.delete(API.deleteColumnUrl, {
 					data: { columnId, boardId },
 					withCredentials: true,
 				})

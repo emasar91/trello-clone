@@ -15,6 +15,7 @@ import {
 	ModalCreateWorkspaceFormContainerStyle,
 	ModalCreateWorkspaceImageMockStyle,
 	ModalCreateWorkspaceInputStyle,
+	ModalCreateWorkspaceLabelStyle,
 	ModalCreateWorkspaceSubTitleStyle,
 	ModalCreateWorkspaceTitleStyle,
 } from './ModalCreateWorkspaces'
@@ -71,18 +72,30 @@ function ModalCreateWorkspace({
 							{t('modalCreateWorkspace.subTitle')}
 						</Typography>
 
+						<Typography
+							variant="body2"
+							sx={ModalCreateWorkspaceLabelStyle(theme)}
+						>
+							{t('modalCreateWorkspace.name')}
+						</Typography>
 						<TextField
 							fullWidth
-							label={t('modalCreateWorkspace.name')}
+							placeholder={t('modalCreateWorkspace.name')}
 							variant="outlined"
 							value={workspaceName}
 							sx={ModalCreateWorkspaceInputStyle(theme)}
 							onChange={(e) => setWorkspaceName(e.target.value)}
 						/>
 
+						<Typography
+							variant="body2"
+							sx={ModalCreateWorkspaceLabelStyle(theme)}
+						>
+							{t('modalCreateWorkspace.description')}
+						</Typography>
 						<TextField
 							fullWidth
-							label={t('modalCreateWorkspace.description')}
+							placeholder={t('modalCreateWorkspace.description')}
 							multiline
 							rows={4}
 							variant="outlined"

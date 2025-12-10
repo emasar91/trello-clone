@@ -5,6 +5,7 @@ import { API } from '@/constants'
 import { useTranslations } from 'next-intl'
 import { IWorkspace } from '@/types/workspaces'
 import { User } from 'firebase/auth'
+import api from '@/lib/axiosClient'
 
 export const useCreateWorkspace = (
 	user: User | null,
@@ -26,7 +27,7 @@ export const useCreateWorkspace = (
 		setLoading(true)
 
 		try {
-			const { data } = await axios.post(
+			const { data } = await api.post(
 				API.createWorkspacesUrl,
 				{
 					name: workspaceName.trim(),
@@ -41,7 +42,7 @@ export const useCreateWorkspace = (
 				toast.success(t('modalCreateWorkspace.successCreate'))
 
 				// 🔄 obtener workspaces actualizados
-				const { data: workspaces } = await axios.get(
+				const { data: workspaces } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{ withCredentials: true }
 				)
@@ -49,9 +50,8 @@ export const useCreateWorkspace = (
 				setWorkSpaces(workspaces)
 			}
 		} catch (err) {
-			if (axios.isAxiosError(err)) {
+			if (axios.isAxiosError(err) && err.status !== 401)
 				toast.error(err.response?.data?.message)
-			}
 		} finally {
 			setLoading(false)
 			didFetch.current = false // 👈 importante para poder volver a usar el hook en otro submit

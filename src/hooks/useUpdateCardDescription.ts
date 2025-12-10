@@ -1,11 +1,11 @@
 // hooks/useUpdateCardDescription.ts
 import { API } from '@/constants'
-import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { toast } from 'react-toastify'
 import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useStoreBoard } from '@/context/useStoreBoard'
+import api from '@/lib/axiosClient'
 
 interface Props {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
@@ -60,7 +60,7 @@ export const useUpdateCardDescription = ({
 
 			// 4️⃣ PUT a la DB
 			try {
-				await axios.put(
+				await api.put(
 					API.updateCardUrl,
 					{
 						cardId,

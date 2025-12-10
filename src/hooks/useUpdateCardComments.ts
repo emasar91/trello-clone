@@ -1,11 +1,11 @@
 // hooks/useUpdateCardComments.ts
 import { API } from '@/constants'
-import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import type { ICardComment } from '@/types/card'
 import { toast } from 'react-toastify'
 import { UniqueIdentifier } from '@dnd-kit/core'
+import api from '@/lib/axiosClient'
 
 interface Props {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
@@ -54,7 +54,7 @@ export const useUpdateCardComments = ({ setItems, items, boardId }: Props) => {
 			setItems(prevItemsCopy)
 
 			try {
-				await axios.put(
+				await api.put(
 					API.updateCardUrl,
 					{
 						cardId,

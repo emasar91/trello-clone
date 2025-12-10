@@ -25,6 +25,7 @@ type ICreateBoardMenuProps = {
 	open: boolean
 	handleClose: () => void
 	anchorEl: null | HTMLElement
+	workspaceName: string
 }
 
 type ImageItemProps = {
@@ -37,6 +38,7 @@ function CreateBoardMenu({
 	open,
 	handleClose,
 	anchorEl,
+	workspaceName,
 }: ICreateBoardMenuProps) {
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
@@ -142,7 +144,10 @@ function CreateBoardMenu({
 					})}
 				</Box>
 
-				<CreateBoardForm onSubmit={handleCreateBoard} />
+				<CreateBoardForm
+					onSubmit={handleCreateBoard}
+					workspaceName={workspaceName}
+				/>
 			</Box>
 		</Menu>
 	)

@@ -24,7 +24,10 @@ const BoardGrid = ({
 			))}
 			{/* Botón Crear tablero */}
 			{availableCreate && (
-				<CreateBoardCard remainingBoards={4 - boards.length} />
+				<CreateBoardCard
+					remainingBoards={4 - boards.length}
+					workspaceName={workspaceName}
+				/>
 			)}
 		</Grid>
 	)

@@ -1,11 +1,11 @@
 // useBoardData.ts
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import axios from 'axios'
 import { API } from '@/constants'
 import { IColumn } from '@/types/columns'
 import { ICard } from '@/types/card'
 import { IBoard } from '@/types/boards'
+import api from '@/lib/axiosClient'
 
 type UseBoardDataProps = {
 	boardname: string
@@ -34,7 +34,7 @@ export const useBoardData = ({
 	/** 🔹 Fetch Board */
 	const fetchBoard = useCallback(async () => {
 		try {
-			const { data } = await axios.get(
+			const { data } = await api.get(
 				`${
 					API.getBoardByNameUrl
 				}?uid=${userUid}&workspaceName=${encodeURIComponent(
@@ -58,7 +58,7 @@ export const useBoardData = ({
 	/** 🔹 Fetch Columns */
 	const fetchColumns = useCallback(async () => {
 		try {
-			const { data } = await axios.get(
+			const { data } = await api.get(
 				`${API.getBoardColumnsUrl}?boardId=${board._id}`,
 				{ withCredentials: true }
 			)
@@ -82,7 +82,7 @@ export const useBoardData = ({
 		try {
 			await Promise.all(
 				columns.map(async (column) => {
-					const { data } = await axios.get(
+					const { data } = await api.get(
 						`${API.getCardsByColumnUrl}?columnId=${column._id}`,
 						{ withCredentials: true }
 					)

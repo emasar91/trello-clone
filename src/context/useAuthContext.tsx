@@ -7,7 +7,7 @@ import {
 	useState,
 	ReactNode,
 } from 'react'
-import { User, onAuthStateChanged } from 'firebase/auth'
+import { User, onIdTokenChanged } from 'firebase/auth'
 import { firebaseAuth } from '@/config/FireBaseConfig'
 import { Box, CircularProgress } from '@mui/material'
 
@@ -28,20 +28,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(
-			firebaseAuth,
-			async (firebaseUser) => {
-				if (firebaseUser) {
-					setUser(firebaseUser)
-					const token = await firebaseUser.getIdToken()
-					document.cookie = `authToken=${token}; path=/;`
-				} else {
-					setUser(null)
-					document.cookie = `authToken=; path=/; max-age=0;`
-				}
-				setLoading(false)
+		const unsubscribe = onIdTokenChanged(firebaseAuth, async (firebaseUser) => {
+			if (firebaseUser) {
+				setUser(firebaseUser)
+				const token = await firebaseUser.getIdToken() // token SIEMPRE actualizado
+				document.cookie = `authToken=${token}; path=/;`
+			} else {
+				setUser(null)
+				document.cookie = `authToken=; path=/; max-age=0;`
 			}
-		)
+			setLoading(false)
+		})
 
 		return () => unsubscribe()
 	}, [])

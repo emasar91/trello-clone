@@ -4,6 +4,7 @@ import { createCard } from '@/helpers/createCardInColumn'
 import { updateCard } from '@/helpers/updateCard'
 import { updateCardsOrder } from '@/helpers/updateCardsOrder'
 import type { ICard } from '@/types/card'
+import { getUserFromRequest } from '@/helpers/getUserIdFromToken'
 
 /**
  * GET /api/cards?columnId=xxxxx
@@ -11,6 +12,11 @@ import type { ICard } from '@/types/card'
  */
 export async function GET(req: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const { searchParams } = new URL(req.url)
 		const columnId = searchParams.get('columnId')
 
@@ -36,6 +42,12 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
+
 		const body = await req.json()
 		const card = await createCard(body)
 
@@ -53,6 +65,11 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
 	try {
+		// 1️⃣ Obtener usuario autenticado
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
+		}
 		const body = await req.json()
 
 		// 🧠 MODO MASIVO (una sola llamada)

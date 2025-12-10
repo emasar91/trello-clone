@@ -1,9 +1,9 @@
 // hooks/useUpdateAllOrders.ts
-import axios from 'axios'
 import { API } from '@/constants'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
+import api from '@/lib/axiosClient'
 
 export const useUpdateAllOrders = (boardId: string) => {
 	const [loading, setLoading] = useState(false)
@@ -14,7 +14,7 @@ export const useUpdateAllOrders = (boardId: string) => {
 		const payload = buildOrderPayload(items, boardId) // 👈 PASO boardId
 
 		try {
-			await axios.put(API.updateCardUrl, payload, { withCredentials: true })
+			await api.put(API.updateCardUrl, payload, { withCredentials: true })
 		} catch (err) {
 			console.error(err)
 			toast.error('Error al actualizar orden')

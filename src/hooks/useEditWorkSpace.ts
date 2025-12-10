@@ -6,6 +6,7 @@ import { User } from 'firebase/auth'
 import { API } from '@/constants'
 import { IWorkspace } from '@/types/workspaces'
 import { useLocale, useTranslations } from 'next-intl'
+import api from '@/lib/axiosClient'
 
 export const useEditWorkspace = (
 	user: User | null,
@@ -32,7 +33,7 @@ export const useEditWorkspace = (
 		setLoading(true)
 
 		try {
-			const { data } = await axios.put(
+			const { data } = await api.put(
 				API.updateWorkspacesUrl,
 				{
 					name: newData.newName.trim(),
@@ -47,7 +48,7 @@ export const useEditWorkspace = (
 				toast.success(t('editWorkspaceSuccess'))
 
 				// 🔄 obtener workspaces actualizados
-				const { data: workspaces } = await axios.get(
+				const { data: workspaces } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{
 						withCredentials: true,
@@ -70,7 +71,8 @@ export const useEditWorkspace = (
 			}
 			handleCloseEditForm()
 		} catch (err) {
-			if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
+			if (axios.isAxiosError(err) && err.status !== 401)
+				toast.error(err.response?.data?.message)
 		} finally {
 			didFetch.current = false // 👈 importante para volver a usarlo sin recargar la página
 		}

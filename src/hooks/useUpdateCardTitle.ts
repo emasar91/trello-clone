@@ -6,6 +6,7 @@ import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/Mult
 import { toast } from 'react-toastify'
 import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useStoreBoard } from '@/context/useStoreBoard'
+import api from '@/lib/axiosClient'
 
 interface Props {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
@@ -57,7 +58,7 @@ export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
 
 			// 4️⃣ PUT a la DB
 			try {
-				await axios.put(
+				await api.put(
 					API.updateCardUrl,
 					{
 						cardId,
@@ -68,7 +69,8 @@ export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
 					{ withCredentials: true }
 				)
 			} catch (err) {
-				if (axios.isAxiosError(err)) toast.error(err.response?.data?.message)
+				if (axios.isAxiosError(err) && err.status !== 401)
+					toast.error(err.response?.data?.message)
 				setItems(items) // rollback
 			} finally {
 				didFetch.current = false

@@ -1,11 +1,11 @@
 // hooks/useCreateColumn.ts
 import { API } from '@/constants'
-import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import type { UniqueIdentifier } from '@dnd-kit/core'
 import { User } from 'firebase/auth'
 import { ICard } from '@/types/card'
+import api from '@/lib/axiosClient'
 
 interface Props {
 	setItems: React.Dispatch<
@@ -50,7 +50,7 @@ export const useCreateColumn = ({
 			}))
 
 			try {
-				const { data } = await axios.post(
+				const { data } = await api.post(
 					API.createColumnUrl, // '/api/columns/create'
 					{ boardId, userId: user?.uid, name: titleFixed },
 					{ withCredentials: true }

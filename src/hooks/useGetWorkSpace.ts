@@ -5,6 +5,7 @@ import { API } from '@/constants'
 import { toast } from 'react-toastify'
 import { useAuth } from '@/context/useAuthContext'
 import { IWorkspace } from '@/types/workspaces'
+import api from '@/lib/axiosClient'
 
 export const useGetWorkspaces = () => {
 	const { user } = useAuth()
@@ -15,7 +16,7 @@ export const useGetWorkspaces = () => {
 			try {
 				setLoading(true)
 
-				const { data } = await axios.get(
+				const { data } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{ withCredentials: true }
 				)
@@ -24,12 +25,10 @@ export const useGetWorkspaces = () => {
 					setWorkspaceAvailable(data)
 				}
 			} catch (err) {
-				if (axios.isAxiosError(err)) {
+				if (axios.isAxiosError(err) && err.response?.status !== 401) {
 					toast.error(
 						err.response?.data?.message || 'Error al obtener workspaces'
 					)
-				} else {
-					toast.error('Error inesperado')
 				}
 			} finally {
 				setLoading(false)

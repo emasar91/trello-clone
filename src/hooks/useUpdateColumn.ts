@@ -1,8 +1,8 @@
 // hooks/useUpdateColumn.ts
 import { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { API } from '@/constants'
+import api from '@/lib/axiosClient'
 import { UniqueIdentifier } from '@dnd-kit/core'
-import axios from 'axios'
 import { ObjectId } from 'mongodb'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -53,7 +53,7 @@ export const useUpdateColumn = ({ setItems, items }: Props) => {
 
 				// 🔥 Enviar al back
 				try {
-					await axios.put(
+					await api.put(
 						API.updateColumnUrl, // '/api/columns/update'
 						{
 							columnId: containerId,

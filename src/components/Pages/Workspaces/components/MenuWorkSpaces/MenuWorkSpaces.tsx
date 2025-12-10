@@ -1,5 +1,3 @@
-import { ArrowLeftIcon } from '@/public/assets/icons/ArrowLeftIcon'
-import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
 import { TrelloLogoIcon } from '@/public/assets/icons/TrelloLogoIcon'
 import {
 	Box,
@@ -23,6 +21,8 @@ import {
 	MenuWorkSpacesTextItemCollapsableStyle,
 } from './MenuWorkSpaces.tyles'
 import { IWorkspace } from '@/types/workspaces'
+import { ArrowDownIcon } from '@/public/assets/icons/ArrowDownIcon'
+import { ArrowUpIcon } from '@/public/assets/icons/ArrowUpIcon'
 
 type IMenuWorkSpaces = {
 	workSpaces: IWorkspace[]
@@ -81,9 +81,9 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 								/>
 							</Box>
 							{openWorkspaces[workspace._id] ? (
-								<ArrowLeftIcon />
+								<ArrowUpIcon />
 							) : (
-								<ArrowRightIcon />
+								<ArrowDownIcon />
 							)}
 						</ListItemButton>
 
