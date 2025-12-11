@@ -101,4 +101,5 @@ export const NavbarLoggedContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	display: 'flex',
 	alignItems: 'center',
 	padding: '0 8px',
+	borderBottom: `1px solid ${theme.palette.navbar.borderBottom}`,
 })

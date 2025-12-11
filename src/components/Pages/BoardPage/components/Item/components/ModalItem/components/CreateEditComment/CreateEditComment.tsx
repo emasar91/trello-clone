@@ -2,6 +2,7 @@ import { Box, Button, TextField, useTheme } from '@mui/material'
 import React from 'react'
 import {
 	CreateEditCommentButtonCancelStyles,
+	CreateEditCommentButtonSaveStyles,
 	CreateEditCommentButtonsContainerStyles,
 	CreateEditCommentContainerStyles,
 	CreateEditCommentInputStyles,
@@ -47,7 +48,11 @@ const CreateEditComment = ({
 				sx={CreateEditCommentInputStyles(theme)}
 			/>
 			<Box sx={CreateEditCommentButtonsContainerStyles}>
-				<Button variant="contained" onClick={onSubmit}>
+				<Button
+					variant="contained"
+					onClick={onSubmit}
+					sx={CreateEditCommentButtonSaveStyles(theme)}
+				>
 					{type === 'new' ? t('save') : t('update')}
 				</Button>
 				<Button

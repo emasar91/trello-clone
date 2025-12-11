@@ -466,13 +466,26 @@ export const colorDark = {
 	scrollbarColor2: '#101204',
 	modalBackground: '#303134',
 	cardBackgroundHover: '#2a2c21',
+	cardBackgroundHoverLight: '#37373a',
 }
 
 export const colorLight = {
 	...colorTokens,
 	loginButton: colorTokens.brandPrimary,
-	blackBackground: colorTokens.whiteBackground,
+	blackBackground: colorTokens.white,
 	brandPrimary: colorTokens.brandPrimary,
+	border: '#dadde2',
+	lightLogoHover: '#dddedd',
+	lightSearchHover: '#f8f8f8',
+	blueButton: '#1868db',
+	blueButtonHover: '#1558bc',
+	grayBorder: '#e9e9e9',
+	blackTextMenuAccount: '#292a2e',
+	grayTextMenuAccount: '#505258',
+	itemMenuAccountHover: '#f0f1f2',
+	blueBackgroundSelected: '#e9f2fe',
+	backgroundGrayItems: '#f1f2f4',
+	backgroundGrayAddCardHover: '#d1d3d4',
 }
 
 export const LIGHT_THEME = 'light'

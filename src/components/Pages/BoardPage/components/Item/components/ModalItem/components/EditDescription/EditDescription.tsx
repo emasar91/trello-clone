@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material'
 import { ICard } from '@/types/card'
 import {
 	EditDescriptionButtonCancelStyles,
+	EditDescriptionButtonSaveStyles,
 	EditDescriptionButtonsContainerStyles,
 	EditDescriptionContainerStyles,
 	EditDescriptionInputStyles,
@@ -50,7 +51,11 @@ const EditDescription = ({
 				sx={EditDescriptionInputStyles(theme)}
 			/>
 			<Box sx={EditDescriptionButtonsContainerStyles}>
-				<Button variant="contained" onClick={onSubmit}>
+				<Button
+					variant="contained"
+					onClick={onSubmit}
+					sx={EditDescriptionButtonSaveStyles(theme)}
+				>
 					{t('save')}
 				</Button>
 				<Button

@@ -12,6 +12,7 @@ import { useEffect, useLayoutEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import {
 	CreateBoardFormContainerStyles,
+	CreateBoardFormInfoTextStyles,
 	CreateBoardFormInputSelectMenuStyles,
 	CreateBoardFormInputSelectStyles,
 	CreateBoardFormInputTitleStyles,
@@ -83,7 +84,7 @@ const CreateBoardForm = ({
 			<Box sx={CreateBoardFormContainerStyles}>
 				{/* Título */}
 				<FormControl fullWidth>
-					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles}>
+					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
 						{t('titleBoard')}
 					</InputLabel>
 					<TextField
@@ -93,13 +94,16 @@ const CreateBoardForm = ({
 						size="small"
 						sx={CreateBoardFormInputTitleStyles(theme)}
 					/>
-					<Typography variant="caption" sx={{ color: 'gray' }}>
+					<Typography
+						variant="caption"
+						sx={CreateBoardFormInfoTextStyles(theme)}
+					>
 						{t('requiredTitle')}
 					</Typography>
 				</FormControl>
 
 				<FormControl fullWidth>
-					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles}>
+					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
 						{t('descriptionBoard')}
 					</InputLabel>
 					<TextField
@@ -109,19 +113,22 @@ const CreateBoardForm = ({
 						size="small"
 						sx={CreateBoardFormInputTitleStyles(theme)}
 					/>
-					<Typography variant="caption" sx={{ color: 'gray' }}>
+					<Typography
+						variant="caption"
+						sx={CreateBoardFormInfoTextStyles(theme)}
+					>
 						{t('optionalDescription')}
 					</Typography>
 				</FormControl>
 
 				{/* Espacio de trabajo */}
 				<FormControl fullWidth size="small">
-					<InputLabel shrink sx={CreateBoardFormLabelSelectStyles}>
+					<InputLabel shrink sx={CreateBoardFormLabelSelectStyles(theme)}>
 						{loadingWorkspace ? t('loading') : t('workspace')}
 					</InputLabel>
 
 					<Select
-						sx={CreateBoardFormInputSelectStyles}
+						sx={CreateBoardFormInputSelectStyles(theme)}
 						disabled={loadingWorkspace}
 						MenuProps={{
 							PaperProps: {

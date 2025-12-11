@@ -87,7 +87,6 @@ export const Item = React.memo(
 			) : (
 				<li
 					ref={ref}
-					onDoubleClick={() => alert('double click')}
 					className={`Wrapper
 						${fadeIn ? 'fadeIn' : ''}
 						${sorting ? 'sorting' : ''}

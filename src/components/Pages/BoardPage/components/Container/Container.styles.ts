@@ -5,6 +5,7 @@ export const ContainerHeaderStyles = (theme: Theme): SxProps<Theme> => ({
 	padding: '5px 20px',
 	paddingRight: '8px',
 	alignItems: 'center',
+
 	justifyContent: 'space-between',
 	backgroundColor: theme.palette.boardPage.blackBackgroundList,
 	borderTopLeftRadius: 5,
@@ -84,7 +85,6 @@ export const ContainerStyles = ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		cursor: 'pointer',
-		color: 'rgba(0, 0, 0, 0.5)',
 		backgroundColor: 'transparent',
 		borderStyle: 'dashed',
 		borderColor: 'rgba(0, 0, 0, 0.08)',
@@ -134,6 +134,7 @@ export const ContainerContentAddCardStyles = (
 	margin: '0 8px 8px 8px',
 	gap: 1,
 	width: '100%',
+	color: theme.palette.boardPage.textColumnTitle,
 	'&:hover': {
 		backgroundColor: theme.palette.boardPage.addButtonCardHover,
 	},

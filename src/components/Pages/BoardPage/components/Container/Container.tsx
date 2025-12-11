@@ -86,10 +86,19 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 							onBlur={finish}
 							onKeyDown={(e) => e.key === 'Enter' && finish()}
 							onMouseDown={(e) => e.stopPropagation()}
-							style={{ width: '100%', fontSize: '1rem', border: 'none' }}
+							style={{
+								width: '100%',
+								fontSize: '1rem',
+								color: theme.palette.boardPage.textColumnTitle,
+								outline: `1px solid ${theme.palette.boardPage.textColumnBorder}`,
+								border: `1px solid ${theme.palette.boardPage.textColumnBorder}`,
+								borderRadius: '4px',
+							}}
 						/>
 					) : (
-						label
+						<span style={{ color: theme.palette.boardPage.textColumnTitle }}>
+							{label}
+						</span>
 					)}
 
 					<Box sx={ContainerActionsStyles}>

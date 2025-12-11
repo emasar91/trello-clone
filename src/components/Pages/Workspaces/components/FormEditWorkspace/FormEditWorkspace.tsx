@@ -50,6 +50,7 @@ function FormEditWorkspace({
 			newDescription:
 				newDescription === defaultDescription ? '' : newDescription.trim(),
 		}
+		if (newData.newName === '' && newData.newDescription === '') return
 
 		onSubmit(newData, defaultName, resetForm)
 	}
@@ -57,7 +58,7 @@ function FormEditWorkspace({
 	return (
 		<Box sx={{ maxWidth: '300px' }}>
 			<FormControl fullWidth sx={{ mt: 2 }}>
-				<InputLabel shrink sx={FormEditWorkspaceLabelStyles}>
+				<InputLabel shrink sx={FormEditWorkspaceLabelStyles(theme)}>
 					{t('name')}
 				</InputLabel>
 				<TextField
@@ -69,7 +70,7 @@ function FormEditWorkspace({
 			</FormControl>
 
 			<FormControl fullWidth sx={{ mt: 2 }}>
-				<InputLabel shrink sx={FormEditWorkspaceLabelStyles}>
+				<InputLabel shrink sx={FormEditWorkspaceLabelStyles(theme)}>
 					{t('description')}
 				</InputLabel>
 				<TextField

@@ -1,10 +1,12 @@
 import { createTheme } from '@mui/material/styles'
-import { colorDark, colorTokens } from './constants'
+import { colorDark, colorLight, colorTokens } from './constants'
 
 declare module '@mui/material/styles' {
 	interface Palette {
 		navbar: {
+			logoColor: string
 			containerBackground: string
+			borderBottom: string
 			createButtonBackground: string
 			createButtonBackgroundHover?: string
 			createButtonText: string
@@ -38,17 +40,26 @@ declare module '@mui/material/styles' {
 			backgroundBoardsSelected: string
 		}
 		boardSection: {
+			menuText: string
+			textAvatar: string
 			background: string
 			seePreviousBoardsText: string
 			workspacesText: string
 			boardCardTitle: string
 			boardCardBackground: string
+			boardCardBackgroundHover: string
 			createBoardCardBackground?: string
 			borderInputsCreateBoards: string
 			backgroundWorkSpaceHover: string
 			backgroundWorkSpaceSelected: string
 			createButtonBackground: string
 			createButtonBackgroundHover: string
+			buttonBackgroundColor: string
+			buttonBackgroundColorHover: string
+			buttonTextColor: string
+			buttonCancelBackgroundColor: string
+			buttonCancelBackgroundColorHover: string
+			buttonCancelTextColor: string
 		}
 		modalCreateWorkspace: {
 			backgroundImageContainer: string
@@ -57,6 +68,7 @@ declare module '@mui/material/styles' {
 			background: string
 			buttonBackgroundColor: string
 			buttonBackgroundColorHover: string
+			buttonTextColor: string
 		}
 		boardPage: {
 			addButtonCard: string
@@ -67,6 +79,8 @@ declare module '@mui/material/styles' {
 			blackBackgroundCard: string
 			textGray: string
 			addButtonCardHover: string
+			textColumnTitle: string
+			textColumnBorder: string
 		}
 		modal: {
 			backgroundColor: string
@@ -75,6 +89,15 @@ declare module '@mui/material/styles' {
 			buttonColor: string
 			buttonHoverColor: string
 			modalBackground: string
+			buttonEditBackground: string
+			buttonSubmitBackground: string
+			buttonSubmitBackgroundHover: string
+			buttonSubmitColor: string
+			buttonCancelColor: string
+			buttonCancelBackground: string
+			buttonCancelBackgroundHover: string
+			commentBackgroundHover: string
+			colorTextDeleteButton: string
 		}
 		scrollbar: {
 			color1: string
@@ -84,6 +107,8 @@ declare module '@mui/material/styles' {
 	interface PaletteOptions {
 		navbar?: {
 			containerBackground?: string
+			borderBottom?: string
+			logoColor?: string
 			createButtonBackground?: string
 			createButtonBackgroundHover?: string
 			createButtonText?: string
@@ -117,17 +142,26 @@ declare module '@mui/material/styles' {
 			backgroundBoardsSelected: string
 		}
 		boardSection: {
+			menuText: string
+			textAvatar: string
 			background: string
 			seePreviousBoardsText: string
 			workspacesText: string
 			boardCardTitle: string
 			boardCardBackground: string
+			boardCardBackgroundHover: string
 			createBoardCardBackground?: string
 			borderInputsCreateBoards: string
 			backgroundWorkSpaceHover: string
 			backgroundWorkSpaceSelected: string
 			createButtonBackground: string
 			createButtonBackgroundHover: string
+			buttonBackgroundColor: string
+			buttonBackgroundColorHover: string
+			buttonTextColor: string
+			buttonCancelBackgroundColor: string
+			buttonCancelBackgroundColorHover: string
+			buttonCancelTextColor: string
 		}
 		modalCreateWorkspace: {
 			backgroundImageContainer: string
@@ -136,6 +170,7 @@ declare module '@mui/material/styles' {
 			background: string
 			buttonBackgroundColor: string
 			buttonBackgroundColorHover: string
+			buttonTextColor: string
 		}
 		boardPage: {
 			addButtonCard: string
@@ -146,6 +181,8 @@ declare module '@mui/material/styles' {
 			blackBackgroundCard: string
 			textGray: string
 			addButtonCardHover: string
+			textColumnTitle: string
+			textColumnBorder: string
 		}
 		modal: {
 			backgroundColor: string
@@ -154,6 +191,15 @@ declare module '@mui/material/styles' {
 			buttonColor: string
 			buttonHoverColor: string
 			modalBackground: string
+			buttonEditBackground: string
+			buttonSubmitBackground: string
+			buttonSubmitBackgroundHover: string
+			buttonSubmitColor: string
+			buttonCancelColor: string
+			buttonCancelBackground: string
+			buttonCancelBackgroundHover: string
+			commentBackgroundHover: string
+			colorTextDeleteButton: string
 		}
 		scrollbar: {
 			color1: string
@@ -177,75 +223,99 @@ export const lightTheme = createTheme({
 			secondary: colorTokens.gray,
 		},
 		navbar: {
-			containerBackground: colorDark.blackBackground,
-			createButtonBackground: colorDark.brandPrimary,
-			createButtonBackgroundHover: colorDark.brandPrimaryHover,
-			createButtonText: colorDark.black,
+			logoColor: colorTokens.black,
+			containerBackground: colorLight.blackBackground,
+			borderBottom: colorLight.border,
+			createButtonBackground: colorLight.blueButton,
+			createButtonBackgroundHover: colorLight.blueButtonHover,
+			createButtonText: colorDark.white,
 			searchInputBackground: colorDark.blackBackgroundLight,
-			searchInputBackgroundHover: colorDark.blackBackgroundHover,
+			searchInputBackgroundHover: colorLight.lightSearchHover,
 			searchInputText: colorDark.grayLight,
 			searchInputPlaceholder: colorDark.grayLight,
 			searchInputIcon: colorDark.grayLight,
 			searchInputBorder: colorDark.grayLight,
-			logoHover: colorDark.blackBackgroundLightHover,
+			logoHover: colorLight.lightLogoHover,
 		},
 		accountMenu: {
-			avatarMenuBackground: colorDark.blackBackgroundLightHover,
-			menuBackground: colorDark.blackBackgroundMenu,
-			menuBorder: colorDark.gray,
-			menuTitle: colorDark.grayLight,
-			avatarName: colorDark.grayTextAvatar,
-			avatarEmail: colorDark.grayTextAvatarSecondary,
-			itemsHover: colorDark.blackBackgroundLightHover,
-			itemsText: colorDark.grayTextItems,
-			itemsTextSelected: colorDark.brandPrimary,
-			backgroundColorItemSelected: colorDark.blueBackgroundSelected,
+			avatarMenuBackground: colorLight.lightLogoHover,
+			menuBackground: colorLight.white,
+			menuBorder: colorLight.grayBorder,
+			menuTitle: colorLight.blackTextMenuAccount,
+			avatarName: colorLight.blackTextMenuAccount,
+			avatarEmail: colorLight.blackTextMenuAccount,
+			itemsHover: colorLight.itemMenuAccountHover,
+			itemsText: colorLight.blackTextMenuAccount,
+			itemsTextSelected: colorLight.brandPrimary,
+			backgroundColorItemSelected: colorLight.blueBackgroundSelected,
 			colorDividerMenu: colorDark.grayLight,
 		},
 		boardsMenu: {
-			textBoards: colorDark.grayTextItems,
-			textBoardsSelected: colorDark.brandPrimary,
-			backgroundBoardsHover: colorDark.grayLightHover,
-			backgroundBoardsSelected: colorDark.blueBackgroundSelected,
+			textBoards: colorLight.blackTextMenuAccount,
+			textBoardsSelected: colorLight.blueButton,
+			backgroundBoardsHover: colorLight.lightLogoHover,
+			backgroundBoardsSelected: colorLight.blueBackgroundSelected,
 		},
 		boardSection: {
-			background: colorDark.blackBackgroundMenu,
+			menuText: colorLight.blackTextMenuAccount,
+			textAvatar: colorLight.white,
+			background: colorLight.white,
 			seePreviousBoardsText: colorDark.grayTextItems,
-			workspacesText: colorDark.grayTextItems,
-			boardCardTitle: colorDark.grayTextItems,
-			boardCardBackground: colorDark.blackBackground,
-			createBoardCardBackground: colorDark.grayCreateBoard,
+			workspacesText: colorLight.blackTextMenuAccount,
+			boardCardTitle: colorLight.blackTextMenuAccount,
+			boardCardBackground: colorLight.white,
+			boardCardBackgroundHover: colorLight.lightLogoHover,
+			createBoardCardBackground: colorLight.itemMenuAccountHover,
 			borderInputsCreateBoards: colorDark.gray,
 			backgroundWorkSpaceHover: colorDark.blackBackgroundLightHover,
 			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
+			buttonBackgroundColor: colorLight.blueButton,
+			buttonBackgroundColorHover: colorLight.blueButtonHover,
+			buttonTextColor: colorLight.white,
+			buttonCancelBackgroundColor: colorLight.itemMenuAccountHover,
+			buttonCancelBackgroundColorHover: colorLight.lightLogoHover,
+			buttonCancelTextColor: colorLight.blackTextMenuAccount,
 		},
 		modalCreateWorkspace: {
 			backgroundImageContainer: colorDark.iconBackground,
-			title: colorDark.grayTextItems,
-			description: colorDark.grayTextItems,
-			background: colorDark.blackBackgroundMenu,
-			buttonBackgroundColor: colorDark.brandPrimary,
-			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
+			title: colorLight.blackTextMenuAccount,
+			description: colorLight.grayTextMenuAccount,
+			background: colorLight.white,
+			buttonBackgroundColor: colorLight.blueButton,
+			buttonBackgroundColorHover: colorLight.blueButtonHover,
+			buttonTextColor: colorLight.white,
 		},
 		boardPage: {
 			addButtonCard: colorDark.grayCreateBoard,
 			addButtonColumn: colorDark.grayCreateBoard,
 			addButtonColumnHover: colorDark.grayTransparent,
-			addButtonColumnText: colorDark.blueText,
-			blackBackgroundList: colorDark.blackBackgroundList,
-			blackBackgroundCard: colorDark.blackCard,
-			textGray: colorDark.grayTextCard,
-			addButtonCardHover: colorDark.cardBackgroundHover,
+			addButtonColumnText: colorLight.white,
+			blackBackgroundList: colorLight.backgroundGrayItems,
+			blackBackgroundCard: colorLight.white,
+			textGray: colorLight.blackTextMenuAccount,
+			addButtonCardHover: colorLight.backgroundGrayAddCardHover,
+			textColumnTitle: colorLight.blackTextMenuAccount,
+			textColumnBorder: colorLight.brandPrimary,
 		},
 		modal: {
-			backgroundColor: colorDark.blackCard,
-			textColor: colorDark.grayTextCard,
+			backgroundColor: colorLight.white,
+			textColor: colorLight.blackTextMenuAccount,
 			buttonColor: colorDark.brandPrimary,
 			buttonHoverColor: colorDark.brandPrimaryHover,
-			backgroundColorActivity: colorDark.blackCardDark,
-			modalBackground: colorDark.modalBackground,
+			backgroundColorActivity: colorLight.backgroundGrayItems,
+			modalBackground: colorLight.white,
+			buttonEditBackground: colorLight.lightLogoHover,
+			buttonSubmitBackground: colorLight.brandPrimary,
+			buttonSubmitBackgroundHover: colorLight.blueButtonHover,
+			buttonSubmitColor: colorLight.white,
+
+			buttonCancelColor: colorLight.blackTextMenuAccount,
+			buttonCancelBackground: colorLight.lightLogoHover,
+			buttonCancelBackgroundHover: colorLight.lightLogoHover,
+			commentBackgroundHover: colorLight.backgroundGrayItems,
+			colorTextDeleteButton: colorLight.white,
 		},
 		scrollbar: {
 			color1: colorDark.scrollbarColor1,
@@ -328,7 +398,9 @@ export const darkTheme = createTheme({
 			secondary: colorTokens.grayLight,
 		},
 		navbar: {
+			logoColor: colorTokens.white,
 			containerBackground: colorDark.blackBackground,
+			borderBottom: colorDark.gray,
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
 			createButtonText: colorDark.black,
@@ -362,17 +434,26 @@ export const darkTheme = createTheme({
 			backgroundBoardsSelected: colorDark.blueBackgroundSelected,
 		},
 		boardSection: {
+			menuText: colorDark.grayTextItems,
+			textAvatar: colorDark.black,
 			background: colorDark.blackBackgroundMenu,
 			seePreviousBoardsText: colorDark.grayTextItems,
 			workspacesText: colorDark.grayTextItems,
 			boardCardTitle: colorDark.grayTextItems,
 			boardCardBackground: colorDark.blackBackground,
+			boardCardBackgroundHover: colorDark.cardBackgroundHoverLight,
 			createBoardCardBackground: colorDark.grayCreateBoard,
 			borderInputsCreateBoards: colorDark.gray,
 			backgroundWorkSpaceHover: colorDark.blackBackgroundLightHover,
 			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
+			buttonBackgroundColor: colorDark.brandPrimary,
+			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
+			buttonTextColor: colorDark.black,
+			buttonCancelBackgroundColor: colorDark.grayCreateBoard,
+			buttonCancelBackgroundColorHover: colorDark.cardBackgroundHoverLight,
+			buttonCancelTextColor: colorDark.grayTextItems,
 		},
 		modalCreateWorkspace: {
 			backgroundImageContainer: colorDark.iconBackground,
@@ -381,6 +462,7 @@ export const darkTheme = createTheme({
 			background: colorDark.blackBackgroundMenu,
 			buttonBackgroundColor: colorDark.brandPrimary,
 			buttonBackgroundColorHover: colorDark.brandPrimaryHover,
+			buttonTextColor: colorDark.black,
 		},
 		boardPage: {
 			addButtonCard: colorDark.grayCreateBoard,
@@ -391,6 +473,8 @@ export const darkTheme = createTheme({
 			blackBackgroundCard: colorDark.blackCard,
 			textGray: colorDark.grayTextCard,
 			addButtonCardHover: colorDark.cardBackgroundHover,
+			textColumnTitle: colorDark.white,
+			textColumnBorder: colorDark.brandPrimary,
 		},
 		modal: {
 			backgroundColor: colorDark.blackCard,
@@ -399,6 +483,16 @@ export const darkTheme = createTheme({
 			buttonHoverColor: colorDark.brandPrimaryHover,
 			backgroundColorActivity: colorDark.blackCardDark,
 			modalBackground: colorDark.modalBackground,
+			buttonEditBackground: colorDark.cardBackgroundHoverLight,
+			buttonSubmitBackground: colorDark.brandPrimary,
+			buttonSubmitBackgroundHover: colorDark.brandPrimaryHover,
+			buttonSubmitColor: colorDark.black,
+
+			buttonCancelColor: colorDark.grayTextCard,
+			buttonCancelBackground: colorDark.black,
+			buttonCancelBackgroundHover: colorDark.cardBackgroundHoverLight,
+			commentBackgroundHover: colorDark.cardBackgroundHoverLight,
+			colorTextDeleteButton: colorDark.grayTextCard,
 		},
 		scrollbar: {
 			color1: colorDark.scrollbarColor1,

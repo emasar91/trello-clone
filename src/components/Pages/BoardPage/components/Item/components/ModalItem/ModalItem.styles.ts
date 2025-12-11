@@ -23,11 +23,10 @@ export const ModalItemCreateCommentButtonStyles = (
 	textAlign: 'start',
 	borderRadius: '8px',
 	boxShadow: 0,
-	justifyContent: 'flex-start', // ⭐ CLAVE
+	justifyContent: 'flex-start',
 	':hover': {
-		bgcolor: theme.palette.modal.modalBackground,
-		filter: 'brightness(1.2)',
-		boxShadow: 0,
+		bgcolor: theme.palette.modal.commentBackgroundHover,
+		boxShadow: 1,
 	},
 })
 
@@ -106,7 +105,7 @@ export const ModalItemEditDescriptionButtonStyles = (
 	bgcolor: theme.palette.modal.modalBackground,
 	color: theme.palette.modal.textColor,
 	'&:hover': {
-		filter: 'brightness(1.2)',
+		bgcolor: theme.palette.modal.buttonEditBackground,
 	},
 })
 
@@ -195,7 +194,7 @@ export const ModalItemTagItemStyles = (
 })
 
 export const ModalItemTagButtonStyles = (theme: Theme): SxProps<Theme> => ({
-	bgcolor: '#303134',
+	bgcolor: theme.palette.modal.modalBackground,
 	width: '32px',
 	height: '32px',
 	minWidth: '32px',
@@ -205,7 +204,8 @@ export const ModalItemTagButtonStyles = (theme: Theme): SxProps<Theme> => ({
 	boxSizing: 'border-box',
 	color: theme.palette.modal.textColor,
 	'&:hover': {
-		filter: 'brightness(1.2)',
+		backgroundColor: theme.palette.modal.buttonEditBackground,
+		color: theme.palette.modal.textColor,
 	},
 })
 

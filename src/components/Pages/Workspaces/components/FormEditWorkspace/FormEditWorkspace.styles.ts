@@ -1,4 +1,3 @@
-import { colorDark } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const FormEditWorkspaceButtonsContainer: SxProps<Theme> = {
@@ -10,45 +9,45 @@ export const FormEditWorkspaceButtonsContainer: SxProps<Theme> = {
 export const FormEditWorkspaceSubmitButtonStyles = (
 	theme: Theme
 ): SxProps<Theme> => ({
-	color: colorDark.black,
-	backgroundColor: theme.palette.boardSection.createButtonBackground,
+	color: theme.palette.boardSection.buttonTextColor,
+	backgroundColor: theme.palette.boardSection.buttonBackgroundColor,
 	'&:hover': {
-		backgroundColor: theme.palette.boardSection.createButtonBackgroundHover,
+		backgroundColor: theme.palette.boardSection.buttonBackgroundColorHover,
 	},
 })
 
 export const FormEditWorkspaceCancelButtonStyles = (
 	theme: Theme
 ): SxProps<Theme> => ({
-	color: `${colorDark.white} !important`,
-	backgroundColor: theme.palette.boardSection.background,
-	filter: 'brightness(1.2)',
+	color: theme.palette.boardSection.buttonCancelTextColor,
+	backgroundColor: theme.palette.boardSection.buttonCancelBackgroundColor,
 	'&:hover': {
-		filter: 'brightness(1.5)',
+		backgroundColor:
+			theme.palette.boardSection.buttonCancelBackgroundColorHover,
 	},
 })
 
-export const FormEditWorkspaceLabelStyles: SxProps<Theme> = {
-	color: 'white',
+export const FormEditWorkspaceLabelStyles = (theme: Theme): SxProps<Theme> => ({
+	color: theme.palette.boardSection.menuText,
 	fontSize: '16px',
 	lineHeight: '20px',
 	marginTop: '8px',
 	marginLeft: '-12px',
-}
+})
 
 export const FormEditWorkspaceInputStyles = (theme: Theme): SxProps<Theme> => ({
 	'& .MuiInputBase-input': {
-		color: 'white',
+		color: theme.palette.boardSection.menuText,
 		fontSize: '14px',
 	},
 	'& .MuiOutlinedInput-root': {
 		backgroundColor: 'transparent',
-		color: 'white',
+		color: theme.palette.boardSection.menuText,
 		marginTop: '14px',
 		'& fieldset': {
 			borderColor: theme.palette.boardSection.borderInputsCreateBoards,
 			filter: 'brightness(1.7)',
-			color: 'white',
+			color: theme.palette.boardSection.menuText,
 		},
 		'&:hover fieldset': {
 			borderColor: theme.palette.primary.main,

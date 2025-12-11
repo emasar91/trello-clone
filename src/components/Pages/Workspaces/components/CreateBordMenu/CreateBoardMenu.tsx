@@ -25,7 +25,7 @@ type ICreateBoardMenuProps = {
 	open: boolean
 	handleClose: () => void
 	anchorEl: null | HTMLElement
-	workspaceName: string
+	workspaceName?: string
 }
 
 type ImageItemProps = {

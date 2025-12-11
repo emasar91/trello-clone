@@ -11,13 +11,9 @@ export const CreateEditCommentContainerStyles = (
 })
 
 export const CreateEditCommentInputStyles = (theme: Theme): SxProps<Theme> => ({
-	borderColor: 'red',
+	backgroundColor: theme.palette.modal.backgroundColor,
 	'& .MuiInputBase-input': {
 		color: theme.palette.modal.textColor,
-		borderColor: 'red',
-	},
-	'& .MuiInputBase-root': {
-		borderColor: 'red',
 	},
 })
 
@@ -32,9 +28,19 @@ export const CreateEditCommentButtonsContainerStyles: SxProps<Theme> = {
 export const CreateEditCommentButtonCancelStyles = (
 	theme: Theme
 ): SxProps<Theme> => ({
-	color: theme.palette.modal.textColor,
+	color: theme.palette.modal.buttonCancelColor,
+	bgcolor: 'transparent',
 	'&:hover': {
-		bgcolor: theme.palette.modal.modalBackground,
-		filter: 'brightness(1.2)',
+		bgcolor: theme.palette.modal.buttonCancelBackgroundHover,
+	},
+})
+
+export const CreateEditCommentButtonSaveStyles = (
+	theme: Theme
+): SxProps<Theme> => ({
+	color: theme.palette.modal.buttonSubmitColor,
+	bgcolor: theme.palette.modal.buttonSubmitBackground,
+	'&:hover': {
+		bgcolor: theme.palette.modal.buttonSubmitBackgroundHover,
 	},
 })

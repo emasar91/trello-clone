@@ -96,6 +96,7 @@ export const ModalCreateWorkspaceButtonStyle = (
 	theme: Theme
 ): SxProps<Theme> => ({
 	backgroundColor: theme.palette.modalCreateWorkspace.buttonBackgroundColor,
+	color: theme.palette.modalCreateWorkspace.buttonTextColor,
 	'&:hover': {
 		backgroundColor:
 			theme.palette.modalCreateWorkspace.buttonBackgroundColorHover,

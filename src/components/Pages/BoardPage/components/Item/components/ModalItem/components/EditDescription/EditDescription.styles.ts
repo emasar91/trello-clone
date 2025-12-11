@@ -31,9 +31,19 @@ export const EditDescriptionButtonsContainerStyles: SxProps<Theme> = {
 export const EditDescriptionButtonCancelStyles = (
 	theme: Theme
 ): SxProps<Theme> => ({
-	color: theme.palette.modal.textColor,
+	color: theme.palette.modal.buttonCancelColor,
+	bgcolor: 'transparent',
 	'&:hover': {
-		bgcolor: theme.palette.modal.modalBackground,
-		filter: 'brightness(1.2)',
+		bgcolor: theme.palette.modal.buttonCancelBackgroundHover,
+	},
+})
+
+export const EditDescriptionButtonSaveStyles = (
+	theme: Theme
+): SxProps<Theme> => ({
+	color: theme.palette.modal.buttonSubmitColor,
+	bgcolor: theme.palette.modal.buttonSubmitBackground,
+	'&:hover': {
+		bgcolor: theme.palette.modal.buttonSubmitBackgroundHover,
 	},
 })

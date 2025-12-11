@@ -9,6 +9,7 @@ import {
 } from '@mui/material'
 import React from 'react'
 import {
+	ModalConfirmButtonCancelStyles,
 	ModalConfirmButtonContainerStyles,
 	ModalConfirmButtonStyles,
 	ModalConfirmContainerStyles,
@@ -62,7 +63,7 @@ function ModalConfirm({
 							t('delete')
 						)}
 					</Button>
-					<Button onClick={onClose} sx={ModalConfirmButtonStyles(theme)}>
+					<Button onClick={onClose} sx={ModalConfirmButtonCancelStyles(theme)}>
 						{t('cancel')}
 					</Button>
 				</Box>

@@ -1,4 +1,3 @@
-import { colorDark } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 
 export const WorkSpacesTitleStyle = (theme: Theme): SxProps<Theme> => ({
@@ -8,13 +7,16 @@ export const WorkSpacesTitleStyle = (theme: Theme): SxProps<Theme> => ({
 	color: theme.palette.boardSection.workspacesText,
 })
 
-export const WorkSpacesAvatarStyle = (bgColor: string): SxProps<Theme> => ({
+export const WorkSpacesAvatarStyle = (
+	bgColor: string,
+	theme: Theme
+): SxProps<Theme> => ({
 	width: 32,
 	height: 32,
 	background: bgColor,
 	borderRadius: 1,
 	fontWeight: 'bold',
-	color: colorDark.black,
+	color: theme.palette.boardSection.textAvatar,
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',

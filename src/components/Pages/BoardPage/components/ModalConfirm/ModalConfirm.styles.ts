@@ -33,9 +33,23 @@ export const ModalConfirmButtonContainerStyles: SxProps<Theme> = {
 
 export const ModalConfirmButtonStyles = (theme: Theme): SxProps<Theme> => ({
 	mt: 2,
+	color: theme.palette.modal.colorTextDeleteButton,
+	padding: '8px 18px',
+	borderRadius: '8px',
+	display: 'flex',
+	gap: '4px',
+})
+
+export const ModalConfirmButtonCancelStyles = (
+	theme: Theme
+): SxProps<Theme> => ({
+	mt: 2,
 	color: theme.palette.modal.textColor,
 	padding: '8px 18px',
 	borderRadius: '8px',
 	display: 'flex',
 	gap: '4px',
+	'&:hover': {
+		bgcolor: theme.palette.modal.buttonCancelBackgroundHover,
+	},
 })

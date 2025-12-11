@@ -46,7 +46,7 @@ const NavbarLogged = () => {
 			<Box sx={NavbarLoggedInnerWrapperStyle}>
 				<Box sx={NavbarLoggedLogoWrapperStyle(theme)}>
 					<Box component={Link} href="/u">
-						<LogoIcon />
+						<LogoIcon color={theme.palette.navbar.logoColor} />
 					</Box>
 				</Box>
 				<Box sx={NavbarLoggedSearchSectionStyle}>

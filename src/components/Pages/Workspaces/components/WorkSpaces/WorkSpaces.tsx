@@ -14,7 +14,7 @@ const WorkspaceSection = ({ workspace }: { workspace: IWorkspace }) => {
 		<Box sx={WorkSpacesContainerStyle}>
 			{/* Header workspace */}
 			<Box sx={WorkSpacesAvatarContainerStyle}>
-				<Box sx={WorkSpacesAvatarStyle(workspace.avatarColor)}>
+				<Box sx={WorkSpacesAvatarStyle(workspace.avatarColor, theme)}>
 					{workspace.name.charAt(0).toUpperCase()}
 				</Box>
 				<Typography variant="h6" sx={WorkSpacesTitleStyle(theme)}>

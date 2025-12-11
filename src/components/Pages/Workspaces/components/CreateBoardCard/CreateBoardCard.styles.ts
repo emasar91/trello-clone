@@ -47,7 +47,9 @@ export const CreateBoardCardContainerStyle = (
 	flexDirection: 'column',
 	height: '108px',
 	cursor: 'pointer',
-	'&:hover': { filter: 'brightness(1.2)' },
+	'&:hover': {
+		backgroundColor: theme.palette.boardSection.boardCardBackgroundHover,
+	},
 })
 
 export const CreateBoardCardRemainingTextStyle = (
