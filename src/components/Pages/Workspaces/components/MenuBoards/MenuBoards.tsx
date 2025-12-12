@@ -21,20 +21,23 @@ const MenuBoards = ({ workspaces }: { workspaces: IWorkspace[] }) => {
 	const locale = useLocale()
 	const { user } = useAuth()
 	const t = useTranslations('BoardsPage')
+	const currentLocale = locale || 'es'
 
 	const username =
 		user?.displayName?.toLowerCase().replace(/ /g, '') ||
 		user?.email?.split('@')[0] ||
 		'user'
-	const menuActive = pathname === `/${locale}/u/${username}/boards`
+	const menuActive = pathname === `/${currentLocale}/u/${username}/boards`
 
 	const goToBoards = () => {
-		router.push(`/${locale}/u/${username}/boards?uid=${user?.uid}`)
+		router.push(`/${currentLocale}/u/${username}/boards?uid=${user?.uid}`)
 	}
 
 	const goToWorkspaceBoards = (workspaceName: string) => {
 		router.push(
-			`/${locale}/w/${workspaceName.toLowerCase()}/boards?uid=${user?.uid}`
+			`/${currentLocale}/w/${workspaceName.toLowerCase()}/boards?uid=${
+				user?.uid
+			}`
 		)
 	}
 

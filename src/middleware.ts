@@ -6,34 +6,55 @@ import { routes as publicRoutes } from './constants'
 
 export const COOKIE_NAME = 'authToken'
 
+// Middleware de next-intl
 const intlMiddleware = createMiddleware(routing)
 
 const authRoutes: string[] = ['login', 'register', 'reset-password']
 
 export function middleware(req: NextRequest) {
 	const url = req.nextUrl.clone()
+
 	const locale = url.locale ?? routing.defaultLocale
-	const pathname = url.pathname.replace(`/${locale}/`, '').replace(/^\//, '')
+
+	// Quitar el locale de la ruta solo si realmente está presente
+	let pathname = url.pathname
+
+	// Caso: /es o /en solos → no son home
+	const rootLocaleMatch = routing.locales.find((l) => pathname === `/${l}`)
+	const isLocaleRoot = Boolean(rootLocaleMatch)
+
+	// Remover el locale solo si está al inicio
+	if (pathname.startsWith(`/${locale}/`)) {
+		pathname = pathname.replace(`/${locale}/`, '/')
+	} else if (pathname === `/${locale}`) {
+		pathname = '/'
+	}
+
+	// Normalizar sin barra inicial
+	const cleanPathname = pathname.replace(/^\//, '')
+
 	const token = req.cookies.get(COOKIE_NAME)?.value
 
-	const isProtected = pathname.startsWith('u')
-	const isAuthRoute = authRoutes.some((r) => pathname.startsWith(r))
-	const isPublicContent = publicRoutes.some((r) => pathname.startsWith(r))
-	const isHome = pathname === '' || pathname === '/'
+	const isProtected = cleanPathname.startsWith('u')
+	const isAuthRoute = authRoutes.some((r) => cleanPathname.startsWith(r))
+	const isPublicContent = publicRoutes.some((r) => cleanPathname.startsWith(r))
 
-	// 1️⃣ Si logueado y va a home / login / register / reset-password / rutas públicas → redirige a appTrello
+	// Home REAL: solo cuando pathname === '' y NO es /es o /en
+	const isHome = cleanPathname === '' && !isLocaleRoot
+
+	// ⭐ 1) Logueado y va a home / login / register / reset-password / rutas públicas → a /u
 	if (token && (isHome || isAuthRoute || isPublicContent)) {
 		url.pathname = `/${locale}/u`
 		return NextResponse.redirect(url)
 	}
 
-	// 2️⃣ Si NO logueado y va a ruta protegida → redirige al home
+	// ⭐ 2) No logueado y va a ruta protegida → a home del idioma
 	if (!token && isProtected) {
 		url.pathname = `/${locale}/`
 		return NextResponse.redirect(url)
 	}
 
-	// 3️⃣ Dejar que next-intl maneje locales
+	// ⭐ 3) Dejar next-intl manejar el resto
 	return intlMiddleware(req)
 }
 

@@ -13,14 +13,28 @@ export const useProtectedRoute = (
 	const locale = useLocale()
 	const router = useRouter()
 	const pathname = usePathname()
+	const currentLocale = locale || 'es'
 	useEffect(() => {
 		if (!loading) {
 			if (isProtected && !user) {
-				router.replace(`/${locale}/`)
+				router.replace(`/${currentLocale}/`)
 			}
-			if (!isProtected && user && (pathname === `/${locale}` || isMockPublic)) {
-				router.replace(`/${locale}/u`)
+			if (
+				!isProtected &&
+				user &&
+				(pathname === `/${currentLocale}` || isMockPublic)
+			) {
+				router.replace(`/${currentLocale}/u`)
 			}
 		}
-	}, [user, loading, router, isProtected, isMockPublic, locale, pathname])
+	}, [
+		user,
+		loading,
+		router,
+		isProtected,
+		isMockPublic,
+		locale,
+		pathname,
+		currentLocale,
+	])
 }

@@ -21,6 +21,7 @@ const RegisterPage = () => {
 	const locale = useLocale()
 	const router = useRouter()
 	const t = useTranslations('Toast')
+	const currentLocale = locale || 'es'
 
 	const handleLogin = async (
 		typeLogin: string,
@@ -32,9 +33,9 @@ const RegisterPage = () => {
 				try {
 					await createUserWithEmailAndPassword(firebaseAuth, email, password)
 
-					const result = await signInEmail(email, password, locale)
+					const result = await signInEmail(email, password, currentLocale)
 					if (result) {
-						router.replace(`/${locale}/u`) // redirect inmediato
+						router.replace(`/${currentLocale}/u`) // redirect inmediato
 					}
 				} catch (error: unknown) {
 					const firebaseError = error as FirebaseError

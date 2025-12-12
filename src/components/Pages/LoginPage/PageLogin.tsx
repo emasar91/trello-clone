@@ -17,6 +17,7 @@ const PageLogin = () => {
 	const router = useRouter()
 	const locale = useLocale()
 	const t = useTranslations('Toast')
+	const currentLocale = locale || 'es'
 
 	const handleLogin = async (
 		typeLogin: 'google' | 'email',
@@ -27,14 +28,14 @@ const PageLogin = () => {
 			if (typeLogin === 'google') {
 				const result = await signInGoogle(locale)
 				if (result) {
-					router.replace(`/${locale}/u`)
+					router.replace(`/${currentLocale}/u`)
 				}
 			}
 
 			if (typeLogin === 'email' && emailForm && passwordForm) {
 				const result = await signInEmail(emailForm, passwordForm, locale)
 				if (result) {
-					router.replace(`/${locale}/u`)
+					router.replace(`/${currentLocale}/u`)
 				}
 			}
 		} catch (error: unknown) {
