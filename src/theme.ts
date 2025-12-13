@@ -260,7 +260,7 @@ export const lightTheme = createTheme({
 			menuText: colorLight.blackTextMenuAccount,
 			textAvatar: colorLight.white,
 			background: colorLight.white,
-			seePreviousBoardsText: colorDark.grayTextItems,
+			seePreviousBoardsText: colorLight.blackTextMenuAccount,
 			workspacesText: colorLight.blackTextMenuAccount,
 			boardCardTitle: colorLight.blackTextMenuAccount,
 			boardCardBackground: colorLight.white,
