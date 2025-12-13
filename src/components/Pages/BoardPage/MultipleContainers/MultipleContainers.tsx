@@ -637,6 +637,8 @@ export function MultipleContainers({
 											setItems={setItems}
 											items={items}
 											tags={value.priorityColor}
+											description={value.description}
+											comments={value.comments}
 										/>
 									)
 								})}

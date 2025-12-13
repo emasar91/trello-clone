@@ -45,7 +45,16 @@
 	--box-shadow-picked-up: 0 0 0 calc(1px / var(--scale-x, 1))
 			rgba(63, 63, 68, 0.05),
 		-1px 0 15px 0 rgba(34, 33, 81, 0.01), 0px 15px 15px 0 rgba(34, 33, 81, 0.25);
-	z-index: 999;
+	opacity: 1;
+	z-index: 2000;
+}
+
+.Wrapper.dragging:not(.dragOverlay) {
+	opacity: 0.3;
+	transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), 0)
+		rotate(2deg);
+
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
 .Item {
@@ -69,7 +78,7 @@
 }
 
 .Item.dragging:not(.dragOverlay) {
-	opacity: 0.5;
+	opacity: 0.3;
 }
 
 .Item.dragOverlay {

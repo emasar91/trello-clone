@@ -4,6 +4,9 @@ import type { Transform } from '@dnd-kit/utilities'
 import './item.css'
 import { useTheme } from '@mui/material/styles'
 import { EyeIcon } from '@/public/assets/icons/EyeIcon'
+import { DescriptionIcon } from '@/public/assets/icons/DescriptionIcon'
+import { ICardComment } from '@/types/card'
+import { CommentIcon } from '@/public/assets/icons/CommentIcon'
 export interface Props {
 	dragOverlay?: boolean
 	disabled?: boolean
@@ -20,6 +23,8 @@ export interface Props {
 	wrapperStyle?: React.CSSProperties
 	value: React.ReactNode
 	tags: string[] | null
+	description: string | null
+	comments: ICardComment[]
 	onRemove?(): void
 	setOpenModalItem: React.Dispatch<React.SetStateAction<boolean>>
 	renderItem?(args: {
@@ -56,6 +61,8 @@ export const Item = React.memo(
 				value,
 				wrapperStyle,
 				tags,
+				description,
+				comments,
 				setOpenModalItem,
 				...props
 			},
@@ -88,10 +95,11 @@ export const Item = React.memo(
 				<li
 					ref={ref}
 					className={`Wrapper
-						${fadeIn ? 'fadeIn' : ''}
-						${sorting ? 'sorting' : ''}
-						${dragOverlay ? 'dragOverlay' : ''}
-					`}
+              ${fadeIn ? 'fadeIn' : ''}
+              ${sorting ? 'sorting' : ''}
+              ${dragging ? 'dragging' : ''}
+              ${dragOverlay ? 'dragOverlay' : ''}
+            `}
 					style={
 						{
 							...wrapperStyle,
@@ -104,18 +112,19 @@ export const Item = React.memo(
 							'--translate-y': transform
 								? `${Math.round(transform.y)}px`
 								: undefined,
-							'--scale-x': transform?.scaleX
-								? `${transform.scaleX}`
-								: undefined,
-							'--scale-y': transform?.scaleY
-								? `${transform.scaleY}`
-								: undefined,
+							// '--scale-x': transform?.scaleX
+							// 	? `${transform.scaleX}`
+							// 	: undefined,
+							// '--scale-y': transform?.scaleY
+							// 	? `${transform.scaleY}`
+							// : undefined,
 							'--index': index,
 							display: 'flex',
 							justifyContent: 'space-between',
 							alignItems: 'center',
 							backgroundColor: theme.palette.boardPage.blackBackgroundCard,
 							color: theme.palette.boardPage.textGray,
+							zIndex: dragging || dragOverlay ? 1000 : 'auto',
 						} as React.CSSProperties
 					}
 				>
@@ -126,6 +135,29 @@ export const Item = React.memo(
 							width: '100%',
 						}}
 					>
+						{tags && (
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: '5px',
+									marginTop: '5px',
+									marginLeft: '4px',
+								}}
+							>
+								{tags.map((color: string) => (
+									<span
+										key={color}
+										style={{
+											backgroundColor: color,
+											width: '37px',
+											height: '8px',
+											borderRadius: '5px',
+										}}
+									></span>
+								))}
+							</div>
+						)}
 						<div
 							style={{
 								display: 'flex',
@@ -145,14 +177,15 @@ export const Item = React.memo(
 									backgroundColor: theme.palette.boardPage.blackBackgroundCard,
 									color: theme.palette.boardPage.textGray,
 									width: '100%',
-									whiteSpace: 'break-spaces',
+									whiteSpace: 'pre-wrap',
+									wordBreak: 'break-word',
 								}}
 								data-cypress="draggable-item"
 								{...(!handle ? listeners : undefined)}
 								{...props}
 								tabIndex={!handle ? 0 : undefined}
 							>
-								{value}
+								<div>{value}</div>
 							</div>
 							<span
 								onClick={(e) => {
@@ -164,30 +197,38 @@ export const Item = React.memo(
 								<EyeIcon />
 							</span>
 						</div>
-
-						{tags && (
-							<div
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									gap: '5px',
-									marginBottom: '5px',
-									marginLeft: '4px',
-								}}
-							>
-								{tags.map((color: string) => (
-									<span
-										key={color}
-										style={{
-											backgroundColor: color,
-											width: '37px',
-											height: '8px',
-											borderRadius: '5px',
-										}}
-									></span>
-								))}
-							</div>
-						)}
+						<div
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								gap: '5px',
+								marginLeft: '4px',
+							}}
+						>
+							{description && (
+								<div
+									style={{
+										marginBottom: '5px',
+										marginLeft: '4px',
+									}}
+								>
+									<DescriptionIcon />
+								</div>
+							)}
+							{comments?.length > 0 && (
+								<div
+									style={{
+										marginBottom: '5px',
+										display: 'flex',
+										alignItems: 'center',
+										gap: '5px',
+									}}
+								>
+									<CommentIcon />
+									<span>{comments?.length}</span>
+								</div>
+							)}
+						</div>
 					</div>
 				</li>
 			)

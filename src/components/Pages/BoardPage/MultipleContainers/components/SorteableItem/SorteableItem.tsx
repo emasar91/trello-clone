@@ -6,6 +6,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { Items } from '../../MultipleContainers'
 import type { Props as ItemProps } from '../../../components/Item/Item'
+import { ICardComment } from '@/types/card'
 
 interface SortableItemProps {
 	containerId: UniqueIdentifier
@@ -18,6 +19,8 @@ interface SortableItemProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
 	tags: string[] | null
+	description: string | null
+	comments: ICardComment[]
 	style(args: {
 		value: UniqueIdentifier
 		index: number
@@ -68,6 +71,8 @@ const SortableItem = ({
 	setItems,
 	items,
 	tags,
+	description,
+	comments,
 }: SortableItemProps) => {
 	const {
 		setNodeRef,
@@ -113,6 +118,8 @@ const SortableItem = ({
 				listeners={listeners}
 				renderItem={renderItem}
 				setOpenModalItem={setOpenModalItem}
+				description={description}
+				comments={comments}
 			/>
 			<ModalItem
 				open={openModalItem}
