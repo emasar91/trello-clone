@@ -135,29 +135,6 @@ export const Item = React.memo(
 							width: '100%',
 						}}
 					>
-						{tags && (
-							<div
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									gap: '5px',
-									marginTop: '5px',
-									marginLeft: '4px',
-								}}
-							>
-								{tags.map((color: string) => (
-									<span
-										key={color}
-										style={{
-											backgroundColor: color,
-											width: '37px',
-											height: '8px',
-											borderRadius: '5px',
-										}}
-									></span>
-								))}
-							</div>
-						)}
 						<div
 							style={{
 								display: 'flex',
@@ -179,13 +156,72 @@ export const Item = React.memo(
 									width: '100%',
 									whiteSpace: 'pre-wrap',
 									wordBreak: 'break-word',
+									display: 'flex',
+									alignItems: 'center',
 								}}
 								data-cypress="draggable-item"
 								{...(!handle ? listeners : undefined)}
 								{...props}
 								tabIndex={!handle ? 0 : undefined}
 							>
-								<div>{value}</div>
+								<div
+									style={{
+										display: 'flex',
+										flexDirection: 'column',
+										justifyContent: 'center',
+									}}
+								>
+									{tags && (
+										<div
+											style={{
+												display: 'flex',
+												alignItems: 'center',
+												gap: '5px',
+												marginTop: '5px',
+												marginBottom: '5px',
+											}}
+										>
+											{tags.map((color: string) => (
+												<span
+													key={color}
+													style={{
+														backgroundColor: color,
+														width: '35px',
+														height: '8px',
+														borderRadius: '5px',
+													}}
+												/>
+											))}
+										</div>
+									)}
+									<span>{value}</span>
+
+									<div
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											gap: '5px',
+										}}
+									>
+										{description && (
+											<div>
+												<DescriptionIcon />
+											</div>
+										)}
+										{comments?.length > 0 && (
+											<div
+												style={{
+													display: 'flex',
+													alignItems: 'center',
+													gap: '5px',
+												}}
+											>
+												<CommentIcon />
+												<span>{comments?.length}</span>
+											</div>
+										)}
+									</div>
+								</div>
 							</div>
 							<span
 								onClick={(e) => {
@@ -196,38 +232,6 @@ export const Item = React.memo(
 							>
 								<EyeIcon />
 							</span>
-						</div>
-						<div
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								gap: '5px',
-								marginLeft: '4px',
-							}}
-						>
-							{description && (
-								<div
-									style={{
-										marginBottom: '5px',
-										marginLeft: '4px',
-									}}
-								>
-									<DescriptionIcon />
-								</div>
-							)}
-							{comments?.length > 0 && (
-								<div
-									style={{
-										marginBottom: '5px',
-										display: 'flex',
-										alignItems: 'center',
-										gap: '5px',
-									}}
-								>
-									<CommentIcon />
-									<span>{comments?.length}</span>
-								</div>
-							)}
 						</div>
 					</div>
 				</li>
