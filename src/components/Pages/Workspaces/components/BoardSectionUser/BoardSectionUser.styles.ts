@@ -13,7 +13,7 @@ export const BoardSectionUserTitleContainerStyle: SxProps<Theme> = {
 	display: 'flex',
 	alignItems: 'center',
 	gap: '8px',
-	marginBottom: '16px',
+	margin: '16px 0',
 }
 
 export const BoardSectionUserTitleStyle = (theme: Theme): SxProps<Theme> => ({

@@ -6,6 +6,8 @@ import {
 	BoardCardTitleStyle,
 } from './BoardCard.styles'
 import { IBoard } from '@/types/workspaces'
+import { useWorkSpaceStore } from '@/context/useWorkSpace'
+import { useTranslations } from 'next-intl'
 
 const BoardCard = ({
 	board,
@@ -16,18 +18,33 @@ const BoardCard = ({
 }) => {
 	const router = useRouter()
 	const theme = useTheme()
+	const { workspaces } = useWorkSpaceStore()
+	const t = useTranslations('BoardsPage')
 
-	const handleRedirect = () => {
-		//workspaceName es recientes se tiene que buscar el primer espacio de trabajo que tenga ese tablero
+	const handleRedirect = (board: IBoard) => {
+		let resolvedWorkspace = workspaceName
+
+		if (workspaceName === t('recently')) {
+			const wsFound = workspaces.find((ws) =>
+				ws.boards.some((b) => b.boardId === board.boardId)
+			)
+
+			if (!wsFound) {
+				return
+			}
+
+			resolvedWorkspace = wsFound.name
+		}
+
 		router.push(
-			`/b/${workspaceName.toLowerCase()}/${board.name
+			`/b/${resolvedWorkspace.toLowerCase()}/${board.name
 				.toLowerCase()
 				.replace(/\s+/g, '-')}`
 		)
 	}
 
 	return (
-		<Card onClick={() => handleRedirect()} sx={BoardCardStyle(theme)}>
+		<Card onClick={() => handleRedirect(board)} sx={BoardCardStyle(theme)}>
 			<Box>
 				<Box
 					component={'img'}

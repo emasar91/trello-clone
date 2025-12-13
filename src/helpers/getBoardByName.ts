@@ -1,6 +1,5 @@
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
-import { toObjectId } from './utils'
 import { IWorkspaceStore } from '@/types/workspaces'
 import { IBoard } from '@/types/boards'
 import { getUser } from './getUser'
@@ -18,9 +17,7 @@ export async function getBoardByNames(
 	const workspacesCollection = db.collection<IWorkspaceStore>('workspaces')
 	const boardsCollection = db.collection<IBoard>('boards')
 
-	const userObjectId = toObjectId(userId) as ObjectId
-
-	const user = await getUser({ uid: userObjectId.toString() })
+	const user = await getUser({ uid: userId.toString() })
 
 	// 1️⃣ Buscar el workspace del usuario con ese nombre
 	const workspace = await workspacesCollection.findOne({

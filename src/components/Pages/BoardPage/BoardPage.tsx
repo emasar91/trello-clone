@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	BoardContentStyle,
 	BoardImageStyle,
@@ -15,14 +15,15 @@ import { ManyItems } from './ManyItems/ManyItems'
 import { useBoardData } from '@/hooks/useGetBoardData'
 import NotificationContainer from '@/components/Notifications/Notifications'
 import { useTranslations } from 'next-intl'
+import { useUpdateLastOpenedBoard } from '@/hooks/useUpdateLastOpenedBoards'
 
-function BoardPage({
+const BoardPage = ({
 	boardname,
 	workspace,
 }: {
 	boardname: string
 	workspace: string
-}) {
+}) => {
 	const theme = useTheme()
 	const { user } = useAuth()
 	const t = useTranslations('BoardsPage')
@@ -40,6 +41,14 @@ function BoardPage({
 		setColumns,
 		setCardsForColumn,
 	})
+
+	const { updateLastOpened } = useUpdateLastOpenedBoard()
+
+	useEffect(() => {
+		if (board && board._id) {
+			updateLastOpened(board._id)
+		}
+	}, [board, updateLastOpened])
 
 	if (error) {
 		return <Box sx={ErrorContainerStyle}>{error}</Box>

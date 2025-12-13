@@ -9,10 +9,10 @@ import {
 	BoardSectionUserTitleStyle,
 } from './BoardSectionUser.styles'
 import { useTranslations } from 'next-intl'
-import { IBoard, IWorkspace } from '@/types/workspaces'
+import { IWorkspace } from '@/types/workspaces'
 import CreateWorkspaceCard from '../CreateWorkspaceCard/CreateWorkspaceCard'
 import ModalCreateWorkspace from '@/components/Navbar/components/ModalCreateWorkspace/ModalCreateWorkspace'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useAuth } from '@/context/useAuthContext'
 import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
@@ -25,19 +25,17 @@ export default function BoardsSectionUser({
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
 
-	const allBoards: IBoard[] = workspaces.flatMap((ws) => ws.boards)
-
-	// 2. Filtrar solo los que tengan lastOpenedAt
-	const openedBoards = allBoards.filter((b) => b.lastOpenedAt !== null)
-
-	// 3. Ordenar del más reciente al más antiguo
-	openedBoards?.sort((a, b) => {
-		// Como lastOpenedAt no es null aquí, podemos usar !
-		return b.lastOpenedAt!.getTime() - a.lastOpenedAt!.getTime()
-	})
-
-	// 4. Tomar solo los 4 primeros
-	const recentBoards = openedBoards.length > 0 ? openedBoards.slice(0, 4) : []
+	const recentBoards = useMemo(() => {
+		return workspaces
+			.flatMap((ws) => ws.boards)
+			.filter((b) => b.lastOpenedAt)
+			.sort(
+				(a, b) =>
+					new Date(b.lastOpenedAt!).getTime() -
+					new Date(a.lastOpenedAt!).getTime()
+			)
+			.slice(0, 4)
+	}, [workspaces])
 
 	const [openModal, setOpenModal] = useState(false)
 	const handleCloseModal = () => {
@@ -84,8 +82,8 @@ export default function BoardsSectionUser({
 							{t('workspacesUser')}
 						</Typography>
 						{workspaces.length > 0 ? (
-							workspaces.map((ws) => (
-								<WorkspaceSection key={ws._id} workspace={ws} />
+							workspaces.map((ws, index) => (
+								<WorkspaceSection key={index} workspace={ws} />
 							))
 						) : (
 							<Box onClick={() => setOpenModal(true)}>

@@ -1,6 +1,7 @@
 import { createBoardinWorkspace } from '@/helpers/createBordInWorkpace'
 import { getBoardByNames } from '@/helpers/getBoardByName'
 import { getUserFromRequest } from '@/helpers/getUserIdFromToken'
+import { updateLastOpenedBoard } from '@/helpers/updateLastOpenedBoard'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
@@ -106,6 +107,37 @@ export async function GET(request: Request) {
 		console.error('Error en GET /api/boards/get:', error)
 		return NextResponse.json(
 			{ error: err.message || 'Error interno del servidor' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function PATCH(request: Request) {
+	try {
+		// 1️⃣ Auth
+		const user = await getUserFromRequest()
+		if (!user) {
+			return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+		}
+
+		const { searchParams } = new URL(request.url)
+		const boardId = searchParams.get('id')
+
+		if (!boardId) {
+			return NextResponse.json(
+				{ error: 'boardId es requerido' },
+				{ status: 400 }
+			)
+		}
+
+		// 2️⃣ Update en workspace
+		await updateLastOpenedBoard(boardId, user._id)
+
+		return NextResponse.json({ ok: true })
+	} catch (error) {
+		console.error('PATCH /api/boards/update-last-opened', error)
+		return NextResponse.json(
+			{ error: 'Error interno del servidor' },
 			{ status: 500 }
 		)
 	}

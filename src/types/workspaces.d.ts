@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 export interface IWorkspace {
 	avatarColor: string
 	createdAt: Date
@@ -16,6 +18,19 @@ export interface IBoard {
 	image: string
 	description: string
 	lastOpenedAt: null | Date
+	boardId: ObjectId
+}
+
+export interface IBoardDocument {
+	_id: ObjectId
+	workspaceId: ObjectId
+	userId: ObjectId
+	name: string
+	description?: string
+	createdAt: Date
+	updatedAt: Date | null
+	lastOpenedAt: Date | null
+	image: string
 }
 
 export interface IWorkspaceStore {
