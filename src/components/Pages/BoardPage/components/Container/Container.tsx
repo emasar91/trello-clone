@@ -73,33 +73,36 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 				<Box
 					sx={ContainerHeaderStyles(theme)}
 					onDoubleClick={() => setEditing(true)}
-					onTouchStart={() => {
-						pressTimer = setTimeout(handleLongPress, 500)
-					}}
-					onTouchEnd={() => clearTimeout(pressTimer)}
 				>
-					{editing ? (
-						<input
-							autoFocus
-							value={value}
-							onChange={(e) => setValue(e.target.value)}
-							onBlur={finish}
-							onKeyDown={(e) => e.key === 'Enter' && finish()}
-							onMouseDown={(e) => e.stopPropagation()}
-							style={{
-								width: '100%',
-								fontSize: '1rem',
-								color: theme.palette.boardPage.textColumnTitle,
-								outline: `1px solid ${theme.palette.boardPage.textColumnBorder}`,
-								border: `1px solid ${theme.palette.boardPage.textColumnBorder}`,
-								borderRadius: '4px',
-							}}
-						/>
-					) : (
-						<span style={{ color: theme.palette.boardPage.textColumnTitle }}>
-							{label}
-						</span>
-					)}
+					<Box
+						onTouchStart={() => {
+							pressTimer = setTimeout(handleLongPress, 500)
+						}}
+						onTouchEnd={() => clearTimeout(pressTimer)}
+					>
+						{editing ? (
+							<input
+								autoFocus
+								value={value}
+								onChange={(e) => setValue(e.target.value)}
+								onBlur={finish}
+								onKeyDown={(e) => e.key === 'Enter' && finish()}
+								onMouseDown={(e) => e.stopPropagation()}
+								style={{
+									width: '100%',
+									fontSize: '1rem',
+									color: theme.palette.boardPage.textColumnTitle,
+									outline: `1px solid ${theme.palette.boardPage.textColumnBorder}`,
+									border: `1px solid ${theme.palette.boardPage.textColumnBorder}`,
+									borderRadius: '4px',
+								}}
+							/>
+						) : (
+							<span style={{ color: theme.palette.boardPage.textColumnTitle }}>
+								{label}
+							</span>
+						)}
+					</Box>
 
 					<Box sx={ContainerActionsStyles}>
 						{onRemove && <Remove onClick={onRemove} />}

@@ -37,7 +37,6 @@ export const BoardImageStyle: SxProps<Theme> = {
 }
 
 export const BoardContentStyle: SxProps<Theme> = {
-	position: 'relative',
 	overflowX: 'auto',
 	zIndex: 1,
 	width: '100%',

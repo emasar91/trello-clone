@@ -77,7 +77,7 @@ const BoardPage = ({
 				/>
 			)}
 			<Box sx={BoardContentStyle}>
-				<ManyItems />
+				<ManyItems boardName={boardname} />
 			</Box>
 			<NotificationContainer />
 		</Box>

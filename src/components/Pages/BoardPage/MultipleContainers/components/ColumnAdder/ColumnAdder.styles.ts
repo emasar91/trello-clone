@@ -6,7 +6,7 @@ export const ColumnAdderAddColumnStyles: SxProps<Theme> = {
 	backgroundColor: '#ffffff3d',
 	padding: '8px 12px',
 	fontSize: 14,
-	marginTop: '12px',
+	marginTop: '50px',
 	display: 'inline-flex',
 	alignItems: 'center',
 	gap: '8px',
