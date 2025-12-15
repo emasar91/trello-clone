@@ -530,7 +530,7 @@ export const API = {
 	getBoardByNameUrl: '/api/boards',
 	updateLastOpenedBoardUrl: '/api/boards',
 	getBoardColumnsUrl: '/api/columns',
-	createColumnUrl: '/api/columns',
+	createColumnUrl: '/api/columns/create',
 	updateColumnUrl: '/api/columns',
 	deleteColumnUrl: '/api/columns',
 	createCardUrl: '/api/cards',

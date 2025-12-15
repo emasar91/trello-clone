@@ -15,7 +15,7 @@ interface IEditDescription {
 	description: string
 	setDescription: React.Dispatch<React.SetStateAction<string>>
 	setShowEditDescription: React.Dispatch<React.SetStateAction<boolean>>
-	cardSelected: ICard
+	cardSelected?: ICard
 	onSubmit: () => void
 }
 

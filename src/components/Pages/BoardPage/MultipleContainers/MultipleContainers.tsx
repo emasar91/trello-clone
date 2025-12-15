@@ -188,7 +188,6 @@ export function MultipleContainers({
 	const [containers, setContainers] = useState(
 		Object.keys(initialItems) as UniqueIdentifier[]
 	)
-	// NOTE: titles now live inside items[containerId].title
 
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
 	const lastOverId = useRef<UniqueIdentifier | null>(null)

@@ -31,8 +31,8 @@ export const useCreateColumn = ({
 	const didFetch = useRef(false)
 
 	// 🔥 igual que createCardInColumn → se llama createColumnInBoard
-	const createColumnInBoard = useCallback(
-		() => async (title: string) => {
+	const createColumnInBoard = useCallback(() => {
+		return async (title: string) => {
 			if (!title?.trim()) return toast.error('El título es requerido')
 			if (didFetch.current) return
 			didFetch.current = true
@@ -85,9 +85,8 @@ export const useCreateColumn = ({
 				didFetch.current = false
 				setLoading(false)
 			}
-		},
-		[setItems, setContainers, boardId, user?.uid]
-	)
+		}
+	}, [setItems, setContainers, boardId, user?.uid])
 
 	return { createColumnInBoard, loading }
 }

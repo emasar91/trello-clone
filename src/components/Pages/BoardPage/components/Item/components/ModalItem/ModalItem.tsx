@@ -57,16 +57,15 @@ type Props = {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 }
 
-function ModalConfirm({
+const ModalItem = ({
 	open,
 	onClose,
 	cardId,
 	columnId,
 	items,
 	setItems,
-}: Props) {
+}: Props) => {
 	const {
-		cardsByColumn,
 		board: { _id: boardId },
 	} = useStoreBoard()
 
@@ -76,9 +75,10 @@ function ModalConfirm({
 
 	const { user } = useAuth()
 
-	const cardSelected = cardsByColumn[columnId]?.find(
-		(item) => item._id === cardId
+	const cardSelected = items[columnId]?.items.find(
+		(item) => item._id.toString() === cardId
 	)
+
 	const etiquetasRef = useRef<HTMLSpanElement | null>(null)
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -376,4 +376,4 @@ function ModalConfirm({
 	)
 }
 
-export default ModalConfirm
+export default ModalItem

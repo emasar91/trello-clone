@@ -9,7 +9,7 @@ import {
 	Link,
 	useTheme,
 } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import AccountMenu from './components/AccountMenu/AccounMenu'
 import {
 	NavbarLoggedActionsStyle,
@@ -72,9 +72,13 @@ const NavbarLogged = () => {
 
 	const pathname = usePathname()
 
-	useEffect(() => {
+	const handleCloseSearchBox = useCallback(() => {
 		setSearchValue('')
 		setQuery('')
+	}, [setSearchValue, setQuery])
+
+	useEffect(() => {
+		handleCloseSearchBox()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pathname])
 
@@ -100,6 +104,27 @@ const NavbarLogged = () => {
 			)
 		}
 	}
+
+	const containerRef = useRef<HTMLDivElement | null>(null)
+
+	useEffect(() => {
+		if (!handleCloseSearchBox) return
+
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				containerRef.current &&
+				!containerRef.current.contains(event.target as Node)
+			) {
+				handleCloseSearchBox()
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside)
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+	}, [handleCloseSearchBox])
 
 	return (
 		<Box sx={NavbarLoggedContainerStyle(theme)}>
@@ -128,7 +153,11 @@ const NavbarLogged = () => {
 									</InputAdornment>
 								}
 							/>
-							<Box position="absolute" sx={NavbarLoggedSearchBoxContainerStyle}>
+							<Box
+								position="absolute"
+								sx={NavbarLoggedSearchBoxContainerStyle}
+								ref={containerRef}
+							>
 								{loading && (
 									<Box sx={NavbarLoggedSearchLoadingStyle(theme)}>
 										<CircularProgress size={16} />

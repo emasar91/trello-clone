@@ -25,6 +25,7 @@ const initialValue: IBoardStore = {
 	setColumns: () => {},
 	setCardsForColumn: () => {},
 	setSelectedCardId: () => {},
+	setCardsByColumn: () => {},
 }
 
 export const useStoreBoard = create<IBoardStore>((set) => ({
@@ -42,4 +43,7 @@ export const useStoreBoard = create<IBoardStore>((set) => ({
 		})),
 	// 👉 Set selected card id
 	setSelectedCardId: (selectedCardId: string) => set({ selectedCardId }),
+	// 👉 Set cards by column
+	setCardsByColumn: (cardsByColumn: Record<string, ICard[]>) =>
+		set({ cardsByColumn }),
 }))

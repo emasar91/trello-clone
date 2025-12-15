@@ -16,11 +16,8 @@ export async function createColumn(
 	const db = await getDB()
 	const columnsCollection = db.collection<IColumn>('columns')
 	const boardsCollection = db.collection('boards')
-
 	const boardObjectId = toObjectId(boardId) as ObjectId
-	const userObjectId = toObjectId(userId) as ObjectId
-	const user = await getUser({ uid: userObjectId.toString() })
-
+	const user = await getUser({ uid: userId.toString() })
 	const createdAt = new Date()
 
 	let finalOrder = order

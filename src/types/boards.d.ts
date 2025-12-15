@@ -20,4 +20,5 @@ interface IBoardStore {
 	setColumns: (columns: IColumn[]) => void
 	setCardsForColumn: (columnId: string, cards: ICard[]) => void
 	setSelectedCardId: (cardId: string) => void
+	setCardsByColumn: (cardsByColumn: Record<string, ICard[]>) => void
 }
