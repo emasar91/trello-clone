@@ -23,7 +23,7 @@ export const TextAreaCustomContainerStylesColumn = (
 ): CSSProperties => ({
 	backgroundColor: theme.palette.boardPage.blackBackgroundList,
 	height: '105px',
-	marginTop: '12px',
+	marginTop: '50px',
 	width: '100%',
 	borderRadius: '8px',
 	padding: '8px 12px',
