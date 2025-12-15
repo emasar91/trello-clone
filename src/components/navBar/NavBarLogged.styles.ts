@@ -44,6 +44,7 @@ export const NavbarLoggedSearchInputStyle = (theme: Theme): SxProps<Theme> => ({
 export const NavbarLoggedSearchContainerStyle: SxProps<Theme> = {
 	flex: 1,
 	minWidth: 0,
+	position: 'relative',
 }
 
 export const NavbarLoggedActionsStyle: SxProps<Theme> = {
@@ -118,11 +119,11 @@ export const NavbarLoggedSearchLoadingStyle = (
 
 export const NavbarLoggedSearchBoxContainerStyle: SxProps<Theme> = {
 	height: 'auto',
-	maxHeight: '50%',
+	maxHeight: '500px',
 	flexDirection: 'column',
 	overflowY: 'auto',
-	maxWidth: '780px',
 	width: '100%',
+	maxWidth: '100%',
 	marginTop: '0.7rem',
 	zIndex: 99999,
 }
