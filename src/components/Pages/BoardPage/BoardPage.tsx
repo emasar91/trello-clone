@@ -58,13 +58,14 @@ const BoardPage = ({
 		return <Box sx={ErrorContainerStyle}>{error}</Box>
 	}
 
-	if (loading)
+	if (loading) {
 		return (
 			<Box sx={LoadingContainerStyle}>
 				<CircularProgress />
 				{t('loadingBoard')}
 			</Box>
 		)
+	}
 
 	return (
 		<Box component={'main'} sx={BoardsPageContainerStyle(theme)}>
@@ -77,7 +78,7 @@ const BoardPage = ({
 				/>
 			)}
 			<Box sx={BoardContentStyle}>
-				<ManyItems boardName={boardname} />
+				<ManyItems boardName={boardname} loading={loading} />
 			</Box>
 			<NotificationContainer />
 		</Box>

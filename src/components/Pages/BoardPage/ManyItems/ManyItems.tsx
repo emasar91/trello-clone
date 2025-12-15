@@ -7,7 +7,13 @@ import { useMemo } from 'react'
 import { ICard } from '@/types/card'
 import { Box, Typography } from '@mui/material'
 
-export const ManyItems = ({ boardName }: { boardName: string }) => {
+export const ManyItems = ({
+	boardName,
+	loading,
+}: {
+	boardName: string
+	loading: boolean
+}) => {
 	const { columns, cardsByColumn } = useStoreBoard()
 
 	const itemsFormatted = useMemo(() => {
@@ -34,32 +40,36 @@ export const ManyItems = ({ boardName }: { boardName: string }) => {
 		return result
 	}, [columns, cardsByColumn])
 
+	console.log('🚀 ~ ManyItems ~ loading:', loading)
 	return (
-		<Box>
-			<Typography
-				sx={{
-					backgroundColor: '#d3d2d6',
-					width: '100%',
-					padding: '0.5rem',
-					position: 'absolute',
-					top: '48px',
-					marginLeft: '-16px',
-					fontSize: '16px',
-					lineHeight: '32px',
-					paddingLeft: '16px',
-				}}
-				variant="h5"
-			>
-				{boardName}
-			</Typography>
-			<MultipleContainers
-				containerStyle={{
-					maxHeight: '85vh',
-					marginTop: '48px',
-				}}
-				items={itemsFormatted}
-				scrollable
-			/>
-		</Box>
+		!loading && (
+			<Box>
+				<Typography
+					sx={{
+						backgroundColor: '#d3d2d6',
+						width: '100%',
+						padding: '0.5rem',
+						position: 'absolute',
+						top: '48px',
+						marginLeft: '-16px',
+						fontSize: '16px',
+						lineHeight: '32px',
+						paddingLeft: '16px',
+					}}
+					variant="h5"
+				>
+					{boardName}
+				</Typography>
+				<MultipleContainers
+					containerStyle={{
+						maxHeight: '85vh',
+						marginTop: '48px',
+					}}
+					items={itemsFormatted}
+					scrollable
+					loadingBoard={loading}
+				/>
+			</Box>
+		)
 	)
 }

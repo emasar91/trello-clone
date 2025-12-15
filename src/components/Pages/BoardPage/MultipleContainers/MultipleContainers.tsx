@@ -167,6 +167,7 @@ interface Props {
 	trashable?: boolean
 	scrollable?: boolean
 	vertical?: boolean
+	loadingBoard?: boolean
 }
 
 export const TRASH_ID = 'void'
@@ -181,6 +182,7 @@ export function MultipleContainers({
 	getItemStyles = () => ({}),
 	wrapperStyle = () => ({}),
 	renderItem,
+	loadingBoard,
 }: Props) {
 	const t = useTranslations('BoardsPage')
 
@@ -395,7 +397,9 @@ export function MultipleContainers({
 
 		return newData
 	}
-
+	if (loadingBoard) {
+		return null
+	}
 	return (
 		<DndContext
 			sensors={sensors}

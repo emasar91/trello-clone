@@ -24,6 +24,7 @@ export const LoadingContainerStyle: SxProps<Theme> = {
 	justifyContent: 'center',
 	alignItems: 'center',
 	gap: 2,
+	zIndex: 99999,
 }
 
 export const BoardImageStyle: SxProps<Theme> = {
