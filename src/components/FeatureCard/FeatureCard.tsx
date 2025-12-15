@@ -22,7 +22,6 @@ type Props = { title: string; translate: string; index: number }
  * <FeatureCard title="analytics" translate="translation" />
  */
 function FeatureCard({ title, translate, index }: Props) {
-	console.log('🚀 ~ FeatureCard ~ index:', index)
 	const t = useTranslations(translate)
 
 	return (

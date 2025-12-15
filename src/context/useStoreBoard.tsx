@@ -13,15 +13,18 @@ const initialBoard: IBoard = {
 	createdAt: null,
 	updatedAt: null,
 	lastOpenedAt: null,
+	selectedCardId: '',
 }
 
 const initialValue: IBoardStore = {
 	board: initialBoard,
 	columns: [],
 	cardsByColumn: {},
+	selectedCardId: '',
 	setBoard: () => {},
 	setColumns: () => {},
 	setCardsForColumn: () => {},
+	setSelectedCardId: () => {},
 }
 
 export const useStoreBoard = create<IBoardStore>((set) => ({
@@ -37,4 +40,6 @@ export const useStoreBoard = create<IBoardStore>((set) => ({
 		set((state) => ({
 			cardsByColumn: { ...state.cardsByColumn, [columnId]: cards },
 		})),
+	// 👉 Set selected card id
+	setSelectedCardId: (selectedCardId: string) => set({ selectedCardId }),
 }))

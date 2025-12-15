@@ -1,8 +1,14 @@
-export const CommentIcon = () => {
+export const CommentIcon = ({
+	width = 16,
+	height = 16,
+}: {
+	width?: number
+	height?: number
+}) => {
 	return (
 		<svg
-			width="16"
-			height="16"
+			width={width + 'px'}
+			height={height + 'px'}
 			role="presentation"
 			focusable="false"
 			viewBox="0 0 24 24"

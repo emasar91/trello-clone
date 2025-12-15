@@ -1,6 +1,4 @@
-// useBoardData.ts
-
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { API } from '@/constants'
 import { IColumn } from '@/types/columns'
 import { ICard } from '@/types/card'
@@ -11,8 +9,10 @@ type UseBoardDataProps = {
 	boardname: string
 	workspace: string
 	userUid?: string
-	board: IBoard
-	columns: IColumn[]
+	hacerFetch: boolean
+	setHacerFetch: (v: boolean) => void
+
+	// store setters
 	setBoard: (board: IBoard) => void
 	setColumns: (columns: IColumn[]) => void
 	setCardsForColumn: (columnId: string, cards: ICard[]) => void
@@ -22,18 +22,27 @@ export const useBoardData = ({
 	boardname,
 	workspace,
 	userUid,
-	board,
-	columns,
+	hacerFetch,
+	setHacerFetch,
 	setBoard,
 	setColumns,
 	setCardsForColumn,
 }: UseBoardDataProps) => {
-	const [loading, setLoading] = useState(true)
-	const [error, setError] = useState<string | null>(null) // 👈 Nuevo
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState<string | null>(null)
 
-	/** 🔹 Fetch Board */
+	// 🔹 ESTADO LOCAL (orquestación)
+	const [localBoard, setLocalBoard] = useState<IBoard | null>(null)
+	const [localColumns, setLocalColumns] = useState<IColumn[]>([])
+
+	/* ============================
+     1️⃣ FETCH BOARD
+  ============================ */
 	const fetchBoard = useCallback(async () => {
 		try {
+			setLoading(true)
+			setError(null)
+
 			const { data } = await api.get(
 				`${
 					API.getBoardByNameUrl
@@ -43,82 +52,85 @@ export const useBoardData = ({
 				{ withCredentials: true }
 			)
 
-			// 🛑 VALIDACIÓN: si no existe el tablero → error inmediato
-			if (!data?.board || !data.board._id) {
-				setError('No se encontró el tablero — Está roto o fue eliminado')
-				return
+			if (!data?.board?._id) {
+				throw new Error('No se encontró el tablero')
 			}
 
-			setBoard(data.board)
+			setLocalBoard(data.board)
+			setBoard(data.board) // 🔁 sync store
 		} catch {
 			setError('Error al obtener el tablero')
+			setLoading(false)
 		}
 	}, [boardname, workspace, userUid, setBoard])
 
-	/** 🔹 Fetch Columns */
+	/* ============================
+     2️⃣ FETCH COLUMNS (depende del board LOCAL)
+  ============================ */
 	const fetchColumns = useCallback(async () => {
+		if (!localBoard?._id) return
+
 		try {
 			const { data } = await api.get(
-				`${API.getBoardColumnsUrl}?boardId=${board._id}`,
+				`${API.getBoardColumnsUrl}?boardId=${localBoard._id}`,
 				{ withCredentials: true }
 			)
 
-			// 🛑 VALIDACIÓN: tablero sin columnas = tablero roto
-			if (!data?.columns || data.columns.length === 0) {
-				setError('El tablero está roto — No tiene columnas')
-				return
+			if (!data?.columns?.length) {
+				throw new Error('Tablero sin columnas')
 			}
 
-			setColumns(data.columns)
+			setLocalColumns(data.columns)
+			setColumns(data.columns) // 🔁 sync store
 		} catch {
-			setError('Error al obtener las columnas')
+			setError('Error al obtener columnas')
+			setLoading(false)
 		}
-	}, [board._id, setColumns])
+	}, [localBoard, setColumns])
 
-	/** 🔹 Fetch Cards por columna */
+	/* ============================
+     3️⃣ FETCH CARDS (depende de columns LOCALES)
+  ============================ */
 	const fetchCards = useCallback(async () => {
-		if (columns.length === 0) return // Ya está manejado arriba
-
 		try {
 			await Promise.all(
-				columns.map(async (column) => {
+				localColumns.map(async (column) => {
 					const { data } = await api.get(
 						`${API.getCardsByColumnUrl}?columnId=${column._id}`,
 						{ withCredentials: true }
 					)
-					setCardsForColumn(column._id.toString(), data.cards || [])
+					setCardsForColumn(column._id, data.cards || [])
 				})
 			)
-			setLoading(false)
-		} catch {
-			setError('Error al obtener las tarjetas')
-		}
-	}, [columns, setCardsForColumn])
 
-	/** Strict Mode Control */
-	const boardFetched = useRef(false)
+			setLoading(false)
+			setHacerFetch(false) // ✅ ciclo terminado
+		} catch {
+			setError('Error al obtener tarjetas')
+			setLoading(false)
+		}
+	}, [localColumns, setCardsForColumn, setHacerFetch])
+
+	/* ============================
+     🔁 ORQUESTACIÓN
+  ============================ */
+
+	// 👉 dispara todo
 	useEffect(() => {
-		if (!boardFetched.current && boardname && workspace) {
-			boardFetched.current = true
+		if (hacerFetch) {
+			setLocalBoard(null)
+			setLocalColumns([])
 			fetchBoard()
 		}
-	}, [boardname, workspace, fetchBoard])
+	}, [hacerFetch, fetchBoard])
 
-	const columnsFetched = useRef(false)
 	useEffect(() => {
-		if (board._id && !columnsFetched.current && !error) {
-			columnsFetched.current = true
-			fetchColumns()
-		}
-	}, [board._id, fetchColumns, error])
+		if (localBoard) fetchColumns()
+	}, [localBoard, fetchColumns])
 
-	const cardsFetched = useRef(false)
 	useEffect(() => {
-		if (columns.length > 0 && !cardsFetched.current && !error) {
-			cardsFetched.current = true
-			fetchCards()
-		}
-	}, [columns, fetchCards, error])
+		if (localColumns.length) fetchCards()
+	}, [localColumns, fetchCards])
 
-	return { loading, error } // 👈 IMPORTANTÍSIMO
+	return { loading, error }
 }

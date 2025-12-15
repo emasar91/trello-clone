@@ -536,4 +536,5 @@ export const API = {
 	createCardUrl: '/api/cards',
 	updateCardUrl: '/api/cards',
 	getCardsByColumnUrl: '/api/cards',
+	searchCardsUrl: '/api/search/cards',
 }

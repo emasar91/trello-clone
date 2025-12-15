@@ -10,7 +10,7 @@ import api from '@/lib/axiosClient'
 
 export const useEditWorkspace = (
 	user: User | null,
-	workspace: { _id: string },
+	workspace: IWorkspace,
 	setWorkSpaces: (value: IWorkspace[]) => void,
 	handleCloseEditForm: () => void
 ) => {

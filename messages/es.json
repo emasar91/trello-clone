@@ -326,6 +326,7 @@
 	},
 	"NavbarLogged": {
 		"create": "Crear",
+		"loading": "Cargando...",
 		"menu": {
 			"trello": "Trello",
 			"account": "Cuenta",
@@ -340,6 +341,10 @@
 				"light": "Claro",
 				"dark": "Oscuro"
 			}
+		},
+		"searchBox": {
+			"header": "TARJETAS",
+			"emptyState": "No se encontraron resultados"
 		}
 	},
 	"Toast": {

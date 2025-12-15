@@ -17,6 +17,13 @@ declare module '@mui/material/styles' {
 			searchInputBorder?: string
 			searchInputBackgroundHover?: string
 			logoHover?: string
+			boxSearch: {
+				backgroundColor: string
+				backgroundHover: string
+				textColor: string
+				borderColor: string
+				secondaryTextColor: string
+			}
 		}
 		accountMenu: {
 			avatarMenuBackground?: string
@@ -119,6 +126,13 @@ declare module '@mui/material/styles' {
 			searchInputBorder?: string
 			searchInputBackgroundHover?: string
 			logoHover?: string
+			boxSearch: {
+				backgroundColor: string
+				backgroundHover: string
+				textColor: string
+				borderColor: string
+				secondaryTextColor: string
+			}
 		}
 		accountMenu: {
 			avatarMenuBackground?: string
@@ -231,11 +245,18 @@ export const lightTheme = createTheme({
 			createButtonText: colorDark.white,
 			searchInputBackground: colorDark.blackBackgroundLight,
 			searchInputBackgroundHover: colorLight.lightSearchHover,
-			searchInputText: colorDark.grayLight,
+			searchInputText: colorLight.blackTextMenuAccount,
 			searchInputPlaceholder: colorDark.grayLight,
 			searchInputIcon: colorDark.grayLight,
 			searchInputBorder: colorDark.grayLight,
 			logoHover: colorLight.lightLogoHover,
+			boxSearch: {
+				backgroundColor: colorLight.blackBackground,
+				backgroundHover: colorLight.lightSearchHover,
+				textColor: colorLight.blackTextMenuAccount,
+				borderColor: colorLight.grayBorder,
+				secondaryTextColor: colorLight.brandPrimary,
+			},
 		},
 		accountMenu: {
 			avatarMenuBackground: colorLight.lightLogoHover,
@@ -411,6 +432,13 @@ export const darkTheme = createTheme({
 			searchInputIcon: colorDark.grayLight,
 			searchInputBorder: colorDark.grayLight,
 			logoHover: colorDark.blackBackgroundLightHover,
+			boxSearch: {
+				backgroundColor: colorDark.blackBackground,
+				backgroundHover: colorDark.blackBackgroundHover,
+				textColor: colorDark.grayLight,
+				borderColor: colorDark.grayLight,
+				secondaryTextColor: colorDark.brandPrimary,
+			},
 		},
 		accountMenu: {
 			avatarMenuBackground: colorDark.blackBackgroundLightHover,

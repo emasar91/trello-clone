@@ -21,7 +21,6 @@ export const useGetWorkspaces = () => {
 					{ withCredentials: true }
 				)
 
-				console.log('🚀 ~ useGetWorkspaces ~ data:', data)
 				if (data) {
 					setWorkspaceAvailable(data)
 				}

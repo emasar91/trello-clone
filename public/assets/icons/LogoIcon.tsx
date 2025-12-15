@@ -1,5 +1,4 @@
 export const LogoIcon = ({ color }: { color: string }) => {
-	console.log('🚀 ~ LogoIcon ~ color:', color)
 	return (
 		<svg width="70" height="24">
 			<symbol id="logo-glyph">

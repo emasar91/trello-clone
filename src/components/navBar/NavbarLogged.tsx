@@ -3,12 +3,13 @@ import { SearchIcon } from '@/public/assets/icons/SearchIcon'
 import {
 	Box,
 	Button,
+	CircularProgress,
 	Input,
 	InputAdornment,
 	Link,
 	useTheme,
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AccountMenu from './components/AccountMenu/AccounMenu'
 import {
 	NavbarLoggedActionsStyle,
@@ -17,13 +18,19 @@ import {
 	NavbarLoggedCreateButtonStyle,
 	NavbarLoggedInnerWrapperStyle,
 	NavbarLoggedLogoWrapperStyle,
+	NavbarLoggedSearchBoxContainerStyle,
 	NavbarLoggedSearchContainerStyle,
 	NavbarLoggedSearchInputStyle,
+	NavbarLoggedSearchLoadingStyle,
 	NavbarLoggedSearchSectionStyle,
 	NavbarLoggedSearchWrapperStyle,
 } from './NavBarLogged.styles'
 import { useTranslations } from 'next-intl'
 import CreateBoardMenu from '../Pages/Workspaces/components/CreateBordMenu/CreateBoardMenu'
+import { useSearchCards } from '@/hooks/useSearchCard'
+import SearchBox from './components/SearchBox/SearchBox'
+import { usePathname, useRouter } from 'next/navigation'
+import { useStoreBoard } from '@/context/useStoreBoard'
 
 const NavbarLogged = () => {
 	const t = useTranslations('NavbarLogged')
@@ -41,6 +48,59 @@ const NavbarLogged = () => {
 
 	const open = Boolean(anchorEl)
 
+	const {
+		searchValue,
+		setSearchValue,
+		results,
+		loading,
+		hasSearched,
+		isTyping,
+	} = useSearchCards()
+
+	const { setSelectedCardId } = useStoreBoard()
+	const router = useRouter()
+
+	const [query, setQuery] = useState('')
+
+	useEffect(() => {
+		if (isTyping) {
+			setQuery('')
+		} else {
+			setQuery(searchValue)
+		}
+	}, [isTyping, setSearchValue, searchValue])
+
+	const pathname = usePathname()
+
+	useEffect(() => {
+		setSearchValue('')
+		setQuery('')
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pathname])
+
+	const handleSelect = (
+		cardId: string,
+		workspaceName: string,
+		boardName: string
+	) => {
+		setSelectedCardId(cardId)
+
+		const path = pathname.replace(/(\/es|\/en)/, '')
+
+		if (
+			path !==
+			`/b/${workspaceName.toLowerCase()}/${boardName
+				.toLowerCase()
+				.replace(/\s+/g, '-')}`
+		) {
+			router.push(
+				`/b/${workspaceName.toLowerCase()}/${boardName
+					.toLowerCase()
+					.replace(/\s+/g, '-')}`
+			)
+		}
+	}
+
 	return (
 		<Box sx={NavbarLoggedContainerStyle(theme)}>
 			<Box sx={NavbarLoggedInnerWrapperStyle}>
@@ -56,6 +116,8 @@ const NavbarLogged = () => {
 								disableUnderline
 								placeholder="Buscar"
 								fullWidth
+								value={searchValue}
+								onChange={(e) => setSearchValue(e.target.value)}
 								sx={NavbarLoggedSearchInputStyle(theme)}
 								startAdornment={
 									<InputAdornment
@@ -66,6 +128,24 @@ const NavbarLogged = () => {
 									</InputAdornment>
 								}
 							/>
+							<Box position="absolute" sx={NavbarLoggedSearchBoxContainerStyle}>
+								{loading && (
+									<Box sx={NavbarLoggedSearchLoadingStyle(theme)}>
+										<CircularProgress size={16} />
+										{t('loading')}
+									</Box>
+								)}
+
+								{!loading && (
+									<SearchBox
+										items={results}
+										loading={loading}
+										query={query}
+										hasSearched={hasSearched}
+										onSelect={handleSelect}
+									/>
+								)}
+							</Box>
 						</Box>
 					</Box>
 					<Button

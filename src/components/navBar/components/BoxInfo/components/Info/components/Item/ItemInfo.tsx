@@ -42,7 +42,6 @@ const ItemInfo = ({ data, tabSelected }: Props) => {
 		return values[Math.floor(Math.random() * values.length)]
 	}
 
-	console.log('🚀 ~ ItemInfo ~ data.items:', data.items)
 	return (
 		<>
 			{(data.items ?? []).map((item, index) => (

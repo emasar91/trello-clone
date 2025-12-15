@@ -103,3 +103,26 @@ export const NavbarLoggedContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	padding: '0 8px',
 	borderBottom: `1px solid ${theme.palette.navbar.borderBottom}`,
 })
+
+export const NavbarLoggedSearchLoadingStyle = (
+	theme: Theme
+): SxProps<Theme> => ({
+	display: 'flex',
+	alignItems: 'center',
+	gap: '0.5rem',
+	backgroundColor: theme.palette.navbar.containerBackground,
+	border: `1px solid ${theme.palette.navbar.searchInputText}`,
+	padding: '0.5rem',
+	borderRadius: '4px',
+})
+
+export const NavbarLoggedSearchBoxContainerStyle: SxProps<Theme> = {
+	height: 'auto',
+	maxHeight: '50%',
+	flexDirection: 'column',
+	overflowY: 'auto',
+	maxWidth: '780px',
+	width: '100%',
+	marginTop: '0.7rem',
+	zIndex: 99999,
+}

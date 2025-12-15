@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
 	BoardContentStyle,
 	BoardImageStyle,
@@ -28,18 +28,18 @@ const BoardPage = ({
 	const { user } = useAuth()
 	const t = useTranslations('BoardsPage')
 
-	const { setBoard, board, setColumns, columns, setCardsForColumn } =
-		useStoreBoard()
+	const { setBoard, board, setColumns, setCardsForColumn } = useStoreBoard()
+	const [hacerFetch, setHacerFetch] = useState(true)
 
 	const { loading, error } = useBoardData({
 		boardname,
 		workspace,
 		userUid: user?.uid,
-		board,
-		columns,
 		setBoard,
 		setColumns,
 		setCardsForColumn,
+		hacerFetch,
+		setHacerFetch,
 	})
 
 	const { updateLastOpened } = useUpdateLastOpenedBoard()
@@ -49,6 +49,10 @@ const BoardPage = ({
 			updateLastOpened(board._id)
 		}
 	}, [board, updateLastOpened])
+
+	useEffect(() => {
+		setHacerFetch(true)
+	}, [boardname])
 
 	if (error) {
 		return <Box sx={ErrorContainerStyle}>{error}</Box>

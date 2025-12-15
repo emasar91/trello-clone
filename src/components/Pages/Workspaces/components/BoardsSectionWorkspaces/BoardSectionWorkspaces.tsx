@@ -59,10 +59,7 @@ function BoardSectionWorkspaces({
 		setWorkSpaces,
 		handleCloseEditForm
 	)
-	console.log(
-		'🚀 ~ BoardSectionWorkspaces ~ loadingWorkspace:',
-		loadingWorkspace
-	)
+
 	return (
 		<Box sx={WorkSpacesContainerStyle}>
 			{loadingWorkspace ? (

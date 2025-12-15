@@ -7,6 +7,7 @@ import { UniqueIdentifier } from '@dnd-kit/core'
 import { Items } from '../../MultipleContainers'
 import type { Props as ItemProps } from '../../../components/Item/Item'
 import { ICardComment } from '@/types/card'
+import { useStoreBoard } from '@/context/useStoreBoard'
 
 interface SortableItemProps {
 	containerId: UniqueIdentifier
@@ -88,7 +89,10 @@ const SortableItem = ({
 	})
 	const mounted = useMountStatus()
 	const mountedWhileDragging = isDragging && !mounted
-	const [openModalItem, setOpenModalItem] = useState(false)
+	const { selectedCardId, setSelectedCardId } = useStoreBoard()
+	const [openModalItem, setOpenModalItem] = useState(() => {
+		return selectedCardId === selectedItemId
+	})
 
 	return (
 		<>
@@ -123,7 +127,10 @@ const SortableItem = ({
 			/>
 			<ModalItem
 				open={openModalItem}
-				onClose={() => setOpenModalItem(false)}
+				onClose={() => {
+					setOpenModalItem(false)
+					setSelectedCardId('')
+				}}
 				cardId={selectedItemId}
 				columnId={containerId}
 				items={items}

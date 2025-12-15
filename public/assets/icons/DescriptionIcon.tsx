@@ -1,7 +1,13 @@
-export const DescriptionIcon = () => (
+export const DescriptionIcon = ({
+	width = 16,
+	height = 16,
+}: {
+	width?: number
+	height?: number
+}) => (
 	<svg
-		width="18"
-		height="18"
+		width={width + 'px'}
+		height={height + 'px'}
 		role="presentation"
 		focusable="false"
 		viewBox="0 0 24 24"

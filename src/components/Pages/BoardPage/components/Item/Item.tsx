@@ -186,7 +186,7 @@ export const Item = React.memo(
 													key={color}
 													style={{
 														backgroundColor: color,
-														width: '35px',
+														width: '30px',
 														height: '8px',
 														borderRadius: '5px',
 													}}
