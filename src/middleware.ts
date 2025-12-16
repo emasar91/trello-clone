@@ -11,6 +11,11 @@ const intlMiddleware = createMiddleware(routing)
 
 const authRoutes: string[] = ['login', 'register', 'reset-password']
 
+/**
+ * Middleware que maneja las siguientes reglas:
+ * - Si no está logueado y se intenta acceder a una ruta protegida, redirige a home del idioma
+ * - Si está logueado y se intenta acceder a una ruta pública o a home, redirige a /u del idioma
+ */
 export function middleware(req: NextRequest) {
 	const url = req.nextUrl.clone()
 

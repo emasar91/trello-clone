@@ -26,6 +26,21 @@ export interface SearchCardResult {
 	}
 }
 
+/**
+ * Hook para buscar tarjetas por texto
+ *
+ * @param {string} value texto a buscar
+ * @param {string} user.uid uid del usuario autenticado
+ *
+ * @returns {
+ *   searchValue: string texto a buscar
+ *   setSearchValue: function para setear el valor de searchValue
+ *   results: SearchCardResult[] resultados de la busqueda
+ *   loading: boolean indica si la busqueda esta en curso
+ *   hasSearched: boolean indica si se ha realizado al menos una busqueda
+ *   isTyping: boolean indica si el usuario esta escribiendo texto en el input
+ * }
+ */
 export const useSearchCards = () => {
 	const { user } = useAuth()
 
@@ -37,7 +52,6 @@ export const useSearchCards = () => {
 	const [hasSearched, setHasSearched] = useState(false)
 
 	useEffect(() => {
-		// 🔹 Si se borra el input → reset total
 		if (!debouncedValue.trim()) {
 			setResults([])
 			setHasSearched(false)
@@ -73,8 +87,6 @@ export const useSearchCards = () => {
 		results,
 		loading,
 		hasSearched,
-
-		// ⭐ helpers útiles para la UI
 		isTyping: !!value.trim() && value !== debouncedValue && !loading,
 	}
 }

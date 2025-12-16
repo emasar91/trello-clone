@@ -7,20 +7,28 @@ import { toast } from 'react-toastify'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import api from '@/lib/axiosClient'
 
-interface Props {
+interface IUpdateCardCommentsProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
 	boardId: string
 }
 
-export const useUpdateCardComments = ({ setItems, items, boardId }: Props) => {
+/**
+ * Hook que devuelve una función para crear o editar comentarios en una tarjeta.
+ * La función devuelta crea o edita comentarios en una tarjeta y devuelve un booleano indicando si la tarjeta se creó correctamente.
+ * @param {function} setItems - Función para actualizar el estado de las tarjetas.
+ * @param {Items} items - Tarjetas actuales.
+ * @param {string} boardId - ID de la board.
+ * @returns {{function} updateCardComments, boolean} - Función para crear o editar comentarios en una tarjeta y un booleano indicando si la tarjeta se creó correctamente.
+ */
+export const useUpdateCardComments = ({
+	setItems,
+	items,
+	boardId,
+}: IUpdateCardCommentsProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 
-	/**
-	 * Función async directa:
-	 * updateCardComments(cardId, newComments)  // 👈 se usa así
-	 */
 	const updateCardComments = useCallback(
 		async (
 			cardId: UniqueIdentifier,
@@ -31,7 +39,6 @@ export const useUpdateCardComments = ({ setItems, items, boardId }: Props) => {
 			didFetch.current = true
 			setLoading(true)
 
-			// 1️⃣ Optimistic UI
 			const prevItemsCopy = structuredClone(items)
 
 			const columnId = Object.keys(prevItemsCopy).find((cid) =>

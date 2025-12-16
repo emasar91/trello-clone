@@ -11,13 +11,27 @@ type UseBoardDataProps = {
 	userUid?: string
 	hacerFetch: boolean
 	setHacerFetch: (v: boolean) => void
-
-	// store setters
 	setBoard: (board: IBoard) => void
 	setColumns: (columns: IColumn[]) => void
 	setCardsForColumn: (columnId: string, cards: ICard[]) => void
 }
 
+/**
+ * Hook que devuelve el estado de un board y sus columnas y tarjetas asociadas.
+ * Utiliza la API para obtener los datos del board y sus columnas y tarjetas.
+ * Dicho hook devuelve un objeto con dos propiedades:
+ * - loading: booleano que indica si se est  realizando una consulta
+ * - error: string que indica el error que se produjo durante la consulta
+ * @param {string} boardname - El nombre del tablero.
+ * @param {string} workspace - El nombre del workspace.
+ * @param {string | undefined} userUid - El ID del usuario autenticado.
+ * @param {boolean} hacerFetch - Booleano que indica si se debe realizar la consulta.
+ * @param {(v: boolean) => void} setHacerFetch - Función para actualizar el valor de hacerFetch.
+ * @param {(board: IBoard) => void} setBoard - Función para actualizar el estado del tablero.
+ * @param {(columns: IColumn[]) => void} setColumns - Función para actualizar el estado de las columnas.
+ * @param {(columnId: string, cards: ICard[]) => void} setCardsForColumn - Función para actualizar el estado de las tarjetas para una columna.
+ * @returns {{loading: boolean, error: string | null}} - El estado del tablero y sus columnas y tarjetas asociadas.
+ */
 export const useBoardData = ({
 	boardname,
 	workspace,

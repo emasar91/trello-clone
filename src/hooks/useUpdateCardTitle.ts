@@ -8,13 +8,25 @@ import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import api from '@/lib/axiosClient'
 
-interface Props {
+interface IUpdateCardTitleProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
 	boardId: string
 }
 
-export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
+/**
+ * Hook que devuelve una función para actualizar el título de una tarjeta en un board.
+ * La función devuelta edita el título de una tarjeta en un board y devuelve un booleano indicando si la tarjeta se editó correctamente.
+ * @param {function} setItems - Función para actualizar el estado de las tarjetas.
+ * @param {Items} items - Tarjetas actuales.
+ * @param {string} boardId - ID del board.
+ * @returns {{function} updateCardTitle, boolean} - Función para editar el título de una tarjeta en un board y un booleano indicando si la tarjeta se editó correctamente.
+ */
+export const useUpdateCardTitle = ({
+	setItems,
+	items,
+	boardId,
+}: IUpdateCardTitleProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 	const { setCardsForColumn } = useStoreBoard()
@@ -25,10 +37,8 @@ export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
 			didFetch.current = true
 			setLoading(true)
 
-			// 1️⃣ Copia para rollback
 			const prevItemsCopy = structuredClone(items)
 
-			// 2️⃣ Buscamos columna + card
 			const columnId = Object.keys(prevItemsCopy).find((cid) =>
 				prevItemsCopy[cid].items.some((c) => c.id === cardId)
 			)
@@ -51,18 +61,16 @@ export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
 				return
 			}
 
-			// 3️⃣ Optimistic UI
 			prevItemsCopy[columnId].items[idx].text = newTitle
 			setItems(prevItemsCopy)
 			setCardsForColumn(columnId, prevItemsCopy[columnId].items)
 
-			// 4️⃣ PUT a la DB
 			try {
 				await api.put(
 					API.updateCardUrl,
 					{
 						cardId,
-						title: newTitle, // 👈 SOLO CAMBIA ESTO
+						title: newTitle,
 						boardId,
 						columnId,
 					},
@@ -71,7 +79,7 @@ export const useUpdateCardTitle = ({ setItems, items, boardId }: Props) => {
 			} catch (err) {
 				if (axios.isAxiosError(err) && err.status !== 401)
 					toast.error(err.response?.data?.message)
-				setItems(items) // rollback
+				setItems(items)
 			} finally {
 				didFetch.current = false
 				setLoading(false)

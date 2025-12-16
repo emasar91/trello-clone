@@ -7,15 +7,30 @@ import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 
+interface ICreateBoardProps {
+	setWorkSpaces: (value: IWorkspace[]) => void
+	user: User | null
+	backgroundSelected: string
+}
+
+/**
+ * Hook para crear un nuevo tablero en un workspace.
+ *
+ * @param {setWorkSpaces} Funci n para actualizar el estado de los workspaces.
+ * @param {user} Usuario autenticado.
+ * @param {backgroundSelected} Fondo seleccionado para el tablero.
+ *
+ * @returns {{handleCreateBoard: (boardName: string, boardDescription: string, workspaceId: string, resetForm: () => void, handleClose?: () => void) => Promise<void>, loading: boolean}}
+ *
+ * La funci n `handleCreateBoard` crea un nuevo tablero en el workspace especificado.
+ * La funci n `handleCreateBoard` devuelve una promesa que se resuelve cuando el tablero ha sido creado.
+ * La variable `loading` se establece en true mientras se est  creando el tablero y se establece en false cuando se ha creado.
+ */
 export const useCreateBoard = ({
 	setWorkSpaces,
 	user,
 	backgroundSelected,
-}: {
-	setWorkSpaces: (value: IWorkspace[]) => void
-	user: User | null
-	backgroundSelected: string
-}) => {
+}: ICreateBoardProps) => {
 	const [loading, setLoading] = useState(false)
 	const t = useTranslations('BoardsPage')
 	const didFetch = useRef(false)
@@ -48,6 +63,15 @@ export const useCreateBoard = ({
 		}
 	}
 
+	/**
+	 * Crea un nuevo tablero en el workspace especificado.
+	 * @param {string} boardName - El nombre del tablero.
+	 * @param {string} boardDescription - La descripci n del tablero.
+	 * @param {string} workspaceId - El ID del workspace.
+	 * @param {() => void} resetForm - Funci n para resetear el formulario.
+	 * @param {() => void} [handleClose] - Funci n para cerrar el modal.
+	 * @returns {Promise<void>}
+	 */
 	const handleCreateBoard = async ({
 		boardName,
 		boardDescription,

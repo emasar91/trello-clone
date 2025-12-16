@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 
-interface Props {
+interface IUpdateColumnProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
 }
@@ -17,11 +17,21 @@ interface UpdateData {
 	order?: number
 }
 
-export const useUpdateColumn = ({ setItems, items }: Props) => {
+/**
+ * Hook que devuelve una función para actualizar una columna en un board y actualizar el estado de las columnas correspondientes.
+ * La función devuelta actualiza la columna del estado antes de la respuesta y devuelve un booleano indicando si la columna se actualizó correctamente.
+ * @param {UniqueIdentifier} containerId - ID de la columna a actualizar.
+ * @param {string|ObjectId} boardId - ID del board.
+ * @param {UpdateData} data - Datos a actualizar (nombre, orden).
+ * @returns {Promise<boolean>} - Booleano indicando si la columna se actualizó correctamente.
+ * @example
+ * const { updateColumn, loading } = useUpdateColumn({ setItems, items })
+ * updateColumn(containerId, boardId)({ newName: 'nuevo nombre' })
+ */
+export const useUpdateColumn = ({ setItems, items }: IUpdateColumnProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 
-	/**   👇 retorna una función que recebe los datos a modificar   */
 	const updateColumn = useCallback(
 		(containerId: UniqueIdentifier, boardId: string | ObjectId) => {
 			return async (data: UpdateData) => {
@@ -42,7 +52,6 @@ export const useUpdateColumn = ({ setItems, items }: Props) => {
 				didFetch.current = true
 				setLoading(true)
 
-				// 🟡 1) Optimistic UI
 				setItems((prev) => ({
 					...prev,
 					[containerId]: {
@@ -51,14 +60,13 @@ export const useUpdateColumn = ({ setItems, items }: Props) => {
 					},
 				}))
 
-				// 🔥 Enviar al back
 				try {
 					await api.put(
-						API.updateColumnUrl, // '/api/columns/update'
+						API.updateColumnUrl,
 						{
 							columnId: containerId,
 							boardId: boardId.toString(),
-							...data, // 👈 dinámico: name? order?
+							...data,
 						},
 						{ withCredentials: true }
 					)
@@ -66,12 +74,11 @@ export const useUpdateColumn = ({ setItems, items }: Props) => {
 					console.error(err)
 					toast.error('Error al actualizar columna')
 
-					// 🔴 revertir si falla
 					setItems((prev) => ({
 						...prev,
 						[containerId]: {
 							...prev[containerId],
-							title: prev[containerId].title, // pero acá no tenés el viejo nombre!
+							title: prev[containerId].title,
 						},
 					}))
 				} finally {

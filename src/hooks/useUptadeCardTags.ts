@@ -7,13 +7,27 @@ import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import api from '@/lib/axiosClient'
 
-interface Props {
+interface IUpdateCardPriorityProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
 	boardId: string
 }
 
-export const useUpdateCardPriority = ({ setItems, items, boardId }: Props) => {
+/**
+ * Hook que devuelve una función para actualizar los tags de una tarjeta en un board.
+ * La función devuelta actualiza los tags de la tarjeta en el estado antes de la respuesta y devuelve un booleano indicando si la tarjeta se actualizó correctamente.
+ * @param {UniqueIdentifier} cardId - ID de la tarjeta a actualizar.
+ * @param {string[]} newTags - Nuevos tags a asignar.
+ * @returns {Promise<boolean>} - Booleano indicando si la tarjeta se actualizó correctamente.
+ * @example
+ * const { updateCardPriority, loading } = useUpdateCardPriority({ setItems, items, boardId })
+ * updateCardPriority(cardId, ['blue', 'red'])
+ */
+export const useUpdateCardPriority = ({
+	setItems,
+	items,
+	boardId,
+}: IUpdateCardPriorityProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 	const { setCardsForColumn } = useStoreBoard()
@@ -24,10 +38,8 @@ export const useUpdateCardPriority = ({ setItems, items, boardId }: Props) => {
 			didFetch.current = true
 			setLoading(true)
 
-			// 1️⃣ Copia para rollback si falla
 			const prevItemsCopy = structuredClone(items)
 
-			// 2️⃣ Buscar la columna & la card
 			const columnId = Object.keys(prevItemsCopy).find((cid) =>
 				prevItemsCopy[cid].items.some((c) => c.id === cardId)
 			)
@@ -44,18 +56,16 @@ export const useUpdateCardPriority = ({ setItems, items, boardId }: Props) => {
 			)
 			if (idx === -1) return
 
-			// 3️⃣ Optimistic UI
 			prevItemsCopy[columnId].items[idx].priorityColor = newTags
 			setItems(prevItemsCopy)
 			setCardsForColumn(columnId, prevItemsCopy[columnId].items)
 
-			// 4️⃣ PUT a la DB
 			try {
 				await api.put(
 					API.updateCardUrl,
 					{
 						cardId,
-						priorityColor: newTags, // 👈 ARRAY
+						priorityColor: newTags,
 						boardId,
 						columnId,
 					},
@@ -65,7 +75,6 @@ export const useUpdateCardPriority = ({ setItems, items, boardId }: Props) => {
 				console.error(err)
 				toast.error('Error al actualizar tags')
 
-				// ❗Rollback si la API falla
 				setItems(items)
 			} finally {
 				didFetch.current = false

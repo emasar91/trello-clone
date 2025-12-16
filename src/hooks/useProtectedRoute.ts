@@ -5,6 +5,16 @@ import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
+/**
+ * Hook to protect routes based on user authentication status.
+ * If the user is not authenticated and the route is protected, it will redirect to the homepage.
+ * If the user is authenticated and the route is not protected or is mock public, it will redirect to the user's homepage.
+ *
+ * @param {boolean} isProtected - Whether the route is protected or not.
+ * @param {boolean} [isMockPublic] - Whether the route is mock public or not. Defaults to false.
+ *
+ * @returns {void}
+ */
 export const useProtectedRoute = (
 	isProtected: boolean,
 	isMockPublic?: boolean

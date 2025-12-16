@@ -5,14 +5,17 @@ import { toast } from 'react-toastify'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import api from '@/lib/axiosClient'
 
+/**
+ * Hook que devuelve una función para actualizar el orden de columnas en un board.
+ * La función devuelta actualizar el orden de columnas en un board y devuelve un booleano indicando si la columna se creó correctamente.
+ * @param {string} boardId - ID del board.
+ * @returns {{function} updateColumnsOrder, boolean} - Función para actualizar el orden de columnas en un board y un booleano indicando si la columna se creó correctamente.
+ */
 export const useUpdateColumnsOrder = (boardId: string) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
-	/** 🔹 TOMA SOLO EL ARRAY — MISMA ESTRUCTURA QUE useUpdateColumn */
 	const updateColumnsOrder = useCallback(
 		async (orderedColumns: UniqueIdentifier[]) => {
-			// 🚫 Primera vez NO se ejecuta
-
 			if (didFetch.current) return
 
 			didFetch.current = true
@@ -23,7 +26,7 @@ export const useUpdateColumnsOrder = (boardId: string) => {
 					API.updateColumnUrl,
 					{
 						boardId,
-						columnsOrder: orderedColumns, // 👈 YA VIENE ORDENADO
+						columnsOrder: orderedColumns,
 					},
 					{ withCredentials: true }
 				)
@@ -36,7 +39,7 @@ export const useUpdateColumnsOrder = (boardId: string) => {
 			}
 		},
 		[boardId]
-	) // 👈 solo depende del boardId
+	)
 
 	return { updateColumnsOrder, loading }
 }

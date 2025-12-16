@@ -7,17 +7,25 @@ import type { UniqueIdentifier } from '@dnd-kit/core'
 import { useStoreBoard } from '@/context/useStoreBoard'
 import api from '@/lib/axiosClient'
 
-interface Props {
+interface IUpdateCardDescriptionProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	items: Items
 	boardId: string
 }
 
+/**
+ * Hook que devuelve una función para editar la descripción de una tarjeta en un board y actualizar el estado de las tarjetas correspondientes.
+ * La función devuelta edita la descripción de una tarjeta en un board y devuelve un booleano indicando si la tarjeta se editó correctamente.
+ * @param {function} setItems - Función para actualizar el estado de las tarjetas.
+ * @param {Items} items - Tarjetas actuales.
+ * @param {string} boardId - ID del board.
+ * @returns {{function} updateCardDescription, boolean} - Función para editar la descripción de una tarjeta en un board y un booleano indicando si la tarjeta se editó correctamente.
+ */
 export const useUpdateCardDescription = ({
 	setItems,
 	items,
 	boardId,
-}: Props) => {
+}: IUpdateCardDescriptionProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 	const { setCardsForColumn } = useStoreBoard()
@@ -28,10 +36,8 @@ export const useUpdateCardDescription = ({
 			didFetch.current = true
 			setLoading(true)
 
-			// 1️⃣ Copia para rollback
 			const prevItemsCopy = structuredClone(items)
 
-			// 2️⃣ Buscamos columna & card
 			const columnId = Object.keys(prevItemsCopy).find((cid) =>
 				prevItemsCopy[cid].items.some((c) => c.id === cardId)
 			)
@@ -53,12 +59,10 @@ export const useUpdateCardDescription = ({
 				return
 			}
 
-			// 3️⃣ Optimistic UI
 			prevItemsCopy[columnId].items[idx].description = newDescription
 			setItems(prevItemsCopy)
 			setCardsForColumn(columnId, prevItemsCopy[columnId].items)
 
-			// 4️⃣ PUT a la DB
 			try {
 				await api.put(
 					API.updateCardUrl,
@@ -73,7 +77,7 @@ export const useUpdateCardDescription = ({
 			} catch (err) {
 				console.error(err)
 				toast.error('Error al actualizar la descripción')
-				setItems(items) // rollback
+				setItems(items)
 			} finally {
 				didFetch.current = false
 				setLoading(false)

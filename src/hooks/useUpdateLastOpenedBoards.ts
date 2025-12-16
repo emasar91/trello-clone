@@ -3,6 +3,11 @@ import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import api from '@/lib/axiosClient'
 
+/**
+ * Hook que devuelve una función para actualizar el último board abierto en un usuario.
+ * La función devuelta actualiza el último board abierto en un usuario y devuelve un booleano indicando si el board se actualizó correctamente.
+ * @returns {{function} updateLastOpened, boolean} - Función para actualizar el último board abierto en un usuario y un booleano indicando si el board se actualizó correctamente.
+ */
 export const useUpdateLastOpenedBoard = () => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)

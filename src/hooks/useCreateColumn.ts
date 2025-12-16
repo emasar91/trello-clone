@@ -7,7 +7,7 @@ import { User } from 'firebase/auth'
 import { ICard } from '@/types/card'
 import api from '@/lib/axiosClient'
 
-interface Props {
+interface ICreateColumnProps {
 	setItems: React.Dispatch<
 		React.SetStateAction<
 			Record<
@@ -21,12 +21,21 @@ interface Props {
 	user: User | null
 }
 
+/**
+ * Hook que devuelve una función para crear una columna en un board y actualizar el estado de las columnas y tarjetas correspondientes.
+ * La función devuelta crea una columna en un board y devuelve el ID de la columna creada.
+ * @param {function} setItems - Función para actualizar el estado de las tarjetas.
+ * @param {function} setContainers - Función para actualizar el estado de las columnas.
+ * @param {string} boardId - ID del board.
+ * @param {User | null} user - Usuario autenticado.
+ * @returns {{function} createColumnInBoard, boolean} - Función para crear una columna en un board y un booleano indicando si la columna se creó correctamente.
+ */
 export const useCreateColumn = ({
 	setItems,
 	setContainers,
 	boardId,
 	user,
-}: Props) => {
+}: ICreateColumnProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 

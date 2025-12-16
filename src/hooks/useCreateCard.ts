@@ -10,14 +10,28 @@ import { UniqueIdentifier } from '@dnd-kit/core'
 import { toast } from 'react-toastify'
 import api from '@/lib/axiosClient'
 
-interface Props {
+interface ICreateCardProps {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 	boardId: string
 	userId: ObjectId
 	items: Items
 }
 
-export const useCreateCard = ({ setItems, boardId, userId, items }: Props) => {
+/**
+ * Hook que devuelve una función para crear una tarjeta en una columna.
+ * La función devuelta crea una tarjeta en una columna y devuelve un booleano indicando si la tarjeta se creó correctamente.
+ * @param {function} setItems - Función para actualizar el estado de las tarjetas.
+ * @param {string} boardId - ID de la board.
+ * @param {ObjectId} userId - ID del usuario que crea la tarjeta.
+ * @param {Items} items - Tarjetas actuales.
+ * @returns {{function} createCardInColumn, boolean} - Función para crear una tarjeta en una columna y un booleano indicando si la tarjeta se creó correctamente.
+ */
+export const useCreateCard = ({
+	setItems,
+	boardId,
+	userId,
+	items,
+}: ICreateCardProps) => {
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false) // evita doble submit
 
