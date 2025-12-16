@@ -26,7 +26,7 @@ export async function updateColumn(
 		}
 
 		// 🛠 Armamos el $set dinámico
-		const setData: Record<string, any> = {
+		const setData: UpdateData & { updatedAt: Date } = {
 			...data,
 			updatedAt: new Date(),
 		}

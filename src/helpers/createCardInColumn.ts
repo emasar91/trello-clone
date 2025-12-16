@@ -12,7 +12,7 @@ type CreateCardData = {
 	userId: string
 	title: string
 	description?: string | null
-	priorityColor?: string | null
+	priorityColor?: string[] | null
 	order?: number
 }
 
