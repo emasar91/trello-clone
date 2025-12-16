@@ -378,6 +378,7 @@
 		"writeDescription": "Write the description",
 		"requiredTitle": "👋 You must indicate the title of the board",
 		"optionalDescription": "Description is optional",
+		"update": "Update",
 		"create": "Create",
 		"modalCreateWorkspace": {
 			"title": "Let's create a workspace",

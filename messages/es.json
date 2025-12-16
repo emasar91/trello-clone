@@ -378,6 +378,7 @@
 		"writeDescription": "Escribe la descripción",
 		"requiredTitle": "👋 Es necesario indicar el título del tablero",
 		"optionalDescription": "La descripción es opcional",
+		"update": "Actualizar",
 		"create": "Crear",
 		"modalCreateWorkspace": {
 			"title": "Vamos a crear un Espacio de trabajo",

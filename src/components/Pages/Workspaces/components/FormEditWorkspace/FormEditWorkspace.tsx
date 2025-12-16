@@ -90,7 +90,7 @@ function FormEditWorkspace({
 					onClick={handleSubmit}
 					sx={FormEditWorkspaceSubmitButtonStyles(theme)}
 				>
-					{t('create')}
+					{t('update')}
 				</Button>
 				<Button
 					onClick={handleClose}

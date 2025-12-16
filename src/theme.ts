@@ -8,15 +8,15 @@ declare module '@mui/material/styles' {
 			containerBackground: string
 			borderBottom: string
 			createButtonBackground: string
-			createButtonBackgroundHover?: string
+			createButtonBackgroundHover: string
 			createButtonText: string
-			searchInputBackground?: string
-			searchInputText?: string
-			searchInputPlaceholder?: string
-			searchInputIcon?: string
-			searchInputBorder?: string
-			searchInputBackgroundHover?: string
-			logoHover?: string
+			searchInputBackground: string
+			searchInputText: string
+			searchInputPlaceholder: string
+			searchInputIcon: string
+			searchInputBorder: string
+			searchInputBackgroundHover: string
+			logoHover: string
 			boxSearch: {
 				backgroundColor: string
 				backgroundHover: string
@@ -26,19 +26,19 @@ declare module '@mui/material/styles' {
 			}
 		}
 		accountMenu: {
-			avatarMenuBackground?: string
-			menuBackground?: string
-			menuBorder?: string
-			menuTitle?: string
-			avatarName?: string
-			avatarEmail?: string
-			itemsHover?: string
-			itemsText?: string
-			backgroundColorItemSelected?: string
-			itemsTextSelected?: string
-			colorDividerMenu?: string
-			itemBackgroundHover?: string
-			itemSelectedBackgroundHover?: string
+			avatarMenuBackground: string
+			menuBackground: string
+			menuBorder: string
+			menuTitle: string
+			avatarName: string
+			avatarEmail: string
+			itemsHover: string
+			itemsText: string
+			backgroundColorItemSelected: string
+			itemsTextSelected: string
+			colorDividerMenu: string
+			itemBackgroundHover: string
+			itemSelectedBackgroundHover: string
 		}
 		boardsMenu: {
 			textBoards: string
@@ -55,7 +55,7 @@ declare module '@mui/material/styles' {
 			boardCardTitle: string
 			boardCardBackground: string
 			boardCardBackgroundHover: string
-			createBoardCardBackground?: string
+			createBoardCardBackground: string
 			borderInputsCreateBoards: string
 			backgroundWorkSpaceHover: string
 			backgroundWorkSpaceSelected: string
@@ -112,20 +112,20 @@ declare module '@mui/material/styles' {
 		}
 	}
 	interface PaletteOptions {
-		navbar?: {
-			containerBackground?: string
-			borderBottom?: string
-			logoColor?: string
-			createButtonBackground?: string
-			createButtonBackgroundHover?: string
-			createButtonText?: string
-			searchInputBackground?: string
-			searchInputText?: string
-			searchInputPlaceholder?: string
-			searchInputIcon?: string
-			searchInputBorder?: string
-			searchInputBackgroundHover?: string
-			logoHover?: string
+		navbar: {
+			containerBackground: string
+			borderBottom: string
+			logoColor: string
+			createButtonBackground: string
+			createButtonBackgroundHover: string
+			createButtonText: string
+			searchInputBackground: string
+			searchInputText: string
+			searchInputPlaceholder: string
+			searchInputIcon: string
+			searchInputBorder: string
+			searchInputBackgroundHover: string
+			logoHover: string
 			boxSearch: {
 				backgroundColor: string
 				backgroundHover: string
@@ -135,19 +135,19 @@ declare module '@mui/material/styles' {
 			}
 		}
 		accountMenu: {
-			avatarMenuBackground?: string
-			menuBackground?: string
-			menuBorder?: string
-			menuTitle?: string
-			avatarName?: string
-			avatarEmail?: string
-			itemsHover?: string
-			itemsText?: string
-			backgroundColorItemSelected?: string
-			itemsTextSelected?: string
-			colorDividerMenu?: string
-			itemBackgroundHover?: string
-			itemSelectedBackgroundHover?: string
+			avatarMenuBackground: string
+			menuBackground: string
+			menuBorder: string
+			menuTitle: string
+			avatarName: string
+			avatarEmail: string
+			itemsHover: string
+			itemsText: string
+			backgroundColorItemSelected: string
+			itemsTextSelected: string
+			colorDividerMenu: string
+			itemBackgroundHover: string
+			itemSelectedBackgroundHover: string
 		}
 		boardsMenu: {
 			textBoards: string
@@ -164,7 +164,7 @@ declare module '@mui/material/styles' {
 			boardCardTitle: string
 			boardCardBackground: string
 			boardCardBackgroundHover: string
-			createBoardCardBackground?: string
+			createBoardCardBackground: string
 			borderInputsCreateBoards: string
 			backgroundWorkSpaceHover: string
 			backgroundWorkSpaceSelected: string
@@ -270,6 +270,8 @@ export const lightTheme = createTheme({
 			itemsTextSelected: colorLight.brandPrimary,
 			backgroundColorItemSelected: colorLight.blueBackgroundSelected,
 			colorDividerMenu: colorDark.grayLight,
+			itemBackgroundHover: colorLight.itemMenuAccountHover,
+			itemSelectedBackgroundHover: colorLight.blueBackgroundSelected,
 		},
 		boardsMenu: {
 			textBoards: colorLight.blackTextMenuAccount,
@@ -288,8 +290,8 @@ export const lightTheme = createTheme({
 			boardCardBackgroundHover: colorLight.lightLogoHover,
 			createBoardCardBackground: colorLight.itemMenuAccountHover,
 			borderInputsCreateBoards: colorDark.gray,
-			backgroundWorkSpaceHover: colorDark.blackBackgroundLightHover,
-			backgroundWorkSpaceSelected: colorDark.blueBackgroundSelected,
+			backgroundWorkSpaceHover: colorLight.itemMenuAccountHover,
+			backgroundWorkSpaceSelected: colorLight.blueBackgroundSelected,
 			createButtonBackground: colorDark.brandPrimary,
 			createButtonBackgroundHover: colorDark.brandPrimaryHover,
 			buttonBackgroundColor: colorLight.blueButton,

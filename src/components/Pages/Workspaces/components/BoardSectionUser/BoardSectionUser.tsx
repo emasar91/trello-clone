@@ -50,7 +50,14 @@ export default function BoardsSectionUser({
 	return (
 		<Box sx={BoardSectionUserStyle}>
 			{loadingWorkspace ? (
-				<CircularProgress size={60} />
+				<Box
+					display="flex"
+					justifyContent="center"
+					alignItems="center"
+					height={400}
+				>
+					<CircularProgress size={60} />
+				</Box>
 			) : (
 				<>
 					<Box>

@@ -10,7 +10,7 @@ import {
 	useTheme,
 } from '@mui/material'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import AccountMenu from './components/AccountMenu/AccounMenu'
+import AccountMenu from './components/AccountMenu/AccountMenu'
 import {
 	NavbarLoggedActionsStyle,
 	NavbarLoggedAdormentIconStyle,

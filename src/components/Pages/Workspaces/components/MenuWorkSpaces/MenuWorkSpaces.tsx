@@ -53,7 +53,7 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 		if (match) {
 			setOpenWorkspaces((prev) => ({
 				...prev,
-				[match._id]: true,
+				[match._id.toString()]: true,
 			}))
 		}
 	}, [pathname, workSpaces])
@@ -64,9 +64,9 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 				const menuActive =
 					pathname === `/${locale}/w/${workspace.name.toLowerCase()}/boards`
 				return (
-					<Box key={workspace._id}>
+					<Box key={workspace._id.toString()}>
 						<ListItemButton
-							onClick={() => handleClick(workspace._id)}
+							onClick={() => handleClick(workspace._id.toString())}
 							sx={MenuWorkSpacesListItemStyle}
 						>
 							<Box sx={MenuWorkSpacesItemContainerStyle}>
@@ -80,15 +80,19 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 									sx={MenuWorkSpacesItemTextStyle(theme)}
 								/>
 							</Box>
-							{openWorkspaces[workspace._id] ? (
-								<ArrowUpIcon />
+							{openWorkspaces[workspace._id.toString()] ? (
+								<Box marginRight={1}>
+									<ArrowUpIcon />
+								</Box>
 							) : (
-								<ArrowDownIcon />
+								<Box marginRight={1}>
+									<ArrowDownIcon />
+								</Box>
 							)}
 						</ListItemButton>
 
 						<Collapse
-							in={!!openWorkspaces[workspace._id]}
+							in={!!openWorkspaces[workspace._id.toString()]}
 							timeout="auto"
 							unmountOnExit
 						>

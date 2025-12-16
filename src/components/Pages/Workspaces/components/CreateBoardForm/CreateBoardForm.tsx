@@ -7,6 +7,7 @@ import {
 	FormControl,
 	Button,
 	useTheme,
+	CircularProgress,
 } from '@mui/material'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { Typography } from '@mui/material'
@@ -27,14 +28,19 @@ import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 const CreateBoardForm = ({
 	onSubmit,
 	workspaceName,
+	loading,
+	handleClose,
 }: {
 	onSubmit: (args: {
 		boardName: string
 		boardDescription: string
 		workspaceId: string
 		resetForm: () => void
-	}) => void
+		handleClose?: () => void
+	}) => void | Promise<void>
 	workspaceName?: string
+	loading?: boolean
+	handleClose?: () => void
 }) => {
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
@@ -74,8 +80,9 @@ const CreateBoardForm = ({
 		onSubmit({
 			boardName: title,
 			boardDescription: description,
-			workspaceId: workspace?._id,
+			workspaceId: workspace?._id?.toString() ?? '',
 			resetForm,
+			...(handleClose && { handleClose }),
 		})
 	}
 
@@ -149,8 +156,8 @@ const CreateBoardForm = ({
 							return selected ? selected.name : ''
 						}}
 					>
-						{workspaceAvailable.map((workspace) => (
-							<MenuItem key={workspace._id} value={workspace._id}>
+						{workspaceAvailable.map((workspace, index) => (
+							<MenuItem key={index} value={workspace._id.toString()}>
 								{workspace.name}
 							</MenuItem>
 						))}
@@ -161,11 +168,11 @@ const CreateBoardForm = ({
 				<Button
 					variant="contained"
 					fullWidth
-					disabled={!title.trim() || loadingWorkspace}
+					disabled={!title.trim() || loadingWorkspace || loading}
 					onClick={handleSubmit}
 					sx={CreateBoardFormSubmitButtonStyles(theme)}
 				>
-					{t('create')}
+					{loading ? <CircularProgress size={20} /> : t('create')}
 				</Button>
 			</Box>
 		)

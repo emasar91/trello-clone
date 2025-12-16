@@ -16,7 +16,7 @@ export const useCreateBoard = ({
 	user: User | null
 	backgroundSelected: string
 }) => {
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const t = useTranslations('BoardsPage')
 	const didFetch = useRef(false)
 
@@ -28,6 +28,7 @@ export const useCreateBoard = ({
 		]
 
 		try {
+			setLoading(true)
 			await Promise.all(
 				defaultColumns.map((col) =>
 					axios.post(
@@ -52,11 +53,13 @@ export const useCreateBoard = ({
 		boardDescription,
 		workspaceId,
 		resetForm,
+		handleClose,
 	}: {
 		boardName: string
 		boardDescription: string
 		workspaceId: string
 		resetForm: () => void
+		handleClose?: () => void
 	}) => {
 		if (didFetch.current) return
 		didFetch.current = true
@@ -82,13 +85,14 @@ export const useCreateBoard = ({
 					{ withCredentials: true }
 				)
 				setWorkSpaces(workspaces)
+				handleClose?.()
 			}
 		} catch (err) {
 			if (axios.isAxiosError(err) && err.status !== 401)
 				toast.error(err.response?.data?.message)
 		} finally {
 			setLoading(false)
-			didFetch.current = false // 👈 importante para poder volver a usar el hook en otro submit
+			didFetch.current = false
 		}
 	}
 

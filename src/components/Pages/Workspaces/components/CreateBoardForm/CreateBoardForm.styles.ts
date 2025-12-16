@@ -78,7 +78,7 @@ export const CreateBoardFormInputSelectMenuStyles = (
 	'& .MuiMenuItem-root': {
 		'&.Mui-selected': {
 			backgroundColor: theme.palette.boardSection.backgroundWorkSpaceSelected,
-			color: theme.palette.boardSection.menuText,
+			color: theme.palette.primary.main,
 		},
 		'&.Mui-selected:hover': {
 			backgroundColor: theme.palette.boardSection.backgroundWorkSpaceSelected,

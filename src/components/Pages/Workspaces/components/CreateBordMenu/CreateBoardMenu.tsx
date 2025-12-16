@@ -1,4 +1,4 @@
-import { Box, Menu, Typography, useTheme } from '@mui/material'
+import { Box, Popover, Typography, useTheme } from '@mui/material'
 import React, { memo, useState } from 'react'
 import CreateBoardForm from '../CreateBoardForm/CreateBoardForm'
 import {
@@ -74,14 +74,14 @@ function CreateBoardMenu({
 	ImageBackgroudItem.displayName = 'ImageBackgroudItem'
 
 	const { user } = useAuth()
-	const { handleCreateBoard } = useCreateBoard({
+	const { handleCreateBoard, loading } = useCreateBoard({
 		setWorkSpaces,
 		user,
 		backgroundSelected,
 	})
 
 	return (
-		<Menu
+		<Popover
 			id="create-board-menu"
 			anchorEl={anchorEl}
 			open={open}
@@ -94,9 +94,9 @@ function CreateBoardMenu({
 				vertical: 'top',
 				horizontal: 'left',
 			}}
-			disableAutoFocus={true}
-			disableEnforceFocus={true}
-			disableScrollLock={true}
+			disableAutoFocus
+			disableEnforceFocus
+			disableRestoreFocus
 			sx={CreateBoardMenuContainerStyle(theme)}
 		>
 			<Box sx={CreateBoardMenuContentStyle}>
@@ -147,9 +147,11 @@ function CreateBoardMenu({
 				<CreateBoardForm
 					onSubmit={handleCreateBoard}
 					workspaceName={workspaceName}
+					loading={loading}
+					handleClose={handleClose}
 				/>
 			</Box>
-		</Menu>
+		</Popover>
 	)
 }
 
