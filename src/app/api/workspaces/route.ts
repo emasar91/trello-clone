@@ -6,6 +6,13 @@ import { IWorkspace } from '@/types/workspaces'
 import { editWorkspace } from '@/helpers/updateWorkspace'
 import { getWorkspaces } from '@/helpers/getWorkspaces'
 
+/**
+ * GET /api/workspaces?uid=123
+ * @param {Request} request
+ * @returns {Promise<NextResponse>}
+ * @description Obtener todos los workspaces de un usuario autenticado.
+ * @example /api/workspaces?uid=123
+ */
 export async function GET(request: Request) {
 	// en este ejemplo el userId viene como query param: /api/workspaces?userId=123
 	// 1️⃣ Obtener usuario autenticado
@@ -25,6 +32,14 @@ export async function GET(request: Request) {
 	return NextResponse.json(workspaces)
 }
 
+/**
+ * Crear un nuevo workspace para un usuario autenticado.
+ *
+ * @param {Request} request - Request que contiene el body con los datos del nuevo workspace.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con el nuevo workspace creado.
+ * @description Crear un nuevo workspace para un usuario autenticado.
+ * @example /api/workspaces?uid=123
+ */
 export async function POST(req: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -39,7 +54,6 @@ export async function POST(req: Request) {
 				{ status: 401 }
 			)
 		}
-
 		// 2) Leer body
 		const body = await req.json()
 		const name = (body?.name ?? '').toString().trim()
@@ -50,14 +64,12 @@ export async function POST(req: Request) {
 		if (!name) {
 			return NextResponse.json({ message: 'Nombre requerido' }, { status: 400 })
 		}
-
 		// 3) Llamar al helper que ya tenés
 		const workspace = await createWorkspaceForUser({
 			userId: user.uid,
 			name,
 			description,
 		})
-
 		return NextResponse.json({ workspace }, { status: 201 })
 	} catch (err: unknown) {
 		const error = err as Error
@@ -80,6 +92,14 @@ export async function POST(req: Request) {
 	}
 }
 
+/**
+ * Actualiza un workspace existente.
+ *
+ * @param {Request} req - Request que contiene el body con los datos del workspace a actualizar.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con el workspace actualizado.
+ * @description Actualiza un workspace existente.
+ * @example /api/workspaces/[id]
+ */
 export async function PUT(req: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -87,7 +107,6 @@ export async function PUT(req: Request) {
 		if (!user) {
 			return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 		}
-
 		// 3️⃣ Leer body
 		const body = await req.json()
 		const name = (body?.name ?? '').toString().trim()
@@ -96,7 +115,6 @@ export async function PUT(req: Request) {
 			body?.description !== undefined
 				? String(body.description).trim()
 				: undefined
-
 		// 🚫 Si ambos vienen vacíos, error
 		if (!name && !description) {
 			return NextResponse.json(
@@ -104,7 +122,6 @@ export async function PUT(req: Request) {
 				{ status: 400 }
 			)
 		}
-
 		// 🚫 workspaceId requerido
 		if (!workspaceId) {
 			return NextResponse.json(
@@ -112,7 +129,6 @@ export async function PUT(req: Request) {
 				{ status: 400 }
 			)
 		}
-
 		// 🛠 Construir objeto dinámico
 		const updateData: { name?: string; description?: string } = {}
 		if (name) updateData.name = name
@@ -127,7 +143,6 @@ export async function PUT(req: Request) {
 			const exists = workspaces.some(
 				(ws) => ws.name.toString() === updateData.name
 			)
-
 			if (exists) {
 				return NextResponse.json(
 					{ message: 'Ya tienes un workspace con ese nombre' },
@@ -135,14 +150,12 @@ export async function PUT(req: Request) {
 				)
 			}
 		}
-
 		// 4️⃣ Llamar al helper que actualiza en MongoDB
 		const result = await editWorkspace({
 			userId: user.uid,
 			workspaceId,
 			...updateData, // <---- solo manda lo que corresponde
 		})
-
 		return NextResponse.json({ workspace: result }, { status: 200 })
 	} catch (err: unknown) {
 		const error = err as Error

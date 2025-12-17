@@ -17,6 +17,17 @@ type Props = {
 	type: 'new' | 'edit'
 }
 
+/**
+ * Componente para crear o editar un comentario en una tarjeta.
+ *
+ * @param {string} value - Valor del comentario.
+ * @param {React.Dispatch<React.SetStateAction<string>>} setValue - Funcion para editar el valor del comentario.
+ * @param {() => void} onSubmit - Funcion para enviar el formulario y cerrar el modal.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} setShow - Funcion para mostrar o esconder el formulario de edici n del comentario.
+ * @param {'new' | 'edit'} type - Tipo de formulario, 'new' para crear un nuevo comentario o 'edit' para editar un comentario existente.
+ *
+ * @returns {JSX.Element} Componente para crear o editar un comentario en una tarjeta.
+ */
 const CreateEditComment = ({
 	value,
 	setvalue,

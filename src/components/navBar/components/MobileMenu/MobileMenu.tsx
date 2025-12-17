@@ -21,6 +21,19 @@ type Props = {
 	open: boolean
 }
 
+/**
+ * MobileMenu is a MUI Box component that renders a mobile menu for the drawer,
+ * including an icon, title, description, and button.
+ *
+ * @param {Props} props - The component props
+ * @param {ITab | null} props.tabSelected - The currently selected tab
+ * @param {boolean} props.open - Whether the menu is open
+ *
+ * @returns {React.ReactElement} The rendered component
+ *
+ * @example
+ * <MobileMenu tabSelected="gettingStarted" open={true} />
+ */
 function MobileMenu({ tabSelected, open }: Props) {
 	const t = useTranslations('Drawer')
 	const tt = `${tabSelected?.tab}.info`

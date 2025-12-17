@@ -14,12 +14,13 @@ import {
 type Props = { title: string; translate: string; index: number }
 
 /**
- * The FeatureCard component renders a feature card with image, title, description and button.
- *
- * @param {{ title: string, translate: string ,index: number}} props
- * @returns {JSX.Element}
+ * Component that renders a feature description card with title, description and button.
+ * @param {string} title - Title of the feature description card.
+ * @param {string} translate - Translate key that is used to translate the text.
+ * @param {number} index - Index of the feature description card.
+ * @returns {React.ReactElement} - Feature description card component.
  * @example
- * <FeatureCard title="analytics" translate="translation" />
+ * <FeatureCard title="analytics" translate="translation" index={1} />
  */
 function FeatureCard({ title, translate, index }: Props) {
 	const t = useTranslations(translate)

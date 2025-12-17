@@ -5,7 +5,14 @@ import type { IColumn } from '@/types/columns'
 import { getUser } from './getUser'
 
 /**
- * Crea una nueva columna y actualiza el `updatedAt` del board correspondiente.
+ * Crea una columna en un board y devuelve la columna creada con su ID.
+ * Si no se proporciona un orden, se calculará automáticamente como el orden
+ * más alto de las columnas existentes en el board + 1.
+ * @param {string | ObjectId} boardId - ID del board.
+ * @param {string | ObjectId} userId - ID del usuario autenticado.
+ * @param {string} name - Nombre de la columna.
+ * @param {number} [order] - Orden de la columna (opcional).
+ * @returns {Promise<{_id: ObjectId} & IColumn>} - La columna creada con su ID y datos.
  */
 export async function createColumn(
 	boardId: string | ObjectId,

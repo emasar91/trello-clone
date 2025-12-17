@@ -7,6 +7,13 @@ import { useMemo } from 'react'
 import { ICard } from '@/types/card'
 import { Box, Typography } from '@mui/material'
 
+/**
+ * A component that renders a list of items for a given board.
+ *
+ * @param {string} boardName - The name of the board to render.
+ * @param {boolean} loading - Whether the board is currently loading.
+ * @returns {JSX.Element} - A JSX element representing the list of items.
+ */
 export const ManyItems = ({
 	boardName,
 	loading,
@@ -40,7 +47,6 @@ export const ManyItems = ({
 		return result
 	}, [columns, cardsByColumn])
 
-	console.log('🚀 ~ ManyItems ~ loading:', loading)
 	return (
 		!loading && (
 			<Box>

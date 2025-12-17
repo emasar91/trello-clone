@@ -5,9 +5,18 @@ import { toObjectId } from './utils'
 import type { ICard } from '@/types/card'
 
 type UpdateCardData = Partial<Omit<ICard, '_id'>> & {
-	_id: string // obligatorio para buscar la card
+	_id: string
 }
 
+/**
+ * Actualiza una tarjeta en un board.
+ * La función actualiza el título, descripción, prioridad y comentarios de una tarjeta en un board.
+ * Si no se envían datos para actualizar, se lanza un error.
+ * @param {UpdateCardData} data - Objeto con los datos para actualizar la tarjeta.
+ * @returns {Promise<ICard>} - Promesa que se resuelve con la tarjeta actualizada.
+ * @example
+ * const result = await updateCard({ _id: cardId, title: 'Nueva tarjeta' })
+ */
 export async function updateCard(data: UpdateCardData) {
 	const db = await getDB()
 	const cardsCollection = db.collection<ICard>('cards')

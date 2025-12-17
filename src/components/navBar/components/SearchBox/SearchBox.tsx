@@ -50,6 +50,19 @@ interface ISearchBoxProps {
 	hasSearched: boolean
 }
 
+/**
+ * Component to show search results in the navbar.
+ * @param {ISearchBoxProps} props
+ * @returns {JSX.Element}
+ * @example
+ * const items = [...]
+ * const onSelect = (cardId: string, workspaceName: string, boardName: string) => void
+ * const query = ""
+ * const loading = false
+ * const hasSearched = false
+ *
+ * <SearchBox items={items} onSelect={onSelect} query={query} loading={loading} hasSearched={hasSearched} />
+ */
 const SearchBox = ({
 	items,
 	onSelect,

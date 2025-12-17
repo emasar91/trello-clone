@@ -17,6 +17,15 @@ import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useAuth } from '@/context/useAuthContext'
 import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
 
+/**
+ * Component that renders a section for the user's boards.
+ * It will render a header with the title "Recently viewed" and a BoardGrid component with the recently viewed boards.
+ * It will also render a header with the title "Workspaces" and a list of WorkspaceSection components with the workspaces of the user.
+ * If the user has no workspaces, it will render a CreateWorkspaceCard component.
+ *
+ * @param {IWorkspace[]} workspaces - The list of workspaces of the user.
+ * @returns A JSX element with the section for the user's boards.
+ */
 export default function BoardsSectionUser({
 	workspaces,
 }: {
@@ -38,6 +47,9 @@ export default function BoardsSectionUser({
 	}, [workspaces])
 
 	const [openModal, setOpenModal] = useState(false)
+	/**
+	 * Closes the modal for creating a new workspace.
+	 */
 	const handleCloseModal = () => {
 		setOpenModal(false)
 	}

@@ -30,13 +30,14 @@ type Props = {
 }
 
 /**
- * A custom slider component for Section 2 of the home page.
+ * A custom slider component that displays a list of items with a custom slider.
  *
- * @param {object} props The component props.
- * @param {boolean} props.showLeftItems Whether to show the left items.
- * @param {array} props.items The items to display in the slider.
- *
- * @returns A JSX element representing the custom slider component.
+ * @param {boolean} showLeftItems - Whether to show the left items or not.
+ * @param {array} items - An array of items to display in the slider.
+ * @param {string} translate - The translation key for the items.
+ * @returns {JSX.Element} The rendered CustomSlider component.
+ *@example
+ *<CustomSlider showLeftItems={true} items={[{ title: 'item1' }, { title: 'item2' }]} translate="home" />
  */
 export function CustomSlider({ showLeftItems, items, translate }: Props) {
 	const [isDragging, setIsDragging] = useState(false)

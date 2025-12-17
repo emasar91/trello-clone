@@ -4,8 +4,11 @@ import { toObjectId } from './utils'
 import { IColumn } from '@/types/columns'
 
 /**
- * Devuelve todas las columnas asociadas a un board.
+ * Devuelve las columnas de un board.
+ * @param {string | ObjectId} boardId - El ID del board.
+ * @returns {Promise<IColumn[]>} - Un array de columnas asociadas al board.
  */
+
 export async function getBoardColumns(boardId: string | ObjectId) {
 	const db = await getDB()
 	const columnsCollection = db.collection<IColumn>('columns')
@@ -14,7 +17,7 @@ export async function getBoardColumns(boardId: string | ObjectId) {
 
 	const columns = await columnsCollection
 		.find({ boardId: boardObjectId })
-		.sort({ order: 1 }) // opcional: ordenadas por posición
+		.sort({ order: 1 })
 		.toArray()
 
 	return columns

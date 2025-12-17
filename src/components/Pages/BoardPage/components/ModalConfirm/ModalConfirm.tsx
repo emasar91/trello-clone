@@ -28,6 +28,20 @@ type Props = {
 	loading: boolean
 }
 
+/**
+ * A modal component that confirms whether the user wants to delete a container.
+ * It shows a title, a message, and two buttons: 'Delete' and 'Cancel'.
+ * When the user clicks on 'Delete', it calls the onConfirm callback with the selectedContainerId.
+ * When the user clicks on 'Cancel', it calls the onClose callback.
+ * If the loading prop is true, it shows a loading animation instead of the 'Delete' button.
+ * @param {boolean} open - Whether the modal is open or not.
+ * @param {() => void} onClose - A callback to call when the user clicks on 'Cancel'.
+ * @param {(id: UniqueIdentifier | null) => void} onConfirm - A callback to call when the user clicks on 'Delete'.
+ * @param {string} title - The title of the modal.
+ * @param {string} message - The message of the modal.
+ * @param {UniqueIdentifier | null} selectedContainerId - The id of the container to delete.
+ * @param {boolean} loading - Whether the modal is loading or not.
+ */
 function ModalConfirm({
 	open,
 	onClose,

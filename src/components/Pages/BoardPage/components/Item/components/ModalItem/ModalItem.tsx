@@ -57,6 +57,17 @@ type Props = {
 	setItems: React.Dispatch<React.SetStateAction<Items>>
 }
 
+/**
+ * Modal Item component. Handles the modal for a specific item in a board.
+ *
+ * @param {object} props - Props for the ModalItem component.
+ * @param {boolean} props.open - Whether the modal is open or not.
+ * @param {function} props.onClose - Function to close the modal.
+ * @param {string} props.cardId - The id of the card.
+ * @param {string} props.columnId - The id of the column.
+ * @param {Items} props.items - Items of the board.
+ * @param {function} props.setItems - Function to set the items of the board.
+ */
 const ModalItem = ({
 	open,
 	onClose,
@@ -83,10 +94,19 @@ const ModalItem = ({
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 	const openMenu = Boolean(anchorEl)
+
+	/**
+	 * Sets the anchor element to the current target element, which is the
+	 * element that was clicked.
+	 * This is used to open the menu when the card is clicked.
+	 */
 	const handleClick = () => {
 		setAnchorEl(etiquetasRef.current)
 	}
 
+	/**
+	 * Closes the menu by setting the anchor element to null.
+	 */
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
@@ -144,6 +164,11 @@ const ModalItem = ({
 		boardId,
 	})
 
+	/**
+	 * Agrega un comentario a una tarjeta.
+	 * @param {string} type - Tipo de comentario ('new' o 'edit').
+	 * @returns {void}
+	 */
 	const handleAddComment = (type: 'new' | 'edit') => {
 		if (!user) return
 		const id = type === 'new' ? crypto.randomUUID() : showEditComment.id
@@ -189,12 +214,23 @@ const ModalItem = ({
 		return dateB.getTime() - dateA.getTime() // más nuevo primero
 	})
 
+	/**
+	 * Elimina un comentario de una tarjeta.
+	 * @param {ICardComment} comment - Comentario a eliminar.
+	 * @returns {void}
+	 */
 	const handleDeleteComment = (comment: ICardComment) => {
 		const newComments = comments.filter((c) => c !== comment)
 		updateCardComments(cardId, newComments, 'delete')
 		setComments(newComments)
 	}
 
+	/**
+	 * Edita el título de una tarjeta.
+	 * Si el título es vacío, no hace nada.
+	 * De lo contrario, llama al updateCardTitle para actualizar el título en el servidor
+	 * y actualiza el estado local.
+	 */
 	const handleEditTitle = () => {
 		if (title.trim() === '') {
 			return
@@ -204,6 +240,12 @@ const ModalItem = ({
 		setTitle(cardSelected?.title || '')
 	}
 
+	/**
+	 * Edita la descripci n de una tarjeta.
+	 * Si la descripci n es vac a, no hace nada.
+	 * De lo contrario, llama a updateCardDescription para actualizar la descripci n en el servidor
+	 * y actualiza el estado local.
+	 */
 	const handleEditDescription = () => {
 		if (description.trim() === '') {
 			return

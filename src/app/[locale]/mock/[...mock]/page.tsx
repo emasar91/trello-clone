@@ -9,6 +9,14 @@ async function getCurrentPath(params: { mock?: string[] }) {
 	return mock.join('/')
 }
 
+/**
+ * MockRoute is a protected route that renders MockPageClient component
+ * if the route is defined in the routes constant and the route is not
+ * protected or public, otherwise it will render the notFound component
+ * @param {Object} params - an object containing the route parameters
+ * @param {string} params.mock - the mock route parameter
+ * @return {Promise<ReactNode>} - a React component representing the route
+ */
 export default async function MockRoute({
 	params,
 }: {

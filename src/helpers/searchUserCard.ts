@@ -19,6 +19,33 @@ function getSnippet(text: string, query: string, radius = 5) {
 	return `${start > 0 ? '…' : ''}${snippet}${end < text.length ? '…' : ''}`
 }
 
+/**
+ * Busca todos los tableros del usuario que contengan un texto determinado
+ * en su t tulo, descripci n o comentarios.
+ * Devuelve un array de objetos con la siguiente estructura:
+ * {
+ *   cardId: string,
+ *   cardTitle: string,
+ *   matchSource: 'title' | 'description' | 'comment',
+ *   snippet: string,
+ *   commentAuthor?: string,
+ *   column: {
+ *     id: string,
+ *     name: string,
+ *   },
+ *   board: {
+ *     id: string,
+ *     name: string,
+ *   },
+ *   workspace: {
+ *     id: string,
+ *     name: string,
+ *   },
+ * }
+ * @param {ObjectId} userId - ID del usuario.
+ * @param {string} query - Texto a buscar.
+ * @returns {Promise<Array<{...SearchCardResult}>>} - Array de resultados de la b squeda.
+ */
 export async function searchUserCards(userId: ObjectId, query: string) {
 	const db = await getDB()
 	const regex = new RegExp(query, 'i')
@@ -100,7 +127,6 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 			snippet = getSnippet(commentMatch.text, query)
 			commentAuthor = commentMatch.authorName
 		} else {
-			// fallback defensivo (no debería pasar)
 			matchSource = 'title'
 		}
 

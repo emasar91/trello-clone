@@ -13,6 +13,15 @@ const directions: string[] = [
 	KeyboardCode.Left,
 ]
 
+/**
+ * A KeyboardCoordinateGetter that filters out containers that are not
+ * of type 'container' or do not have children, and returns the
+ * closest container to the active container in the given direction.
+ *
+ * @param {KeyboardEvent} event - The keyboard event.
+ * @param {object} context - The context object containing active, droppableRects, droppableContainers, and collisionRect.
+ * @returns {object | undefined} An object with x and y coordinates, or undefined if no container is found.
+ */
 export const coordinateGetter: KeyboardCoordinateGetter = (
 	event,
 	{ context: { active, droppableRects, droppableContainers, collisionRect } }

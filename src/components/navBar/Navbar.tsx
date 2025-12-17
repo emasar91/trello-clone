@@ -32,13 +32,19 @@ import { useStoreTrello } from '@/context/useStoreTrello'
 import { ArrowLeftIcon } from '@/public/assets/icons/ArrowLeftIcon'
 
 /**
- * The Navbar component for the Trelo clone.
+ * The NavBar component renders the main navigation bar of the application.
  *
- * This component displays the navbar across the top of the page, which
- * includes the logo, tabs, and two buttons for logging in and getting a free
- * trial.
+ * It uses the `useState` hook to manage the state of the navigation bar and the
+ * `useMediaQuery` hook to determine the width of the screen.
  *
- * @returns {React.ReactElement} The rendered navbar component.
+ * If the user is logged in, it renders the `NavbarLogged` component.
+ * If the user is not logged in, it renders a login and register button.
+ *
+ * It also renders the `LangSwitcher` component to allow the user to switch
+ * between languages.
+ *
+ * @returns {React.ReactElement} A Box component containing the rendered
+ * navigation bar and its contents.
  */
 const NavBar = () => {
 	const t = useTranslations('NavBarLogin.buttonLogin')

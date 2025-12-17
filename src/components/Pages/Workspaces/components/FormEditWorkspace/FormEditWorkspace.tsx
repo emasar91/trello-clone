@@ -16,6 +16,19 @@ import {
 	FormEditWorkspaceSubmitButtonStyles,
 } from './FormEditWorkspace.styles'
 
+/**
+ * Formulario para editar un workspace existente.
+ *
+ * @param {() => void} handleClose - Funcion para cerrar el formulario.
+ * @param {(
+ *   newData: { newName: string; newDescription: string },
+ *   defaultName: string,
+ *   resetForm: () => void
+ * ) => void} onSubmit - Funcion para editar un workspace existente.
+ * @param {string} defaultName - Nombre original del workspace.
+ * @param {string} defaultDescription - Descripcion original del workspace.
+ * @param {boolean} loading - Indica si se est  editando el workspace.
+ */
 function FormEditWorkspace({
 	handleClose,
 	onSubmit,
@@ -39,11 +52,19 @@ function FormEditWorkspace({
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
 
+	/**
+	 * Resets the form by setting the name and description back to empty strings.
+	 */
 	const resetForm = () => {
 		setNewWorkspaceName('')
 		setNewDescription('')
 	}
 
+	/**
+	 * Submits the form data to edit a workspace.
+	 * If the new name and description are the same as the default name and description, the function does nothing.
+	 * Otherwise, it calls the onSubmit function passed as a prop with the new data, default name, and reset form function.
+	 */
 	const handleSubmit = () => {
 		const newData = {
 			newName: newWorkspaceName === defaultName ? '' : newWorkspaceName.trim(),

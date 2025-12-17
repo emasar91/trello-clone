@@ -39,6 +39,18 @@ type ImageItemProps = {
 	onClick: () => void
 }
 
+/**
+ * TagMenu is a component that displays a list of tags that can be selected.
+ * It is used in the ModalItem component to allow the user to select tags for a card.
+ * The component receives the following props:
+ * - open: A boolean that indicates whether the menu is open or not.
+ * - handleClose: A function that is called when the menu is closed.
+ * - anchorEl: The element that the menu is anchored to.
+ * - setSelectedTags: A function that is called when the user selects a tag.
+ * - selectedTags: An array of strings that contains the selected tags.
+ * - onSubmit: A function that is called when the user submits the selected tags.
+ * - cardId: The unique identifier of the card.
+ */
 function TagMenu({
 	open,
 	handleClose,
@@ -51,6 +63,13 @@ function TagMenu({
 	const theme = useTheme()
 	const t = useTranslations('ModalItem')
 
+	/**
+	 * Toggles the given tag in the selected tags array.
+	 * If the tag is already in the array, it is removed.
+	 * If the tag is not in the array, it is added.
+	 * After toggling the tag, the onSubmit function is called with the new array of selected tags.
+	 * @param {string} imgSrc - The source of the image to toggle.
+	 */
 	const toggleTag = (imgSrc: string) => {
 		const newTags = selectedTags.includes(imgSrc)
 			? selectedTags.filter((tag) => tag !== imgSrc)

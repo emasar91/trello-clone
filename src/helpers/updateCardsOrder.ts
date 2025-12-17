@@ -10,6 +10,11 @@ interface CardOrderUpdate {
 	updatedAt: Date
 }
 
+/**
+ * Actualiza el orden de las tarjetas en el tablero.
+ * @param {CardOrderUpdate[]} updates - Array de objetos con la información de las tarjetas a actualizar.
+ * @returns {Promise<{modifiedCount: number}>} - Resultado de la actualización de las tarjetas.
+ */
 export async function updateCardsOrder(updates: CardOrderUpdate[]) {
 	const db = await getDB()
 	const cardsCollection = db.collection('cards')
@@ -32,5 +37,5 @@ export async function updateCardsOrder(updates: CardOrderUpdate[]) {
 
 	if (bulkOps.length === 0) return null
 	const result = await cardsCollection.bulkWrite(bulkOps)
-	return result // { modifiedCount... }
+	return result
 }

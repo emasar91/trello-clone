@@ -22,6 +22,12 @@ type MockPageProps = {
 	route: string
 }
 
+/**
+ * MockPageClient is a component that renders a mock page with a title, subtitle, description, and two buttons.
+ * It takes a route parameter and uses it to replace [route] in the translation keys.
+ * @param {string} route - The route parameter to be used in the translation keys.
+ * @returns {ReactNode} The mock page component.
+ */
 export default function MockPageClient({ route }: MockPageProps) {
 	const t = useTranslations('MockPage')
 

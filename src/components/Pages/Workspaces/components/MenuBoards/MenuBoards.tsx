@@ -14,6 +14,15 @@ import { useAuth } from '@/context/useAuthContext'
 import MenuWorkSpaces from '../MenuWorkSpaces/MenuWorkSpaces'
 import { IWorkspace } from '@/types/workspaces'
 
+/**
+ * Component to render the menu for the boards page.
+ * It will render an item for the user's boards and another item for the workspaces.
+ * When the user clicks on an item, it will navigate to the corresponding page.
+ *
+ * @param {IWorkspace[]} workspaces - The list of workspaces.
+ *
+ * @returns A JSX element with the menu for the boards page.
+ */
 const MenuBoards = ({ workspaces }: { workspaces: IWorkspace[] }) => {
 	const theme = useTheme()
 	const pathname = usePathname()
@@ -29,10 +38,17 @@ const MenuBoards = ({ workspaces }: { workspaces: IWorkspace[] }) => {
 		'user'
 	const menuActive = pathname === `/${currentLocale}/u/${username}/boards`
 
+	/**
+	 * Navigates to the boards page for the current user.
+	 */
 	const goToBoards = () => {
 		router.push(`/${currentLocale}/u/${username}/boards?uid=${user?.uid}`)
 	}
 
+	/**
+	 * Navigates to the boards page for the given workspace.
+	 * @param {string} workspaceName - The name of the workspace.
+	 */
 	const goToWorkspaceBoards = (workspaceName: string) => {
 		router.push(
 			`/${currentLocale}/w/${workspaceName.toLowerCase()}/boards?uid=${

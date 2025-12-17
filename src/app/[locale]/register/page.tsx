@@ -17,6 +17,23 @@ import { signInEmail } from '@/services/AuthActions'
 import { useRouter } from 'next/navigation'
 import { FirebaseError } from 'firebase/app'
 
+/**
+ * RegisterPage component renders a form with an email input, a password input, and a submit button.
+ * The component uses the useTranslations hook to translate the text of the form.
+ * The component expects the following properties:
+ * - handleLogin: a function to handle the login, receives the type of login, email and password as parameters.
+ * - register: a boolean to indicate if the form is for register or not, default is false.
+ * - recoverPassword: a boolean to indicate if the form is for recover password or not, default is false.
+ *
+ * The component renders the following elements:
+ * - An EmailField component with the email value and onChange function.
+ * - A PasswordField component with the password value and onChange function.
+ * - A SubmitButton component with the onClick function.
+ * - A GoogleLoginButton component with the onClick function.
+ * - A NotificationContainer component.
+ *
+ * @returns {JSX.Element} The component element.
+ */
 const RegisterPage = () => {
 	const locale = useLocale()
 	const router = useRouter()

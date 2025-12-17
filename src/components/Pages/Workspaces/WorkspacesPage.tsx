@@ -12,6 +12,15 @@ import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import NotificationContainer from '@/components/Notifications/Notifications'
 import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 
+/**
+ * WorkspacesPage component
+ *
+ * @param {string} type - type of workspace page, can be 'w' for workspace or 'u' for user
+ * @param {string} username - username of the user or workspace
+ * @param {string} uid - uid of the user or workspace
+ *
+ * @returns JSX element
+ */
 function WorkspacesPage({
 	type,
 	username,

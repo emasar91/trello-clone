@@ -28,6 +28,16 @@ import { useAuth } from '@/context/useAuthContext'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useEditWorkspace } from '@/hooks/useEditWorkSpace'
 
+/**
+ * Component to render a section for the workspaces.
+ * It will render a avatar for the workspace, the name of the workspace and a button to edit the workspace.
+ * It will also render a BoardGrid component with the boards of the workspace.
+ * If the workspace has no boards, it will render a "Create board" button.
+ *
+ * @param {string} username - The username of the workspace.
+ * @param {IWorkspace[]} workspaces - The list of workspaces.
+ * @returns A JSX element with the section for the workspaces.
+ */
 function BoardSectionWorkspaces({
 	username,
 	workspaces,
@@ -46,10 +56,17 @@ function BoardSectionWorkspaces({
 		(ws) => ws.name.toLowerCase() === username
 	)!
 
+	/**
+	 * Opens the edit form for the workspace.
+	 * This function sets the `openEditForm` state to `true`, which will render the edit form.
+	 */
 	const handleOpenEditForm = () => {
 		setOpenEditForm(true)
 	}
 
+	/**
+	 * Closes the edit form for the workspace.
+	 */
 	const handleCloseEditForm = () => {
 		setOpenEditForm(false)
 	}

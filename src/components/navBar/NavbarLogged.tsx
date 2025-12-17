@@ -32,6 +32,11 @@ import SearchBox from './components/SearchBox/SearchBox'
 import { usePathname, useRouter } from 'next/navigation'
 import { useStoreBoard } from '@/context/useStoreBoard'
 
+/**
+ * NavbarLogged component
+ *
+ * @returns {JSX.Element} NavbarLogged component
+ */
 const NavbarLogged = () => {
 	const t = useTranslations('NavbarLogged')
 	const theme = useTheme()

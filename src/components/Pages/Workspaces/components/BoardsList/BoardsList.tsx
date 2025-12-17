@@ -4,6 +4,16 @@ import CreateBoardCard from '../CreateBoardCard/CreateBoardCard'
 import { BoardListGridStyle } from './BoardsList.styles'
 import { IBoard } from '@/types/workspaces'
 
+/**
+ * Component to render a grid of boards.
+ * It will render a BoardCard component for each board in the given array.
+ * If the createBoard prop is true, it will also render a CreateBoardCard component.
+ * The CreateBoardCard component will only be rendered if there are less than 4 boards in the given array.
+ *
+ * @param {IBoard[]} boards - The array of boards to render.
+ * @param {string} workspaceName - The name of the workspace.
+ * @param {boolean} [createBoard=true] - Whether to render the CreateBoardCard component.
+ */
 const BoardGrid = ({
 	boards,
 	workspaceName,
@@ -22,7 +32,6 @@ const BoardGrid = ({
 					<BoardCard board={b} workspaceName={workspaceName} />
 				</Grid>
 			))}
-			{/* Botón Crear tablero */}
 			{availableCreate && (
 				<CreateBoardCard
 					remainingBoards={4 - boards.length}

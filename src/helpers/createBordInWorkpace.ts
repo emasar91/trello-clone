@@ -3,6 +3,19 @@ import { getDB } from './getDB'
 import { toObjectId } from './utils'
 import { IWorkspaceStore } from '@/types/workspaces'
 
+/**
+ * Crea un nuevo tablero en el workspace especificado.
+ * Primero se valida que el usuario existe y que el workspace pertenece al usuario.
+ * Luego se cheuquea si ya existe un tablero con ese nombre en el workspace.
+ * Finalmente se crea el tablero y se actualiza la referencia en el workspace.
+ *
+ * @param {string|ObjectId} userId - ID del usuario.
+ * @param {ObjectId|string} workspaceId - ID del workspace.
+ * @param {string} name - nombre del tablero.
+ * @param {string} [description] - descripci n del tablero.
+ * @param {string} image - imagen del tablero.
+ * @returns {{...newBoard, _id: ObjectId}} - Tablero creado con su ID.
+ */
 export async function createBoardinWorkspace({
 	userId,
 	workspaceId,

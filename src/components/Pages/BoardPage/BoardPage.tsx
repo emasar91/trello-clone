@@ -17,6 +17,16 @@ import NotificationContainer from '@/components/Notifications/Notifications'
 import { useTranslations } from 'next-intl'
 import { useUpdateLastOpenedBoard } from '@/hooks/useUpdateLastOpenedBoards'
 
+/**
+ * Component to render a board page.
+ * It will render the board's image, if exists, and a ManyItems component with the board's name.
+ * If the board is not found, it will render an error message.
+ * If the board is still loading, it will render a loading message.
+ * It also renders a NotificationContainer component.
+ * @param {string} boardname - The name of the board.
+ * @param {string} workspace - The name of the workspace.
+ * @returns {JSX.Element} - The board page component.
+ */
 const BoardPage = ({
 	boardname,
 	workspace,

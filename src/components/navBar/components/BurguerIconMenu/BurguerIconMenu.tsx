@@ -4,6 +4,10 @@ import './BurguerIconMenu.css'
 const BurguerIconMenu = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+	/**
+	 * Toggle the menu open state.
+	 * @returns {void} - Nothing
+	 */
 	const handleOpen = () => {
 		setIsMenuOpen(!isMenuOpen)
 	}

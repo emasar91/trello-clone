@@ -14,14 +14,19 @@ interface User {
 	nombre?: string | null
 	username?: string | null
 	workspaces: WorkspaceRef[]
-	// ... otros campos opcionales
 }
 
 /**
- * Crea un workspace para un usuario y lo agrega a su array de workspaces
- * @param {string|ObjectId} userId - ID del usuario
- * @param {string} name - nombre del workspace
- * @returns {Promise<Object>} - workspace creado
+ * Crea un nuevo workspace para un usuario.
+ * Primero se valida que el usuario existe y que no tiene un workspace con ese nombre.
+ * Luego se crea el workspace y se actualiza la referencia en el usuario.
+ *
+ * @param {string | ObjectId} userId - ID del usuario.
+ * @param {string} name - nombre del workspace.
+ * @param {string} [description] - descripci n del workspace.
+ *
+ * @returns {{...newWorkspace, _id: ObjectId}} - Workspace creado con su ID.
+ * @throws {Error} Si el usuario no existe o si ya tiene un workspace con ese nombre.
  */
 export async function createWorkspaceForUser({
 	userId,

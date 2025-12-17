@@ -13,7 +13,7 @@ import { Plus } from '@/public/assets/icons/Plus'
 import CreateCardInput from '../TextAreaCustom/TextAreaCustom'
 import { useTranslations } from 'next-intl'
 
-interface Props {
+export interface Props {
 	children: React.ReactNode
 	label?: string
 	style?: React.CSSProperties
@@ -21,6 +21,7 @@ interface Props {
 	onRename?: (data: { newName: string }) => void
 	handleprops?: React.ButtonHTMLAttributes<HTMLButtonElement>
 	onCreateCard?: (value: string) => void
+	hover?: boolean
 }
 
 export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(

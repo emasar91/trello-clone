@@ -15,6 +15,14 @@ import {
 	PageHomeVideoStyle,
 } from './Section1.styles'
 
+/**
+ * Section1 component for the home page.
+ *
+ * This component renders a section that displays the title, subtitle, description and a link to watch a video.
+ * It also renders a video element with the video source set to "/assets/video/updatedhero.mp4".
+ *
+ * @returns {JSX.Element} A JSX element representing the section.
+ */
 const Section1 = () => {
 	const { setOpenModal } = useStoreTrello()
 	const t = useTranslations('PageHome.section1')

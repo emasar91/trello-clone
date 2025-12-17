@@ -34,6 +34,16 @@ type ImageItemProps = {
 	onClick: () => void
 }
 
+/**
+ * Componente para criar um novo tablero em um workspace.
+ *
+ * @param {open} Indica se o menu est  aberto.
+ * @param {handleClose} Fun o para fechar o menu.
+ * @param {anchorEl} Elemento HTML que serve como ancora para o menu.
+ * @param {workspaceName} Nome do workspace no qual o tablero ser  criado.
+ *
+ * @returns Um componente que renderiza um menu de cria o de tablero.
+ */
 function CreateBoardMenu({
 	open,
 	handleClose,

@@ -29,6 +29,14 @@ type IMenuWorkSpaces = {
 	goToWorkspaceBoards: (workspaceName: string) => void
 }
 
+/**
+ * Component for displaying a list of workspaces in the menu.
+ * Each workspace is collapsible and when opened, it displays a button to go to the boards of that workspace.
+ * The component also handles the active state of the menu, so that the currently selected workspace is highlighted.
+ *
+ * @param {IWorkspace[]} workspaces - List of workspaces to display.
+ * @param {Function} goToWorkspaceBoards - Function to call when a workspace is selected.
+ */
 function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 	const theme = useTheme()
 	const pathname = usePathname()
@@ -39,10 +47,15 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 		{}
 	)
 
+	/**
+	 * Handles the click event on a workspace item in the menu.
+	 * Toggles the open state of the workspace in the openWorkspaces state.
+	 * @param {_id} - The id of the workspace item to toggle.
+	 */
 	const handleClick = (_id: string) => {
 		setOpenWorkspaces((prev) => ({
 			...prev,
-			[_id]: !prev[_id], // toggle solo ese
+			[_id]: !prev[_id],
 		}))
 	}
 

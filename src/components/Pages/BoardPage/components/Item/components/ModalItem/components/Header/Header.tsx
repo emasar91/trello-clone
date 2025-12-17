@@ -17,6 +17,16 @@ type IHeaderProps = {
 	onSubmit: () => void
 }
 
+/**
+ * Header component.
+ * @param {boolean} isEditingTitle - Is the title editable?
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} setIsEditingTitle - Function to toggle isEditingTitle state.
+ * @param {string} title - The title to be displayed.
+ * @param {React.Dispatch<React.SetStateAction<string>>} setTitle - Function to update the title state.
+ * @param {() => void} onClose - Function to be called when the close button is clicked.
+ * @param {() => void} onSubmit - Function to be called when the title form is submitted.
+ * @return {JSX.Element} The Header component.
+ */
 const Header = ({
 	isEditingTitle,
 	setIsEditingTitle,
@@ -26,6 +36,7 @@ const Header = ({
 	onSubmit,
 }: IHeaderProps) => {
 	const theme = useTheme()
+
 	return (
 		<Box sx={HeaderStyles}>
 			{!isEditingTitle ? (

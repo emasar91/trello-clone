@@ -23,6 +23,15 @@ const AuthContext = createContext<AuthContextType>({
 
 export const useAuth = () => useContext(AuthContext)
 
+/**
+ * AuthProvider component that wraps children with an AuthContextProvider.
+ * Listens to onIdTokenChanged and updates the user and loading state accordingly.
+ * If the user is logged in, sets an auth token cookie with the user's id token.
+ * If the user is logged out, removes the auth token cookie.
+ * When the component is unmounted, removes the listener.
+ * @param {ReactNode} children - The children to wrap with the AuthContextProvider.
+ * @returns {ReactNode} The wrapped children with the AuthContextProvider.
+ */
 export function AuthProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<User | null>(null)
 	const [loading, setLoading] = useState(true)

@@ -5,8 +5,12 @@ import { IBoard } from '@/types/boards'
 import { getUser } from './getUser'
 
 /**
- * Devuelve un board por nombre de workspace y nombre de board.
- * Busca primero el workspace para obtener su ID, y luego el board asociado.
+ * Busca un board por su nombre en un workspace determinado.
+ * @param {string | ObjectId} userId - ID del usuario.
+ * @param {string} workspaceName - Nombre del workspace.
+ * @param {string} boardName - Nombre del board.
+ * @returns {Promise<{workspace: IWorkspaceStore, board: IBoard}>} - El board encontrado junto con su workspace.
+ * @throws {Error} Si no se encontr  el board o el workspace.
  */
 export async function getBoardByNames(
 	userId: string | ObjectId,

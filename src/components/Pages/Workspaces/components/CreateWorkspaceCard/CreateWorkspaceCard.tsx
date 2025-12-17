@@ -8,6 +8,13 @@ import {
 	CreateWorkspaceCardRemainingTextStyle,
 } from './CreateWorkspaceCard.styles'
 
+/**
+ * Componente para criar um novo workspace.
+ *
+ * @param {number} remainingBoards - Número de espaços restantes para criar um workspace.
+ *
+ * @returns {JSX.Element} - Elemento JSX do componente CreateWorkspaceCard.
+ */
 const CreateWorkspaceCard = ({
 	remainingBoards,
 }: {

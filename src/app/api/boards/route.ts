@@ -5,6 +5,14 @@ import { updateLastOpenedBoard } from '@/helpers/updateLastOpenedBoard'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
+/**
+ * Crea un nuevo tablero en el workspace especificado.
+ *
+ * @param {Request} req - Request que contiene el body con los datos del nuevo tablero.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con el nuevo tablero creado con su ID.
+ * @description Crea un nuevo tablero en el workspace especificado.
+ * @example /api/boards?uid=123&workspaceId=123&name=Board1&description=Este es un tablero&image=https://example.com/image.jpg
+ */
 export async function POST(req: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -72,6 +80,15 @@ export async function POST(req: Request) {
 	}
 }
 
+/**
+ * GET /api/boards/get?uid={string}&workspaceName={string}&boardName={string}
+ * @param {string} uid - ID del usuario autenticado.
+ * @param {string} workspaceName - nombre del workspace.
+ * @param {string} boardName - nombre del board.
+ * @returns {Promise<NextResponse>} - El workspace y tablero correspondientes.
+ * @description Obtener un workspace y tablero por su nombre.
+ * @example /api/boards/get?uid=123&workspaceName=miWorkspace&boardName=miBoard
+ */
 export async function GET(request: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -80,7 +97,6 @@ export async function GET(request: Request) {
 			return NextResponse.json({ message: 'No autorizado' }, { status: 401 })
 		}
 		const { searchParams } = new URL(request.url)
-
 		const uid = searchParams.get('uid')
 		const workspaceName = searchParams.get('workspaceName')
 		const boardName = searchParams.get('boardName')
@@ -91,13 +107,11 @@ export async function GET(request: Request) {
 				{ status: 400 }
 			)
 		}
-
 		const { workspace, board } = await getBoardByNames(
 			uid,
 			workspaceName,
 			boardName
 		)
-
 		return NextResponse.json({
 			workspace,
 			board,
@@ -112,6 +126,18 @@ export async function GET(request: Request) {
 	}
 }
 
+/**
+ * PATCH /api/boards/update-last-opened
+ * Actualiza el tablero que se encuentra en el workspace y se
+ * marca como el tablero que se abri  por  ltimo.
+ * @param {string} id - El ID del tablero.
+ * @returns {Promise<NextResponse>} - El estado del tablero.
+ * @description Actualiza el tablero que se encuentra en el workspace y se
+ * marca como el tablero que se abri  por  ltimo.
+ * @example /api/boards/update-last-opened?id=123
+ * @throws {Error} - Si no se proporciona un boardId.
+ * @throws {Error} - Si ocurre un error interno del servidor.
+ */
 export async function PATCH(request: Request) {
 	try {
 		// 1️⃣ Auth
@@ -119,7 +145,6 @@ export async function PATCH(request: Request) {
 		if (!user) {
 			return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 		}
-
 		const { searchParams } = new URL(request.url)
 		const boardId = searchParams.get('id')
 

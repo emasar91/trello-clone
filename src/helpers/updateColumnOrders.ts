@@ -1,18 +1,23 @@
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
 
+/**
+ * Actualiza el orden de las columnas en un tablero.
+ * Filtra solo los IDs de columna que son ObjectIds válidos y
+ * actualiza el orden de las columnas reales. Devuelve un array
+ * con las columnas actualizadas y ordenadas.
+ * @param {string[]} columnIds - IDs de las columnas a actualizar.
+ * @returns {Promise<Icolumn[]>} - Columnas actualizadas y ordenadas.
+ */
 export async function updateColumnOrders(columnIds: string[]) {
 	try {
 		const db = await getDB()
 		const columnsCollection = db.collection('columns')
 
-		// 🧼 1️⃣ Filtrar SOLO ObjectIds válidos (ignora col-xxxx)
 		const validIds = columnIds.filter(ObjectId.isValid)
 
-		// 🛑 Nada para actualizar
 		if (validIds.length === 0) return []
 
-		// 🔥 2️⃣ Actualizar orden SOLO de columnas reales
 		const ops = validIds.map((id, index) =>
 			columnsCollection.updateOne(
 				{ _id: new ObjectId(id) },
@@ -22,7 +27,6 @@ export async function updateColumnOrders(columnIds: string[]) {
 
 		await Promise.all(ops)
 
-		// 👀 3️⃣ Devolver columnas actualizadas y ordenadas
 		const updatedColumns = await columnsCollection
 			.find({ _id: { $in: validIds.map((id) => new ObjectId(id)) } })
 			.sort({ order: 1 })

@@ -18,6 +18,16 @@ interface User {
 	// ... otros campos opcionales
 }
 
+/**
+ * Edita un workspace existente.
+ *
+ * @param {userId: string | ObjectId} - ID del usuario.
+ * @param {workspaceId: string | ObjectId} - ID del workspace.
+ * @param {name?: string} - Nuevo nombre para el workspace.
+ * @param {description?: string} - Nueva descripci n para el workspace.
+ * @returns {Promise<{workspace: IWorkspace, ...updateFields: Partial<IWorkspace>>} - El workspace editado junto con los campos actualizados.
+ * @throws {Error} Si el usuario o el workspace no se encuentra o no se aplicaron cambios.
+ */
 export async function editWorkspace({
 	userId,
 	workspaceId,

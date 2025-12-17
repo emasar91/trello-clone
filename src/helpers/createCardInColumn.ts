@@ -16,6 +16,14 @@ type CreateCardData = {
 	order?: number
 }
 
+/**
+ * Crea una nueva tarjeta y actualiza el `updatedAt` del board y de la columna correspondientes.
+ *
+ * @param {CreateCardData} data - Objeto con los datos para crear la tarjeta.
+ *
+ * @returns {Promise<ICard>} - Promesa que se resuelve con la tarjeta creada.
+ */
+
 export async function createCard(data: CreateCardData) {
 	const db = await getDB()
 	const cardsCollection = db.collection<Omit<ICard, '_id'>>('cards')
@@ -24,7 +32,7 @@ export async function createCard(data: CreateCardData) {
 
 	const now = new Date()
 	const order = await getNextOrder(data.columnId)
-
+	// 1️⃣ Crear la nueva tarjeta
 	const newCard: Omit<ICard, '_id'> = {
 		boardId: toObjectId(data.boardId) as ObjectId,
 		columnId: toObjectId(data.columnId) as ObjectId,
@@ -34,9 +42,7 @@ export async function createCard(data: CreateCardData) {
 		priorityColor: data.priorityColor ?? null,
 		createdAt: now,
 		updatedAt: null,
-		order: order, // si no se define, va al final
-
-		// 👇 SECCIÓN OBLIGATORIA SEGÚN TU TIPO
+		order: order,
 		comments: [],
 	}
 

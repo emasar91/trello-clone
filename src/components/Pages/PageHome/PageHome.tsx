@@ -10,9 +10,15 @@ import Section5 from './components/Section5/Section5'
 import { colorsLanding } from '@/constants'
 
 /**
- * PageHome component that renders a video and a description of the product.
+ * PageHome component
  *
- * @returns {React.ReactElement} The PageHome component.
+ * PageHome component is the main component of the home page.
+ * It contains the sections 1, 2, 3, 4 and 5.
+ * Section 1 contains the hero section with a video as the background.
+ * Section 2 contains the feature section with a title, a subtitle and a call-to-action.
+ * Section 3 contains the testimonial section with a title, a subtitle and a call-to-action.
+ * Section 4 contains the feature section with a title, a subtitle and a call-to-action.
+ * Section 5 contains the contact section with a title, a subtitle and a call-to-action.
  */
 const PageHome = () => {
 	return (

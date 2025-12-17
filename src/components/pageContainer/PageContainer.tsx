@@ -19,6 +19,10 @@ type Props = {
  * PageContainer does not provide any additional props beyond what is available on the Box component.
  * @param {{ children: React.ReactNode }} props
  * @returns {React.ReactElement}
+ * @example
+ * <PageContainer>
+ *   <Box>...</Box>
+ * </PageContainer>
  */
 const PageContainer = ({ children, backgroundColor, margin }: Props) => {
 	return (

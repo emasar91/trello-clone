@@ -6,6 +6,15 @@ import { deleteColumnAndCards } from '@/helpers/deleteColumn'
 import { updateColumnOrders } from '@/helpers/updateColumnOrders'
 import { getUserFromRequest } from '@/helpers/getUserIdFromToken'
 
+/**
+ * GET /api/columns?boardId=123
+ * @param {Request} request
+ * @returns {Promise<NextResponse>}
+ * @description Obtener todas las columnas de un board.
+ * @example /api/columns?boardId=123
+ * @throws {Error} - Si no se proporciona un boardId.
+ * @throws {Error} - Si ocurre un error interno del servidor.
+ */
 export async function GET(request: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -22,7 +31,6 @@ export async function GET(request: Request) {
 				{ status: 400 }
 			)
 		}
-
 		const columns = (await getBoardColumns(boardId)) as IColumn[]
 
 		return NextResponse.json({ columns: columns }, { status: 200 })
@@ -36,8 +44,16 @@ export async function GET(request: Request) {
 	}
 }
 
-// /api/columns/update/route.ts
-
+/**
+ * PUT /api/columns/update
+ * @param {Request} request
+ * @returns {Promise<NextResponse>}
+ * @description Actualiza una columna en un board o actualiza el orden de todas las columnas en un board.
+ * @example /api/columns/update?boardId=123&columnId=abc&newName=columna actualizada
+ * @example /api/columns/update?boardId=123&columnsOrder=[columnId1, columnId2, ...]
+ * @throws {Error} - Si no se proporciona un boardId o un columnId.
+ * @throws {Error} - Si ocurre un error interno del servidor.
+ */
 export async function PUT(request: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -63,18 +79,15 @@ export async function PUT(request: Request) {
 				{ status: 400 }
 			)
 		}
-
 		const updateFields: { name?: string; order?: number } = {}
 		if (newName?.trim()) updateFields.name = newName.trim()
 		if (order !== undefined) updateFields.order = order
-
 		if (Object.keys(updateFields).length === 0) {
 			return NextResponse.json(
 				{ error: 'No se envió ningún dato para actualizar' },
 				{ status: 400 }
 			)
 		}
-
 		const updatedColumn = await updateColumn(columnId, boardId, updateFields)
 
 		return NextResponse.json(
@@ -90,6 +103,13 @@ export async function PUT(request: Request) {
 	}
 }
 
+/**
+ * Elimina una columna y todas las tarjetas asociadas a ella.
+ * Lanza un error si el tablero no puede quedar sin columnas.
+ * @param {Request} req - Request que contiene el ID de la columna y el ID del tablero.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con el estado de la eliminación.
+ * @example /api/columns/delete?columnId=123&boardId=456
+ */
 export async function DELETE(req: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -102,7 +122,6 @@ export async function DELETE(req: Request) {
 		if (!columnId || !boardId) {
 			return NextResponse.json({ error: 'Faltan datos' }, { status: 400 })
 		}
-
 		await deleteColumnAndCards(columnId, boardId)
 
 		return NextResponse.json({ success: true })

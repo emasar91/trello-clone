@@ -1,3 +1,10 @@
+/**
+ * Format a date to a human-readable string.
+ *
+ * @param {Date|string} date The date to format. Can be a Date object or a string in the format 'YYYY-MM-DDTHH:mm:ssZ'.
+ * @param {string} locale The locale to use. Can be 'en' or 'es'.
+ * @returns {string} The formatted date string.
+ */
 export const formatCommentDate = (date: Date | string, locale: string) => {
 	const now = new Date()
 	const target = typeof date === 'string' ? new Date(date) : date

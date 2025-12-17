@@ -13,6 +13,23 @@ import { useLocale, useTranslations } from 'next-intl'
 import { toast } from 'react-toastify'
 import { FirebaseError } from 'firebase/app'
 
+/**
+ * PageLogin component renders a form with an email input, a password input, and a submit button.
+ * The component uses the useTranslations hook to translate the text of the form.
+ * The component expects the following properties:
+ * - handleLogin: a function to handle the login, receives the type of login, email and password as parameters.
+ * - handleResetPassword: a function to handle the reset password, receives the email as a parameter.
+ * - register: a boolean to indicate if the form is for register or not, default is false.
+ * - recoverPassword: a boolean to indicate if the form is for recover password or not, default is false.
+ *
+ * The component renders the following elements:
+ * - An EmailField component with the email value and onChange function.
+ * - A PasswordField component with the password value and onChange function, and showPassword and onToggleShow functions.
+ * - A SubmitButton component with the onClick function, disabled property and text property.
+ * - A GoogleLoginButton component with the onClick function and text property.
+ * - A NotificationContainer component.
+ * - A LoginCreateAccount component with the onClick function, disabled property and text property.
+ */
 const PageLogin = () => {
 	const router = useRouter()
 	const locale = useLocale()
@@ -48,6 +65,10 @@ const PageLogin = () => {
 			}
 		}
 	}
+
+	/**
+	 * Redirects the user to the password reset page.
+	 */
 	const handleResetPassword = () => {
 		router.push('/reset-password')
 	}

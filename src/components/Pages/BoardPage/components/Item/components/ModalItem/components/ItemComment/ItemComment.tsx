@@ -19,6 +19,14 @@ type Props = {
 	onDelete: () => void
 }
 
+/**
+ * ItemComment component renders a comment box with author name, comment text and edit and delete buttons.
+ *
+ * @param {IComment} comment - The comment to be rendered.
+ * @param {() => void} onEdit - Callback function to be called when the edit button is clicked.
+ * @param {() => void} onDelete - Callback function to be called when the delete button is clicked.
+ * @returns {JSX.Element} - The rendered comment box.
+ */
 const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 	const theme = useTheme()
 	const t = useTranslations('ModalItem')

@@ -7,8 +7,11 @@ import type { ICard } from '@/types/card'
 import { getUserFromRequest } from '@/helpers/getUserIdFromToken'
 
 /**
- * GET /api/cards?columnId=xxxxx
- * Retorna todas las tarjetas de una columna
+ * Obtiene todas las tarjetas de una columna.
+ * @example /api/cards?columnId=123
+ * @throws {Error} - Si no se proporciona un usuario autenticado.
+ * @throws {Error} - Si ocurre un error interno del servidor.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con las tarjetas de la columna.
  */
 export async function GET(req: Request) {
 	try {
@@ -38,8 +41,14 @@ export async function GET(req: Request) {
 	}
 }
 
-// app/api/cards/route.ts
-
+/**
+ * Crea una nueva tarjeta en una columna.
+ *
+ * @param {Request} req - Request que contiene el body con los datos de la tarjeta.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con la tarjeta creada.
+ * @throws {Error} - Si no se proporciona un usuario autenticado.
+ * @throws {Error} - Si ocurre un error interno del servidor.
+ */
 export async function POST(req: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -61,8 +70,18 @@ export async function POST(req: Request) {
 	}
 }
 
-// app/api/cards/route.ts
-
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Actualiza una o varias tarjetas en un board.
+ *
+ * @param {Request} req - Request que contiene el body con los datos de las tarjetas.
+ * @returns {Promise<NextResponse>} - Promesa que se resuelve con las tarjetas actualizadas.
+ *
+ * @throws {Error} - Si no se proporciona un usuario autenticado.
+ * @throws {Error} - Si ocurre un error interno del servidor.
+ *
+ * @example /api/cards?boardId=123&columnId=456
+ */
 export async function PUT(req: Request) {
 	try {
 		// 1️⃣ Obtener usuario autenticado
@@ -81,7 +100,6 @@ export async function PUT(req: Request) {
 			)
 		}
 
-		// 🧩 MODO NORMAL – 1 CARD
 		const {
 			cardId,
 			boardId,

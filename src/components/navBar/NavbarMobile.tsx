@@ -26,6 +26,20 @@ type Props = {
 	setSubmenuOpen: (open: boolean) => void
 }
 
+/**
+ * ExpandableMenu component
+ *
+ * @param {boolean} open - Whether the menu is open
+ * @param {number} navbarHeight - The height of the navbar
+ * @param {boolean} submenuOpen - Whether the submenu is open
+ * @param {(open: boolean) => void} setSubmenuOpen - Function to set the submenu open state
+ * @returns {JSX.Element} The rendered ExpandableMenu component
+ *@example
+ *<ExpandableMenu open={open} navbarHeight={60} submenuOpen={submenuOpen} setSubmenuOpen={setSubmenuOpen} />
+ * This component renders a menu with items from the tabsNavbar constant.
+ * It also renders a submenu with the same items when a drawer item is clicked.
+ * The submenu is rendered inside a Box with width 100% and overflow auto.
+ */
 export function ExpandableMenu({
 	open,
 	navbarHeight = 60,

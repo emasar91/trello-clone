@@ -12,6 +12,11 @@ import {
 	Section4TitleStyle,
 } from './Section4.styles'
 
+/**
+ * Section 4 component
+ *
+ * @returns {JSX.Element} Section 4 component
+ */
 const Section4 = () => {
 	const t = useTranslations('PageHome.section4')
 	return (

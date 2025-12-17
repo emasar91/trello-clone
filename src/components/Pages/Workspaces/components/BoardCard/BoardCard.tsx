@@ -9,6 +9,18 @@ import { IBoard } from '@/types/workspaces'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useTranslations } from 'next-intl'
 
+/**
+ * Componente para criar um card de um tablero.
+ *
+ * @param {IBoard} board - Informações do tablero.
+ * @param {string} workspaceName - Nome do workspace atual.
+ *
+ * @returns {JSX.Element} - Elemento JSX do componente BoardCard.
+ *
+ * @example
+ * <BoardCard board={board} workspaceName="recently" />
+ *
+ */
 const BoardCard = ({
 	board,
 	workspaceName,

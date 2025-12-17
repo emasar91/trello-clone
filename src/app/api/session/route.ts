@@ -3,6 +3,15 @@ import { COOKIE_NAME } from '@/middleware'
 import { NextResponse } from 'next/server'
 import admin from '@/config/firebaseAdmin'
 
+/**
+ * Crea una sesi n con un token de autenticaci n de Firebase
+ * y redirige al usuario a la p gina de inicio de la app
+ * con el idioma seleccionado.
+ *
+ * @param {Request} req - La solicitud HTTP
+ * @returns {NextResponse} La respuesta HTTP con la cookie de sesi n
+ * @throws {Error} Si hay un error al crear la sesi n
+ */
 export async function POST(req: Request) {
 	try {
 		const { token, locale, user } = await req.json()
@@ -23,7 +32,6 @@ export async function POST(req: Request) {
 		// --------------------------
 		const db = await getDB()
 		const usersCollection = db.collection('users')
-
 		const existingUser = await usersCollection.findOne({ uid: user.uid })
 
 		if (!existingUser) {
@@ -38,7 +46,6 @@ export async function POST(req: Request) {
 				lastSeenAt: null,
 			})
 		}
-
 		// ----------------------------------
 		// 🔥 Setear cookie HTTPOnly con el Session Cookie
 		// ----------------------------------
@@ -50,9 +57,8 @@ export async function POST(req: Request) {
 			secure: process.env.NODE_ENV === 'production',
 			sameSite: 'strict',
 			path: '/',
-			maxAge: expiresIn / 1000, // en segundos
+			maxAge: expiresIn / 1000,
 		})
-
 		return res
 	} catch (error) {
 		console.error('SESSION ERROR:', error)
@@ -60,6 +66,14 @@ export async function POST(req: Request) {
 	}
 }
 
+/**
+ * Elimina la cookie de sesión y redirige a la raíz
+ * original de la aplicación.
+ *
+ * @param {Request} req - La petición
+ * @returns {NextResponse} - La respuesta
+ * @throws {Error} - Si ocurre un error
+ */
 export async function DELETE(req: Request) {
 	const { locale } = await req.json()
 	const baseUrl = new URL(req.url).origin

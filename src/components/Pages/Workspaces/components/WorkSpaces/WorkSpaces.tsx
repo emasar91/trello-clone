@@ -8,6 +8,12 @@ import {
 } from './WorkSpaces.styles'
 import { IWorkspace } from '@/types/workspaces'
 
+/**
+ * Component that renders a workspace section with the workspace avatar and title.
+ * It also renders a BoardGrid component with the boards of the workspace.
+ *
+ * @param {{ workspace: IWorkspace }} - The workspace to render.
+ */
 const WorkspaceSection = ({ workspace }: { workspace: IWorkspace }) => {
 	const theme = useTheme()
 	return (

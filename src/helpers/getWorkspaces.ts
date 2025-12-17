@@ -3,6 +3,11 @@ import { getDB } from './getDB'
 import { toObjectId } from './utils'
 import { IWorkspaceStore } from '@/types/workspaces'
 
+/**
+ * Gets all workspaces for a given user.
+ * @param {string | ObjectId} userId - The id of the user to get workspaces for.
+ * @returns {Promise<IWorkspaceStore[]>} - A promise that resolves with an array of workspaces.
+ */
 export async function getWorkspaces(userId: string | ObjectId) {
 	const db = await getDB()
 	const workspacesCollection = db.collection<IWorkspaceStore>('workspaces')

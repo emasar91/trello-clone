@@ -1,5 +1,9 @@
 import { AVATAR_BACKGROUND } from '@/constants'
 
+/**
+ * Función que devuelve un color aleatorio para el avatar de un usuario
+ * @returns {string} - Un string que representa el color aleatorio
+ */
 export const getRandomAvatarColor = (): string => {
 	const total = AVATAR_BACKGROUND.length
 

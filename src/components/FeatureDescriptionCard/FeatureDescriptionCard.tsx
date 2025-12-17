@@ -20,20 +20,15 @@ type Props = {
 }
 
 /**
- * The FeatureDescriptionCard component renders a feature description card with
- * image, title, icon and description. The component accepts four props: sideImage
- * (left or right), title (string), icon (React Node), and translate (string that
- * is used to translate the text using next-intl). The component uses useTranslations
- * hook from next-intl to translate the text. The component renders a Card with
- * image, title, icon and description. The title and description are rendered inside
- * a Box with a custom style. The icon is rendered inside a Box with a custom style.
- * The component uses the Box component from @mui/material to render the Card and
- * the Box components.
- *
- * @param {{ sideImage: 'left' | 'right', title: string, icon: React.ReactNode, translate: string }} props
- * @returns {React.ReactElement}
+ * A component that renders a feature description card with title, description and icon.
+ * It also supports different side images for different features.
+ * @param sideImage - The side of the image.
+ * @param title - The title of the feature.
+ * @param icon - The icon of the feature.
+ * @param translate - The translate key of the feature.
+ * @returns A feature description card component with the given parameters.
  * @example
- * <FeatureDescriptionCard sideImage="left" title="analytics" icon={<Analytics />} translate="translation" />
+ * <FeatureDescriptionCard sideImage="left" title="analytics" icon={<AnalyticsIcon />} translate="translation" />
  */
 const FeatureDescriptionCard = ({
 	sideImage,

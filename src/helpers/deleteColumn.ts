@@ -3,6 +3,13 @@ import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
 import { toObjectId } from './utils'
 
+/**
+ * Elimina una columna y todas las tarjetas asociadas a ella.
+ * Lanza un error si el tablero no puede quedar sin columnas.
+ * @param {string | ObjectId} columnId - ID de la columna a eliminar.
+ * @param {string | ObjectId} boardId - ID del tablero al que pertenece la columna.
+ * @returns {Promise<{columnId: ObjectId, cardIds: ObjectId[]}>} - ID de la columna eliminada y los IDs de las tarjetas eliminadas.
+ */
 export async function deleteColumnAndCards(
 	columnId: string | ObjectId,
 	boardId: string | ObjectId

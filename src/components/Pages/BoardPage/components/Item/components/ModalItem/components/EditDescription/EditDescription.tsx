@@ -19,6 +19,17 @@ interface IEditDescription {
 	onSubmit: () => void
 }
 
+/**
+ * Componente para editar la descripci n de una tarjeta.
+ *
+ * @param {string} description - Descripci n de la tarjeta.
+ * @param {React.Dispatch<React.SetStateAction<string>>} setDescription - Funcion para editar la descripci n de la tarjeta.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} setShowEditDescription - Funcion para mostrar o esconder el formulario de edici n de la descripci n.
+ * @param {ICard | undefined} cardSelected - Tarjeta seleccionada.
+ * @param {() => void} onSubmit - Funcion para editar la descripci n de la tarjeta.
+ *
+ * @returns {JSX.Element} - Componente para editar la descripci n de una tarjeta.
+ */
 const EditDescription = ({
 	description,
 	setDescription,
@@ -27,7 +38,6 @@ const EditDescription = ({
 	onSubmit,
 }: IEditDescription) => {
 	const theme = useTheme()
-
 	const t = useTranslations('ModalItem')
 
 	return (

@@ -1,6 +1,16 @@
 import BoardPage from '@/components/Pages/BoardPage/BoardPage'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
+/**
+ * Page component for boards.
+ *
+ * @param {object} params - Object with boardname and username properties.
+ *
+ * @returns {JSX.Element} - ProtectedPage component with BoardPage child.
+ *
+ * @example
+ * <Page boardname="myboard" username="john" />
+ */
 async function page({
 	params,
 }: {
@@ -8,7 +18,6 @@ async function page({
 }) {
 	const { boardname, username } = await params
 	return (
-		//crear board empezar con el tablero
 		<ProtectedPage isProtected>
 			<BoardPage boardname={boardname} workspace={username} />
 		</ProtectedPage>

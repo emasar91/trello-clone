@@ -25,6 +25,16 @@ import { useTranslations } from 'next-intl'
 import { IWorkspace } from '@/types/workspaces'
 import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 
+/**
+ * Formulario para crear un nuevo tablero en un workspace.
+ *
+ * @param {onSubmit} Funci n para crear un nuevo tablero.
+ * @param {workspaceName} nombre del workspace donde se va a crear el tablero.
+ * @param {loading} indica si se est  cargando el workspace.
+ * @param {handleClose} funci n para cerrar el modal.
+ *
+ * @returns JSX.Element - Formulario para crear un nuevo tablero.
+ */
 const CreateBoardForm = ({
 	onSubmit,
 	workspaceName,
@@ -70,12 +80,23 @@ const CreateBoardForm = ({
 		}
 	}, [workspaceAvailable, workspaceName])
 
+	/**
+	 * Resets the state of the form.
+	 * Sets the title and description to empty strings and
+	 * sets the workspace to null.
+	 */
 	const resetForm = () => {
 		setTitle('')
 		setDescription('')
 		setWorkspace(null)
 	}
 
+	/**
+	 * Submits the form data to create a new board.
+	 * Calls the onSubmit function passed as a prop with the new data, reset form function, and handle close function if it exists.
+	 * The new data contains the title, description, workspace ID, reset form function, and handle close function.
+	 * If the workspace ID is null or undefined, it is set to an empty string.
+	 */
 	const handleSubmit = () => {
 		onSubmit({
 			boardName: title,

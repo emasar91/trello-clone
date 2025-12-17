@@ -26,6 +26,20 @@ type IThemeMenu = {
 	selectedTheme: 'light' | 'dark'
 }
 
+/**
+ * ThemeMenu is a component that allows the user to select between light and dark theme.
+ * It includes two menu items with radio buttons, each corresponding to a different theme.
+ * The component also includes a close icon that is displayed when the menu is open.
+ * The component uses the useTheme hook from @mui/material to get the current theme.
+ * The component also uses the useTranslations hook from next-intl to get the translation of the menu items.
+ * The component is passed the following props:
+ * - themeAnchorEl: The element that the menu is anchored to.
+ * - setThemeAnchorEl: A function that sets the themeAnchorEl.
+ * - themeOpen: A boolean that indicates whether the menu is open or not.
+ * - handleSelect: A function that is called when a menu item is selected.
+ * - selectedTheme: The theme that is currently selected.
+ * @returns A Menu component with two menu items and a close icon.
+ */
 function ThemeMenu({
 	themeAnchorEl,
 	setThemeAnchorEl,

@@ -10,6 +10,15 @@ import { useTranslations } from 'next-intl'
 import { CustomSlider } from '@/components/CustomSlider/CustomSlider'
 import { itemsSliderSection2 } from '@/constants'
 
+/**
+ * Section 2 component
+ *
+ * This component renders a section with a title, subtitle, description and a custom slider with items.
+ *
+ * The title, subtitle and description are translated using next-intl.
+ *
+ * The custom slider is shown with the left items and the items are translated using next-intl.
+ */
 const Section2 = () => {
 	const t = useTranslations('PageHome.section2')
 

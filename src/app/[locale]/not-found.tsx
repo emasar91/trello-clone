@@ -16,6 +16,13 @@ import {
 } from './not-found.styles'
 import { useTranslations } from 'next-intl'
 
+/**
+ * This component is used to display a page when the user is not found.
+ *
+ * It displays an error image, a title, a description and two buttons, one for login and one to go back home.
+ *
+ * @returns {React.ReactElement | null} The NotFound component when the user is not found, otherwise null.
+ */
 export default function NotFound() {
 	const t = useTranslations('NotFound')
 

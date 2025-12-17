@@ -4,6 +4,10 @@ import admin from '@/config/firebaseAdmin'
 import { IUser } from '@/types/user'
 import { COOKIE_NAME } from '@/middleware'
 
+/**
+ * Devuelve el usuario asociado a la solicitud a partir de la cookie de sesi n
+ * @returns {Promise<IUser | null>} El usuario asociado a la solicitud o null si no se encuentra
+ */
 export async function getUserFromRequest() {
 	try {
 		const cookieStore = cookies()

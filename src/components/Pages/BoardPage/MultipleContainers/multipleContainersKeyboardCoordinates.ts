@@ -13,6 +13,17 @@ const directions: string[] = [
 	KeyboardCode.Left,
 ]
 
+/**
+ * @description
+ * A function that determines the new coordinates for an item when
+ * the user presses an arrow key. It takes into account the active
+ * item, the droppable rectangles, the droppable containers and the
+ * collision rectangle.
+ *
+ * @param {KeyboardEvent} event - The event that triggered the function call.
+ * @param {{ active: DraggableItem, droppableRects: Map<string, Rectangle>, droppableContainers: Map<string, DroppableContainer>, collisionRect: Rectangle | null }} context - The context object containing the active item, the droppable rectangles, the droppable containers and the collision rectangle.
+ * @returns {x: number, y: number} | undefined - The new coordinates for the item. If the item should not be moved, it returns undefined.
+ */
 export const coordinateGetter: KeyboardCoordinateGetter = (
 	event,
 	{ context: { active, droppableRects, droppableContainers, collisionRect } }

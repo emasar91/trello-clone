@@ -11,6 +11,11 @@ import {
 import FeatureDescriptionCard from '@/components/FeatureDescriptionCard/FeatureDescriptionCard'
 import { featureSection3 } from '@/constants'
 
+/**
+ * Section 3 component
+ *
+ * @returns {JSX.Element} Section 3 component
+ */
 const Section3 = () => {
 	const t = useTranslations('PageHome.section3')
 
