@@ -9,14 +9,12 @@ import api from '@/lib/axiosClient'
 
 /**
  * Hook para obtener los workspaces disponibles para un usuario.
- *
  * @returns {{
  *   getWorkspaces: (setWorkspaceAvailable: (value: IWorkspace[]) => void) => Promise<void>,
  *   loading: boolean
  * }}
- *
- * La funci n `getWorkspaces` obtiene los workspaces disponibles para un usuario y establece el estado de los workspaces en el componente.
- * La funci n `getWorkspaces` devuelve una promesa que se resuelve cuando los workspaces han sido obtenidos.
+ * La Funcion `getWorkspaces` obtiene los workspaces disponibles para un usuario y establece el estado de los workspaces en el componente.
+ * La Funcion `getWorkspaces` devuelve una promesa que se resuelve cuando los workspaces han sido obtenidos.
  * La variable `loading` se establece en true mientras se est n obteniendo los workspaces y se establece en false cuando se han obtenido.
  */
 export const useGetWorkspaces = () => {
@@ -27,12 +25,13 @@ export const useGetWorkspaces = () => {
 		async (setWorkspaceAvailable: (value: IWorkspace[]) => void) => {
 			try {
 				setLoading(true)
-
+				// 1️⃣ Obtener workspaces
 				const { data } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{ withCredentials: true }
 				)
 
+				// 2️⃣ Si se encontro correctamente → actualizar estado
 				if (data) {
 					setWorkspaceAvailable(data)
 				}

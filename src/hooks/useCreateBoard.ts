@@ -15,15 +15,12 @@ interface ICreateBoardProps {
 
 /**
  * Hook para crear un nuevo tablero en un workspace.
- *
- * @param {setWorkSpaces} Funci n para actualizar el estado de los workspaces.
+ * @param {setWorkSpaces} Funcion para actualizar el estado de los workspaces.
  * @param {user} Usuario autenticado.
  * @param {backgroundSelected} Fondo seleccionado para el tablero.
- *
  * @returns {{handleCreateBoard: (boardName: string, boardDescription: string, workspaceId: string, resetForm: () => void, handleClose?: () => void) => Promise<void>, loading: boolean}}
- *
- * La funci n `handleCreateBoard` crea un nuevo tablero en el workspace especificado.
- * La funci n `handleCreateBoard` devuelve una promesa que se resuelve cuando el tablero ha sido creado.
+ * La funcion `handleCreateBoard` crea un nuevo tablero en el workspace especificado.
+ * La funcion `handleCreateBoard` devuelve una promesa que se resuelve cuando el tablero ha sido creado.
  * La variable `loading` se establece en true mientras se est  creando el tablero y se establece en false cuando se ha creado.
  */
 export const useCreateBoard = ({
@@ -34,7 +31,7 @@ export const useCreateBoard = ({
 	const [loading, setLoading] = useState(false)
 	const t = useTranslations('BoardsPage')
 	const didFetch = useRef(false)
-
+	// 1️⃣ Crear columnas por defecto
 	const createDefaultColumns = async (boardId: string) => {
 		const defaultColumns = [
 			{ name: 'Para hacer', order: 1 },
@@ -43,6 +40,7 @@ export const useCreateBoard = ({
 		]
 
 		try {
+			// 2️⃣ Crear columnas por defecto en la base de datos
 			setLoading(true)
 			await Promise.all(
 				defaultColumns.map((col) =>
@@ -68,8 +66,8 @@ export const useCreateBoard = ({
 	 * @param {string} boardName - El nombre del tablero.
 	 * @param {string} boardDescription - La descripci n del tablero.
 	 * @param {string} workspaceId - El ID del workspace.
-	 * @param {() => void} resetForm - Funci n para resetear el formulario.
-	 * @param {() => void} [handleClose] - Funci n para cerrar el modal.
+	 * @param {() => void} resetForm - Funcion para resetear el formulario.
+	 * @param {() => void} [handleClose] - Funcion para cerrar el modal.
 	 * @returns {Promise<void>}
 	 */
 	const handleCreateBoard = async ({
@@ -88,6 +86,7 @@ export const useCreateBoard = ({
 		if (didFetch.current) return
 		didFetch.current = true
 		try {
+			// 3️⃣ Crear tablero
 			const { data } = await api.post(
 				API.createBoardsUrl,
 				{
@@ -101,13 +100,17 @@ export const useCreateBoard = ({
 			)
 
 			if (data.board?._id) {
+				// 4️⃣ Crear columnas por defecto
 				await createDefaultColumns(data.board._id)
+				// 5️⃣ Resetear formulario
 				resetForm()
 				toast.success(t('menuBaord.successCreate'))
+				// 6️⃣ Actualizar workspaces
 				const { data: workspaces } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{ withCredentials: true }
 				)
+				// 7️⃣ Actualizar estado
 				setWorkSpaces(workspaces)
 				handleClose?.()
 			}

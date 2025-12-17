@@ -1,4 +1,3 @@
-// hooks/useUpdateColumnsOrder.ts
 import { API } from '@/constants'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -22,6 +21,7 @@ export const useUpdateColumnsOrder = (boardId: string) => {
 			setLoading(true)
 
 			try {
+				// 1️⃣ Actualizar orden de columnas en la base de datos
 				await api.put(
 					API.updateColumnUrl,
 					{

@@ -33,15 +33,16 @@ export const useCreateCard = ({
 	items,
 }: ICreateCardProps) => {
 	const [loading, setLoading] = useState(false)
-	const didFetch = useRef(false) // evita doble submit
+	const didFetch = useRef(false)
 
 	const createCardInColumn = useCallback(
 		(containerId: UniqueIdentifier) => {
 			return async (title: string) => {
 				if (didFetch.current) return
+				// 1️⃣ Validar titulo
 				if (!title?.trim()) return
-
 				const tempId = `${containerId}-${Date.now()}`
+				// 2️⃣ Crear tarjeta local
 				const newLocalCard: ColumnItem = {
 					id: tempId,
 					text: title,
@@ -57,6 +58,7 @@ export const useCreateCard = ({
 					comments: [],
 					order: items[containerId]?.items?.length || 0,
 				}
+				// 3️⃣ Validar si el titulo ya existe
 				const cardTitleAlreadyExists = Object.values(items).some((container) =>
 					container.items.some((card) => card.text === title)
 				)
@@ -69,7 +71,7 @@ export const useCreateCard = ({
 				didFetch.current = true
 				setLoading(true)
 
-				// 1️⃣ Optimistic UI
+				// 4️⃣ Optimistic UI
 				setItems((prev) => ({
 					...prev,
 					[containerId]: {
@@ -79,8 +81,9 @@ export const useCreateCard = ({
 				}))
 
 				try {
+					// 5️⃣ Crear tarjeta en la base de datos
 					const { data } = await api.post(
-						API.createCardUrl, // ej: '/api/cards/create'
+						API.createCardUrl,
 						{
 							title,
 							boardId,
@@ -92,9 +95,9 @@ export const useCreateCard = ({
 						{ withCredentials: true }
 					)
 
-					const realCard = data.card // tu api devuelve { card }
+					const realCard = data.card
 
-					// 2️⃣ Reemplazar ID temporal por el real de MongoDB
+					// 6️⃣ Reemplazar ID temporal por el real de MongoDB
 					setItems((prev) => {
 						const updated = [...prev[containerId].items]
 						const i = updated.findIndex((c) => c.id === tempId)

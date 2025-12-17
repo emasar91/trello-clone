@@ -28,10 +28,8 @@ export interface SearchCardResult {
 
 /**
  * Hook para buscar tarjetas por texto
- *
  * @param {string} value texto a buscar
  * @param {string} user.uid uid del usuario autenticado
- *
  * @returns {
  *   searchValue: string texto a buscar
  *   setSearchValue: function para setear el valor de searchValue
@@ -63,11 +61,13 @@ export const useSearchCards = () => {
 				setLoading(true)
 				setHasSearched(true)
 
+				// 1️⃣ Obtener tarjetas
 				const { data } = await api.get(
 					`${API.searchCardsUrl}?q=${debouncedValue}`,
 					{ withCredentials: true }
 				)
 
+				// 2️⃣ Si se encontro correctamente → actualizar estado
 				setResults(data ?? [])
 			} catch (err) {
 				if (axios.isAxiosError(err) && err.response?.status !== 401) {

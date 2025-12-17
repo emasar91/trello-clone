@@ -38,12 +38,15 @@ export const useUpdateColumn = ({ setItems, items }: IUpdateColumnProps) => {
 				if (didFetch.current) return
 				if (!data.newName?.trim()) return
 
+				// 1️⃣ Limpiar nombre
 				const titleFixed = data.newName.trim()
 
+				// 2️⃣ Verificar si el nombre ya existe
 				const titleAlreadyExists = Object.values(items).some(
 					(container) => container.title === titleFixed
 				)
 
+				// 3️⃣ Si el nombre ya existe → mostrar error
 				if (titleAlreadyExists) {
 					toast.error('Ya existe una columna con el mismo nombre')
 					return
@@ -52,6 +55,7 @@ export const useUpdateColumn = ({ setItems, items }: IUpdateColumnProps) => {
 				didFetch.current = true
 				setLoading(true)
 
+				// 4️⃣ Optimistic UI actualizar nombre
 				setItems((prev) => ({
 					...prev,
 					[containerId]: {
@@ -61,6 +65,7 @@ export const useUpdateColumn = ({ setItems, items }: IUpdateColumnProps) => {
 				}))
 
 				try {
+					// 5️⃣ Actualizar nombre en la base de datos
 					await api.put(
 						API.updateColumnUrl,
 						{
@@ -74,6 +79,7 @@ export const useUpdateColumn = ({ setItems, items }: IUpdateColumnProps) => {
 					console.error(err)
 					toast.error('Error al actualizar columna')
 
+					// 6️⃣ Optimistic UI revertir nombre
 					setItems((prev) => ({
 						...prev,
 						[containerId]: {

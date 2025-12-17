@@ -36,12 +36,15 @@ export const useUpdateCardDescription = ({
 			didFetch.current = true
 			setLoading(true)
 
+			// 1️⃣ Clonar items
 			const prevItemsCopy = structuredClone(items)
 
+			// 2️⃣ Encontrar columna de la tarjeta
 			const columnId = Object.keys(prevItemsCopy).find((cid) =>
 				prevItemsCopy[cid].items.some((c) => c.id === cardId)
 			)
 
+			// 3️⃣ Si no se encontro la columna → mostrar error
 			if (!columnId) {
 				toast.error('Card no encontrada')
 				didFetch.current = false
@@ -59,11 +62,13 @@ export const useUpdateCardDescription = ({
 				return
 			}
 
+			// 4️⃣ Actualizar descripción
 			prevItemsCopy[columnId].items[idx].description = newDescription
 			setItems(prevItemsCopy)
 			setCardsForColumn(columnId, prevItemsCopy[columnId].items)
 
 			try {
+				// 5️⃣ Actualizar descripción en la base de datos
 				await api.put(
 					API.updateCardUrl,
 					{

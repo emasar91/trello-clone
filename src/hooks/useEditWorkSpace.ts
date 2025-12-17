@@ -10,14 +10,11 @@ import api from '@/lib/axiosClient'
 
 /**
  * Hook para editar un workspace existente.
- *
  * @param {User | null} user - Usuario autenticado.
  * @param {IWorkspace} workspace - Workspace a editar.
  * @param {setWorkSpaces} setWorkSpaces - Funcion para actualizar el estado de los workspaces.
  * @param {handleCloseEditForm} handleCloseEditForm - Funcion para cerrar el formulario de edicion.
- *
  * @returns {{handleEditWorkspace: (newData: { newName: string; newDescription: string }, defaultName: string, resetForm: () => void) => Promise<void>, loading: boolean}}
- *
  * La funcion `handleEditWorkspace` edita un workspace existente.
  * La funcion `handleEditWorkspace` devuelve una promesa que se resuelve cuando el workspace ha sido editado.
  * La variable `loading` se establece en true mientras se est  editando el workspace y se establece en false cuando se ha editado.
@@ -37,11 +34,9 @@ export const useEditWorkspace = (
 
 	/**
 	 * Edita un workspace existente.
-	 *
 	 * @param {newData: { newName: string; newDescription: string }} - Nuevos valores para el workspace.
 	 * @param {defaultName: string} - Nombre original del workspace.
 	 * @param {resetForm: () => void} - Funcion para resetear el formulario.
-	 *
 	 * La funcion `handleEditWorkspace` edita un workspace existente.
 	 * La funcion `handleEditWorkspace` devuelve una promesa que se resuelve cuando el workspace ha sido editado.
 	 * La variable `loading` se establece en true mientras se est  editando el workspace y se establece en false cuando se ha editado.
@@ -56,6 +51,7 @@ export const useEditWorkspace = (
 
 		try {
 			setLoading(true)
+			// 1️⃣ Editar workspace en la base de datos
 			const { data } = await api.put(
 				API.updateWorkspacesUrl,
 				{
@@ -67,9 +63,11 @@ export const useEditWorkspace = (
 			)
 
 			if (data.workspace) {
+				// 2️⃣ Si se edito correctamente → actualizar estado
 				resetForm()
 				toast.success(t('editWorkspaceSuccess'))
 
+				// 3️⃣ Obtener workspaces actualizados
 				const { data: workspaces } = await api.get(
 					`${API.getWorkspacesUrl}?uid=${user?.uid}`,
 					{
@@ -78,9 +76,11 @@ export const useEditWorkspace = (
 				)
 				setWorkSpaces(workspaces)
 
+				// 4️⃣ Cambiar nombre del workspace
 				const nameWorkspace =
 					newData.newName.trim() === '' ? defaultName : newData.newName.trim()
 
+				// 5️⃣ Redirigir a la nueva ruta
 				setTimeout(() => {
 					setLoading(false)
 					router.replace(
@@ -90,6 +90,7 @@ export const useEditWorkspace = (
 					)
 				}, 1000)
 			}
+			// 6️⃣ Cerrar formulario
 			handleCloseEditForm()
 		} catch (err) {
 			if (axios.isAxiosError(err) && err.status !== 401)

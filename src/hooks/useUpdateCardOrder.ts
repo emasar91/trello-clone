@@ -17,10 +17,11 @@ export const useUpdateAllOrders = (boardId: string) => {
 
 	const updateAllOrders = async (items: Items) => {
 		setLoading(true)
-
+		// 1️⃣ Construir payload
 		const payload = buildOrderPayload(items, boardId)
 
 		try {
+			// 2️⃣ Actualizar orden en la base de datos
 			await api.put(API.updateCardUrl, payload, { withCredentials: true })
 		} catch (err) {
 			console.error(err)

@@ -39,7 +39,6 @@ export const useCreateColumn = ({
 	const [loading, setLoading] = useState(false)
 	const didFetch = useRef(false)
 
-	// 🔥 igual que createCardInColumn → se llama createColumnInBoard
 	const createColumnInBoard = useCallback(() => {
 		return async (title: string) => {
 			if (!title?.trim()) return toast.error('El título es requerido')
@@ -49,9 +48,10 @@ export const useCreateColumn = ({
 
 			// 1️⃣ Crear ID temporal
 			const tempId = `col-${Date.now()}`
+			// 2️⃣ Validar titulo
 			const titleFixed = title.trim()
 
-			// 2️⃣ Optimistic UI
+			// 3️⃣ Optimistic UI
 			setContainers((prev) => [...prev, tempId])
 			setItems((prev) => ({
 				...prev,
@@ -59,16 +59,16 @@ export const useCreateColumn = ({
 			}))
 
 			try {
+				// 4️⃣ Crear columna en la base de datos
 				const { data } = await api.post(
-					API.createColumnUrl, // '/api/columns/create'
+					API.createColumnUrl,
 					{ boardId, userId: user?.uid, name: titleFixed },
 					{ withCredentials: true }
 				)
 
-				// Mongo devuelve 📌 `_id`
 				const realId = String(data._id)
 
-				// 3️⃣ Reemplazar ID temporal por real
+				// 5️⃣ Reemplazar ID temporal por real
 				setContainers((prev) => prev.map((id) => (id === tempId ? realId : id)))
 
 				setItems((prev) => {
@@ -83,7 +83,7 @@ export const useCreateColumn = ({
 				console.error(err)
 				toast.error('Error al crear columna')
 
-				// ❌ Si falló → revertir Optimistic UI
+				// 6️⃣ Si falló → revertir Optimistic UI
 				setContainers((prev) => prev.filter((id) => id !== tempId))
 				setItems((prev) => {
 					const copy = structuredClone(prev)

@@ -19,6 +19,8 @@ type UseBoardDataProps = {
 /**
  * Hook que devuelve el estado de un board y sus columnas y tarjetas asociadas.
  * Utiliza la API para obtener los datos del board y sus columnas y tarjetas.
+ * Los datos obtenidos se almacenan en el estado local y en el store.
+ * Primero se obtiene el tablero, luego las columnas y finalmente las tarjetas.
  * Dicho hook devuelve un objeto con dos propiedades:
  * - loading: booleano que indica si se est  realizando una consulta
  * - error: string que indica el error que se produjo durante la consulta
@@ -57,6 +59,7 @@ export const useBoardData = ({
 			setLoading(true)
 			setError(null)
 
+			// 1️⃣ Obtener tablero
 			const { data } = await api.get(
 				`${
 					API.getBoardByNameUrl
@@ -65,11 +68,11 @@ export const useBoardData = ({
 				)}&boardName=${encodeURIComponent(boardname)}`,
 				{ withCredentials: true }
 			)
-
 			if (!data?.board?._id) {
 				throw new Error('No se encontró el tablero')
 			}
 
+			// 2️⃣ Si se encontro correctamente → actualizar estado
 			setLocalBoard(data.board)
 			setBoard(data.board) // 🔁 sync store
 		} catch {
@@ -85,6 +88,7 @@ export const useBoardData = ({
 		if (!localBoard?._id) return
 
 		try {
+			// 1️⃣ Obtener columnas
 			const { data } = await api.get(
 				`${API.getBoardColumnsUrl}?boardId=${localBoard._id}`,
 				{ withCredentials: true }
@@ -94,6 +98,7 @@ export const useBoardData = ({
 				throw new Error('Tablero sin columnas')
 			}
 
+			// 2️⃣ Si se encontro correctamente → actualizar estado
 			setLocalColumns(data.columns)
 			setColumns(data.columns) // 🔁 sync store
 		} catch {
@@ -107,6 +112,7 @@ export const useBoardData = ({
   ============================ */
 	const fetchCards = useCallback(async () => {
 		try {
+			// 1️⃣ Obtener tarjetas de cada columna
 			await Promise.all(
 				localColumns.map(async (column) => {
 					const { data } = await api.get(
@@ -117,6 +123,7 @@ export const useBoardData = ({
 				})
 			)
 
+			// 2️⃣ Si se encontro correctamente → actualizar estado
 			setLoading(false)
 			setHacerFetch(false) // ✅ ciclo terminado
 		} catch {
@@ -128,10 +135,9 @@ export const useBoardData = ({
 	/* ============================
      🔁 ORQUESTACIÓN
   ============================ */
-
-	// 👉 dispara todo
 	useEffect(() => {
 		if (hacerFetch) {
+			// 1️⃣ Resetear estados
 			setLocalBoard(null)
 			setLocalColumns([])
 			fetchBoard()
@@ -139,10 +145,12 @@ export const useBoardData = ({
 	}, [hacerFetch, fetchBoard])
 
 	useEffect(() => {
+		// 1️⃣ Obtener columnas
 		if (localBoard) fetchColumns()
 	}, [localBoard, fetchColumns])
 
 	useEffect(() => {
+		// 1️⃣ Obtener tarjetas
 		if (localColumns.length) fetchCards()
 	}, [localColumns, fetchCards])
 

@@ -19,6 +19,7 @@ export const useUpdateLastOpenedBoard = () => {
 		setLoading(true)
 
 		try {
+			// 1️⃣ Actualizar último board abierto en la base de datos
 			await api.patch(
 				`${API.updateLastOpenedBoardUrl}?id=${boardId}`,
 				{},

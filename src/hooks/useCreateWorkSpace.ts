@@ -10,12 +10,11 @@ import api from '@/lib/axiosClient'
 /**
  * Hook para crear un nuevo workspace para un usuario.
  * @param {User | null} user - Usuario autenticado.
- * @param {setWorkSpaces} - Funci n para actualizar el estado de los workspaces.
- * @param {setOpenModal} - Funci n para abrir o cerrar el modal de creaci n de workspace.
+ * @param {setWorkSpaces} - Funcion para actualizar el estado de los workspaces.
+ * @param {setOpenModal} - Funcion para abrir o cerrar el modal de creaci n de workspace.
  * @returns {{handleCreateWorkspace: (workspaceName: string, workspaceDescription: string, resetForm: () => void) => Promise<void>, loading: boolean}}
- *
- * La funci n `handleCreateWorkspace` crea un nuevo workspace en el workspace especificado.
- * La funci n `handleCreateWorkspace` devuelve una promesa que se resuelve cuando el workspace ha sido creado.
+ * La Funcion `handleCreateWorkspace` crea un nuevo workspace en el workspace especificado.
+ * La Funcion `handleCreateWorkspace` devuelve una promesa que se resuelve cuando el workspace ha sido creado.
  * La variable `loading` se establece en true mientras se est  creando el workspace y se establece en false cuando se ha creado.
  */
 export const useCreateWorkspace = (
@@ -31,7 +30,7 @@ export const useCreateWorkspace = (
 	 * Crea un nuevo workspace para un usuario.
 	 * @param {string} workspaceName - Nombre del workspace.
 	 * @param {string} workspaceDescription - Descripci n del workspace.
-	 * @param {() => void} resetForm - Funci n para resetear el formulario.
+	 * @param {() => void} resetForm - Funcion para resetear el formulario.
 	 * @returns {Promise<void>} - Promesa que se resuelve cuando el workspace ha sido creado.
 	 */
 	const handleCreateWorkspace = async (
@@ -45,6 +44,7 @@ export const useCreateWorkspace = (
 		setLoading(true)
 
 		try {
+			// 1️⃣ Crear workspace en la base de datos
 			const { data } = await api.post(
 				API.createWorkspacesUrl,
 				{
@@ -54,6 +54,7 @@ export const useCreateWorkspace = (
 				{ withCredentials: true }
 			)
 
+			// 2️⃣ Si se creo correctamente → actualizar estado
 			if (data.workspace) {
 				resetForm()
 				setOpenModal(false)

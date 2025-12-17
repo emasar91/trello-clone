@@ -36,12 +36,12 @@ type IModalCreateWorkspace = {
  * Componente para crear un nuevo espacio de trabajo.
  *
  * @param {boolean} openModal - Indica si el modal est  abierto o no.
- * @param {() => void} handleCloseModal - Funci n para cerrar el modal.
+ * @param {() => void} handleCloseModal - Funcion para cerrar el modal.
  * @param {(
  *   workspaceName: string,
  *   workspaceDescription: string,
  *   resetForm: () => void
- * ) => Promise<void>} handleSubmit - Funci n para crear un nuevo espacio de trabajo.
+ * ) => Promise<void>} handleSubmit - Funcion para crear un nuevo espacio de trabajo.
  * @param {boolean} loading - Indica si se est  creando un nuevo espacio de Trabajo.
  */
 

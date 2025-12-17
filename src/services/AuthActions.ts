@@ -13,6 +13,7 @@ import {
  */
 export const signInGoogle = async (locale: string) => {
 	const result = await signInWithPopup(firebaseAuth, googleProvider)
+	// 1️⃣ Obtener el token
 	const token = await result.user.getIdToken()
 	// 2️⃣ Guardar Session Cookie
 	await fetch('/api/session', {
@@ -31,13 +32,16 @@ export const signInGoogle = async (locale: string) => {
  * @param {string} locale The locale to sign in with.
  * @returns {Promise<User>} The user object.
  */
+
 export const signInEmail = async (
 	email: string,
 	password: string,
 	locale: string
 ) => {
 	const result = await signInWithEmailAndPassword(firebaseAuth, email, password)
+	// 1️⃣ Obtener el token
 	const token = await result.user.getIdToken()
+	// 2️⃣ Guardar Session Cookie
 	await fetch('/api/session', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -49,13 +53,13 @@ export const signInEmail = async (
 
 /**
  * Logs out the user and deletes the session cookie for the given locale.
- *
  * @param {string} locale The locale to delete the session cookie for.
- *
  * @returns {Promise<void>} A promise that resolves when the user has been logged out.
  */
 export const logout = async (locale: string) => {
+	// 1️⃣ Cerrar sesión
 	await signOut(firebaseAuth)
+	// 2️⃣ Eliminar Session Cookie
 	await fetch('/api/session', {
 		method: 'DELETE',
 		headers: { 'Content-Type': 'application/json' },

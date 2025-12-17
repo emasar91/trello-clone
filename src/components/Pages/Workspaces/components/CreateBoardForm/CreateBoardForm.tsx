@@ -28,10 +28,10 @@ import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 /**
  * Formulario para crear un nuevo tablero en un workspace.
  *
- * @param {onSubmit} Funci n para crear un nuevo tablero.
+ * @param {onSubmit} Funcion para crear un nuevo tablero.
  * @param {workspaceName} nombre del workspace donde se va a crear el tablero.
  * @param {loading} indica si se est  cargando el workspace.
- * @param {handleClose} funci n para cerrar el modal.
+ * @param {handleClose} Funcion para cerrar el modal.
  *
  * @returns JSX.Element - Formulario para crear un nuevo tablero.
  */

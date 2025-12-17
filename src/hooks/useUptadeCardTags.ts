@@ -1,4 +1,3 @@
-// hooks/useUpdateCardPriority.ts
 import { API } from '@/constants'
 import { useCallback, useRef, useState } from 'react'
 import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
@@ -38,12 +37,13 @@ export const useUpdateCardPriority = ({
 			didFetch.current = true
 			setLoading(true)
 
+			// 1️⃣ Clonar items
 			const prevItemsCopy = structuredClone(items)
-
+			//2️⃣ Buscar la columna en la que se encuentra la tarjeta
 			const columnId = Object.keys(prevItemsCopy).find((cid) =>
 				prevItemsCopy[cid].items.some((c) => c.id === cardId)
 			)
-
+			//3️⃣ Si no se encuentra la tarjeta, mostrar un error y retornar
 			if (!columnId) {
 				toast.error('Card no encontrada')
 				didFetch.current = false
@@ -54,12 +54,13 @@ export const useUpdateCardPriority = ({
 			const idx = prevItemsCopy[columnId].items.findIndex(
 				(c) => c.id === cardId
 			)
+			//4️⃣ Si no se encuentra la tarjeta, mostrar un error y retornar
 			if (idx === -1) return
-
+			//5️⃣ Actualizar el estado de la tarjeta
 			prevItemsCopy[columnId].items[idx].priorityColor = newTags
 			setItems(prevItemsCopy)
 			setCardsForColumn(columnId, prevItemsCopy[columnId].items)
-
+			//6️⃣ Actualizar la tarjeta en la base de datos
 			try {
 				await api.put(
 					API.updateCardUrl,

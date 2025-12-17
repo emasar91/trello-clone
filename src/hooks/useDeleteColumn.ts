@@ -26,6 +26,7 @@ export const useDeleteColumn = ({ setItems }: IDeleteColumnProps) => {
 			didFetch.current = true
 			setLoading(true)
 
+			// 1️⃣ Eliminar columna del estado
 			setItems((prev) => {
 				const newItems = { ...prev }
 				delete newItems[columnId]
@@ -33,6 +34,7 @@ export const useDeleteColumn = ({ setItems }: IDeleteColumnProps) => {
 			})
 
 			try {
+				// 2️⃣ Eliminar columna de la base de datos
 				await api.delete(API.deleteColumnUrl, {
 					data: { columnId, boardId },
 					withCredentials: true,
