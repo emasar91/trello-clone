@@ -9,12 +9,10 @@ import { useTranslations } from 'next-intl'
 import CreateBoardMenu from '../CreateBordMenu/CreateBoardMenu'
 
 /**
- * Componente para criar um novo tablero.
- *
+ * CreateBoardCard es un componente que renderiza un card para crear un nuevo tablero.
  * @param {number} remainingBoards - Número de espaços restantes para criar um tablero.
  * @param {string} workspaceName - Nome do workspace atual.
- *
- * @returns {JSX.Element} - Elemento JSX do componente CreateBoardCard.
+ * @returns {JSX.Element} - Elemento JSX del componente CreateBoardCard.
  */
 const CreateBoardCard = ({
 	remainingBoards,
@@ -29,15 +27,15 @@ const CreateBoardCard = ({
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
 	/**
-	 * Handles a click event on the card, setting the anchor element to the current target.
-	 * This is used to open the CreateBoardMenu when the card is clicked.
+	 * handleClick es una funcion que maneja el evento de click en el card, estableciendo el anchor element al elemento actual.
+	 * Se usa para abrir el CreateBoardMenu cuando el card es clickeado.
 	 */
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
 
 	/**
-	 * Closes the CreateBoardMenu by setting the anchor element to null.
+	 * handleClose es una funcion que cierra el CreateBoardMenu estableciendo el anchor element a null.
 	 */
 	const handleClose = () => {
 		setAnchorEl(null)

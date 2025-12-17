@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 /**
- * Hook que devuelve un booleano que indica si el componente
+ * useMountStatus es un hook que devuelve un booleano que indica si el componente
  * ha finalizado de montarse.
  * Utiliza un timeout para establecer el estado de montado
  * 500ms despu s de que el componente se monte.

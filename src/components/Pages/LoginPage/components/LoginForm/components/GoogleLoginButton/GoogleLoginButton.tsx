@@ -7,12 +7,11 @@ interface GoogleLoginButtonProps {
 }
 
 /**
- * A button that can be clicked to login with a Google account.
- *
+ * GoogleLoginButton es un boton que se puede hacer click para iniciar sesion con una cuenta de Google.
  * @param {GoogleLoginButtonProps} props
- * @param {() => void} props.onClick - The function to call when the button is clicked.
- * @param {string} props.text - The text to display on the button.
- * @returns {React.ReactElement} A button component with a Google logo and the given text.
+ * @param {() => void} props.onClick - La funcion a ejecutar cuando se hace click en el boton.
+ * @param {string} props.text - El texto a mostrar en el boton.
+ * @returns {React.ReactElement} un Box con el Button
  */
 const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({
 	onClick,

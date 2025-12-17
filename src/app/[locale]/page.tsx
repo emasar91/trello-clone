@@ -5,8 +5,8 @@ import './globals.css'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
 /**
- * HomePage component that renders the protected PageHome component.
- * It is unprotected and anyone can access it.
+ * HomePage que renderiza el componente PageHome protegido.
+ * No está protegido y cualquier persona puede acceder a él.
  */
 const HomePage = () => {
 	return (

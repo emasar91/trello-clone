@@ -4,13 +4,13 @@ import { Box } from '@mui/material'
 type Props = { VideoSrc: string }
 
 /**
- * A simple component that renders a video in a Box.
- * The width of the video is set to 100% and the height is set to auto.
- * The video is given a block display.
- * The controls attribute is set to true to allow the user to control the video.
- * @param {{ VideoSrc: string }} Props - The props given to the component.
- * @param {string} Props.VideoSrc - The source URL of the video.
- * @returns {React.ReactElement} - The component.
+ * VideoBox es un componente que renderiza un video en un Box.
+ * El ancho del video se establece en 100% y la altura se establece en auto.
+ * El video se da un display block.
+ * El atributo controls se establece en true para permitir al usuario controlar el video.
+ * @param {{ VideoSrc: string }} Props - Las props dadas al componente.
+ * @param {string} Props.VideoSrc - La URL de la fuente del video.
+ * @returns {React.ReactElement} - El componente VideoBox.
  */
 const VideoBox = ({ VideoSrc }: Props) => {
 	return (

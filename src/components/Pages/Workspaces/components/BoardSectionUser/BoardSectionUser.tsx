@@ -18,13 +18,12 @@ import { useAuth } from '@/context/useAuthContext'
 import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
 
 /**
- * Component that renders a section for the user's boards.
- * It will render a header with the title "Recently viewed" and a BoardGrid component with the recently viewed boards.
- * It will also render a header with the title "Workspaces" and a list of WorkspaceSection components with the workspaces of the user.
- * If the user has no workspaces, it will render a CreateWorkspaceCard component.
- *
- * @param {IWorkspace[]} workspaces - The list of workspaces of the user.
- * @returns A JSX element with the section for the user's boards.
+ * BoardSectionUser es un componente que renderiza una seccion para los tableros del usuario.
+ * Renderiza un header con el titulo "Recientemente visto" y un BoardGrid con los tableros recientemente vistos.
+ * Tambien renderiza un header con el titulo "Workspaces" y una lista de WorkspaceSection con los workspaces del usuario.
+ * Si el usuario no tiene workspaces, renderiza un CreateWorkspaceCard.
+ * @param {IWorkspace[]} workspaces - La lista de workspaces del usuario.
+ * @returns Un JSX element con la seccion para los tableros del usuario.
  */
 export default function BoardsSectionUser({
 	workspaces,
@@ -47,8 +46,9 @@ export default function BoardsSectionUser({
 	}, [workspaces])
 
 	const [openModal, setOpenModal] = useState(false)
+
 	/**
-	 * Closes the modal for creating a new workspace.
+	 * handleCloseModal es una funcion que cierra el modal para crear un nuevo workspace.
 	 */
 	const handleCloseModal = () => {
 		setOpenModal(false)
@@ -77,6 +77,7 @@ export default function BoardsSectionUser({
 							<>
 								<Box sx={BoardSectionUserTitleContainerStyle}>
 									<ClockIcon />
+
 									<Typography
 										variant="h6"
 										sx={BoardSectionUserTitleStyle(theme)}
@@ -84,6 +85,7 @@ export default function BoardsSectionUser({
 										{t('recentlyViewed')}
 									</Typography>
 								</Box>
+
 								<BoardGrid
 									boards={recentBoards}
 									createBoard={false}
@@ -100,6 +102,7 @@ export default function BoardsSectionUser({
 						>
 							{t('workspacesUser')}
 						</Typography>
+
 						{workspaces.length > 0 ? (
 							workspaces.map((ws, index) => (
 								<WorkspaceSection key={index} workspace={ws} />
@@ -107,6 +110,7 @@ export default function BoardsSectionUser({
 						) : (
 							<Box onClick={() => setOpenModal(true)}>
 								<CreateWorkspaceCard remainingBoards={4} />
+
 								<ModalCreateWorkspace
 									openModal={openModal}
 									handleCloseModal={handleCloseModal}

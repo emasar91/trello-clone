@@ -10,16 +10,10 @@ import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useTranslations } from 'next-intl'
 
 /**
- * Componente para criar um card de um tablero.
- *
- * @param {IBoard} board - Informações do tablero.
- * @param {string} workspaceName - Nome do workspace atual.
- *
- * @returns {JSX.Element} - Elemento JSX do componente BoardCard.
- *
- * @example
- * <BoardCard board={board} workspaceName="recently" />
- *
+ * BoardCard es un componente que renderiza un card de un tablero.
+ * @param {IBoard} board - Información del tablero.
+ * @param {string} workspaceName - Nombre del workspace actual.
+ * @returns {JSX.Element} - Elemento JSX del componente BoardCard.
  */
 const BoardCard = ({
 	board,
@@ -33,6 +27,10 @@ const BoardCard = ({
 	const { workspaces } = useWorkSpaceStore()
 	const t = useTranslations('BoardsPage')
 
+	/**
+	 * handleRedirect es una funcion que redirige al usuario a la pagina del tablero.
+	 * @param {IBoard} board - Información del tablero.
+	 */
 	const handleRedirect = (board: IBoard) => {
 		let resolvedWorkspace = workspaceName
 
@@ -64,6 +62,7 @@ const BoardCard = ({
 					sx={BoardCardImageStyle}
 					src={board.image}
 				/>
+
 				<Typography variant="body2" sx={BoardCardTitleStyle(theme)} noWrap>
 					{board.name}
 				</Typography>

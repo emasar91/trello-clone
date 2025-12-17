@@ -9,12 +9,11 @@ interface IShowPasswordProps {
 }
 
 /**
- * A component that displays a button to toggle the show password visibility.
- *
+ * ShowPassword es un componente que muestra un boton para alternar la visibilidad de la contrasena.
  * @param {IShowPasswordProps} props
- * @param {boolean} props.showPassword - Whether the password is visible or not.
- * @param {() => void} props.handleShowPassword - The function to call when the button is clicked.
- * @returns The button component.
+ * @param {boolean} props.showPassword - Indica si la contrasena es visible o no.
+ * @param {() => void} props.handleShowPassword - La funcion a ejecutar cuando se hace click en el boton.
+ * @returns El boton.
  */
 const ShowPassword: React.FunctionComponent<IShowPasswordProps> = ({
 	showPassword,

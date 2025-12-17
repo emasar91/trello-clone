@@ -15,13 +15,13 @@ import MenuWorkSpaces from '../MenuWorkSpaces/MenuWorkSpaces'
 import { IWorkspace } from '@/types/workspaces'
 
 /**
- * Component to render the menu for the boards page.
- * It will render an item for the user's boards and another item for the workspaces.
- * When the user clicks on an item, it will navigate to the corresponding page.
+ * MenuBoards es un componente que renderiza el menu para la pagina de tableros.
+ * Renderiza un item para los tableros del usuario y otro item para los workspaces.
+ * Cuando el usuario hace click en un item, navega a la pagina correspondiente.
  *
- * @param {IWorkspace[]} workspaces - The list of workspaces.
+ * @param {IWorkspace[]} workspaces - La lista de workspaces.
  *
- * @returns A JSX element with the menu for the boards page.
+ * @returns {JSX.Element} - El componente MenuBoards.
  */
 const MenuBoards = ({ workspaces }: { workspaces: IWorkspace[] }) => {
 	const theme = useTheme()
@@ -39,15 +39,15 @@ const MenuBoards = ({ workspaces }: { workspaces: IWorkspace[] }) => {
 	const menuActive = pathname === `/${currentLocale}/u/${username}/boards`
 
 	/**
-	 * Navigates to the boards page for the current user.
+	 * goToBoards es una funcion que navega a la pagina de tableros para el usuario actual.
 	 */
 	const goToBoards = () => {
 		router.push(`/${currentLocale}/u/${username}/boards?uid=${user?.uid}`)
 	}
 
 	/**
-	 * Navigates to the boards page for the given workspace.
-	 * @param {string} workspaceName - The name of the workspace.
+	 * goToWorkspaceBoards es una funcion que navega a la pagina de tableros para el workspace dado.
+	 * @param {string} workspaceName - El nombre del workspace.
 	 */
 	const goToWorkspaceBoards = (workspaceName: string) => {
 		router.push(

@@ -9,11 +9,9 @@ import {
 } from './CreateWorkspaceCard.styles'
 
 /**
- * Componente para criar um novo workspace.
- *
- * @param {number} remainingBoards - Número de espaços restantes para criar um workspace.
- *
- * @returns {JSX.Element} - Elemento JSX do componente CreateWorkspaceCard.
+ * CreateWorkspaceCard es un componente que renderiza un card para crear un nuevo workspace.
+ * @param {number} remainingBoards - Número de tableros restantes para crear un workspace.
+ * @returns {JSX.Element} - Elemento JSX del componente CreateWorkspaceCard.
  */
 const CreateWorkspaceCard = ({
 	remainingBoards,

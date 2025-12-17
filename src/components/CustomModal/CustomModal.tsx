@@ -5,13 +5,11 @@ import { ModalStyles } from './CustomModal.styles'
 type Props = { children: React.ReactNode; styles?: object }
 
 /**
- * A custom modal component that wraps the Material UI Modal component.
- * It also provides a hook to open and close the modal using the useStoreTrello hook.
- * @param {React.ReactNode} children - The content of the modal.
- * @param {object} styles - Optional styles to apply to the modal container.
- * @returns {JSX.Element} The rendered CustomModal component.
- *@example
- *<CustomModal>...</CustomModal>
+ * CustomModal es un componente que envuelve el componente Modal de Material UI.
+ * También proporciona una hook para abrir y cerrar el modal usando el hook useStoreTrello.
+ * @param {React.ReactNode} children - El contenido del modal.
+ * @param {object} styles - Estilos opcionales para aplicar al contenedor del modal.
+ * @returns {JSX.Element} El componente CustomModal renderizado.
  */
 const CustomModal = ({ children, styles }: Props) => {
 	const { openModal, setOpenModal } = useStoreTrello()

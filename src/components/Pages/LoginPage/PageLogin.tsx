@@ -14,21 +14,21 @@ import { toast } from 'react-toastify'
 import { FirebaseError } from 'firebase/app'
 
 /**
- * PageLogin component renders a form with an email input, a password input, and a submit button.
- * The component uses the useTranslations hook to translate the text of the form.
- * The component expects the following properties:
- * - handleLogin: a function to handle the login, receives the type of login, email and password as parameters.
- * - handleResetPassword: a function to handle the reset password, receives the email as a parameter.
- * - register: a boolean to indicate if the form is for register or not, default is false.
- * - recoverPassword: a boolean to indicate if the form is for recover password or not, default is false.
+ * PageLogin es el componente de la pagina de login.
+ * Renderiza un formulario con un input de correo electronico, un input de contrasena y un boton de submit.
+ * El componente utiliza el hook useTranslations para traducir el texto del formulario.
+ * El componente espera las siguientes propiedades:
+ * - handleLogin: una funcion para manejar el login, recibe el tipo de login, correo electronico y contrasena como parametros.
+ * - handleResetPassword: una funcion para manejar el reset de contrasena, recibe el correo electronico como parametro.
+ * - register: un booleano para indicar si el formulario es para registro o no, por defecto es false.
+ * - recoverPassword: un booleano para indicar si el formulario es para recuperar contrasena o no, por defecto es false.
  *
- * The component renders the following elements:
- * - An EmailField component with the email value and onChange function.
- * - A PasswordField component with the password value and onChange function, and showPassword and onToggleShow functions.
- * - A SubmitButton component with the onClick function, disabled property and text property.
- * - A GoogleLoginButton component with the onClick function and text property.
- * - A NotificationContainer component.
- * - A LoginCreateAccount component with the onClick function, disabled property and text property.
+ * El componente renderiza los siguientes elementos:
+ * - Un EmailField con el valor del correo electronico y la funcion onChange.
+ * - Un PasswordField con el valor de la contrasena y la funcion onChange, y las funciones showPassword y onToggleShow.
+ * - Un SubmitButton con la funcion onClick, la propiedad disabled y el texto.
+ * - Un GoogleLoginButton con la funcion onClick y el texto.
+ * - Un LoginCreateAccount con la funcion onClick, la propiedad disabled y el texto.
  */
 const PageLogin = () => {
 	const router = useRouter()
@@ -67,7 +67,7 @@ const PageLogin = () => {
 	}
 
 	/**
-	 * Redirects the user to the password reset page.
+	 * Redirecciona al usuario a la pagina de restablecimiento de contrasena.
 	 */
 	const handleResetPassword = () => {
 		router.push('/reset-password')
@@ -78,11 +78,13 @@ const PageLogin = () => {
 			<PageContainer backgroundColor={colorsLanding.loginPageBackground}>
 				<LoginPageContainer register={false} recover={false}>
 					<LoginTitle />
+
 					<LoginForm
 						handleResetPassword={handleResetPassword}
 						handleLogin={handleLogin}
 						recoverPassword={false}
 					/>
+
 					<LoginCreateAccount />
 				</LoginPageContainer>
 			</PageContainer>

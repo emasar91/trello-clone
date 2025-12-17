@@ -20,15 +20,13 @@ type Props = {
 }
 
 /**
- * A component that renders a feature description card with title, description and icon.
- * It also supports different side images for different features.
- * @param sideImage - The side of the image.
- * @param title - The title of the feature.
- * @param icon - The icon of the feature.
- * @param translate - The translate key of the feature.
- * @returns A feature description card component with the given parameters.
- * @example
- * <FeatureDescriptionCard sideImage="left" title="analytics" icon={<AnalyticsIcon />} translate="translation" />
+ * FeatureDescriptionCard es un componente que renderiza una tarjeta de descripción de característica con título, descripción y icono.
+ * También soporta diferentes imágenes laterales para diferentes características.
+ * @param sideImage - El lado de la imagen.
+ * @param title - El título de la característica.
+ * @param icon - El icono de la característica.
+ * @param translate - La clave de traducción de la característica.
+ * @returns Un componente de tarjeta de descripción de característica con los parámetros dados.
  */
 const FeatureDescriptionCard = ({
 	sideImage,

@@ -61,32 +61,28 @@ import { useTranslations } from 'next-intl'
 import { getNextContainerId } from '../utils/getNextContainerId'
 
 /**
- * AnimateLayoutChanges is a utility function that returns an
- * AnimateLayoutChanges object with the wasDragging property set to true.
- * This is useful for animating layout changes in droppable containers.
- * @param {object} args - an AnimateLayoutChanges object
- * @returns {object} - an AnimateLayoutChanges object with wasDragging set to true
+ * animateLayoutChanges es una funcion util que retorna un
+ * AnimateLayoutChanges object con la propiedad wasDragging set to true.
+ * Esto es util para animar cambios de layout en contenedores droppables.
+ * @param {object} args - un objeto AnimateLayoutChanges
+ * @returns {object} - un objeto AnimateLayoutChanges con wasDragging set to true
  */
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true })
 
 /**
- * A DroppableContainer component.
- *
- * This component is a wrapper around the Container component that adds
- * dragging and dropping functionality to the container.
- *
- * It also adds a hover effect when the container is being dragged over.
- *
- * @param {React.ReactNode} children - The children of the container.
- * @param {boolean} disabled - Whether the container is disabled or not.
- * @param {UniqueIdentifier} id - The id of the container.
- * @param {UniqueIdentifier[]} items - The items in the container.
- * @param {React.CSSProperties} style - The style of the container.
- * @param {string} label - The label of the container.
- * @param {() => void} onRemove - The function to call when the remove button is clicked.
- * @param {(value: string) => void} onRename - The function to call when the rename button is clicked.
- * @param {(value: string) => void} onCreateCard - The function to call when the create card button is clicked.
+ * DroppableContainer es un componente que envuelve el componente Container
+ * y le agrega funcionalidad de arrastrar y soltar al contenedor.
+ * Tambien agrega un efecto de hover cuando el contenedor esta siendo arrastrado sobre el.
+ * @param {React.ReactNode} children - los hijos del contenedor.
+ * @param {boolean} disabled - si el contenedor esta deshabilitado.
+ * @param {UniqueIdentifier} id - el id del contenedor.
+ * @param {UniqueIdentifier[]} items - los items en el contenedor.
+ * @param {React.CSSProperties} style - el estilo del contenedor.
+ * @param {string} label - el nombre del contenedor.
+ * @param {() => void} onRemove - la funcion a llamar cuando se hace clic en el boton de eliminar.
+ * @param {(value: string) => void} onRename - la funcion a llamar cuando se hace clic en el boton de renombrar.
+ * @param {(value: string) => void} onCreateCard - la funcion a llamar cuando se hace clic en el boton de crear tarjeta.
  */
 function DroppableContainer({
 	children,
@@ -199,21 +195,19 @@ export const TRASH_ID = 'void'
 const PLACEHOLDER_ID = 'placeholder'
 
 /**
- * A component that renders a multiple containers board for a Kanban board.
- *
- * @param {boolean} [adjustScale] - Whether to adjust the scale of the board.
- * @param {(id: UniqueIdentifier) => void} [cancelDrop] - A function to call when the user cancels a drag.
- * @param {Items} items - An object containing the column data.
- * @param {React.CSSProperties} [containerStyle] - Styles for the container.
- * @param {(args: { value: UniqueIdentifier, index: number, overIndex: number, isDragging: boolean, containerId: UniqueIdentifier, isSorting: boolean, isDragOverlay: boolean }) => React.CSSProperties} [getItemStyles] - A function to get the styles for the item.
- * @param {(index: number) => React.CSSProperties} [wrapperStyle] - A function to get the styles for the wrapper.
- * @param {KeyboardCoordinateGetter} [coordinateGetter] - A function to get the keyboard coordinates.
- * @param {boolean} [minimal] - Whether to render the board in minimal mode.
- * @param {boolean} [scrollable] - Whether to make the board scrollable.
- * @param {boolean} [vertical] - Whether to render the board in vertical mode.
- * @param {boolean} [loadingBoard] - Whether the board is still loading.
- * @param {ItemProps['renderItem']} [renderItem] - A function to render a single item.
- * @param {Modifiers} [modifiers] - A list of modifiers to apply to the board.
+ * MultipleContainers es un componente que renderiza un tablero de Kanban con multiples contenedores.
+ * @param {boolean} [adjustScale] - si se debe ajustar la escala del tablero.
+ * @param {(id: UniqueIdentifier) => void} [cancelDrop] - una funcion para llamar cuando el usuario cancela un arrastre.
+ * @param {Items} items - un objeto que contiene los datos de las columnas.
+ * @param {React.CSSProperties} [containerStyle] - estilos para el contenedor.
+ * @param {(args: { value: UniqueIdentifier, index: number, overIndex: number, isDragging: boolean, containerId: UniqueIdentifier, isSorting: boolean, isDragOverlay: boolean }) => React.CSSProperties} [getItemStyles] - una funcion para obtener los estilos del item.
+ * @param {(index: number) => React.CSSProperties} [wrapperStyle] - una funcion para obtener los estilos del envoltorio.
+ * @param {KeyboardCoordinateGetter} [coordinateGetter] - una funcion para obtener las coordenadas del teclado.
+ * @param {boolean} [minimal] - si se debe renderizar el tablero en modo minimal.
+ * @param {boolean} [scrollable] - si se debe hacer el tablero scrollable.
+ * @param {boolean} [loadingBoard] - si el tablero esta cargando.
+ * @param {ItemProps['renderItem']} [renderItem] - una funcion para renderizar un item.
+ * @param {Modifiers} [modifiers] - una lista de modificadores para aplicar al tablero.
  */
 export function MultipleContainers({
 	cancelDrop,
@@ -325,12 +319,12 @@ export function MultipleContainers({
 	)
 
 	/**
-	 * Finds the id of the container where the item with the given id is located.
-	 * If the item is a container, returns its id.
-	 * If the item is not a container, returns the id of its parent container.
-	 * If the item is not found, returns null.
-	 * @param {UniqueIdentifier} id - The id of the item to find.
-	 * @returns {UniqueIdentifier|null} The id of the container, or null if not found.
+	 * findContainer es una funcion que encuentra el id del contenedor donde se encuentra el item con el id dado.
+	 * Si el item es un contenedor, retorna su id.
+	 * Si el item no es un contenedor, retorna el id de su contenedor padre.
+	 * Si el item no se encuentra, retorna null.
+	 * @param {UniqueIdentifier} id - el id del item a buscar.
+	 * @returns {UniqueIdentifier|null} el id del contenedor, o null si no se encuentra.
 	 */
 	const findContainer = (id: UniqueIdentifier) => {
 		if (id in items) {
@@ -343,10 +337,10 @@ export function MultipleContainers({
 	}
 
 	/**
-	 * Finds the index of the item with the given id in its container.
-	 * If the item is not found, returns -1.
-	 * @param {UniqueIdentifier} id - The id of the item to find.
-	 * @returns {number} The index of the item, or -1 if not found.
+	 * getIndex es una funcion que encuentra el indice del item con el id dado en su contenedor.
+	 * Si el item no se encuentra, retorna -1.
+	 * @param {UniqueIdentifier} id - el id del item a buscar.
+	 * @returns {number} el indice del item, o -1 si no se encuentra.
 	 */
 	const getIndex = (id: UniqueIdentifier) => {
 		const container = findContainer(id)
@@ -361,9 +355,9 @@ export function MultipleContainers({
 	}
 
 	/**
-	 * Resets the state of the page when a drag is cancelled.
-	 * If cloned items exist, it resets the items to the cloned state.
-	 * It also resets the active id and cloned items to null.
+	 * onDragCancel es una funcion que resetea el estado de la pagina cuando un arrastre es cancelado.
+	 * Si existen items clonados, los resetea a su estado original.
+	 * Tambien resetea el id activo y los items clonados a null.
 	 */
 	const onDragCancel = () => {
 		if (clonedItems) {
@@ -422,9 +416,10 @@ export function MultipleContainers({
 	const { updateColumn } = useUpdateColumn({ setItems, items })
 
 	/**
-	 * Handles the removal of a column. If the column has items, shows a modal to confirm the removal.
-	 * If the column does not have items, removes the column immediately.
-	 * @param {UniqueIdentifier} containerId - The ID of the column to remove.
+	 * handleRemoveColumns es una funcion que maneja la eliminacion de una columna.
+	 * Si la columna tiene items, muestra un modal para confirmar la eliminacion.
+	 * Si la columna no tiene items, elimina la columna inmediatamente.
+	 * @param {UniqueIdentifier} containerId - el ID de la columna a eliminar.
 	 */
 	const handleRemoveColumns = (containerId: UniqueIdentifier) => {
 		const itemsContainer = items[containerId]
@@ -437,11 +432,11 @@ export function MultipleContainers({
 	}
 
 	/**
-	 * Función que actualiza las órdenes de los items en dos contenedores
-	 * @param {Items} data - El objeto que contiene los items a reordenar
-	 * @param {UniqueIdentifier} activeContainerId - El id del contenedor activo
-	 * @param {UniqueIdentifier} overContainerId - El id del contenedor sobre el que se está arrastrando
-	 * @returns {Items} El objeto con los items reordenados
+	 * updateOrders es una funcion que actualiza las órdenes de los items en dos contenedores.
+	 * @param {Items} data - el objeto que contiene los items a reordenar.
+	 * @param {UniqueIdentifier} activeContainerId - el id del contenedor activo.
+	 * @param {UniqueIdentifier} overContainerId - el id del contenedor sobre el que se está arrastrando.
+	 * @returns {Items} el objeto con los items reordenados.
 	 */
 	const updateOrders = (
 		data: Items,
@@ -542,10 +537,10 @@ export function MultipleContainers({
 						}
 						const result = updateOrders(
 							newItems,
-							activeContainer, // p.ej: "691f6787722b2f9c87c83e60"
-							overContainer // p.ej: "691f6787722b2f9c87c83e61"
+							activeContainer,
+							overContainer
 						)
-						updateAllOrders(newItems) // <-- listo, manda TODO de una
+						updateAllOrders(newItems)
 
 						return result
 					})
@@ -621,11 +616,10 @@ export function MultipleContainers({
 								},
 							}
 
-							updateAllOrders(newItems) // <-- listo, manda TODO de una
+							updateAllOrders(newItems)
 
 							return newItems
 						})
-						// set default title for the new column is already set above
 						setActiveId(null)
 					})
 					return
@@ -660,7 +654,7 @@ export function MultipleContainers({
 								activeContainer,
 								overContainer
 							)
-							updateAllOrders(newItems) // 1 sola vez!
+							updateAllOrders(newItems)
 
 							return result
 						})
@@ -761,9 +755,9 @@ export function MultipleContainers({
 	}
 
 	/**
-	 * Adds a new column to the board if the title is not empty and does not already exist.
-	 * @param {string} [title] - The title of the new column. If empty, nothing happens.
-	 * @throws {Error} if a column with the same title already exists.
+	 * handleAddColumnWithTitle es una funcion que agrega una nueva columna al tablero si el titulo no esta vacio y no existe.
+	 * @param {string} [title] - el titulo de la nueva columna. Si esta vacio, no hace nada.
+	 * @throws {Error} si una columna con el mismo titulo ya existe.
 	 */
 	function handleAddColumnWithTitle(title?: string) {
 		const titleAlreadyExists = Object.values(items).some(

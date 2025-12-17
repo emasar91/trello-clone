@@ -29,18 +29,19 @@ type Props = {
 }
 
 /**
- * A modal component that confirms whether the user wants to delete a container.
- * It shows a title, a message, and two buttons: 'Delete' and 'Cancel'.
- * When the user clicks on 'Delete', it calls the onConfirm callback with the selectedContainerId.
- * When the user clicks on 'Cancel', it calls the onClose callback.
- * If the loading prop is true, it shows a loading animation instead of the 'Delete' button.
- * @param {boolean} open - Whether the modal is open or not.
- * @param {() => void} onClose - A callback to call when the user clicks on 'Cancel'.
- * @param {(id: UniqueIdentifier | null) => void} onConfirm - A callback to call when the user clicks on 'Delete'.
- * @param {string} title - The title of the modal.
- * @param {string} message - The message of the modal.
- * @param {UniqueIdentifier | null} selectedContainerId - The id of the container to delete.
- * @param {boolean} loading - Whether the modal is loading or not.
+ * Un componente Modal que confirma si el usuario desea eliminar un contenedor.
+ * Muestra un título, un mensaje y dos botones: 'Delete' y 'Cancel'.
+ * Cuando el usuario hace clic en 'Delete', llama al callback onConfirm con el selectedContainerId.
+ * Cuando el usuario hace clic en 'Cancel', llama al callback onClose.
+ * Si la prop loading es true, muestra una animación de carga en lugar del botón 'Delete'.
+ * @param {boolean} open - Si el modal está abierto o no.
+ * @param {() => void} onClose - Un callback para llamar cuando el usuario hace clic en 'Cancel'.
+ * @param {(id: UniqueIdentifier | null) => void} onConfirm - Un callback para llamar cuando el usuario hace clic en 'Delete'.
+ * @param {string} title - El título del modal.
+ * @param {string} message - El mensaje del modal.
+ * @param {UniqueIdentifier | null} selectedContainerId - El id del contenedor a eliminar.
+ * @param {boolean} loading - Si el modal está cargando o no.
+ * @returns {JSX.Element} - Un JSX element representando el modal de confirmación.
  */
 function ModalConfirm({
 	open,
@@ -60,9 +61,11 @@ function ModalConfirm({
 				<Typography variant="h6" sx={ModalConfirmTitleStyles(theme)}>
 					{title}
 				</Typography>
+
 				<Typography variant="body1" sx={ModalConfirmDescriptionStyles(theme)}>
 					{message}
 				</Typography>
+
 				<Box sx={ModalConfirmButtonContainerStyles}>
 					<Button
 						variant="contained"
@@ -77,6 +80,7 @@ function ModalConfirm({
 							t('delete')
 						)}
 					</Button>
+
 					<Button onClick={onClose} sx={ModalConfirmButtonCancelStyles(theme)}>
 						{t('cancel')}
 					</Button>

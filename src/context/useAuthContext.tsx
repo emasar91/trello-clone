@@ -24,12 +24,12 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext(AuthContext)
 
 /**
- * AuthProvider component that wraps children with an AuthContextProvider.
- * Listens to onIdTokenChanged and updates the user and loading state accordingly.
- * If the user is logged in, sets an auth token cookie with the user's id token.
- * If the user is logged out, removes the auth token cookie.
- * When the component is unmounted, removes the listener.
- * @param {ReactNode} children - The children to wrap with the AuthContextProvider.
+ * AuthProvider component que envuelve los hijos con un AuthContextProvider.
+ * Escucha onIdTokenChanged y actualiza el estado del usuario y el estado de carga de manera correspondiente.
+ * Si el usuario está registrado, establece un cookie de token de autenticación con el token del usuario.
+ * Si el usuario está desregistrado, elimina el cookie de token de autenticación.
+ * Cuando el componente se desmonta, elimina el oyente.
+ * @param {ReactNode} children - Los hijos para envolver con el AuthContextProvider.
  * @returns {ReactNode} The wrapped children with the AuthContextProvider.
  */
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -40,7 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 		const unsubscribe = onIdTokenChanged(firebaseAuth, async (firebaseUser) => {
 			if (firebaseUser) {
 				setUser(firebaseUser)
-				const token = await firebaseUser.getIdToken() // token SIEMPRE actualizado
+				const token = await firebaseUser.getIdToken()
 				document.cookie = `authToken=${token}; path=/;`
 			} else {
 				setUser(null)

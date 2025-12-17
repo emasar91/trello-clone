@@ -30,24 +30,23 @@ export const isValidEmail = (email: string): boolean => {
 }
 
 /**
- * LoginForm component renders a form with an email input, a password input, a submit button, and a link to recover the password.
+ * LoginForm es el componente del formulario de login.
+ * Renderiza un formulario con un input de correo electronico, un input de contrasena y un boton de submit.
+ * El componente utiliza el hook useTranslations para traducir el texto del formulario.
+ * El componente espera las siguientes propiedades:
+ * - handleResetPassword: una funcion para manejar el reset de contrasena, recibe el correo electronico como parametro.
+ * - handleLogin: una funcion para manejar el login, recibe el tipo de login (email o google) y el correo electronico y contrasena como parametros.
+ * - handleRecoverPassword: una funcion para manejar el restablecimiento de contrasena, recibe el correo electronico como parametro.
+ * - register: un booleano para indicar si el formulario es para registro o no, por defecto es false.
+ * - recoverPassword: un booleano para indicar si el formulario es para restablecimiento de contrasena o no, por defecto es false.
  *
- * The component uses the useTranslations hook to translate the text of the form.
- *
- * The component expects the following properties:
- * - handleResetPassword: a function to handle the reset password, receives the email as a parameter.
- * - handleLogin: a function to handle the login, receives the type of login (email or google) and the email and password as parameters.
- * - handleRecoverPassword: a function to handle the recover password, receives the email as a parameter.
- * - register: a boolean to indicate if the form is for register or not, default is false.
- * - recoverPassword: a boolean to indicate if the form is for recover password or not, default is false.
- *
- * The component renders the following elements:
- * - An EmailField component with the email value and onChange function.
- * - A PasswordField component with the password value and onChange function, and showPassword and onToggleShow functions.
- * - A ResetPasswordLink component with the onClick function.
- * - A SubmitButton component with the onClick function, disabled property and text property.
- * - A GoogleLoginButton component with the onClick function and text property.
- * - A NotificationContainer component.
+ * El componente renderiza los siguientes elementos:
+ * - Un EmailField con el valor del correo electronico y la funcion onChange.
+ * - Un PasswordField con el valor de la contrasena y la funcion onChange, y las funciones showPassword y onToggleShow.
+ * - Un ResetPasswordLink con la funcion onClick.
+ * - Un SubmitButton con la funcion onClick, la propiedad disabled y el texto.
+ * - Un GoogleLoginButton con la funcion onClick y el texto.
+ * - Un NotificationContainer.
  */
 const LoginForm: React.FunctionComponent<ILoginFormProps> = ({
 	handleResetPassword = () => {},
@@ -68,6 +67,11 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = ({
 		: t('form.login')
 	const disableButton = recoverPassword ? !email : !email || !password
 
+	/**
+	 * onSubmit es la funcion que se ejecuta cuando se hace submit en el formulario.
+	 * Si es para restablecimiento de contrasena, valida el correo electronico y llama a handleRecoverPassword.
+	 * Si es para login, llama a handleLogin.
+	 */
 	const onSubmit = (
 		type: 'google' | 'email',
 		email: string,

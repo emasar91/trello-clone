@@ -4,11 +4,11 @@ import * as React from 'react'
 import { LoginCreateAccountContainerStyle } from './LogginCreateAccount.styles'
 
 /**
- * Renders a box with a typography and a button to navigate to the register page
- *
- * @returns {React.ReactElement} A Box component with a Typography and a Button
+ * LoginCreateAccount es un componente que renderiza un Box con un Typography y un Button
+ * para navegar a la pagina de registro.
+ * @returns {React.ReactElement} un Box con el Typography y el Button
  */
-const LoginCreateAccount = ({}) => {
+const LoginCreateAccount = () => {
 	const t = useTranslations('LoginPage')
 
 	return (

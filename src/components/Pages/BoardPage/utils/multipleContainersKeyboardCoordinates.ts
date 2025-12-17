@@ -14,13 +14,12 @@ const directions: string[] = [
 ]
 
 /**
- * A KeyboardCoordinateGetter that filters out containers that are not
- * of type 'container' or do not have children, and returns the
- * closest container to the active container in the given direction.
- *
- * @param {KeyboardEvent} event - The keyboard event.
- * @param {object} context - The context object containing active, droppableRects, droppableContainers, and collisionRect.
- * @returns {object | undefined} An object with x and y coordinates, or undefined if no container is found.
+ * coordinateGetter es un KeyboardCoordinateGetter que filtra los contenedores que no son
+ * de tipo 'container' o no tienen hijos, y devuelve el
+ * contenedor mas cercano al contenedor activo en la direccion dada.
+ * @param {KeyboardEvent} event - El evento del teclado.
+ * @param {object} context - El objeto de contexto que contiene active, droppableRects, droppableContainers, y collisionRect.
+ * @returns {object | undefined} Un objeto con las coordenadas x e y, o undefined si no se encuentra ningun contenedor.
  */
 export const coordinateGetter: KeyboardCoordinateGetter = (
 	event,

@@ -12,15 +12,15 @@ interface ILoginPageContainerProps {
 }
 
 /**
- * LoginPageContainer component that renders a container for the login page.
- * It takes three boolean props, `register`, `recover`, and `children`.
- * If `register` is true, it renders a header with a back button and sets
- * the container height to 560px. If `recover` is true, it renders a header
- * with a back button and sets the container height to 450px. Otherwise, it
- * sets the container height to 700px.
+ * LoginContainer es un componente que renderiza un container para la pagina de login.
+ * Recibe tres propiedades booleanas, `register`, `recover`, y `children`.
+ * Si `register` es true, renderiza un header con un boton de regresar y establece
+ * la altura del container a 560px. Si `recover` es true, renderiza un header
+ * con un boton de regresar y establece la altura del container a 450px. De lo contrario,
+ * establece la altura del container a 700px.
  *
- * @param {{ children: React.ReactNode, register: boolean, recover: boolean }}
- * @returns {React.ReactElement}
+ * @param {ILoginPageContainerProps} props
+ * @returns {React.ReactElement} un Box con el children
  */
 const LoginPageContainer: React.FunctionComponent<ILoginPageContainerProps> = ({
 	children,

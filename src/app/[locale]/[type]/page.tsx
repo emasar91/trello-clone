@@ -4,13 +4,9 @@ import { useAuth } from '@/context/useAuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 /**
- * AppTrelloPage is a higher-order component that wraps the AppTrello component.
- * It checks if the user is logged in and if so, redirects the user to their corresponding page.
- * If the user is not logged in, it returns null.
- * @param {Object} user - The user object from the useAuth hook.
- * @param {Object} loading - The loading state from the useAuth hook.
- * @param {Object} router - The useRouter hook from Next.js.
- * @returns {null} - If the user is not logged in, it returns null.
+ * AppTrelloPage es un componente que envuelve el componente AppTrello.
+ * Verifica si el usuario está autenticado y si lo está, redirige al usuario a su página correspondiente.
+ * Si el usuario no está autenticado, retorna null.
  */
 export default function AppTrelloPage() {
 	const { user, loading } = useAuth()

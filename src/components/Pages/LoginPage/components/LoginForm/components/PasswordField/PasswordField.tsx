@@ -12,11 +12,12 @@ interface PasswordFieldProps {
 }
 
 /**
- * PasswordField is a component that wraps a TextField with a ShowPassword component.
- * It displays the password as text if showPassword is true, otherwise it displays
- * the password as a password input.
+ * PasswordField es un componente que envuelve un TextField con un ShowPassword.
+ * Muestra la contrasena como texto si showPassword es true, de lo contrario
+ * muestra la contrasena como un input de contrasena.
  *
- * @param {{ value: string, onChange: (value: string) => void, showPassword: boolean, onToggleShow: () => void }}
+ * @param {PasswordFieldProps} props
+ * @returns {React.ReactElement} un Box con el TextField y el ShowPassword
  */
 const PasswordField: React.FC<PasswordFieldProps> = ({
 	value,
@@ -35,6 +36,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
 				onChange={(e) => onChange(e.target.value)}
 				placeholder={t('form.passwordPlaceholder')}
 			/>
+
 			<ShowPassword
 				showPassword={showPassword}
 				handleShowPassword={onToggleShow}

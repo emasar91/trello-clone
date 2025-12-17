@@ -3,12 +3,10 @@ import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 import React from 'react'
 
 /**
- * Page component for Workspaces.
- *
- * @param {object} params - Object with type and username properties.
- * @param {object} searchParams - Object with uid property.
- *
- * @returns {JSX.Element} - ProtectedPage component with WorkspacesPage child.
+ * Page es un componente que renderiza el componente WorkspacesPage protegido.
+ * @param {object} params - Object con type y username como propiedades.
+ * @param {object} searchParams - Object con uid como propiedad.
+ * @returns {JSX.Element} - ProtectedPage con WorkspacesPage como hijo.
  */
 async function Page({
 	params,

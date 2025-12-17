@@ -35,14 +35,13 @@ type ImageItemProps = {
 }
 
 /**
- * Componente para criar um novo tablero em um workspace.
+ * CreateBoardMenu es un componente que renderiza un menu de creacion de tablero.
+ * @param {open} Indica si el menu esta abierto.
+ * @param {handleClose} Funcion para cerrar el menu.
+ * @param {anchorEl} Elemento HTML que sirve como anchor para el menu.
+ * @param {workspaceName} Nombre del workspace en el que se creara el tablero.
  *
- * @param {open} Indica se o menu est  aberto.
- * @param {handleClose} Fun o para fechar o menu.
- * @param {anchorEl} Elemento HTML que serve como ancora para o menu.
- * @param {workspaceName} Nome do workspace no qual o tablero ser  criado.
- *
- * @returns Um componente que renderiza um menu de cria o de tablero.
+ * @returns {JSX.Element} - El componente CreateBoardMenu.
  */
 function CreateBoardMenu({
 	open,
@@ -110,11 +109,10 @@ function CreateBoardMenu({
 			sx={CreateBoardMenuContainerStyle(theme)}
 		>
 			<Box sx={CreateBoardMenuContentStyle}>
-				{/* titulo */}
 				<Typography variant="h6" sx={CreateBoardMenuCreateTitleStyles(theme)}>
 					{t('createNewBoardTitle')}
 				</Typography>
-				{/* imagen */}
+
 				<Box
 					component="img"
 					loading="lazy"

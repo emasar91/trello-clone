@@ -6,13 +6,13 @@ import {
 import { useMemo } from 'react'
 import { ICard } from '@/types/card'
 import { Box, Typography } from '@mui/material'
+import { ManyItemsTitleBoardStyles } from './ManyItems.styles'
 
 /**
- * A component that renders a list of items for a given board.
- *
- * @param {string} boardName - The name of the board to render.
- * @param {boolean} loading - Whether the board is currently loading.
- * @returns {JSX.Element} - A JSX element representing the list of items.
+ * Componente que representa una lista de items para un tablero dado.
+ * @param {string} boardName - El nombre del tablero a renderizar.
+ * @param {boolean} loading - Si el tablero está actualmente cargando.
+ * @returns {JSX.Element} - Un JSX element representando la lista de items.
  */
 export const ManyItems = ({
 	boardName,
@@ -50,22 +50,10 @@ export const ManyItems = ({
 	return (
 		!loading && (
 			<Box>
-				<Typography
-					sx={{
-						backgroundColor: '#d3d2d6',
-						width: '100%',
-						padding: '0.5rem',
-						position: 'absolute',
-						top: '48px',
-						marginLeft: '-16px',
-						fontSize: '16px',
-						lineHeight: '32px',
-						paddingLeft: '16px',
-					}}
-					variant="h5"
-				>
+				<Typography sx={ManyItemsTitleBoardStyles} variant="h5">
 					{boardName}
 				</Typography>
+
 				<MultipleContainers
 					containerStyle={{
 						maxHeight: '85vh',

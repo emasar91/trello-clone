@@ -23,13 +23,14 @@ export async function POST(request: Request) {
 		const body = await request.json()
 		const { boardId, userId, name, order } = body
 
+		// 2️⃣ Validar datos
 		if (!boardId || !userId || !name) {
 			return NextResponse.json(
 				{ error: 'boardId, userId y name son requeridos' },
 				{ status: 400 }
 			)
 		}
-
+		// 3️⃣ Crear columna
 		const newColumn = (await createColumn(
 			boardId,
 			userId,
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
 			order
 		)) as IColumn
 
+		// 4️⃣ Devolver respuesta
 		return NextResponse.json(newColumn)
 	} catch (error: unknown) {
 		const err = error as Error

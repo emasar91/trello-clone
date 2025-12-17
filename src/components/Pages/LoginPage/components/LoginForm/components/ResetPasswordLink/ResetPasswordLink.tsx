@@ -8,12 +8,10 @@ interface ResetPasswordLinkProps {
 }
 
 /**
- * A component to render a link to reset password.
- *
+ * ResetPasswordLink es un componente que renderiza un enlace para restablecer la contrasena.
  * @param {ResetPasswordLinkProps} props
- * @prop {() => void} onClick - The function to call when the link is clicked.
- *
- * @returns {React.ReactElement} A Box component with a Button inside.
+ * @prop {() => void} onClick - La funcion a ejecutar cuando se hace click en el enlace.
+ * @returns {React.ReactElement} un Box con el Button
  */
 const ResetPasswordLink: React.FC<ResetPasswordLinkProps> = ({ onClick }) => {
 	const t = useTranslations('LoginPage')

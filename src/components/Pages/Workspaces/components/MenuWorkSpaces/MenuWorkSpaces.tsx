@@ -30,12 +30,11 @@ type IMenuWorkSpaces = {
 }
 
 /**
- * Component for displaying a list of workspaces in the menu.
- * Each workspace is collapsible and when opened, it displays a button to go to the boards of that workspace.
- * The component also handles the active state of the menu, so that the currently selected workspace is highlighted.
- *
- * @param {IWorkspace[]} workspaces - List of workspaces to display.
- * @param {Function} goToWorkspaceBoards - Function to call when a workspace is selected.
+ * MenuWorkSpaces es un componente que renderiza una lista de workspaces en el menu.
+ * Cada workspace es collapsible y cuando se abre, muestra un boton para ir a los tableros de ese workspace.
+ * El componente tambien maneja el estado activo del menu, para que el workspace seleccionado actualmente se destaque.
+ * @param {IWorkspace[]} workspaces - Lista de workspaces a mostrar.
+ * @param {Function} goToWorkspaceBoards - Funcion para llamar cuando un workspace es seleccionado.
  */
 function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 	const theme = useTheme()
@@ -48,9 +47,9 @@ function MenuWorkSpaces({ workSpaces, goToWorkspaceBoards }: IMenuWorkSpaces) {
 	)
 
 	/**
-	 * Handles the click event on a workspace item in the menu.
-	 * Toggles the open state of the workspace in the openWorkspaces state.
-	 * @param {_id} - The id of the workspace item to toggle.
+	 * handleClick es una funcion que maneja el evento de click en un item de workspace en el menu.
+	 * Cambia el estado abierto del workspace en el openWorkspaces state.
+	 * @param {_id} - El id del item de workspace a cambiar.
 	 */
 	const handleClick = (_id: string) => {
 		setOpenWorkspaces((prev) => ({

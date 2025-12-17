@@ -20,7 +20,6 @@ interface Props {
 
 /**
  * Componente para crear un nuevo tablero o columna.
- *
  * @param {Props} props - Propiedades del componente.
  * @param {Props.onCreate} onCreate - Función que se llama cuando se crea un nuevo tablero o columna.
  * @param {Props.onCancel} onCancel - Función que se llama cuando se cancela la creación de un nuevo tablero o columna.
@@ -34,16 +33,14 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 	const wrapperRef = useRef<HTMLDivElement>(null)
 
 	const [value, setValue] = useState('')
-	const [cancelled, setCancelled] = useState(false) // evita creación cuando se pulsa X
+	const [cancelled, setCancelled] = useState(false)
 
-	// ---------- Compatibilidad estilos: TextAreaCustomStyles puede ser función (theme) o objeto ----------
 	const cardTextAreaStyle = useMemo(() => {
 		return typeof TextAreaCustomStyles === 'function'
 			? TextAreaCustomStyles(theme)
 			: TextAreaCustomStyles
 	}, [theme])
 
-	// ---------- click fuera del contenedor ----------
 	useEffect(() => {
 		/**
 		 * Función que se llama cuando se hace click fuera del contenedor de este componente.
@@ -57,14 +54,10 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 			const clickedOutside = !wrapperRef.current.contains(e.target as Node)
 			if (!clickedOutside) return
 
-			// Column: siempre cancelar (solo crear con botón/Enter)
 			if (type === 'column') {
 				onCancel()
 				return
 			}
-
-			// Card: crear sólo si hay texto y no fue cancelado por la X
-			// y luego cerrar
 			if (type === 'card') {
 				if (!cancelled && value.trim()) {
 					onCreate(value.trim())
@@ -79,7 +72,6 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 
 	/**
 	 * Termina la creación de un nuevo tablero o columna.
-	 *
 	 * Si se proporciona un valor no vacío, se crea el tablero o columna con ese valor.
 	 * Si se proporciona un valor vacío, se cancela la creación y se cierra el contenedor.
 	 */
@@ -101,7 +93,6 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 
 	/**
 	 * Maneja el evento de tecla presionada en un elemento de texto.
-	 *
 	 * Si se presiona Enter y se está en el tipo de columna, crea la columna con el valor actual.
 	 * Si se presiona Enter y se está en el tipo de card, crea la tarjeta con el valor actual sin Shift.
 	 * Si se presiona Enter y se está en el tipo de card con Shift, crea la tarjeta con el valor actual.
@@ -113,7 +104,6 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 		const isShift = e.shiftKey
 
 		if (type === 'column') {
-			// Column: Enter crea (sin shift)
 			if (isEnter) {
 				e.preventDefault()
 				finish()
@@ -122,13 +112,11 @@ export default function CreateCardInput({ onCreate, onCancel, type }: Props) {
 		}
 
 		if (type === 'card') {
-			// Card: Enter sin Shift crea
 			if (isEnter && !isShift) {
 				e.preventDefault()
 				finish()
 				return
 			}
-			// limitar saltos de línea
 			if (isEnter && isShift) {
 				const lines = value.split('\n')
 				if (lines.length >= 3) e.preventDefault()

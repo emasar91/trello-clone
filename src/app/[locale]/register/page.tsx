@@ -18,19 +18,18 @@ import { useRouter } from 'next/navigation'
 import { FirebaseError } from 'firebase/app'
 
 /**
- * RegisterPage component renders a form with an email input, a password input, and a submit button.
- * The component uses the useTranslations hook to translate the text of the form.
- * The component expects the following properties:
- * - handleLogin: a function to handle the login, receives the type of login, email and password as parameters.
- * - register: a boolean to indicate if the form is for register or not, default is false.
- * - recoverPassword: a boolean to indicate if the form is for recover password or not, default is false.
+ * RegisterPage component que renderiza un formulario con un campo de correo electrónico, un campo de contraseña y un botón de envío.
+ * El componente utiliza el hook useTranslations para traducir el texto del formulario.
+ * El componente espera las siguientes propiedades:
+ * - handleLogin: una función para manejar el inicio de sesión, recibe el tipo de inicio de sesión, correo electrónico y contraseña como parámetros.
+ * - register: un booleano para indicar si el formulario es para registro o no, por defecto es false.
+ * - recoverPassword: un booleano para indicar si el formulario es para recuperar la contraseña o no, por defecto es false.
  *
- * The component renders the following elements:
- * - An EmailField component with the email value and onChange function.
- * - A PasswordField component with the password value and onChange function.
- * - A SubmitButton component with the onClick function.
- * - A GoogleLoginButton component with the onClick function.
- * - A NotificationContainer component.
+ * El componente renderiza los siguientes elementos:
+ * - An EmailField con el valor del correo electrónico y la función onChange.
+ * - A PasswordField con el valor de la contraseña y la función onChange.
+ * - A SubmitButton con la función onClick.
+ * - A GoogleLoginButton con la función onClick.
  *
  * @returns {JSX.Element} The component element.
  */
@@ -52,7 +51,7 @@ const RegisterPage = () => {
 
 					const result = await signInEmail(email, password, currentLocale)
 					if (result) {
-						router.replace(`/${currentLocale}/u`) // redirect inmediato
+						router.replace(`/${currentLocale}/u`)
 					}
 				} catch (error: unknown) {
 					const firebaseError = error as FirebaseError

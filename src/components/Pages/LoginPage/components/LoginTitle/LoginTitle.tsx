@@ -13,16 +13,15 @@ interface ILoginTitleProps {
 }
 
 /**
- * Renders the title of the login page, with a Logo and a subtitle
- * depending of the page is for login, register or recover password
- *
+ * LoginTitle es el componente del titulo de la pagina de login.
+ * Renderiza un Logo y un subtitulo dependiendo de la pagina
+ * es para login, registro o restablecimiento de contrasena
  * @param {{ register?: boolean; recover?: boolean }} props
- * @param {boolean} [props.register=false] if true, the subtitle is
- * the text for register
- * @param {boolean} [props.recover=false] if true, the subtitle is
- * the text for recover password
- * @returns {React.ReactElement} A Box component with the Logo and the
- * subtitle
+ * @param {boolean} [props.register=false] si es true, el subtitulo es
+ * el texto para registro
+ * @param {boolean} [props.recover=false] si es true, el subtitulo es
+ * el texto para restablecimiento de contrasena
+ * @returns {React.ReactElement} un Box con el Logo y el subtitulo
  */
 const LoginTitle: React.FunctionComponent<ILoginTitleProps> = ({
 	register,
@@ -39,6 +38,7 @@ const LoginTitle: React.FunctionComponent<ILoginTitleProps> = ({
 	return (
 		<Box sx={LoginTitleContainerStyle}>
 			<Logo />
+
 			<Typography sx={LoginTitleSubtitleStyle} variant="body1">
 				{subtitleText}
 			</Typography>

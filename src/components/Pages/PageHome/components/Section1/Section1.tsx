@@ -16,12 +16,10 @@ import {
 } from './Section1.styles'
 
 /**
- * Section1 component for the home page.
- *
- * This component renders a section that displays the title, subtitle, description and a link to watch a video.
- * It also renders a video element with the video source set to "/assets/video/updatedhero.mp4".
- *
- * @returns {JSX.Element} A JSX element representing the section.
+ * Section1 es el componente de la seccion 1 de la pagina de inicio.
+ * Renderiza un texto con el titulo, subtitulo y descripcion de la seccion 1.
+ * Renderiza un video con el video source set to "/assets/video/updatedhero.mp4".
+ * @returns {JSX.Element} Section1 componente
  */
 const Section1 = () => {
 	const { setOpenModal } = useStoreTrello()
@@ -33,7 +31,9 @@ const Section1 = () => {
 					<Typography variant="h1" sx={PageHomeTitleStyle}>
 						{t('title')}
 					</Typography>
+
 					<Typography sx={PageHomeSubtitleStyle}>{t('subTitle')}</Typography>
+
 					<Typography sx={PageHomeDescriptionStyle}>
 						{t('description')}
 					</Typography>
@@ -41,6 +41,7 @@ const Section1 = () => {
 
 				<Box sx={PageHomeLinkContainerStyle} onClick={() => setOpenModal(true)}>
 					<Typography sx={PageHomeLinkStyle}>{t('watchVideo')}</Typography>
+
 					<Box className="play-icon" sx={PageHomeIconContainerStyle}>
 						<PlayVideoIcon />
 					</Box>

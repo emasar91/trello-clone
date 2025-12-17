@@ -40,7 +40,6 @@ interface SortableItemProps {
  * Componente que representa un elemento ordenable (drag & drop).
  * Envuelve el componente `Item` y le añade la lógica de `useSortable`.
  * También maneja la apertura del modal de detalle (`ModalItem`).
- *
  * @param props - Propiedades del componente
  * @param props.containerId - ID del contenedor (columna) donde está el item
  * @param props.id - ID único del item (card)
@@ -56,6 +55,7 @@ interface SortableItemProps {
  * @param props.getIndex - Función para obtener el índice de un item dado su ID
  * @param props.renderItem - Render prop opcional para personalizar el item
  * @param props.wrapperStyle - Función para estilos del wrapper
+ * @returns {JSX.Element} - El componente SortableItem
  */
 const SortableItem = ({
 	disabled,

@@ -12,17 +12,13 @@ interface SubmitButtonProps {
 }
 
 /**
- * SubmitButton is a component that wraps a Button with a Box and applies some
- * styles to it. It takes three props: onClick, disabled, and text.
- *
- * onClick is a function that gets called when the button is clicked.
- *
- * disabled is a boolean that determines whether the button is disabled or not.
- *
- * text is a string that is the text to display inside the button.
- *
- * @param {{ onClick: () => void, disabled: boolean, text: string }} props
- * @returns {React.ReactElement}
+ * SubmitButton es un componente que envuelve un Button con un Box y aplica
+ * algunos estilos a él. Recibe tres props: onClick, disabled, y text.
+ * onClick es una funcion que se llama cuando se hace click en el boton.
+ * disabled es un booleano que determina si el boton esta deshabilitado o no.
+ * text es un string que es el texto a mostrar dentro del boton.
+ * @param {SubmitButtonProps} props
+ * @returns {React.ReactElement} un Box con el Button
  */
 const SubmitButton: React.FC<SubmitButtonProps> = ({
 	onClick,

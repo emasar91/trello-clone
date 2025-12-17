@@ -5,8 +5,9 @@ import { itemsSliderSection5 } from '@/constants'
 import { useWindowSize } from '@/hooks/useWindowsSize'
 
 /**
- * Section 5 component of the PageHome page. It renders a CustomSlider component if the screen width is greater than 768px.
- * @returns {JSX.Element | null} The CustomSlider component or null if the screen width is less than or equal to 768px.
+ * Section 5 es el componente de la seccion 5 de la pagina de inicio.
+ * Renderiza un CustomSlider si el ancho de la pantalla es mayor a 768px.
+ * @returns {JSX.Element | null} El CustomSlider o null si el ancho de la pantalla es menor o igual a 768px.
  */
 const Section5 = () => {
 	const width = useWindowSize()

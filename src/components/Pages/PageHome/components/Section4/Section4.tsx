@@ -13,9 +13,10 @@ import {
 } from './Section4.styles'
 
 /**
- * Section 4 component
- *
- * @returns {JSX.Element} Section 4 component
+ * Section 4 es el componente de la seccion 4 de la pagina de inicio.
+ * Renderiza un texto con el titulo, subtitulo y descripcion de la seccion 4.
+ * Renderiza una lista de FeatureCard con los items de la seccion 4.
+ * @returns {JSX.Element} Section 4 componente
  */
 const Section4 = () => {
 	const t = useTranslations('PageHome.section4')
@@ -23,7 +24,9 @@ const Section4 = () => {
 		<>
 			<Box sx={Section4TextContainerStyle}>
 				<Typography sx={Section4SubTitleStyle}>{t('subTitle')}</Typography>
+
 				<Typography sx={Section4TitleStyle}>{t('title')}</Typography>
+
 				<Typography sx={Section4DescriptionStyle}>
 					{t('description')}
 				</Typography>

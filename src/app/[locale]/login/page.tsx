@@ -2,9 +2,9 @@ import PageLogin from '@/components/Pages/LoginPage/PageLogin'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
 /**
- * LoginPage component that renders the protected PageLogin component.
- * It is unprotected and anyone can access it.
- * @return {Promise<ReactNode>} - a React component representing the route
+ * LoginPage component que renderiza el componente PageLogin protegido.
+ * No está protegido y cualquier persona puede acceder a él.
+ * @return {Promise<ReactNode>} - un componente React que representa la ruta
  */
 const LoginPage = () => {
 	return (

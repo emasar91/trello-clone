@@ -20,12 +20,11 @@ type Props = {
 }
 
 /**
- * ItemComment component renders a comment box with author name, comment text and edit and delete buttons.
- *
- * @param {IComment} comment - The comment to be rendered.
- * @param {() => void} onEdit - Callback function to be called when the edit button is clicked.
- * @param {() => void} onDelete - Callback function to be called when the delete button is clicked.
- * @returns {JSX.Element} - The rendered comment box.
+ * ItemComment es un componente que renderiza un cuadro de comentario con el nombre del autor, el texto del comentario y botones de editar y eliminar.
+ * @param {IComment} comment - El comentario a renderizar.
+ * @param {() => void} onEdit - Funcion de callback que se llama cuando se hace clic en el boton de editar.
+ * @param {() => void} onDelete - Funcion de callback que se llama cuando se hace clic en el boton de eliminar.
+ * @returns {JSX.Element} - El cuadro de comentario renderizado.
  */
 const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 	const theme = useTheme()
@@ -38,6 +37,7 @@ const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 				<Typography sx={ItemCommentAuthorStyles}>
 					{String(comment.authorName)}
 				</Typography>
+
 				<Typography sx={ItemCommentDateStyles}>
 					{formatCommentDate(comment.editedAt || comment.createdAt, locale)}
 				</Typography>
@@ -45,10 +45,12 @@ const ItemComment = ({ comment, onEdit, onDelete }: Props) => {
 			<Typography sx={ItemCommentCommentTextStyles(theme)}>
 				{comment.text}
 			</Typography>
+
 			<Box sx={ItemCommentButtonsContainerStyles}>
 				<Button sx={ItemCommentButtonStyles(theme)} onClick={onEdit}>
 					{t('editDescription')}
 				</Button>
+
 				<Button sx={ItemCommentButtonStyles(theme)} onClick={onDelete}>
 					{t('delete')}
 				</Button>

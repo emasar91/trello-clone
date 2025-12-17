@@ -20,15 +20,13 @@ interface IEditDescription {
 }
 
 /**
- * Componente para editar la descripci n de una tarjeta.
- *
- * @param {string} description - Descripci n de la tarjeta.
- * @param {React.Dispatch<React.SetStateAction<string>>} setDescription - Funcion para editar la descripci n de la tarjeta.
- * @param {React.Dispatch<React.SetStateAction<boolean>>} setShowEditDescription - Funcion para mostrar o esconder el formulario de edici n de la descripci n.
+ * EditDescription es un componente que permite editar la descripción de una tarjeta.
+ * @param {string} description - Descripción de la tarjeta.
+ * @param {React.Dispatch<React.SetStateAction<string>>} setDescription - Funcion para editar la descripción de la tarjeta.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} setShowEditDescription - Funcion para mostrar o esconder el formulario de edici n de la descripción.
  * @param {ICard | undefined} cardSelected - Tarjeta seleccionada.
- * @param {() => void} onSubmit - Funcion para editar la descripci n de la tarjeta.
- *
- * @returns {JSX.Element} - Componente para editar la descripci n de una tarjeta.
+ * @param {() => void} onSubmit - Funcion para editar la descripción de la tarjeta.
+ * @returns {JSX.Element} - Componente para editar la descripción de una tarjeta.
  */
 const EditDescription = ({
 	description,
@@ -68,6 +66,7 @@ const EditDescription = ({
 				>
 					{t('save')}
 				</Button>
+
 				<Button
 					sx={EditDescriptionButtonCancelStyles(theme)}
 					onClick={() => {

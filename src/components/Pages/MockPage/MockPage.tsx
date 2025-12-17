@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 
 /**
- * InnerMockRoute is a protected route that renders MockPageClient component
- * if the route is defined in the routes constant and the route is not
- * protected or public, otherwise it will render the notFound component
- * @param {string} locale - the locale of the request
- * @param {Promise<{mock: string[]}>} params - the route parameters
- * @returns {Promise<ReactNode>} - a React component representing the route
+ * InnerMockRoute es una ruta protegida que renderiza el componente MockPageClient
+ * si la ruta esta definida en el array de rutas y la ruta no esta protegida o publica,
+ * de lo contrario renderizara el componente notFound
+ * @param {string} locale - el locale de la peticion
+ * @param {Promise<{mock: string[]}>} params - los parametros de la ruta
+ * @returns {Promise<ReactNode>} - un componente React representando la ruta
  */
 export async function InnerMockRoute({
 	locale,
@@ -36,11 +36,11 @@ export async function InnerMockRoute({
 }
 
 /**
- * MockRoute is a protected route that renders MockPageClient component
- * if the route is defined in the routes constant and the route is not
- * protected or public, otherwise it will render the notFound component
- * @param {Promise<{locale: 'es' | 'en'; mock: string[]}>} params - the route parameters
- * @returns {Promise<ReactNode>} - a React component representing the route
+ * MockRoute es una ruta protegida que renderiza el componente MockPageClient
+ * si la ruta esta definida en el array de rutas y la ruta no esta protegida o publica,
+ * de lo contrario renderizara el componente notFound
+ * @param {Promise<{locale: 'es' | 'en'; mock: string[]}>} params - los parametros de la ruta
+ * @returns {Promise<ReactNode>} - un componente React representando la ruta
  */
 export default async function MockRoute({
 	params,

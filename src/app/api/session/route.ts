@@ -7,33 +7,25 @@ import admin from '@/config/firebaseAdmin'
  * Crea una sesi n con un token de autenticaci n de Firebase
  * y redirige al usuario a la p gina de inicio de la app
  * con el idioma seleccionado.
- *
  * @param {Request} req - La solicitud HTTP
  * @returns {NextResponse} La respuesta HTTP con la cookie de sesi n
- * @throws {Error} Si hay un error al crear la sesi n
  */
 export async function POST(req: Request) {
 	try {
 		const { token, locale, user } = await req.json()
 		const baseUrl = new URL(req.url).origin
 		const redirectUrl = `${baseUrl}/${locale}/u`
-
-		// --------------------------
-		// 🔥 Crear Session Cookie
-		// --------------------------
+		// 1️⃣ Crear Session Cookie
 		const expiresIn = 1000 * 60 * 60 * 24 * 5 // 5 días
 
 		const sessionCookie = await admin
 			.auth()
 			.createSessionCookie(token, { expiresIn })
 
-		// --------------------------
-		// 🔥 Guardar user en DB si no existe
-		// --------------------------
 		const db = await getDB()
 		const usersCollection = db.collection('users')
 		const existingUser = await usersCollection.findOne({ uid: user.uid })
-
+		// 2️⃣ Guardar user en DB si no existe
 		if (!existingUser) {
 			await usersCollection.insertOne({
 				uid: user.uid,
@@ -46,9 +38,7 @@ export async function POST(req: Request) {
 				lastSeenAt: null,
 			})
 		}
-		// ----------------------------------
-		// 🔥 Setear cookie HTTPOnly con el Session Cookie
-		// ----------------------------------
+		// 3️⃣ Setear cookie HTTPOnly con el Session Cookie
 		const res = NextResponse.redirect(redirectUrl)
 		res.cookies.set({
 			name: COOKIE_NAME,
@@ -69,16 +59,14 @@ export async function POST(req: Request) {
 /**
  * Elimina la cookie de sesión y redirige a la raíz
  * original de la aplicación.
- *
  * @param {Request} req - La petición
  * @returns {NextResponse} - La respuesta
- * @throws {Error} - Si ocurre un error
  */
 export async function DELETE(req: Request) {
 	const { locale } = await req.json()
 	const baseUrl = new URL(req.url).origin
 	const redirectUrl = `${baseUrl}/${locale ?? 'es'}`
-
+	// 1️⃣ Eliminar cookie de sesión
 	const res = NextResponse.redirect(redirectUrl)
 	res.cookies.set({
 		name: COOKIE_NAME,

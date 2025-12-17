@@ -23,10 +23,10 @@ type MockPageProps = {
 }
 
 /**
- * MockPageClient is a component that renders a mock page with a title, subtitle, description, and two buttons.
- * It takes a route parameter and uses it to replace [route] in the translation keys.
- * @param {string} route - The route parameter to be used in the translation keys.
- * @returns {ReactNode} The mock page component.
+ * MockPageClient es el componente de la pagina de mock.
+ * Renderiza una pagina con un titulo, subtitulo, descripcion y dos botones.
+ * @param {string} route - El parametro de la ruta para reemplazar [route] en las claves de traduccion.
+ * @returns {ReactNode} El componente de la pagina de mock.
  */
 export default function MockPageClient({ route }: MockPageProps) {
 	const t = useTranslations('MockPage')
@@ -39,9 +39,11 @@ export default function MockPageClient({ route }: MockPageProps) {
 						<Box sx={MockPageIconContainerStyle}>
 							<NoDisponibleIcon />
 						</Box>
+
 						<Typography variant="h1" sx={MockPageTitleStyle}>
 							{t('title')}
 						</Typography>
+
 						<Typography variant="body1" sx={MockPageSubtitleStyle}>
 							{t('subTitle').replace('[route]', route.toUpperCase() || '')}
 						</Typography>
@@ -62,6 +64,7 @@ export default function MockPageClient({ route }: MockPageProps) {
 						>
 							{t('buttonLogin')}
 						</Button>
+
 						<Button
 							component="a"
 							href="/"

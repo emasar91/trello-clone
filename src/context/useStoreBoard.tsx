@@ -30,20 +30,13 @@ const initialValue: IBoardStore = {
 
 export const useStoreBoard = create<IBoardStore>((set) => ({
 	...initialValue,
-	// 👉 Set board
 	setBoard: (board: IBoard) => set({ board }),
-
-	// 👉 Set columns
 	setColumns: (columns: IColumn[]) => set({ columns }),
-
-	// 👉 Set cards (y su orden)
 	setCardsForColumn: (columnId: string, cards: ICard[]) =>
 		set((state) => ({
 			cardsByColumn: { ...state.cardsByColumn, [columnId]: cards },
 		})),
-	// 👉 Set selected card id
 	setSelectedCardId: (selectedCardId: string) => set({ selectedCardId }),
-	// 👉 Set cards by column
 	setCardsByColumn: (cardsByColumn: Record<string, ICard[]>) =>
 		set({ cardsByColumn }),
 }))

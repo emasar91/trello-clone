@@ -13,22 +13,12 @@ interface ProtectedPageProps {
 }
 
 /**
- * Componente que renderiza o conteúdo apenas se o usuário estiver
- * autenticado e a rota for protegida estiver definida.
- * Se a rota for protegida for definida, mas o usuário
- * não estiver autenticado, o conteúdo não ser  renderizado.
- * Se a rota for protegida não for definida, mas o usuário
- * estiver autenticado, o conteúdo não ser  renderizado.
- * Se a rota for protegida for definida e o usuário estiver
- * autenticado, o conteúdo ser  renderizado.
- * Se a rota for protegida não for definida, mas o usuário
- * não estiver autenticado, o conteúdo ser  renderizado.
- *
- * @param {ReactNode} children - O conteúdo a ser renderizado.
- * @param {boolean} isProtected - Se a rota for protegida estiver
- *                        definida. O padr o   true.
- * @param {boolean} isMockPublic - Se a rota for protegida for
- *                        p blica. O padr o   false.
+ * ProtectedPage es un componente que renderiza el contenido solo si el usuario esta autenticado y la ruta esta protegida.
+ * Si la ruta es protegida, pero el usuario no esta autenticado, el contenido no sera renderizado.
+ * Si la ruta no es protegida, pero el usuario esta autenticado, el contenido no sera renderizado.
+ * @param {ReactNode} children - El contenido a ser renderizado.
+ * @param {boolean} isProtected - Si la ruta es protegida esta definida. Por defecto es true.
+ * @param {boolean} isMockPublic - Si la ruta es protegida no esta definida. Por defecto es false.
  */
 export function ProtectedPage({
 	children,
@@ -38,7 +28,6 @@ export function ProtectedPage({
 	const { user, loading } = useAuth()
 	useProtectedRoute(isProtected, isMockPublic)
 
-	// Mientras carga auth o no hay usuario en ruta protegida → no renderizamos nada
 	if (loading) {
 		return (
 			<Box sx={ProtectedRouteStyles}>

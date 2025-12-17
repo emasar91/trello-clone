@@ -26,13 +26,11 @@ import { IWorkspace } from '@/types/workspaces'
 import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 
 /**
- * Formulario para crear un nuevo tablero en un workspace.
- *
+ * CreateBoardForm es un componente que renderiza un formulario para crear un nuevo tablero en un workspace.
  * @param {onSubmit} Funcion para crear un nuevo tablero.
  * @param {workspaceName} nombre del workspace donde se va a crear el tablero.
  * @param {loading} indica si se est  cargando el workspace.
  * @param {handleClose} Funcion para cerrar el modal.
- *
  * @returns JSX.Element - Formulario para crear un nuevo tablero.
  */
 const CreateBoardForm = ({
@@ -67,7 +65,6 @@ const CreateBoardForm = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	// 📌 Cuando se cargan, buscamos el de la prop workspaceName
 	useEffect(() => {
 		if (!workspaceName || workspaceAvailable.length === 0) return
 
@@ -81,9 +78,7 @@ const CreateBoardForm = ({
 	}, [workspaceAvailable, workspaceName])
 
 	/**
-	 * Resets the state of the form.
-	 * Sets the title and description to empty strings and
-	 * sets the workspace to null.
+	 * resetForm es una funcion que resetea el formulario.
 	 */
 	const resetForm = () => {
 		setTitle('')
@@ -92,10 +87,10 @@ const CreateBoardForm = ({
 	}
 
 	/**
-	 * Submits the form data to create a new board.
-	 * Calls the onSubmit function passed as a prop with the new data, reset form function, and handle close function if it exists.
-	 * The new data contains the title, description, workspace ID, reset form function, and handle close function.
-	 * If the workspace ID is null or undefined, it is set to an empty string.
+	 * handleSubmit es una funcion que envia los datos del formulario para crear un nuevo tablero.
+	 * Llama a la funcion onSubmit pasada como prop con los nuevos datos, funcion de reseteo del formulario, y funcion de cierre si existe.
+	 * Los nuevos datos contienen el titulo, descripcion, ID del workspace, funcion de reseteo del formulario, y funcion de cierre.
+	 * Si el ID del workspace es null o undefined, se le asigna un string vacio.
 	 */
 	const handleSubmit = () => {
 		onSubmit({
@@ -110,11 +105,11 @@ const CreateBoardForm = ({
 	return (
 		!loadingWorkspace && (
 			<Box sx={CreateBoardFormContainerStyles}>
-				{/* Título */}
 				<FormControl fullWidth>
 					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
 						{t('titleBoard')}
 					</InputLabel>
+
 					<TextField
 						placeholder={t('writeTitle')}
 						value={title}
@@ -122,6 +117,7 @@ const CreateBoardForm = ({
 						size="small"
 						sx={CreateBoardFormInputTitleStyles(theme)}
 					/>
+
 					<Typography
 						variant="caption"
 						sx={CreateBoardFormInfoTextStyles(theme)}
@@ -134,6 +130,7 @@ const CreateBoardForm = ({
 					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
 						{t('descriptionBoard')}
 					</InputLabel>
+
 					<TextField
 						placeholder={t('writeDescription')}
 						value={description}
@@ -141,6 +138,7 @@ const CreateBoardForm = ({
 						size="small"
 						sx={CreateBoardFormInputTitleStyles(theme)}
 					/>
+
 					<Typography
 						variant="caption"
 						sx={CreateBoardFormInfoTextStyles(theme)}
@@ -149,7 +147,6 @@ const CreateBoardForm = ({
 					</Typography>
 				</FormControl>
 
-				{/* Espacio de trabajo */}
 				<FormControl fullWidth size="small">
 					<InputLabel shrink sx={CreateBoardFormLabelSelectStyles(theme)}>
 						{loadingWorkspace ? t('loading') : t('workspace')}
@@ -185,7 +182,6 @@ const CreateBoardForm = ({
 					</Select>
 				</FormControl>
 
-				{/* Botón Crear */}
 				<Button
 					variant="contained"
 					fullWidth

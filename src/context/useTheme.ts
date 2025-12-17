@@ -1,4 +1,3 @@
-// themeStore.ts
 import { darkTheme, lightTheme } from '@/theme'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
@@ -12,7 +11,7 @@ type ThemeState = {
 export const useThemeStore = create<ThemeState>()(
 	persist(
 		(set) => ({
-			mode: 'dark', // default only SSR time
+			mode: 'dark',
 			theme: darkTheme,
 			setMode: (value) =>
 				set({
@@ -24,7 +23,7 @@ export const useThemeStore = create<ThemeState>()(
 			name: 'theme-storage',
 			storage: createJSONStorage(() => localStorage),
 			partialize: (state) => ({ mode: state.mode }),
-			skipHydration: true, // **NO pisa el localStorage en SSR/primer render**
+			skipHydration: true,
 		}
 	)
 )

@@ -14,23 +14,21 @@ import { Box } from '@mui/material'
 import { useTranslations } from 'next-intl'
 
 /**
- * RecoverPassword component renders a form with an email input, a submit button, and a link to recover the password.
- *
- * The component uses the useTranslations hook to translate the text of the form.
- *
- * The component expects the following properties:
- * - handleResetPassword: a function to handle the reset password, receives the email as a parameter.
+ * RecoverPassword component que renderiza un formulario con un campo de correo electrónico, un botón de envío y un enlace para recuperar la contraseña.
+ * El componente utiliza el hook useTranslations para traducir el texto del formulario.
+ * El componente espera las siguientes propiedades:
+ * - handleResetPassword: una función para manejar el restablecimiento de la contraseña, recibe el correo electrónico como parámetro.
  * - handleRecoverPassword: a function to handle the recover password, receives the email as a parameter.
  * - register: a boolean to indicate if the form is for register or not, default is false.
  * - recoverPassword: a boolean to indicate if the form is for recover password or not, default is false.
  *
- * The component renders the following elements:
- * - An EmailField component with the email value and onChange function.
- * - A PasswordField component with the password value and onChange function, and showPassword and onToggleShow functions.
- * - A ResetPasswordLink component with the onClick function.
- * - A SubmitButton component with the onClick function, disabled property and text property.
- * - A GoogleLoginButton component with the onClick function and text property.
- * - A NotificationContainer component.
+ * El componente renderiza los siguientes elementos:
+ * - An EmailField con el valor del correo electrónico y la función onChange.
+ * - A PasswordField con el valor de la contraseña y la función onChange, y showPassword y onToggleShow.
+ * - A ResetPasswordLink con la función onClick.
+ * - A SubmitButton con la función onClick, propiedad disabled y text.
+ * - A GoogleLoginButton con la función onClick y text.
+ * - A NotificationContainer componente.
  */
 const RecoverPassword = () => {
 	const router = useRouter()

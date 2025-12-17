@@ -29,14 +29,13 @@ import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useEditWorkspace } from '@/hooks/useEditWorkSpace'
 
 /**
- * Component to render a section for the workspaces.
- * It will render a avatar for the workspace, the name of the workspace and a button to edit the workspace.
- * It will also render a BoardGrid component with the boards of the workspace.
- * If the workspace has no boards, it will render a "Create board" button.
- *
- * @param {string} username - The username of the workspace.
- * @param {IWorkspace[]} workspaces - The list of workspaces.
- * @returns A JSX element with the section for the workspaces.
+ * BoardSectionWorkspaces es un componente que renderiza una seccion para los workspaces.
+ * Renderiza un avatar para el workspace, el nombre del workspace y un boton para editar el workspace.
+ * Tambien renderiza un BoardGrid con los tableros del workspace.
+ * Si el workspace no tiene tableros, renderiza un "Crear tablero".
+ * @param {string} username - El nombre del workspace.
+ * @param {IWorkspace[]} workspaces - La lista de workspaces.
+ * @returns Un JSX element con la seccion para los workspaces.
  */
 function BoardSectionWorkspaces({
 	username,
@@ -57,15 +56,16 @@ function BoardSectionWorkspaces({
 	)!
 
 	/**
-	 * Opens the edit form for the workspace.
-	 * This function sets the `openEditForm` state to `true`, which will render the edit form.
+	 * handleOpenEditForm es una funcion que abre el formulario de edicion para el workspace.
+	 * Esta funcion establece el estado `openEditForm` a `true`, lo que renderizara el formulario de edicion.
 	 */
 	const handleOpenEditForm = () => {
 		setOpenEditForm(true)
 	}
 
 	/**
-	 * Closes the edit form for the workspace.
+	 * handleCloseEditForm es una funcion que cierra el formulario de edicion para el workspace.
+	 * Esta funcion establece el estado `openEditForm` a `false`, lo que renderizara el workspace.
 	 */
 	const handleCloseEditForm = () => {
 		setOpenEditForm(false)
@@ -90,7 +90,6 @@ function BoardSectionWorkspaces({
 				</Box>
 			) : (
 				<Box sx={WorkSpacesStyle}>
-					{/* Header workspace */}
 					{openEditForm ? (
 						<FormEditWorkspace
 							handleClose={handleCloseEditForm}
@@ -104,9 +103,11 @@ function BoardSectionWorkspaces({
 							<Box sx={WorkSpacesAvatarStyle(workspace?.avatarColor)}>
 								{workspace?.name.charAt(0).toUpperCase()}
 							</Box>
+
 							<Typography variant="h6" sx={WorkSpacesTitleStyle(theme)}>
 								{workspace?.name}
 							</Typography>
+
 							<Box sx={WorkSpacesEditIconStyle} onClick={handleOpenEditForm}>
 								<EditIcon />
 							</Box>
@@ -118,6 +119,7 @@ function BoardSectionWorkspaces({
 					<Box sx={WorkSpacesBoardsContainerStyle}>
 						<Box sx={WorkSpacesBoardsAvatarContainerStyle}>
 							<UserIcon />
+
 							<Typography variant="h6" sx={WorkSpacesTitleBoardsStyle(theme)}>
 								{t('yourBoards')}
 							</Typography>

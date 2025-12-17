@@ -18,14 +18,14 @@ import { useTranslations } from 'next-intl'
 import { useUpdateLastOpenedBoard } from '@/hooks/useUpdateLastOpenedBoards'
 
 /**
- * Component to render a board page.
- * It will render the board's image, if exists, and a ManyItems component with the board's name.
- * If the board is not found, it will render an error message.
- * If the board is still loading, it will render a loading message.
- * It also renders a NotificationContainer component.
- * @param {string} boardname - The name of the board.
- * @param {string} workspace - The name of the workspace.
- * @returns {JSX.Element} - The board page component.
+ * BoardPage es un componente que renderiza una pagina de un tablero.
+ * Renderiza la imagen del tablero, si existe, y un ManyItems con el nombre del tablero.
+ * Si el tablero no se encuentra, renderiza un mensaje de error.
+ * Si el tablero todavia se esta cargando, renderiza un mensaje de carga.
+ * Tambien renderiza un NotificationContainer.
+ * @param {string} boardname - El nombre del tablero.
+ * @param {string} workspace - El nombre del workspace.
+ * @returns {JSX.Element} - El componente de la pagina del tablero.
  */
 const BoardPage = ({
 	boardname,

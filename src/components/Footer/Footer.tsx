@@ -20,13 +20,10 @@ import {
 import { useAuth } from '@/context/useAuthContext'
 
 /**
- * Footer component, renders a footer with a login link and a list of items with
- * titles and subtitles.
- *
- * When the user is logged in, the component renders null.
- *
- * @returns {React.ReactElement | null} The Footer component when the user is not
- * logged in, otherwise null.
+ * Footer es un componente que renderiza un pie de página con un enlace de inicio de sesión y una lista de elementos con
+ * títulos y subtítulos.
+ * Cuando el usuario está autenticado, el componente renderiza null.
+ * @returns {React.ReactElement | null} El componente Footer cuando el usuario no  esta logged in, si no es null.
  */
 
 const Footer = () => {

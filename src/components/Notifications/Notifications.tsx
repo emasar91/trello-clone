@@ -3,11 +3,11 @@ import { Bounce, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 /**
- * A React component that renders a notification container
- * using react-toastify.
- * It provides a default configuration for the notifications
- * and supports drag and drop.
- * @return {React.ReactElement} A React element representing the notification container.
+ * NotificationContainer es un componente que renderiza un contenedor de notificaciones
+ * usando react-toastify.
+ * Es una proveida  con una configuracion por defecto para las notificaciones
+ * y soporta arrastrar y soltar.
+ * @return {React.ReactElement} El componente NotificationContainer.
  */
 const NotificationContainer: React.FunctionComponent = () => {
 	return (

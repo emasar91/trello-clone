@@ -18,7 +18,6 @@ import {
 
 /**
  * Formulario para editar un workspace existente.
- *
  * @param {() => void} handleClose - Funcion para cerrar el formulario.
  * @param {(
  *   newData: { newName: string; newDescription: string },
@@ -53,7 +52,7 @@ function FormEditWorkspace({
 	const t = useTranslations('BoardsPage')
 
 	/**
-	 * Resets the form by setting the name and description back to empty strings.
+	 * resetForm es una funcion que resetea el formulario.
 	 */
 	const resetForm = () => {
 		setNewWorkspaceName('')
@@ -61,9 +60,9 @@ function FormEditWorkspace({
 	}
 
 	/**
-	 * Submits the form data to edit a workspace.
-	 * If the new name and description are the same as the default name and description, the function does nothing.
-	 * Otherwise, it calls the onSubmit function passed as a prop with the new data, default name, and reset form function.
+	 * handleSubmit es una funcion que envia los datos del formulario para editar un workspace.
+	 * Si el nuevo nombre y descripcion son iguales al nombre y descripcion por defecto, la funcion no hace nada.
+	 * De lo contrario, llama a la funcion onSubmit pasada como prop con los nuevos datos, nombre por defecto y funcion de reseteo del formulario.
 	 */
 	const handleSubmit = () => {
 		const newData = {

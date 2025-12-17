@@ -24,6 +24,18 @@ export interface Props {
 	hover?: boolean
 }
 
+/**
+ * Container es un componente que muestra un contenedor con una lista de tarjetas.
+ * @param {React.ReactNode} children - Elementos hijos que se renderizarán dentro del contenedor.
+ * @param {string} label - Etiqueta del contenedor.
+ * @param {() => void} onRemove - Funcion para eliminar el contenedor.
+ * @param {(data: { newName: string }) => void} onRename - Funcion para renombrar el contenedor.
+ * @param {React.ButtonHTMLAttributes<HTMLButtonElement>} handleprops - Props para el boton de manejo.
+ * @param {React.CSSProperties} style - Estilos para el contenedor.
+ * @param {(value: string) => void} onCreateCard - Funcion para crear una nueva tarjeta.
+ * @param {boolean} hover - Indica si el contenedor esta siendo hover.
+ * @returns {JSX.Element} El contenedor renderizado.
+ */
 export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 	(
 		{ children, label, onRename, onRemove, handleprops, style, onCreateCard },
@@ -54,6 +66,11 @@ export const Container = forwardRef<HTMLDivElement | HTMLButtonElement, Props>(
 		const handleOpenAddCard = useCallback(() => setShowAddCard(true), [])
 		const handleCloseAddCard = useCallback(() => setShowAddCard(false), [])
 
+		/**
+		 * handleCreateCard es una funcion que se encarga de crear una nueva tarjeta.
+		 * @param {string} value - Valor de la tarjeta.
+		 * @returns {void}
+		 */
 		const handleCreateCard = useCallback(
 			(value: string) => {
 				onCreateCard?.(value)

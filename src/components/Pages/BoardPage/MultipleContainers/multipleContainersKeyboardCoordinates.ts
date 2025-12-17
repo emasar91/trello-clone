@@ -14,15 +14,12 @@ const directions: string[] = [
 ]
 
 /**
- * @description
- * A function that determines the new coordinates for an item when
- * the user presses an arrow key. It takes into account the active
- * item, the droppable rectangles, the droppable containers and the
- * collision rectangle.
- *
- * @param {KeyboardEvent} event - The event that triggered the function call.
- * @param {{ active: DraggableItem, droppableRects: Map<string, Rectangle>, droppableContainers: Map<string, DroppableContainer>, collisionRect: Rectangle | null }} context - The context object containing the active item, the droppable rectangles, the droppable containers and the collision rectangle.
- * @returns {x: number, y: number} | undefined - The new coordinates for the item. If the item should not be moved, it returns undefined.
+ * coordinateGetter es una funcion que determina las nuevas coordenadas para un item cuando
+ * el usuario presiona una tecla de flecha. Considera el item activo, los rectangulos
+ * droppables, los contenedores droppables y el rectangulo de colision.
+ * @param {KeyboardEvent} event - El evento que desencadenó la llamada a la funcion.
+ * @param {{ active: DraggableItem, droppableRects: Map<string, Rectangle>, droppableContainers: Map<string, DroppableContainer>, collisionRect: Rectangle | null }} context - El objeto de contexto que contiene el item activo, los rectangulos droppables, los contenedores droppables y el rectangulo de colision.
+ * @returns {x: number, y: number} | undefined - las nuevas coordenadas para el item. Si el item no debe ser movido, retorna undefined.
  */
 export const coordinateGetter: KeyboardCoordinateGetter = (
 	event,

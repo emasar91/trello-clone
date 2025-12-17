@@ -13,12 +13,10 @@ import NotificationContainer from '@/components/Notifications/Notifications'
 import { useGetWorkspaces } from '@/hooks/useGetWorkSpace'
 
 /**
- * WorkspacesPage component
- *
- * @param {string} type - type of workspace page, can be 'w' for workspace or 'u' for user
- * @param {string} username - username of the user or workspace
- * @param {string} uid - uid of the user or workspace
- *
+ * WorkspacesPage es un componente que renderiza una página de workspaces.
+ * @param {string} type - tipo de página de workspace, puede ser 'w' para workspace o 'u' para usuario
+ * @param {string} username - nombre de usuario del usuario o workspace
+ * @param {string} uid - uid del usuario o workspace
  * @returns JSX element
  */
 function WorkspacesPage({

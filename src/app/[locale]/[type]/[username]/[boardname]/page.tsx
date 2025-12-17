@@ -2,14 +2,9 @@ import BoardPage from '@/components/Pages/BoardPage/BoardPage'
 import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 
 /**
- * Page component for boards.
- *
- * @param {object} params - Object with boardname and username properties.
- *
- * @returns {JSX.Element} - ProtectedPage component with BoardPage child.
- *
- * @example
- * <Page boardname="myboard" username="john" />
+ * Page es un componente que renderiza el componente BoardPage protegido.
+ * @param {object} params - Object con boardname y username como propiedades.
+ * @returns {JSX.Element} - ProtectedPage con BoardPage como hijo.
  */
 async function page({
 	params,

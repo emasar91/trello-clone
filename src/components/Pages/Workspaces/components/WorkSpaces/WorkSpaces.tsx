@@ -9,16 +9,14 @@ import {
 import { IWorkspace } from '@/types/workspaces'
 
 /**
- * Component that renders a workspace section with the workspace avatar and title.
- * It also renders a BoardGrid component with the boards of the workspace.
- *
- * @param {{ workspace: IWorkspace }} - The workspace to render.
+ * WorkspaceSection es un componente que renderiza una sección de workspace con el avatar y el título del workspace.
+ * También renderiza un BoardGrid con los tableros del workspace.
+ * @param {{ workspace: IWorkspace }} - El workspace a renderizar.
  */
 const WorkspaceSection = ({ workspace }: { workspace: IWorkspace }) => {
 	const theme = useTheme()
 	return (
 		<Box sx={WorkSpacesContainerStyle}>
-			{/* Header workspace */}
 			<Box sx={WorkSpacesAvatarContainerStyle}>
 				<Box sx={WorkSpacesAvatarStyle(workspace.avatarColor, theme)}>
 					{workspace.name.charAt(0).toUpperCase()}

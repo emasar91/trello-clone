@@ -11,13 +11,12 @@ import { CustomSlider } from '@/components/CustomSlider/CustomSlider'
 import { itemsSliderSection2 } from '@/constants'
 
 /**
- * Section 2 component
+ * Section 2 es el componente de la seccion 2 de la pagina de inicio.
+ * Renderiza un texto con el titulo, subtitulo y descripcion de la seccion 2.
+ * Renderiza un CustomSlider con los items de la seccion 2.
+ * @returns {JSX.Element} Section 2 componente
  *
- * This component renders a section with a title, subtitle, description and a custom slider with items.
- *
- * The title, subtitle and description are translated using next-intl.
- *
- * The custom slider is shown with the left items and the items are translated using next-intl.
+ * El CustomSlider se muestra con los items de la izquierda y los items se traducen usando next-intl.
  */
 const Section2 = () => {
 	const t = useTranslations('PageHome.section2')
@@ -30,6 +29,7 @@ const Section2 = () => {
 						<Typography component="p" sx={Section2SubtitleStyle}>
 							{t('subTitle')}
 						</Typography>
+
 						<Typography component={'h2'} sx={Section2TitleStyle}>
 							{t('title')}
 						</Typography>

@@ -9,14 +9,13 @@ interface EmailFieldProps {
 }
 
 /**
- * EmailField component renders a TextField with a label of "Email" and a placeholder
- * of "Ingresa tu email". The component uses the useTranslations hook to translate
- * the text of the placeholder. The component expects two properties: value and onChange.
- * value is the value of the TextField and onChange is a function to call when the value
- * of the TextField changes.
- *
- * @param {{ value: string, onChange: (value: string) => void }} props
- * @returns {React.ReactElement}
+ * EmailField es un componente que renderiza un TextField con un label de "Email" y un placeholder
+ * de "Ingresa tu email". El componente usa el hook useTranslations para traducir
+ * el texto del placeholder. El componente espera dos propiedades: value y onChange.
+ * value es el valor del TextField y onChange es una funcion para llamar cuando el valor
+ * del TextField cambia.
+ * @param {EmailFieldProps} props
+ * @returns {React.ReactElement} un Box con el TextField
  */
 const EmailField: React.FC<EmailFieldProps> = ({ value, onChange }) => {
 	const t = useTranslations('LoginPage')

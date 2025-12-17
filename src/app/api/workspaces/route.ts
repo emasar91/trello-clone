@@ -7,26 +7,27 @@ import { editWorkspace } from '@/helpers/updateWorkspace'
 import { getWorkspaces } from '@/helpers/getWorkspaces'
 
 /**
- * GET /api/workspaces?uid=123
+ * Obtener todos los workspaces de un usuario autenticado.
  * @param {Request} request
  * @returns {Promise<NextResponse>}
- * @description Obtener todos los workspaces de un usuario autenticado.
  * @example /api/workspaces?uid=123
  */
 export async function GET(request: Request) {
-	// en este ejemplo el userId viene como query param: /api/workspaces?userId=123
 	// 1️⃣ Obtener usuario autenticado
 	const user = await getUserFromRequest()
 	if (!user) {
 		return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 	}
+	// 2️⃣ Obtener userId de query param
 	const { searchParams } = new URL(request.url)
 	const uid = searchParams.get('uid')
 
+	// 3️⃣ Si no viene uid, error
 	if (!uid) {
 		return NextResponse.json({ error: 'uid es requerido' }, { status: 400 })
 	}
 
+	// 4️⃣ Obtener workspaces
 	const workspaces = (await getUserWorkspaces(uid)) as IWorkspace[]
 
 	return NextResponse.json(workspaces)
@@ -34,10 +35,8 @@ export async function GET(request: Request) {
 
 /**
  * Crear un nuevo workspace para un usuario autenticado.
- *
  * @param {Request} request - Request que contiene el body con los datos del nuevo workspace.
  * @returns {Promise<NextResponse>} - Promesa que se resuelve con el nuevo workspace creado.
- * @description Crear un nuevo workspace para un usuario autenticado.
  * @example /api/workspaces?uid=123
  */
 export async function POST(req: Request) {
@@ -48,23 +47,26 @@ export async function POST(req: Request) {
 			return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 		}
 
+		// 2️⃣ Validar maximo de workspaces
 		if (user.workspaces.length >= 4) {
 			return NextResponse.json(
 				{ message: 'El maximo de workspaces es 4' },
 				{ status: 401 }
 			)
 		}
-		// 2) Leer body
+
+		// 3️⃣ Leer body
 		const body = await req.json()
 		const name = (body?.name ?? '').toString().trim()
 		const description = body?.description
 			? String(body.description).trim()
 			: undefined
 
+		// 4️⃣ Validar nombre
 		if (!name) {
 			return NextResponse.json({ message: 'Nombre requerido' }, { status: 400 })
 		}
-		// 3) Llamar al helper que ya tenés
+		// 5️⃣ Crear workspace
 		const workspace = await createWorkspaceForUser({
 			userId: user.uid,
 			name,
@@ -73,9 +75,7 @@ export async function POST(req: Request) {
 		return NextResponse.json({ workspace }, { status: 201 })
 	} catch (err: unknown) {
 		const error = err as Error
-
 		console.error('POST /api/workspaces error:', error)
-
 		if (
 			error.message?.includes('TOKEN_INVALID') ||
 			error.message?.includes('TOKEN_EXPIRED')
@@ -94,10 +94,8 @@ export async function POST(req: Request) {
 
 /**
  * Actualiza un workspace existente.
- *
  * @param {Request} req - Request que contiene el body con los datos del workspace a actualizar.
  * @returns {Promise<NextResponse>} - Promesa que se resuelve con el workspace actualizado.
- * @description Actualiza un workspace existente.
  * @example /api/workspaces/[id]
  */
 export async function PUT(req: Request) {
@@ -107,7 +105,7 @@ export async function PUT(req: Request) {
 		if (!user) {
 			return NextResponse.json({ message: 'TOKEN_INVALID' }, { status: 401 })
 		}
-		// 3️⃣ Leer body
+		// 2️⃣ Leer body
 		const body = await req.json()
 		const name = (body?.name ?? '').toString().trim()
 		const workspaceId = body?.workspaceId
@@ -115,26 +113,26 @@ export async function PUT(req: Request) {
 			body?.description !== undefined
 				? String(body.description).trim()
 				: undefined
-		// 🚫 Si ambos vienen vacíos, error
+		// 3️⃣ Si ambos vienen vacíos, error
 		if (!name && !description) {
 			return NextResponse.json(
 				{ message: 'Debe enviar nombre o descripción para actualizar' },
 				{ status: 400 }
 			)
 		}
-		// 🚫 workspaceId requerido
+		// 4️⃣ workspaceId requerido
 		if (!workspaceId) {
 			return NextResponse.json(
 				{ message: 'ID de workspace requerido' },
 				{ status: 400 }
 			)
 		}
-		// 🛠 Construir objeto dinámico
+		// 5️⃣ Construir objeto dinámico
 		const updateData: { name?: string; description?: string } = {}
 		if (name) updateData.name = name
 		if (description) updateData.description = description
 
-		// 👀 Validar duplicado solo si se quiere actualizar el nombre
+		// 6️⃣ Validar duplicado solo si se quiere actualizar el nombre
 		if (updateData.name) {
 			const workspaces = (await getWorkspaces(
 				user.uid
@@ -150,11 +148,11 @@ export async function PUT(req: Request) {
 				)
 			}
 		}
-		// 4️⃣ Llamar al helper que actualiza en MongoDB
+		// 7️⃣ Llamar al helper que actualiza en MongoDB
 		const result = await editWorkspace({
 			userId: user.uid,
 			workspaceId,
-			...updateData, // <---- solo manda lo que corresponde
+			...updateData,
 		})
 		return NextResponse.json({ workspace: result }, { status: 200 })
 	} catch (err: unknown) {
@@ -162,7 +160,6 @@ export async function PUT(req: Request) {
 
 		console.error('PUT /api/workspaces/[id] error:', error?.message || error)
 
-		// 🔒 Errores de autorización
 		if (
 			error.message?.includes('TOKEN_INVALID') ||
 			error.message?.includes('TOKEN_EXPIRED')
@@ -170,22 +167,16 @@ export async function PUT(req: Request) {
 			return NextResponse.json({ message: 'TOKEN_MISSING' }, { status: 401 })
 		}
 
-		// 👤 Usuario no encontrado
 		if (error.message?.includes('USER_NOT_FOUND')) {
 			return NextResponse.json({ message: error.message }, { status: 401 })
 		}
-
-		// 🚫 Workspace inexistente
 		if (error.message?.includes('Workspace no encontrado')) {
 			return NextResponse.json({ message: error.message }, { status: 404 })
 		}
 
-		// ⚠️ Otros errores esperados
 		if (error.message?.includes('No se aplicaron cambios')) {
 			return NextResponse.json({ message: error.message }, { status: 400 })
 		}
-
-		// 💥 Error genérico
 		return NextResponse.json({ message: 'Error interno' }, { status: 500 })
 	}
 }

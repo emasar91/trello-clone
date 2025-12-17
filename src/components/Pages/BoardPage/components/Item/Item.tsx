@@ -41,7 +41,13 @@ export interface Props {
 		value: Props['value']
 	}): React.ReactElement | null
 }
-
+/**
+ * Un componente Item que muestra una tarjeta con su valor, tags, descripción y comentarios.
+ * También muestra un botón para eliminar la tarjeta y un botón para ver la tarjeta.
+ * @param {Props} props - Las propiedades del componente.
+ * @returns {JSX.Element} - Un JSX element representando el item.
+ * no se usa componentes de mui porque pierde rendimiento en la lista de items
+ */
 export const Item = React.memo(
 	React.forwardRef<HTMLLIElement, Props>(
 		(

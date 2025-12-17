@@ -12,17 +12,13 @@ type Props = {
 }
 
 /**
- * PageContainer is a container component that wraps the page content in a Box.
- * It provides consistent styling for the page content, such as background color, width, and alignment.
- * It also provides a child Box that can be used to wrap the page content.
- * The child Box is styled with consistent padding and a maxWidth.
- * PageContainer does not provide any additional props beyond what is available on the Box component.
+ * PageContainer es un contenedor que envuelve el contenido de la página en un Box.
+ * Proporciona un estilo consistente para el contenido de la página, como el color de fondo, el ancho y la alineación.
+ * También proporciona un Box hijo que se puede usar para envolver el contenido de la página.
+ * El Box hijo se estiliza con un relleno consistente y un maxWidth.
+ * PageContainer no proporciona ninguna prop adicional más allá de lo que está disponible en el componente Box.
  * @param {{ children: React.ReactNode }} props
  * @returns {React.ReactElement}
- * @example
- * <PageContainer>
- *   <Box>...</Box>
- * </PageContainer>
  */
 const PageContainer = ({ children, backgroundColor, margin }: Props) => {
 	return (

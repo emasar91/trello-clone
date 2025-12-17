@@ -5,6 +5,12 @@ import CreateCardInput from '../../../components/TextAreaCustom/TextAreaCustom'
 import { ColumnAdderAddColumnStyles } from './ColumnAdder.styles'
 import { useTranslations } from 'next-intl'
 
+/**
+ * Componente que representa un botón para agregar una nueva columna.
+ * Envuelve el componente `Box` y le añade la lógica de `useTranslations`.
+ * @param {Function} onCreate - Función para crear una nueva columna
+ * @returns {JSX.Element} - El componente ColumnAdder
+ */
 const ColumnAdder = ({ onCreate }: { onCreate: (title: string) => void }) => {
 	const [show, setShow] = useState(false)
 	const t = useTranslations('BoardsPage')
@@ -21,7 +27,7 @@ const ColumnAdder = ({ onCreate }: { onCreate: (title: string) => void }) => {
 	return (
 		<CreateCardInput
 			type="column"
-			onCreate={(title) => {
+			onCreate={(title: string) => {
 				onCreate(title)
 				setShow(false)
 			}}

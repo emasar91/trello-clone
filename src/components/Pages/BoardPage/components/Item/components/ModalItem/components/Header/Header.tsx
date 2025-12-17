@@ -18,14 +18,14 @@ type IHeaderProps = {
 }
 
 /**
- * Header component.
- * @param {boolean} isEditingTitle - Is the title editable?
- * @param {React.Dispatch<React.SetStateAction<boolean>>} setIsEditingTitle - Function to toggle isEditingTitle state.
- * @param {string} title - The title to be displayed.
- * @param {React.Dispatch<React.SetStateAction<string>>} setTitle - Function to update the title state.
- * @param {() => void} onClose - Function to be called when the close button is clicked.
- * @param {() => void} onSubmit - Function to be called when the title form is submitted.
- * @return {JSX.Element} The Header component.
+ * Header es un componente que muestra el titulo de la tarjeta y permite editarlo.
+ * @param {boolean} isEditingTitle - Indica si el titulo esta siendo editado.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} setIsEditingTitle - Funcion para cambiar el estado de isEditingTitle.
+ * @param {string} title - El titulo de la tarjeta.
+ * @param {React.Dispatch<React.SetStateAction<string>>} setTitle - Funcion para actualizar el titulo de la tarjeta.
+ * @param {() => void} onClose - Funcion para cerrar el modal.
+ * @param {() => void} onSubmit - Funcion para enviar el titulo editado.
+ * @return {JSX.Element} El Header component.
  */
 const Header = ({
 	isEditingTitle,

@@ -40,12 +40,12 @@ export async function generateMetadata({
 }
 
 /**
- * The InnerLayout function generates a docstring that is used to create a component
- * given the children and locale.
- * If the locale is not found, it will return not found.
- * The function returns a promise that resolves to the metadata.
- * The InnerLayout function returns a promise that resolves to the following:
- * the metadata containing the locale
+ * La función InnerLayout genera una docstring que se utiliza para crear un componente
+ * dado los children y locale.
+ * Si el locale no se encuentra, devolverá not found.
+ * La función devuelve una promesa que se resuelve en la metadata.
+ * La función InnerLayout devuelve una promesa que se resuelve en lo siguiente:
+ * la metadata que contiene el locale
  * the title
  * the description
  * the NextIntlClientProvider locale
