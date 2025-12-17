@@ -165,7 +165,7 @@ export const Item = React.memo(
 										justifyContent: 'center',
 									}}
 								>
-									{tags && (
+									{tags && tags?.length > 0 && (
 										<div
 											style={{
 												display: 'flex',
