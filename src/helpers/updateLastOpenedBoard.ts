@@ -19,6 +19,7 @@ export async function updateLastOpenedBoard(
 	const boardObjectId = toObjectId(boardId)
 	const userObjectId = toObjectId(userId)
 
+	// 1️⃣ Actualizar lastOpenedAt
 	await workspacesCollection.updateOne(
 		{
 			userId: userObjectId,

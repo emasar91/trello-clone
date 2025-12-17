@@ -13,11 +13,13 @@ export async function getNextOrder(columnId: string) {
 	const db = await getDB()
 	const cardsCollection = db.collection('cards')
 
+	// 1️⃣ Buscar la tarjeta con orden más alto en la columna
 	const lastCard = await cardsCollection
 		.find({ columnId: toObjectId(columnId) as ObjectId })
 		.sort({ order: -1 })
 		.limit(1)
 		.toArray()
 
+	// 2️⃣ Retornar el próximo orden
 	return lastCard.length > 0 ? lastCard[0].order + 1 : 1
 }

@@ -1,27 +1,27 @@
 import { ObjectId } from 'mongodb'
 
 /**
- * Converts a given string or ObjectId to a valid ObjectId.
- * If the given value is already an ObjectId, it is returned as is.
- * If the given value is a string, it is validated to ensure it is a valid ObjectId format (24 character hex string, 12 byte Uint8Array, or an integer).
- * If the given value is invalid, an Error is thrown.
- * @param {string | ObjectId} value - The value to convert to an ObjectId.
- * @returns {ObjectId} - The converted ObjectId.
- * @throws {Error} - If the given value is invalid.
+ * Convierte un valor dado a un ObjectId válido.
+ * Si el valor dado ya es un ObjectId, se devuelve como está.
+ * Si el valor dado es una cadena, se valida para asegurarse de que sea un formato ObjectId válido (24 caracteres hex, 12 bytes Uint8Array, o un entero).
+ * Si el valor dado es inválido, se lanza un Error.
+ * @param {string | ObjectId} value - El valor a convertir en ObjectId.
+ * @returns {ObjectId} - El ObjectId convertido.
+ * @throws {Error} - Si el valor dado es inválido.
  */
 export const toObjectId = (value: string | ObjectId): ObjectId => {
-	// If it's already an ObjectId, return it
+	// Si el valor es ya un ObjectId, devuélvelo como está
 	if (value instanceof ObjectId) {
 		return value
 	}
 
-	// Validate that the string is a valid ObjectId format
+	// Validar que la cadena sea un formato ObjectId válido
 	if (!ObjectId.isValid(value)) {
 		throw new Error(
 			`Invalid ObjectId format: "${value}". Expected a 24 character hex string, 12 byte Uint8Array, or an integer.`
 		)
 	}
 
-	// Convert string to ObjectId
+	// Convertir string a ObjectId
 	return new ObjectId(value)
 }

@@ -1,4 +1,3 @@
-// lib/cards/createCard.ts
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
 import { toObjectId } from './utils'
@@ -18,9 +17,7 @@ type CreateCardData = {
 
 /**
  * Crea una nueva tarjeta y actualiza el `updatedAt` del board y de la columna correspondientes.
- *
  * @param {CreateCardData} data - Objeto con los datos para crear la tarjeta.
- *
  * @returns {Promise<ICard>} - Promesa que se resuelve con la tarjeta creada.
  */
 
@@ -60,7 +57,7 @@ export async function createCard(data: CreateCardData) {
 		{ $set: { updatedAt: now } }
 	)
 
-	// Retorno formato completo
+	// 4️⃣ Retornar la tarjeta creada
 	return {
 		_id: result.insertedId,
 		...newCard,

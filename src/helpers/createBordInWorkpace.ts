@@ -93,5 +93,6 @@ export async function createBoardinWorkspace({
 		console.error(error)
 	}
 
+	// 6️⃣ Retornar el tablero creado
 	return { ...newBoard, _id: boardId }
 }

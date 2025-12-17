@@ -13,10 +13,12 @@ export async function getCardsByColumn(columnId: string | ObjectId) {
 	const cardsCollection = db.collection<ICard>('cards')
 
 	const columnObjectId = toObjectId(columnId) as ObjectId
+	// 1️⃣ Buscar las tarjetas de la columna
 	const cards = await cardsCollection
 		.find({ columnId: columnObjectId })
 		.sort({ order: 1 })
 		.toArray()
 
+	// 2️⃣ Retornar las tarjetas
 	return cards
 }

@@ -7,6 +7,8 @@ import { getDB } from './getDB'
  */
 export async function getUser({ uid }: { uid?: string }) {
 	const db = await getDB()
+	// 1️⃣ Buscar el usuario
 	const user = await db.collection('users').findOne({ uid })
+	// 2️⃣ Retornar el usuario
 	return user
 }

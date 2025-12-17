@@ -21,39 +21,20 @@ function getSnippet(text: string, query: string, radius = 5) {
 
 /**
  * Busca todos los tableros del usuario que contengan un texto determinado
- * en su t tulo, descripci n o comentarios.
- * Devuelve un array de objetos con la siguiente estructura:
- * {
- *   cardId: string,
- *   cardTitle: string,
- *   matchSource: 'title' | 'description' | 'comment',
- *   snippet: string,
- *   commentAuthor?: string,
- *   column: {
- *     id: string,
- *     name: string,
- *   },
- *   board: {
- *     id: string,
- *     name: string,
- *   },
- *   workspace: {
- *     id: string,
- *     name: string,
- *   },
- * }
+ * en su titulo, descripción o comentarios.
  * @param {ObjectId} userId - ID del usuario.
  * @param {string} query - Texto a buscar.
- * @returns {Promise<Array<{...SearchCardResult}>>} - Array de resultados de la b squeda.
+ * @returns {Promise<Array<{...SearchCardResult}>>} - Array de resultados de la búsqueda.
  */
 export async function searchUserCards(userId: ObjectId, query: string) {
 	const db = await getDB()
 	const regex = new RegExp(query, 'i')
 
+	// 1️⃣ Buscar las tarjetas
 	const cards = await db
 		.collection('cards')
 		.aggregate([
-			// 1️⃣ Board
+			// 2️⃣ Board
 			{
 				$lookup: {
 					from: 'boards',
@@ -64,14 +45,14 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 			},
 			{ $unwind: '$board' },
 
-			// 2️⃣ SOLO datos del usuario
+			// 3️⃣ SOLO datos del usuario
 			{
 				$match: {
 					'board.userId': userId,
 				},
 			},
 
-			// 3️⃣ Buscar texto
+			// 4️⃣ Buscar texto
 			{
 				$match: {
 					$or: [
@@ -82,7 +63,7 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 				},
 			},
 
-			// 4️⃣ Column
+			// 5️⃣ Column
 			{
 				$lookup: {
 					from: 'columns',
@@ -93,7 +74,7 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 			},
 			{ $unwind: '$column' },
 
-			// 5️⃣ Workspace
+			// 6️⃣ Workspace
 			{
 				$lookup: {
 					from: 'workspaces',
@@ -106,6 +87,7 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 		])
 		.toArray()
 
+	// 7️⃣ Retornar las tarjetas
 	return cards.map((card) => {
 		let matchSource: 'title' | 'description' | 'comment'
 		let snippet = ''
@@ -117,6 +99,7 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 			regex.test(c.text)
 		)
 
+		// 8️⃣ Retornar si matcheo con el titulo, descripcion o comentario
 		if (titleMatch) {
 			matchSource = 'title'
 		} else if (descriptionMatch) {
@@ -130,6 +113,7 @@ export async function searchUserCards(userId: ObjectId, query: string) {
 			matchSource = 'title'
 		}
 
+		// 9️⃣ Retornar los resultados
 		return {
 			cardId: card._id.toString(),
 			cardTitle: card.title,

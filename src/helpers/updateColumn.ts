@@ -1,4 +1,3 @@
-// lib/db/columns.ts
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
 import { toObjectId } from './utils'
@@ -29,26 +28,33 @@ export async function updateColumn(
 		const columnsCollection = db.collection('columns')
 		const boardsCollection = db.collection('boards')
 
+		// 1️⃣ Validar si el columnId es válido
 		const _id = typeof columnId === 'string' ? new ObjectId(columnId) : columnId
 
+		// 2️⃣ Validar si hay datos para actualizar
 		if (!data || Object.keys(data).length === 0) {
 			return null
 		}
 
+		// 3️⃣ Preparar datos para actualizar
 		const setData: UpdateData & { updatedAt: Date } = {
 			...data,
 			updatedAt: new Date(),
 		}
 
+		// 4️⃣ Ejecutar actualización
 		const result = await columnsCollection.updateOne({ _id }, { $set: setData })
 
+		// 5️⃣ Validar si la columna existe
 		if (!result?.modifiedCount) return null
 
+		// 6️⃣ Actualizar board
 		await boardsCollection.updateOne(
 			{ _id: toObjectId(boardId) as ObjectId },
 			{ $set: { updatedAt: new Date() } }
 		)
 
+		// 7️⃣ Retornar la columna actualizada
 		const updated = await columnsCollection.findOne({ _id })
 
 		return updated ?? null

@@ -27,7 +27,9 @@ export async function createColumn(
 	const user = await getUser({ uid: userId.toString() })
 	const createdAt = new Date()
 
+	// 1️⃣ Calcular orden
 	let finalOrder = order
+	// 2️⃣ Si no se proporciona un orden, calcularlo
 	if (finalOrder === undefined) {
 		const lastColumn = await columnsCollection
 			.find({ boardId: boardObjectId })
@@ -37,7 +39,7 @@ export async function createColumn(
 
 		finalOrder = lastColumn.length > 0 ? lastColumn[0].order + 1 : 0
 	}
-	// 1️⃣ Crear la nueva columna
+	// 3️⃣ Crear la nueva columna con el orden final
 	const newColumn: IColumn = {
 		boardId: boardObjectId,
 		userId: user?._id,
@@ -50,12 +52,12 @@ export async function createColumn(
 	const result = await columnsCollection.insertOne(newColumn)
 	const columnId = result.insertedId
 
-	// 2️⃣ Actualizar el campo updatedAt del board
+	// 4️⃣ Actualizar el campo updatedAt del board
 	await boardsCollection.updateOne(
 		{ _id: boardObjectId },
 		{ $set: { updatedAt: createdAt } }
 	)
 
-	// 3️⃣ Retornar la columna creada
+	// 5️⃣ Retornar la columna creada
 	return { ...newColumn, _id: columnId }
 }

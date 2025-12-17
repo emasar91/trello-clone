@@ -14,10 +14,13 @@ export async function updateColumnOrders(columnIds: string[]) {
 		const db = await getDB()
 		const columnsCollection = db.collection('columns')
 
+		// 1️⃣ Filtrar IDs válidos
 		const validIds = columnIds.filter(ObjectId.isValid)
 
+		// 2️⃣ Validar si hay IDs válidos
 		if (validIds.length === 0) return []
 
+		// 3️⃣ Crear operaciones de actualización
 		const ops = validIds.map((id, index) =>
 			columnsCollection.updateOne(
 				{ _id: new ObjectId(id) },
@@ -25,13 +28,16 @@ export async function updateColumnOrders(columnIds: string[]) {
 			)
 		)
 
+		// 4️⃣ Ejecutar operaciones de actualización
 		await Promise.all(ops)
 
+		// 5️⃣ Retornar columnas actualizadas
 		const updatedColumns = await columnsCollection
 			.find({ _id: { $in: validIds.map((id) => new ObjectId(id)) } })
 			.sort({ order: 1 })
 			.toArray()
 
+		// 6️⃣ Retornar columnas actualizadas
 		return updatedColumns
 	} catch (error) {
 		console.error('❌ Error en updateColumnOrders:', error)

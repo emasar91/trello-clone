@@ -1,4 +1,3 @@
-// lib/cards/updateCardOrderBatch.ts
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
 
@@ -19,6 +18,7 @@ export async function updateCardsOrder(updates: CardOrderUpdate[]) {
 	const db = await getDB()
 	const cardsCollection = db.collection('cards')
 
+	// 1️⃣ Crear operaciones de actualización
 	const bulkOps = updates.map(
 		({ _id, columnId, boardId, order, updatedAt }) => ({
 			updateOne: {
@@ -36,6 +36,10 @@ export async function updateCardsOrder(updates: CardOrderUpdate[]) {
 	)
 
 	if (bulkOps.length === 0) return null
+
+	// 2️⃣ Ejecutar operaciones de actualización
 	const result = await cardsCollection.bulkWrite(bulkOps)
+
+	// 3️⃣ Retornar resultado
 	return result
 }

@@ -15,12 +15,10 @@ interface User {
 	nombre?: string | null
 	username?: string | null
 	workspaces: WorkspaceRef[]
-	// ... otros campos opcionales
 }
 
 /**
  * Edita un workspace existente.
- *
  * @param {userId: string | ObjectId} - ID del usuario.
  * @param {workspaceId: string | ObjectId} - ID del workspace.
  * @param {name?: string} - Nuevo nombre para el workspace.
@@ -72,6 +70,7 @@ export async function editWorkspace({
 
 	if (result.modifiedCount === 0) throw new Error('No se aplicaron cambios')
 
+	// 5️⃣ Retornar workspace actualizado
 	return {
 		...workspace,
 		...updateFields,

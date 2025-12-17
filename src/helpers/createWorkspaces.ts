@@ -20,11 +20,9 @@ interface User {
  * Crea un nuevo workspace para un usuario.
  * Primero se valida que el usuario existe y que no tiene un workspace con ese nombre.
  * Luego se crea el workspace y se actualiza la referencia en el usuario.
- *
  * @param {string | ObjectId} userId - ID del usuario.
  * @param {string} name - nombre del workspace.
  * @param {string} [description] - descripci n del workspace.
- *
  * @returns {{...newWorkspace, _id: ObjectId}} - Workspace creado con su ID.
  * @throws {Error} Si el usuario no existe o si ya tiene un workspace con ese nombre.
  */
@@ -69,10 +67,11 @@ export async function createWorkspaceForUser({
 		avatarColor: getRandomAvatarColor(),
 	}
 
+	// 4️⃣ Insertar el workspace en la base de datos
 	const result = await workspacesCollection.insertOne(newWorkspace)
 	const workspaceId = result.insertedId
 
-	// 4️⃣ Agregar referencia al usuario
+	// 5️⃣ Agregar referencia al usuario
 	await usersCollection.updateOne(
 		{ _id: userObjectId },
 		{
@@ -82,5 +81,6 @@ export async function createWorkspaceForUser({
 		}
 	)
 
+	// 6️⃣ Retornar el workspace creado
 	return { ...newWorkspace, _id: workspaceId }
 }

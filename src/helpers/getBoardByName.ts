@@ -21,9 +21,10 @@ export async function getBoardByNames(
 	const workspacesCollection = db.collection<IWorkspaceStore>('workspaces')
 	const boardsCollection = db.collection<IBoard>('boards')
 
+	// 1️⃣ Buscar el usuario
 	const user = await getUser({ uid: userId.toString() })
 
-	// 1️⃣ Buscar el workspace del usuario con ese nombre
+	// 2️⃣ Buscar el workspace del usuario con ese nombre
 	const workspace = await workspacesCollection.findOne({
 		userId: user?._id,
 		name: workspaceName,
@@ -33,7 +34,7 @@ export async function getBoardByNames(
 		throw new Error(`No se encontró el workspace con nombre "${workspaceName}"`)
 	}
 
-	// 2️⃣ Buscar el board dentro de la colección de boards
+	// 3️⃣ Buscar el board dentro de la colección de boards
 	const board = await boardsCollection.findOne({
 		userId: user?._id,
 		workspaceId: workspace._id,
@@ -46,6 +47,6 @@ export async function getBoardByNames(
 		)
 	}
 
-	// 3️⃣ Retornar el board junto con el workspace
+	// 4️⃣ Retornar el board junto con el workspace
 	return { workspace, board }
 }

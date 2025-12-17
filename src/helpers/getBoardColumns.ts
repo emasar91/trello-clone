@@ -15,10 +15,12 @@ export async function getBoardColumns(boardId: string | ObjectId) {
 
 	const boardObjectId = toObjectId(boardId) as ObjectId
 
+	// 1️⃣ Buscar las columnas del board
 	const columns = await columnsCollection
 		.find({ boardId: boardObjectId })
 		.sort({ order: 1 })
 		.toArray()
 
+	// 2️⃣ Retornar las columnas
 	return columns
 }

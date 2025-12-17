@@ -1,4 +1,3 @@
-// /helpers/deleteColumn.ts
 import { ObjectId } from 'mongodb'
 import { getDB } from './getDB'
 import { toObjectId } from './utils'
@@ -19,23 +18,24 @@ export async function deleteColumnAndCards(
 	const cardsCollection = db.collection('cards')
 	const boardsCollection = db.collection('boards')
 
+	// 1️⃣ Chequear que el tablero no quede sin columnas
 	const columnCount = await columnsCollection.countDocuments({ boardId })
 	if (columnCount === 1)
 		throw new Error('El tablero no puede quedar sin columnas')
 
-	// 1️⃣ Obtener cards de esa columna
+	// 2️⃣ Obtener cards de esa columna
 	const cards = await cardsCollection
 		.find({ columnId: toObjectId(columnId) })
 		.toArray()
 	const cardIds = cards.map((card) => card._id)
 
-	// 2️⃣ Eliminar cards de esa columna
+	// 3️⃣ Eliminar cards de esa columna
 	await cardsCollection.deleteMany({ columnId: toObjectId(columnId) })
 
-	// 3️⃣ Eliminar columna
+	// 4️⃣ Eliminar columna
 	await columnsCollection.deleteOne({ _id: toObjectId(columnId) as ObjectId })
 
-	// 4️⃣ Actualizar tablero — remover columna del board
+	// 5️⃣ Actualizar tablero — remover columna del board
 	const columnObjectId = toObjectId(columnId)
 	await boardsCollection.updateOne(
 		{ _id: toObjectId(boardId) as ObjectId },
@@ -46,5 +46,6 @@ export async function deleteColumnAndCards(
 		}
 	)
 
+	// 6️⃣ Retornar el ID de la columna eliminada y los IDs de las tarjetas eliminadas
 	return { columnId, cardIds }
 }
