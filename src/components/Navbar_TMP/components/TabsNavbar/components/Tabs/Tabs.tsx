@@ -1,6 +1,6 @@
 import { tabsNavbar } from '@/constants'
 import React, { useEffect, useRef, useState } from 'react'
-import Tab from '@/components/Navbar/components/TabsNavbar/components/Tab/Tab'
+import Tab from '@/components/Navbar_TMP/components/TabsNavbar/components/Tab/Tab'
 import { useStoreTrello } from '@/context/useStoreTrello'
 import { IDrawer, ITab } from '@/types/navBar'
 import { Box } from '@mui/material'

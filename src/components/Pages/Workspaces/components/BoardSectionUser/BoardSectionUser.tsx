@@ -16,7 +16,7 @@ import { useMemo, useState } from 'react'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useAuth } from '@/context/useAuthContext'
 import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
-import ModalCreateWorkspace from '@/components/Navbar/components/ModalCreateWorkspace/ModalCreateWorkspace'
+import ModalCreateWorkspace from '@/components/Navbar_TMP/components/ModalCreateWorkspace/ModalCreateWorkspace'
 
 /**
  * BoardSectionUser es un componente que renderiza una seccion para los tableros del usuario.

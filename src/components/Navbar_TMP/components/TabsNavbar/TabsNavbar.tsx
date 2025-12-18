@@ -1,5 +1,5 @@
 import React from 'react'
-import Tabs from '@/components/Navbar/components/TabsNavbar/components/Tabs/Tabs'
+import Tabs from '@/components/Navbar_TMP/components/TabsNavbar/components/Tabs/Tabs'
 import { Box } from '@mui/material'
 import { containerBoxStyle } from './TabsNavBar.styles'
 
