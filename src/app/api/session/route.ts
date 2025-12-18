@@ -56,9 +56,11 @@ export async function POST(req: Request) {
 			maxAge: expiresIn / 1000,
 		})
 		return res
-	} catch (error) {
+	} catch (err: unknown) {
+		const error = err as Error
 		console.error('SESSION ERROR:', error)
-		return new NextResponse('Error en session', { status: 500 })
+		console.log('SESSION ERROR:', error)
+		return new NextResponse(error.message, { status: 500 })
 	}
 }
 
