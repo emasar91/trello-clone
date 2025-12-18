@@ -115,7 +115,7 @@ Todo el estado está tipado con **TypeScript**, reforzando la robustez y manteni
 
 ## 👤 Autor
 
-Desarrollado por ** EManuel Sarco - Michael**  
+Desarrollado por **Emanuel Sarco - Michael**  
 Frontend React Developer  
 
 🔗 GitHub: https://github.com/emasar91
