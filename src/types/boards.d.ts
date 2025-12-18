@@ -14,7 +14,7 @@ export interface IBoard {
 interface IBoardStore {
 	board: IBoard
 	columns: IColumn[]
-	cardsByColumn: Record<string, ICard[]> // cards agrupadas por columnId
+	cardsByColumn: Record<string, ICard[]>
 	selectedCardId: string
 	setBoard: (board: IBoard) => void
 	setColumns: (columns: IColumn[]) => void

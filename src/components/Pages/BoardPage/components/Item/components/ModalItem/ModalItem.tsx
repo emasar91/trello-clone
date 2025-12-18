@@ -172,6 +172,7 @@ const ModalItem = ({
 	const handleAddComment = (type: 'new' | 'edit') => {
 		if (!user) return
 		const id = type === 'new' ? crypto.randomUUID() : showEditComment.id
+		//1️⃣ Si es nuevo, se genera un id nuevo, si es edición, se usa el id de la edición
 		const comment: ICardComment = {
 			_id: id,
 			text: type === 'new' ? newComment! : editComment,
@@ -183,15 +184,16 @@ const ModalItem = ({
 			authorId: user.uid, // string — lo convertimos en backend
 			authorName: user.displayName || 'User',
 		}
-		// Construir el array nuevo y enviarlo
+		// 2️⃣ Construir el array nuevo y enviarlo
 		const newComments =
 			type === 'new'
 				? [...comments, comment]
 				: comments.map((c) => (c._id === id ? comment : c))
 
-		// Llamás al hook pasando el array completo (así el backend recibe array)
+		// 3️⃣ Llamás al hook pasando el array completo (así el backend recibe array)
 		updateCardComments(cardId, newComments, type)
 
+		// 4️⃣ Si el comentario no está vacío, se actualiza el estado local
 		if (comment.text.trim() !== '') {
 			setComments((prev) =>
 				type === 'new'
@@ -208,6 +210,7 @@ const ModalItem = ({
 		}
 	}
 
+	// 5️⃣ Ordena los comentarios por fecha de edición o creación
 	const sortedComments = [...comments].sort((a, b) => {
 		const dateA: Date = new Date(a.editedAt || a.createdAt)
 		const dateB: Date = new Date(b.editedAt || b.createdAt)

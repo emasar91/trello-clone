@@ -20,18 +20,17 @@ export function ThemeWrapper({ children }: { children: React.ReactNode }) {
 	const [hydrated, setHydrated] = useState(false)
 
 	useEffect(() => {
-		// Hidratar manualmente el store
 		useThemeStore.persist.rehydrate()
 		setHydrated(true)
 	}, [])
 
 	useEffect(() => {
 		if (hydrated) {
-			setMode(mode) // Recalcular theme una vez cargado
+			setMode(mode)
 		}
 	}, [hydrated, mode, setMode])
 
-	if (!hydrated) return null // Evita flash incorrecto
+	if (!hydrated) return null
 
 	return (
 		<ThemeProvider theme={theme}>

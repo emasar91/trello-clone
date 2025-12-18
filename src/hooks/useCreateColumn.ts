@@ -1,4 +1,3 @@
-// hooks/useCreateColumn.ts
 import { API } from '@/constants'
 import { useCallback, useRef, useState } from 'react'
 import { toast } from 'react-toastify'

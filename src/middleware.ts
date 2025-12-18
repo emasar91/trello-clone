@@ -6,7 +6,6 @@ import { routes as publicRoutes } from './constants'
 
 export const COOKIE_NAME = 'authToken'
 
-// Middleware de next-intl
 const intlMiddleware = createMiddleware(routing)
 
 const authRoutes: string[] = ['login', 'register', 'reset-password']

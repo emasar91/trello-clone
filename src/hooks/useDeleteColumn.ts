@@ -1,4 +1,3 @@
-// hooks/useDeleteColumn.ts
 import { useState, useRef, useCallback } from 'react'
 import { API } from '@/constants'
 import { toast } from 'react-toastify'

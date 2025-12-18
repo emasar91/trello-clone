@@ -13,7 +13,7 @@ let client: MongoClient
 let clientPromise: Promise<MongoClient>
 
 declare global {
-	// para evitar múltiples conexiones en dev con hot reload
+	// 1️⃣ para evitar múltiples conexiones en dev con hot reload
 	var _mongoClientPromise: Promise<MongoClient> | undefined
 }
 

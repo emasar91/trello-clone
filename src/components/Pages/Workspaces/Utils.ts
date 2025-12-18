@@ -7,14 +7,15 @@ import { AVATAR_BACKGROUND } from '@/constants'
 export const getRandomAvatarColor = (): string => {
 	const total = AVATAR_BACKGROUND.length
 
-	// índice aleatorio
+	// 1️⃣ índice aleatorio
 	const index = Math.floor(Math.random() * total)
 
-	// color base
+	// 2️⃣ color base
 	const color1 = AVATAR_BACKGROUND[index]
 
-	// color desplazado +3 (con vuelta)
+	// 3️⃣ color desplazado +3 (con vuelta)
 	const color2 = AVATAR_BACKGROUND[(index + 3) % total]
 
+	// 4️⃣ Devuelve el gradiente
 	return `linear-gradient(0deg, ${color1} 0%, ${color2} 100%)`
 }

@@ -1,4 +1,3 @@
-// Container.tsx
 import React, { forwardRef, useState, useEffect, useCallback } from 'react'
 import { Handle, Remove } from '../Item'
 import {

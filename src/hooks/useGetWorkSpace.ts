@@ -1,4 +1,3 @@
-// /hooks/useGetWorkspaces.ts
 import { useCallback, useState } from 'react'
 import axios from 'axios'
 import { API } from '@/constants'

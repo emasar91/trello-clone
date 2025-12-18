@@ -1,4 +1,3 @@
-// hooks/useUpdateCardTitle.ts
 import { API } from '@/constants'
 import axios from 'axios'
 import { useCallback, useRef, useState } from 'react'

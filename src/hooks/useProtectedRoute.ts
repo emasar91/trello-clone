@@ -1,4 +1,3 @@
-// hooks/useProtectedRoute.ts
 'use client'
 import { useAuth } from '@/context/useAuthContext'
 import { useLocale } from 'next-intl'

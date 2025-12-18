@@ -353,25 +353,24 @@ export const lightTheme = createTheme({
 			styleOverrides: {
 				root: {
 					'& .MuiOutlinedInput-notchedOutline': {
-						borderColor: colorDark.gray, // color por defecto
+						borderColor: colorDark.gray,
 					},
 					'&:hover .MuiOutlinedInput-notchedOutline': {
-						borderColor: colorDark.gray, // color en hover
+						borderColor: colorDark.gray,
 					},
 					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-						borderColor: colorDark.brandPrimary, // color en focus
+						borderColor: colorDark.brandPrimary,
 						borderWidth: 2,
 					},
 				},
 				input: {
-					color: colorDark.darkBlue, // color del texto
+					color: colorDark.darkBlue,
 				},
 			},
 		},
 		MuiPopover: {
 			styleOverrides: {
 				paper: {
-					// elimina filtro y overlay
 					backdropFilter: 'none',
 					WebkitBackdropFilter: 'none',
 					backgroundImage: 'none',
@@ -381,7 +380,6 @@ export const lightTheme = createTheme({
 		MuiMenu: {
 			styleOverrides: {
 				paper: {
-					// mismo fix para Menú
 					backdropFilter: 'none',
 					WebkitBackdropFilter: 'none',
 					backgroundImage: 'none',
@@ -537,25 +535,24 @@ export const darkTheme = createTheme({
 			styleOverrides: {
 				root: {
 					'& .MuiOutlinedInput-notchedOutline': {
-						borderColor: colorDark.gray, // color por defecto
+						borderColor: colorDark.gray,
 					},
 					'&:hover .MuiOutlinedInput-notchedOutline': {
-						borderColor: colorDark.gray, // color en hover
+						borderColor: colorDark.gray,
 					},
 					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-						borderColor: colorDark.brandPrimary, // color en focus
+						borderColor: colorDark.brandPrimary,
 						borderWidth: 2,
 					},
 				},
 				input: {
-					color: colorDark.darkBlue, // color del texto
+					color: colorDark.darkBlue,
 				},
 			},
 		},
 		MuiPopover: {
 			styleOverrides: {
 				paper: {
-					// elimina filtro y overlay
 					backdropFilter: 'none',
 					WebkitBackdropFilter: 'none',
 					backgroundImage: 'none',
@@ -565,7 +562,6 @@ export const darkTheme = createTheme({
 		MuiMenu: {
 			styleOverrides: {
 				paper: {
-					// mismo fix para Menú
 					backdropFilter: 'none',
 					WebkitBackdropFilter: 'none',
 					backgroundImage: 'none',

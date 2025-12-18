@@ -77,7 +77,6 @@ const SearchBox = ({
 		return null
 	}
 
-	// Mostrar caja siempre que haya query
 	const showEmptyState = hasSearched && !loading && items.length === 0
 
 	return (
@@ -101,7 +100,6 @@ const SearchBox = ({
 					{items.map((item) => {
 						const isTitleMatch = item.matchSource === 'title'
 
-						// Para el título: resaltar solo la coincidencia dentro del título
 						const primaryContent = isTitleMatch
 							? getHighlightedSnippet(item.cardTitle, query)
 							: getHighlightedSnippet(item.snippet, query)
@@ -163,24 +161,31 @@ const SearchBox = ({
 
 export default SearchBox
 
+/**
+ * Resalta la coincidencia en el texto.
+ * @param {string} text - Texto original.
+ * @param {string} query - Búsqueda.
+ * @param {number} length - Longitud del recorte.
+ * @returns {string} - Texto con la coincidencia resaltada.
+ */
 function getHighlightedSnippet(text: string, query: string, length = 60) {
-	// Si no hay texto o búsqueda, devolvemos vacío
+	// 1️⃣ Si no hay texto o búsqueda, devolvemos vacío
 	if (!text || !query) return text
 
 	const index = text.toLowerCase().indexOf(query.toLowerCase())
 	if (index === -1) return text
 
-	// Calcular el inicio y final del recorte, centrado en la coincidencia
+	// 2️⃣ Calcular el inicio y final del recorte, centrado en la coincidencia
 	const start = Math.max(0, index - Math.floor(length / 2))
 	const end = Math.min(
 		text.length,
 		index + query.length + Math.floor(length / 2)
 	)
 
-	// Extraer el trozo del texto alrededor de la coincidencia
+	// 3️⃣ Extraer el trozo del texto alrededor de la coincidencia
 	const snippet = text.slice(start, end)
 
-	// Resaltar la coincidencia
+	// 4️⃣ Resaltar la coincidencia
 	const highlighted = snippet
 		.split(new RegExp(`(${query})`, 'ig'))
 		.map((part, index) =>
@@ -201,7 +206,7 @@ function getHighlightedSnippet(text: string, query: string, length = 60) {
 			)
 		)
 
-	// Si el texto original es más largo que el recorte, agregamos "..."
+	// 5️⃣ Si el texto original es más largo que el recorte, agregamos "..."
 	return start > 0 ? `...${highlighted}` : highlighted
 }
 

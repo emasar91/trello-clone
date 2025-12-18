@@ -1,4 +1,3 @@
-// hooks/useUpdateCardComments.ts
 import { API } from '@/constants'
 import { useCallback, useRef, useState } from 'react'
 import type { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'

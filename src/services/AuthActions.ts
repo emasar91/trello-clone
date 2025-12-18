@@ -1,4 +1,3 @@
-// src/services/AuthActions.ts
 import { firebaseAuth, googleProvider } from '@/config/FireBaseConfig'
 import {
 	signInWithEmailAndPassword,

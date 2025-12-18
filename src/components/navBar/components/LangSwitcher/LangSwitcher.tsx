@@ -21,9 +21,8 @@ const LangSwitcher = () => {
 	const pathname = usePathname()
 
 	const changeLocale = (newLocale: string) => {
-		// Divido la URL en partes
 		const segments = pathname.split('/')
-		segments[1] = newLocale // reemplazo el idioma
+		segments[1] = newLocale
 		const newPath = segments.join('/')
 		router.replace(newPath)
 	}

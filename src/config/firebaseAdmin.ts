@@ -5,7 +5,7 @@ if (!admin.apps.length) {
 		credential: admin.credential.cert({
 			projectId: process.env.FIREBASE_PROJECT_ID,
 			clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-			// Reemplazamos los \n por saltos de línea reales
+			// 1️⃣ Reemplazamos los \n por saltos de línea reales
 			privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
 		}),
 	})

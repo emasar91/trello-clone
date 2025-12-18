@@ -6,7 +6,6 @@ const tailwindConfig = {
 			},
 		},
 	},
-	// si usás content:
 	content: ['./src/**/*.{js,ts,jsx,tsx,html}'],
 }
 

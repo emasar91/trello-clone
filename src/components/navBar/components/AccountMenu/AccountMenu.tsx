@@ -60,7 +60,7 @@ export default function AccountMenu() {
 	}
 	const handleClose = () => {
 		setAnchorEl(null)
-		setThemeAnchorEl(null) // cierro ambos
+		setThemeAnchorEl(null)
 	}
 
 	const handleThemeClick = (event: React.MouseEvent<HTMLElement>) => {

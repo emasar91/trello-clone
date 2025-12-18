@@ -10,18 +10,18 @@ import { ObjectId } from 'mongodb'
  * @throws {Error} - Si el valor dado es inválido.
  */
 export const toObjectId = (value: string | ObjectId): ObjectId => {
-	// Si el valor es ya un ObjectId, devuélvelo como está
+	// 1️⃣ Si el valor es ya un ObjectId, devuélvelo como está
 	if (value instanceof ObjectId) {
 		return value
 	}
 
-	// Validar que la cadena sea un formato ObjectId válido
+	// 2️⃣ Validar que la cadena sea un formato ObjectId válido
 	if (!ObjectId.isValid(value)) {
 		throw new Error(
 			`Invalid ObjectId format: "${value}". Expected a 24 character hex string, 12 byte Uint8Array, or an integer.`
 		)
 	}
 
-	// Convertir string a ObjectId
+	// 3️⃣ Convertir string a ObjectId
 	return new ObjectId(value)
 }

@@ -1,4 +1,3 @@
-// hooks/useCreateCard.ts
 import { API } from '@/constants'
 import { useCallback, useRef, useState } from 'react'
 import type {

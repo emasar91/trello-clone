@@ -38,13 +38,6 @@ export const NavBarButtonsLoginStyle: SxProps<Theme> = {
 	alignItems: 'stretch',
 }
 
-// export const NavBarLogoStyle: SxProps<Theme> = {
-// 	alignItems: 'center',
-// 	alignSelf: 'stretch',
-// 	display: 'flex',
-// 	padding: '1rem',
-// }
-
 export const NavBarRegisterStyle: SxProps<Theme> = {
 	backgroundColor: colorsLanding.loginButton,
 	WebkitBoxAlign: 'center',
@@ -74,7 +67,6 @@ export const NavBarLangSwitcherStyle: SxProps<Theme> = {
 	alignItems: 'center',
 }
 
-// 🔵 Mantiene tu estilo actual, y solo agregamos animación
 export const NavBarLogoStyle: SystemStyleObject<Theme> = {
 	alignItems: 'center',
 	alignSelf: 'stretch',
@@ -85,7 +77,6 @@ export const NavBarLogoStyle: SystemStyleObject<Theme> = {
 	transition: 'transform 300ms ease, opacity 300ms ease',
 }
 
-// 🟢 Estados del logo
 export const logoVisible: SystemStyleObject<Theme> = {
 	transform: 'translateX(0)',
 	opacity: 1,
@@ -96,7 +87,6 @@ export const logoHidden: SystemStyleObject<Theme> = {
 	opacity: 0,
 }
 
-// 🟡 Estilos del botón “atrás”
 export const backBase: SystemStyleObject<Theme> = {
 	position: 'absolute',
 	left: 0,
@@ -111,7 +101,6 @@ export const backBase: SystemStyleObject<Theme> = {
 	gap: '0.5rem',
 }
 
-// 🔁 Estados del botón atrás
 export const backVisible: SystemStyleObject<Theme> = {
 	transform: 'translateY(-50%) translateX(0)',
 	opacity: 1,

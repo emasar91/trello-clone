@@ -7,7 +7,7 @@ export const BoardsPageContainerStyle = (theme: Theme): SxProps<Theme> => ({
 	justifyContent: 'center',
 	alignItems: 'start',
 	height: 'calc(100vh - 48px)',
-	scrollbarWidth: 'thin', // Adjust width for vertical scrollbars
+	scrollbarWidth: 'thin',
 	scrollbarColor: `${theme.palette.scrollbar.color1} ${theme.palette.scrollbar.color2}`,
 })
 
@@ -34,7 +34,7 @@ export const BoardImageStyle: SxProps<Theme> = {
 	width: '100%',
 	height: 'calc(100vh - 48px)',
 	objectFit: 'cover',
-	filter: 'brightness(0.8)', // opcional, para oscurecer un poco el fondo
+	filter: 'brightness(0.8)',
 }
 
 export const BoardContentStyle: SxProps<Theme> = {

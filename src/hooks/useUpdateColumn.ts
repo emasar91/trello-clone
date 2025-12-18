@@ -1,4 +1,3 @@
-// hooks/useUpdateColumn.ts
 import { Items } from '@/components/Pages/BoardPage/MultipleContainers/MultipleContainers'
 import { API } from '@/constants'
 import api from '@/lib/axiosClient'
