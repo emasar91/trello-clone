@@ -19,7 +19,8 @@ Está construida con **Next.js (App Router) y TypeScript**, poniendo especial é
 - Demostrar experiencia sólida en **React y Next.js**
 - Aplicar criterios de **arquitectura frontend** y separación de responsabilidades
 - Mostrar manejo de **estado global y UI compleja**
-- Presentar un proyecto de portfolio con nivel **SSR / Senior Frontend**
+- Presentar un proyecto de portfolio alineado a estándares de **Frontend Senior**
+
 
 ---
 
@@ -41,7 +42,7 @@ Está construida con **Next.js (App Router) y TypeScript**, poniendo especial é
 ### Utilidades
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white)
 
-## 🚀 Tecnologías utilizadas
+El proyecto está construido sobre un stack moderno orientado a escalabilidad y mantenibilidad:
 
 - **Next.js (App Router)** – Routing, layouts y estructura de la aplicación  
 - **React + TypeScript** – Componentes reutilizables y tipado fuerte  
@@ -110,4 +111,12 @@ Todo el estado está tipado con **TypeScript**, reforzando la robustez y manteni
   - componentes de UI
 - Uso intensivo de **TypeScript** para reducir errores y mejorar la calidad del código
 - Enfoque en arquitectura y experiencia de usuario más allá de la implementación visual
+
+
+## 👤 Autor
+
+Desarrollado por ** EManuel Sarco - Michael**  
+Frontend React Developer  
+
+🔗 GitHub: https://github.com/emasar91
 
