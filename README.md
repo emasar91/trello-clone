@@ -1,4 +1,4 @@
-## Trello Clone 🧩
+# Trello Clone 🧩
 Clon de Trello desarrollado como **proyecto de portfolio**, enfocado en reproducir un flujo de trabajo **Kanban** realista y en demostrar buenas prácticas de **desarrollo frontend moderno** con React y Next.js.
 
 El proyecto prioriza una arquitectura clara, escalable y mantenible, con un enfoque cercano al de un **producto digital real**, más allá de una simple demo técnica.
