@@ -75,7 +75,8 @@ El proyecto está construido sobre un stack moderno orientado a **escalabilidad,
 
 La estructura del proyecto sigue una separación clara de responsabilidades, orientada a escalabilidad, mantenibilidad y trabajo en equipo:
 
-`src/
+```bash
+src/
 ├─ app/              # Rutas, layouts y páginas (Next.js App Router)
 │  ├─ [locale]/      # Rutas localizadas para soporte de internacionalización (i18n)
 │  └─ api/           # Endpoints y capa de comunicación con backend
@@ -87,7 +88,7 @@ La estructura del proyecto sigue una separación clara de responsabilidades, ori
 ├─ i18n/             # Configuración y mensajes de internacionalización (ES / EN)
 ├─ lib/              # Utilidades compartidas (HTTP client, cache, etc.)
 ├─ services/         # Servicios auxiliares (autenticación)
-└─ types/            # Tipos y contratos de datos`
+└─ types/            # Tipos y contratos de datos```
 
 La estructura está pensada para facilitar la lectura del código, la evolución del producto y el trabajo colaborativo entre desarrolladores frontend.
 
