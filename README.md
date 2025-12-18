@@ -2,15 +2,17 @@
 
 Clon de Trello desarrollado como **proyecto de portfolio**, enfocado en reproducir un flujo de trabajo **Kanban** realista y en demostrar buenas prácticas de **desarrollo frontend moderno** con React y Next.js.
 
-El proyecto prioriza una arquitectura clara, escalable y mantenible, más cercana a un producto real que a una demo técnica.
+El proyecto prioriza una arquitectura clara, escalable y mantenible, con un enfoque cercano al de un **producto digital real**, más allá de una simple demo técnica.
 
 ---
 
 ## 🧠 Descripción
 
-La aplicación permite gestionar tableros, columnas y tarjetas mediante interacciones directas, incorporando **drag & drop**, edición inline y feedback visual, simulando el comportamiento de herramientas de productividad utilizadas en entornos profesionales.
+La aplicación permite gestionar tableros, columnas y tarjetas mediante interacciones directas, incorporando **drag & drop**, edición inline y feedback visual.
 
-Está construida con **Next.js (App Router) y TypeScript**, poniendo especial énfasis en la organización del código, el manejo del estado global y la experiencia de usuario.
+El objetivo no fue únicamente replicar la interfaz de Trello, sino **modelar un flujo de trabajo real**, considerando cómo las decisiones de arquitectura frontend impactan directamente en la **experiencia de usuario, mantenibilidad y evolución del producto**.
+
+Está construida con **Next.js (App Router) y TypeScript**, poniendo especial énfasis en la organización del código, el manejo del estado global y la consistencia de la UI.
 
 ---
 
@@ -18,9 +20,8 @@ Está construida con **Next.js (App Router) y TypeScript**, poniendo especial é
 
 - Demostrar experiencia sólida en **React y Next.js**
 - Aplicar criterios de **arquitectura frontend** y separación de responsabilidades
-- Mostrar manejo de **estado global y UI compleja**
-- Presentar un proyecto de portfolio alineado a estándares de **Frontend Senior**
-
+- Diseñar una UI interactiva con **estado global y lógica compleja**
+- Presentar un proyecto de portfolio alineado a estándares de desarrollo frontend utilizados en **productos digitales a gran escala**
 
 ---
 
@@ -33,23 +34,23 @@ Está construida con **Next.js (App Router) y TypeScript**, poniendo especial é
 
 ### Estado y arquitectura
 ![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat)
-![App Router](https://img.shields.io/badge/Next.js_App_Router-000000?style=flat&logo=next.js&logoColor=white)
+![Next.js App Router](https://img.shields.io/badge/Next.js_App_Router-000000?style=flat&logo=next.js&logoColor=white)
 
 ### UI & UX
 ![Drag and Drop](https://img.shields.io/badge/Drag_&_Drop-UX-important)
-![CSS](https://img.shields.io/badge/CSS_Modular-1572B6?style=flat&logo=css3&logoColor=white)
+![CSS Modular](https://img.shields.io/badge/CSS_Modular-1572B6?style=flat&logo=css3&logoColor=white)
 
 ### Utilidades
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white)
 
-El proyecto está construido sobre un stack moderno orientado a escalabilidad y mantenibilidad:
+El proyecto está construido sobre un stack moderno orientado a **escalabilidad, mantenibilidad y experiencia de usuario**:
 
 - **Next.js (App Router)** – Routing, layouts y estructura de la aplicación  
 - **React + TypeScript** – Componentes reutilizables y tipado fuerte  
 - **Zustand** – Manejo de estado global  
-- **Drag & Drop** – Interacción entre tarjetas y columnas  
+- **Drag & Drop** – Interacción fluida entre tarjetas y columnas  
 - **Capa de servicios** – Separación de lógica de comunicación  
-- **Estilos desacoplados** – UI clara, mantenible y escalable  
+- **Estilos desacoplados** – UI clara, consistente y escalable  
 
 ---
 
@@ -69,7 +70,7 @@ El proyecto está construido sobre un stack moderno orientado a escalabilidad y 
 ### Experiencia de usuario
 - Interacciones rápidas y naturales
 - Animaciones suaves al mover elementos
-- Componentes reutilizables y desacoplados
+- Componentes reutilizables y consistentes
 - Enfoque en claridad visual y usabilidad
 
 ---
@@ -81,13 +82,13 @@ La estructura del proyecto sigue una separación clara de responsabilidades:
 ```bash
 src/
 ├─ app/          # Rutas, layouts y páginas (Next.js App Router)
-├─ components/   # Componentes reutilizables y de dominio (board, columns, cards)
+├─ components/   # Componentes reutilizables y de dominio (boards, columns, cards)
 ├─ store/        # Estado global manejado con Zustand
 ├─ services/     # Capa de servicios y lógica de negocio
 ├─ lib/          # Configuración compartida (ej: cliente HTTP)
 └─ types/        # Tipos y contratos de datos
 ```
---- 
+---
 
 ## 🧩 Manejo de estado
 
@@ -110,8 +111,32 @@ Todo el estado está tipado con **TypeScript**, reforzando la robustez y manteni
   - estado global
   - componentes de UI
 - Uso intensivo de **TypeScript** para reducir errores y mejorar la calidad del código
-- Enfoque en arquitectura y experiencia de usuario más allá de la implementación visual
+- Decisiones técnicas tomadas considerando mantenibilidad, legibilidad y trabajo en equipo
+- Enfoque en arquitectura frontend y experiencia de usuario más allá de la implementación visual
 
+---
+
+## 🧠 Product & Frontend Focus
+
+Este proyecto fue diseñado con un enfoque similar al de un producto real, priorizando:
+
+- Escalabilidad del frontend y claridad arquitectónica
+- Componentes reutilizables y consistentes
+- Experiencia de usuario fluida y predecible
+- Separación clara de responsabilidades
+- Decisiones técnicas orientadas a facilitar la evolución del producto
+
+El desarrollo se abordó considerando escenarios reales de crecimiento, mantenimiento y colaboración en equipos de frontend.
+
+---
+
+## 📌 Cierre
+
+Este proyecto refleja un enfoque orientado a **producto y calidad de código**, priorizando arquitectura frontend, experiencia de usuario y decisiones técnicas conscientes.
+
+El trabajo fue realizado considerando prácticas utilizadas en **productos digitales de alto impacto**, alineadas con entornos de desarrollo colaborativos y escalables.
+
+---
 
 ## 👤 Autor
 
@@ -119,4 +144,3 @@ Desarrollado por **Emanuel Sarco - Michael**
 Frontend React Developer  
 
 🔗 GitHub: https://github.com/emasar91
-
