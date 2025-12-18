@@ -18,7 +18,7 @@ import {
 	ModalCreateWorkspaceLabelStyle,
 	ModalCreateWorkspaceSubTitleStyle,
 	ModalCreateWorkspaceTitleStyle,
-} from './ModalCreateWorkspaces.styles'
+} from './ModalCreateWorkspace.styles'
 import { useTranslations } from 'next-intl'
 
 type IModalCreateWorkspace = {
