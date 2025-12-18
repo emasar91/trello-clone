@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import TabsNavbar from '@/components/Navbar_TMP/components/TabsNavbar/TabsNavbar'
+import TabsNavbar from '@/components/Navbar/components/TabsNavbar/TabsNavbar'
 import { Box, Link, Typography, useMediaQuery } from '@mui/material'
 import {
 	backBase,
