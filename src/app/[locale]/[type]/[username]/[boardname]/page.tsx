@@ -9,7 +9,7 @@ import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 async function page({
 	params,
 }: {
-	params: { boardname: string; username: string }
+	params: Promise<{ boardname: string; username: string }>
 }) {
 	const { boardname, username } = await params
 	return (

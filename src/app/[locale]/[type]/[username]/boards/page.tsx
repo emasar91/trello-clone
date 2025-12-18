@@ -12,8 +12,8 @@ async function Page({
 	params,
 	searchParams,
 }: {
-	params: { type: string; username: string }
-	searchParams?: { uid: string }
+	params: Promise<{ type: string; username: string }>
+	searchParams?: Promise<{ uid: string }>
 }) {
 	const { type, username } = await params
 	const { uid } = (await searchParams) ?? { uid: '' }

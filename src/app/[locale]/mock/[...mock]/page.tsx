@@ -3,7 +3,7 @@ import { ProtectedPage } from '@/components/ProtectedRoute/ProtectedRoute'
 import { routes } from '@/constants'
 import { notFound } from 'next/navigation'
 
-async function getCurrentPath(params: { mock?: string[] }) {
+async function getCurrentPath(params: Promise<{ mock?: string[] }>) {
 	const { mock } = await params
 	if (!mock) return ''
 	return mock.join('/')
@@ -20,7 +20,7 @@ async function getCurrentPath(params: { mock?: string[] }) {
 export default async function MockRoute({
 	params,
 }: {
-	params: { mock?: string[] }
+	params: Promise<{ mock?: string[] }>
 }) {
 	const currentPath = await getCurrentPath(params)
 
