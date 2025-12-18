@@ -1,4 +1,4 @@
-# Trello Clone 🧩
+## Trello Clone 🧩
 Clon de Trello desarrollado como **proyecto de portfolio**, enfocado en reproducir un flujo de trabajo **Kanban** realista y en demostrar buenas prácticas de **desarrollo frontend moderno** con React y Next.js.
 
 El proyecto prioriza una arquitectura clara, escalable y mantenible, con un enfoque cercano al de un **producto digital real**, más allá de una simple demo técnica.
@@ -70,7 +70,7 @@ El proyecto está construido sobre un stack moderno orientado a **escalabilidad,
 
 ---
 
-🗂️ Organización del proyecto
+## 🗂️ Organización del proyecto
 
 La estructura del proyecto sigue una separación clara de responsabilidades, orientada a escalabilidad, mantenibilidad y trabajo en equipo:
 
@@ -94,7 +94,7 @@ La estructura está pensada para facilitar la lectura del código, la evolución
 
 ---
 
-🔐 Autenticación
+## 🔐 Autenticación
 
 La aplicación cuenta con un sistema de autenticación que permite:
 
@@ -120,7 +120,7 @@ Este enfoque permite extender fácilmente los métodos de autenticación y mante
 
 ---
 
-🌍 Internacionalización (i18n)
+## 🌍 Internacionalización (i18n)
 
 La aplicación incluye soporte de **internacionalización**, permitiendo visualizar la interfaz en **español e inglés**.
 
@@ -136,7 +136,7 @@ La implementación de i18n permite adaptar el producto a distintos mercados sin 
 
 ---
 
-🎨 Theming (Light / Dark Mode)
+## 🎨 Theming (Light / Dark Mode)
 
 El proyecto cuenta con soporte para **modo claro y oscuro**, priorizando accesibilidad y experiencia de usuario.
 
@@ -152,7 +152,7 @@ El sistema de theming fue diseñado para ser extensible y mantener coherencia vi
 
 --- 
 
-🧩 Manejo de estado
+## 🧩 Manejo de estado
 
 El estado global de la aplicación se gestiona con **Zustand**, lo que permite:
 
@@ -168,7 +168,7 @@ Todo el estado está tipado con **TypeScript**, reforzando la robustez y manteni
 
 ---
 
-⚙️ Decisiones técnicas destacadas
+## ⚙️ Decisiones técnicas destacadas
 
 - Elección de **Zustand** por su simplicidad, bajo acoplamiento y buena escalabilidad
 
@@ -188,7 +188,7 @@ Todo el estado está tipado con **TypeScript**, reforzando la robustez y manteni
 
 ---
 
-🧠 Product & Frontend Focus
+## 🧠 Product & Frontend Focus
 
 Este proyecto fue diseñado con un enfoque similar al de un **producto digital real**, priorizando:
 
@@ -206,15 +206,16 @@ El desarrollo se abordó considerando escenarios reales de crecimiento, mantenim
 
 ---
 
-📌 Cierre
+## 📌 Cierre
 
 Este proyecto refleja un enfoque orientado a **producto y calidad de código**, priorizando arquitectura frontend, experiencia de usuario y decisiones técnicas conscientes.
 
-El trabajo fue realizado considerando prácticas utilizadas en **productos digitales de alto impacto**, alineadas con entornos de desarrollo colaborativos y escalables.
+El trabajo fue realizado considerando prácticas utilizadas en **productos digitales de alto impacto**, alineado con prácticas comunes en equipos de frontend de productos digitales de gran escala.
+
 
 ---
 
-👤 Autor
+## 👤 Autor
 
 Desarrollado por **Emanuel Sarco -- Michael**\
 Frontend React Developer
