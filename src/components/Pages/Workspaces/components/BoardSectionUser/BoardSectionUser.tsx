@@ -11,11 +11,12 @@ import {
 import { useTranslations } from 'next-intl'
 import { IWorkspace } from '@/types/workspaces'
 import CreateWorkspaceCard from '../CreateWorkspaceCard/CreateWorkspaceCard'
-import ModalCreateWorkspace from '@/components/Navbar/components/ModalCreateWorkspace/ModalCreateWorkspace'
+
 import { useMemo, useState } from 'react'
 import { useWorkSpaceStore } from '@/context/useWorkSpace'
 import { useAuth } from '@/context/useAuthContext'
 import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
+import ModalCreateWorkspace from '@/components/Navbar/components/ModalCreateWorkspace/ModalCreateWorkspace'
 
 /**
  * BoardSectionUser es un componente que renderiza una seccion para los tableros del usuario.

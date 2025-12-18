@@ -45,12 +45,12 @@ type IModalCreateWorkspace = {
  * @param {boolean} loading - Indica si se est  creando un nuevo espacio de Trabajo.
  */
 
-function ModalCreateWorkspace({
+const ModalCreateWorkspace = ({
 	openModal,
 	handleCloseModal,
 	handleSubmit,
 	loading,
-}: IModalCreateWorkspace) {
+}: IModalCreateWorkspace) => {
 	const theme = useTheme()
 	const t = useTranslations('BoardsPage')
 
