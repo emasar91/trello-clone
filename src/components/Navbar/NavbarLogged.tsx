@@ -1,6 +1,7 @@
 import { LogoIcon } from '@/public/assets/icons/LogoIcon'
 import { SearchIcon } from '@/public/assets/icons/SearchIcon'
 import {
+	Avatar,
 	Box,
 	Button,
 	CircularProgress,
@@ -31,6 +32,9 @@ import { useSearchCards } from '@/hooks/useSearchCard'
 import SearchBox from './components/SearchBox/SearchBox'
 import { usePathname, useRouter } from 'next/navigation'
 import { useStoreBoard } from '@/context/useStoreBoard'
+import { AccountMenuNavbarAvatarStyle } from './components/AccountMenu/AccountMenu.styles'
+import { useAuth } from '@/context/useAuthContext'
+import { UserDefaultIcon } from '@/public/assets/icons/UserDefaultIcon'
 
 /**
  * NavbarLogged component
@@ -64,6 +68,7 @@ const NavbarLogged = () => {
 
 	const { setSelectedCardId } = useStoreBoard()
 	const router = useRouter()
+	const { user } = useAuth()
 
 	const [query, setQuery] = useState('')
 
@@ -131,6 +136,8 @@ const NavbarLogged = () => {
 		}
 	}, [handleCloseSearchBox])
 
+	const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null)
+
 	return (
 		<Box sx={NavbarLoggedContainerStyle(theme)}>
 			<Box sx={NavbarLoggedInnerWrapperStyle}>
@@ -196,7 +203,21 @@ const NavbarLogged = () => {
 					/>
 				</Box>
 				<Box sx={NavbarLoggedActionsStyle}>
-					<AccountMenu />
+					<Avatar
+						src={user?.photoURL || undefined}
+						sx={AccountMenuNavbarAvatarStyle}
+						onClick={(e) => setMenuAnchor(e.currentTarget)}
+					>
+						{!user?.photoURL && <UserDefaultIcon />}
+					</Avatar>
+
+					{menuAnchor && (
+						<AccountMenu
+							anchorEl={menuAnchor}
+							onClose={() => setMenuAnchor(null)}
+							router={router}
+						/>
+					)}
 				</Box>
 			</Box>
 		</Box>

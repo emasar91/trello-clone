@@ -25,21 +25,33 @@ export function ProtectedPage({
 	isProtected = true,
 	isMockPublic = false,
 }: ProtectedPageProps) {
-	const { user, loading } = useAuth()
+	const { user, loading, authReady } = useAuth()
 	useProtectedRoute(isProtected, isMockPublic)
 
-	if (loading) {
+	if (loading || !authReady) {
 		return (
 			<Box sx={ProtectedRouteStyles}>
 				<CircularProgress size={60} />
 			</Box>
 		)
 	}
+
 	if (!user && !loading && isProtected) {
-		return null
+		return (
+			<Box sx={{ height: '90vh', overflow: 'hidden' }}>
+				<Box sx={ProtectedRouteStyles}>
+					<CircularProgress size={60} />
+				</Box>
+			</Box>
+		)
 	}
+
 	if (user && !loading && !isProtected) {
-		return null
+		return (
+			<Box sx={ProtectedRouteStyles}>
+				<CircularProgress size={60} />
+			</Box>
+		)
 	}
 
 	return <>{children}</>

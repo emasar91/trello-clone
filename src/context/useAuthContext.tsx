@@ -14,27 +14,25 @@ import { Box, CircularProgress } from '@mui/material'
 type AuthContextType = {
 	user: User | null
 	loading: boolean
+	authReady: boolean
 }
 
 const AuthContext = createContext<AuthContextType>({
 	user: null,
 	loading: true,
+	authReady: false,
 })
 
 export const useAuth = () => useContext(AuthContext)
 
 /**
- * AuthProvider component que envuelve los hijos con un AuthContextProvider.
- * Escucha onIdTokenChanged y actualiza el estado del usuario y el estado de carga de manera correspondiente.
- * Si el usuario está registrado, establece un cookie de token de autenticación con el token del usuario.
- * Si el usuario está desregistrado, elimina el cookie de token de autenticación.
- * Cuando el componente se desmonta, elimina el oyente.
- * @param {ReactNode} children - Los hijos para envolver con el AuthContextProvider.
- * @returns {ReactNode} The wrapped children with the AuthContextProvider.
+ * AuthProvider es un componente que proporciona el contexto de autenticacion.
+ * @param {ReactNode} children - El contenido a ser renderizado.
  */
 export function AuthProvider({ children }: { children: ReactNode }) {
 	const [user, setUser] = useState<User | null>(null)
 	const [loading, setLoading] = useState(true)
+	const [authReady, setAuthReady] = useState(false)
 
 	useEffect(() => {
 		const unsubscribe = onIdTokenChanged(firebaseAuth, async (firebaseUser) => {
@@ -46,16 +44,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 				setUser(null)
 				document.cookie = `authToken=; path=/; max-age=0;`
 			}
+
 			setLoading(false)
+			setAuthReady(true)
 		})
 
 		return () => unsubscribe()
 	}, [])
 
 	return (
-		<AuthContext.Provider value={{ user, loading }}>
-			{loading ? (
-				<Box position={'absolute'} left={'50%'} top={'50%'} zIndex={9999}>
+		<AuthContext.Provider value={{ user, loading, authReady }}>
+			{!authReady ? (
+				<Box
+					position="fixed"
+					left="50%"
+					top="50%"
+					sx={{ transform: 'translate(-50%, -50%)' }}
+					zIndex={9999}
+				>
 					<CircularProgress size={60} />
 				</Box>
 			) : (

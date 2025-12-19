@@ -1,24 +1,22 @@
-import * as React from 'react'
+import { DARK_THEME, LIGHT_THEME } from '@/constants'
+import { useAuth } from '@/context/useAuthContext'
+import { useThemeStore } from '@/context/useTheme'
+import { useWorkSpaceStore } from '@/context/useWorkSpace'
+import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
+import { logout } from '@/services/AuthActions'
 import {
-	Menu,
-	MenuItem,
+	Avatar,
+	Box,
 	Divider,
 	ListItemIcon,
 	ListItemText,
+	MenuItem,
+	Popover,
 	Typography,
-	Box,
-	Avatar,
 	useTheme,
 } from '@mui/material'
-import { useAuth } from '@/context/useAuthContext'
-import { logout } from '@/services/AuthActions'
 import { useLocale, useTranslations } from 'next-intl'
-import { UserDefaultIcon } from '@/public/assets/icons/UserDefaultIcon'
-import { CreateWorkSpaceIcon } from '@/public/assets/icons/CreateWorkSpaceIcon'
-import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
-
-import { DARK_THEME, LIGHT_THEME } from '@/constants'
-import ThemeMenu from '../ThemeMenu/ThemeMenu'
+import { useState } from 'react'
 import {
 	AccountMenuAvatarContainerStyle,
 	AccountMenuAvatarIconStyle,
@@ -28,84 +26,91 @@ import {
 	AccountMenuItemStyle,
 	AccountMenuItemThemeStyle,
 	AccountMenuItemWorkSpaceStyle,
-	AccountMenuNavbarAvatarContainerStyle,
-	AccountMenuNavbarAvatarStyle,
 	AccountMenuStyle,
 	AccountMenuSubtitleAccountStyle,
 	AccountMenuSubtitleTrelloStyle,
 } from './AccountMenu.styles'
-import { useState } from 'react'
+import { UserDefaultIcon } from '@/public/assets/icons/UserDefaultIcon'
+import { ArrowRightIcon } from '@/public/assets/icons/ArrowRightIcon'
+import { CreateWorkSpaceIcon } from '@/public/assets/icons/CreateWorkSpaceIcon'
+import ThemeMenu from '../ThemeMenu/ThemeMenu'
 import ModalCreateWorkspace from '../ModalCreateWorkspace/ModalCreateWorkspace'
-import { useWorkSpaceStore } from '@/context/useWorkSpace'
-import { useCreateWorkspace } from '@/hooks/useCreateWorkSpace'
-import { useThemeStore } from '@/context/useTheme'
+import { toast } from 'react-toastify'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
-export default function AccountMenu() {
+/**
+ * AccountMenu es un componente que renderiza un menu de opciones para el usuario autenticado.
+ * @param {HTMLElement} anchorEl - El elemento que desencadena el menu.
+ * @param {() => void} onClose - La funcion que se ejecuta al cerrar el menu.
+ * @param {AppRouterInstance} router - El router de la aplicacion.
+ */
+export default function AccountMenu({
+	anchorEl,
+	onClose,
+	router,
+}: {
+	anchorEl: HTMLElement
+	onClose: () => void
+	router: AppRouterInstance
+}) {
 	const { user } = useAuth()
 	const locale = useLocale()
 	const t = useTranslations('NavbarLogged')
 	const theme = useTheme()
 	const toggleTheme = useThemeStore((s) => s.setMode)
-
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-	const [themeAnchorEl, setThemeAnchorEl] = React.useState<null | HTMLElement>(
-		null
-	)
-
 	const open = Boolean(anchorEl)
+
+	const [themeAnchorEl, setThemeAnchorEl] = useState<HTMLElement | null>(null)
 	const themeOpen = Boolean(themeAnchorEl)
 
-	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorEl(event.currentTarget)
-	}
-	const handleClose = () => {
-		setAnchorEl(null)
-		setThemeAnchorEl(null)
-	}
-
+	/**
+	 * handleThemeClick es una funcion que se ejecuta al hacer click en el boton de theme.
+	 * @param {React.MouseEvent<HTMLElement>} event - El evento de click.
+	 */
 	const handleThemeClick = (event: React.MouseEvent<HTMLElement>) => {
 		setThemeAnchorEl(event.currentTarget)
 	}
 
+	/**
+	 * handleLogout es una funcion que se ejecuta al hacer click en el boton de logout.
+	 */
 	const handleLogout = async () => {
-		await logout(locale)
+		const { firebaseError } = await logout(locale)
+		onClose()
+		// UX primero: salir siempre
+		router.replace('/')
+
+		if (firebaseError) {
+			toast.warning('Hubo un problema al cerrar sesión completamente')
+		}
 	}
 
-	const [selectedTheme, setSelectedTheme] = React.useState<
+	const [selectedTheme, setSelectedTheme] = useState<
 		typeof LIGHT_THEME | typeof DARK_THEME
 	>(theme.palette.mode === 'dark' ? DARK_THEME : LIGHT_THEME)
 
+	/**
+	 * handleSelect es una funcion que se ejecuta al seleccionar un theme.
+	 * @param {typeof LIGHT_THEME | typeof DARK_THEME} value - El valor del theme seleccionado.
+	 */
 	const handleSelect = (value: typeof LIGHT_THEME | typeof DARK_THEME) => {
 		setSelectedTheme(value)
 		toggleTheme(value)
 	}
 
 	const [openModal, setOpenModal] = useState(false)
-	const handleOpenModal = () => setOpenModal(true)
-	const handleCloseModal = () => setOpenModal(false)
-
 	const { setWorkSpaces } = useWorkSpaceStore()
 
 	const { handleCreateWorkspace, loading: loadingWorkspace } =
 		useCreateWorkspace(user, setWorkSpaces, setOpenModal)
 
 	return (
-		<Box>
-			<Box sx={AccountMenuNavbarAvatarContainerStyle(theme)}>
-				<Avatar
-					src={user?.photoURL || undefined}
-					sx={AccountMenuNavbarAvatarStyle}
-					onClick={handleClick}
-				>
-					{!user?.photoURL ? <UserDefaultIcon /> : null}
-				</Avatar>
-			</Box>
-
-			{/* Menú principal */}
-			<Menu
-				anchorEl={anchorEl}
+		<>
+			<Popover
 				open={open}
-				onClose={handleClose}
+				anchorEl={anchorEl}
+				onClose={onClose}
+				keepMounted={false}
 				sx={AccountMenuStyle(theme)}
 			>
 				<Typography
@@ -114,13 +119,14 @@ export default function AccountMenu() {
 				>
 					{t('menu.account').toUpperCase()}
 				</Typography>
+
 				<MenuItem sx={AccountMenuAvatarContainerStyle} disableRipple>
 					<ListItemIcon>
 						<Avatar
 							src={user?.photoURL || undefined}
 							sx={AccountMenuAvatarIconStyle}
 						>
-							{!user?.photoURL ? <UserDefaultIcon /> : null}
+							{!user?.photoURL && <UserDefaultIcon />}
 						</Avatar>
 					</ListItemIcon>
 					<ListItemText
@@ -129,6 +135,7 @@ export default function AccountMenu() {
 						sx={AccountMenuAvatarInfoStyle(theme)}
 					/>
 				</MenuItem>
+
 				<Divider sx={AccountMenuDividerStyle(theme)} />
 
 				<Typography
@@ -137,20 +144,11 @@ export default function AccountMenu() {
 				>
 					{t('menu.trello').toUpperCase()}
 				</Typography>
+
 				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
 					{t('menu.profile')}
 				</MenuItem>
-				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
-					{t('menu.activity')}
-				</MenuItem>
-				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
-					{t('menu.cards')}
-				</MenuItem>
-				<MenuItem sx={AccountMenuItemStyle(theme)} disableRipple>
-					{t('menu.settings')}
-				</MenuItem>
 
-				{/* Item que abre submenu */}
 				<MenuItem
 					onClick={handleThemeClick}
 					sx={AccountMenuItemThemeStyle(themeOpen, theme)}
@@ -167,7 +165,7 @@ export default function AccountMenu() {
 				<MenuItem
 					sx={AccountMenuItemWorkSpaceStyle(theme)}
 					disableRipple
-					onClick={handleOpenModal}
+					onClick={() => setOpenModal(true)}
 				>
 					<CreateWorkSpaceIcon />
 					{t('menu.createWorkspace')}
@@ -175,29 +173,29 @@ export default function AccountMenu() {
 
 				<Divider sx={AccountMenuDividerStyle(theme)} />
 
-				<MenuItem
-					onClick={handleLogout}
-					sx={AccountMenuItemStyle(theme)}
-					disableRipple
-				>
+				<MenuItem onClick={handleLogout} sx={AccountMenuItemStyle(theme)}>
 					{t('menu.logout')}
 				</MenuItem>
-			</Menu>
+			</Popover>
 
-			<ThemeMenu
-				themeAnchorEl={themeAnchorEl}
-				setThemeAnchorEl={setThemeAnchorEl}
-				themeOpen={themeOpen}
-				handleSelect={handleSelect}
-				selectedTheme={selectedTheme}
-			/>
+			{themeOpen && (
+				<ThemeMenu
+					themeAnchorEl={themeAnchorEl}
+					setThemeAnchorEl={setThemeAnchorEl}
+					themeOpen={themeOpen}
+					handleSelect={handleSelect}
+					selectedTheme={selectedTheme}
+				/>
+			)}
 
-			<ModalCreateWorkspace
-				openModal={openModal}
-				handleCloseModal={handleCloseModal}
-				handleSubmit={handleCreateWorkspace}
-				loading={loadingWorkspace}
-			/>
-		</Box>
+			{openModal && (
+				<ModalCreateWorkspace
+					openModal={openModal}
+					handleCloseModal={() => setOpenModal(false)}
+					handleSubmit={handleCreateWorkspace}
+					loading={loadingWorkspace}
+				/>
+			)}
+		</>
 	)
 }

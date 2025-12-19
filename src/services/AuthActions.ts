@@ -56,12 +56,28 @@ export const signInEmail = async (
  * @returns {Promise<void>} A promise that resolves when the user has been logged out.
  */
 export const logout = async (locale: string) => {
-	// 1️⃣ Cerrar sesión
-	await signOut(firebaseAuth)
-	// 2️⃣ Eliminar Session Cookie
-	await fetch('/api/session', {
-		method: 'DELETE',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ locale }),
-	})
+	let firebaseError = null
+
+	try {
+		// 1️⃣ Cerrar sesión
+		await signOut(firebaseAuth)
+	} catch (error) {
+		// 2️⃣ Manejar error
+		firebaseError = error
+		console.error('Firebase signOut failed', error)
+	}
+
+	try {
+		// 3️⃣ Eliminar Session Cookie
+		await fetch('/api/session', {
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ locale }),
+		})
+	} catch (error) {
+		// 4️⃣ Manejar error
+		console.error('Session cookie cleanup failed', error)
+	}
+
+	return { firebaseError }
 }

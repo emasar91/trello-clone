@@ -54,7 +54,7 @@ const NavBar = () => {
 	const { setDrawerOpen } = useStoreTrello()
 	const [submenuOpen, setSubmenuOpen] = useState(open)
 
-	const { user, loading } = useAuth()
+	const { user, authReady, loading } = useAuth()
 
 	useEffect(() => {
 		if (!open) {
@@ -76,7 +76,7 @@ const NavBar = () => {
 		//eslint-disable-next-line
 	}, [width])
 
-	if (loading) return null
+	if (!authReady) return null
 
 	if (user && !loading) {
 		return <NavbarLogged />

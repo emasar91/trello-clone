@@ -3,33 +3,30 @@
 import { useAuth } from '@/context/useAuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+
 /**
- * AppTrelloPage es un componente que envuelve el componente AppTrello.
- * Verifica si el usuario está autenticado y si lo está, redirige al usuario a su página correspondiente.
- * Si el usuario no está autenticado, retorna null.
+ * AppTrelloPage es un componente que redirige al usuario a su perfil si el usuario esta autenticado.
+ * Si el usuario no esta autenticado, el componente no renderiza nada.
+ * @param {ReactNode} children - El contenido a ser renderizado.
  */
 export default function AppTrelloPage() {
-	const { user, loading } = useAuth()
+	const { user, authReady } = useAuth()
 	const router = useRouter()
 
 	useEffect(() => {
-		if (loading) return
-
+		if (!authReady) return
 		if (!user) return
 
 		const { uid, displayName, email } = user
 
-		if (displayName) {
-			const nameUser = displayName.toLowerCase().replace(/ /g, '')
-			router.replace(`/u/${nameUser}/boards?uid=${uid}`)
-			return
-		}
+		const username = displayName
+			? displayName.toLowerCase().replace(/\s+/g, '')
+			: email?.split('@')[0]
 
-		if (displayName === null && email) {
-			const nameUser = email.toLowerCase().split('@')[0]
-			router.replace(`/u/${nameUser}/boards?uid=${uid}`)
-		}
-	}, [loading, user, router])
+		if (!username) return
+
+		router.replace(`/u/${username}/boards?uid=${uid}`)
+	}, [authReady, user, router])
 
 	return null
 }

@@ -16,13 +16,13 @@ export const useProtectedRoute = (
 	isProtected: boolean,
 	isMockPublic?: boolean
 ) => {
-	const { user, loading } = useAuth()
+	const { user, loading, authReady } = useAuth()
 	const locale = useLocale()
 	const router = useRouter()
 	const pathname = usePathname()
 	const currentLocale = locale || 'es'
 	useEffect(() => {
-		if (!loading) {
+		if (!loading && authReady) {
 			if (isProtected && !user) {
 				router.replace(`/${currentLocale}/`)
 			}
@@ -35,6 +35,7 @@ export const useProtectedRoute = (
 			}
 		}
 	}, [
+		authReady,
 		user,
 		loading,
 		router,

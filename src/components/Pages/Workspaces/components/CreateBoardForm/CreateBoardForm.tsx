@@ -103,96 +103,88 @@ const CreateBoardForm = ({
 	}
 
 	return (
-		!loadingWorkspace && (
-			<Box sx={CreateBoardFormContainerStyles}>
-				<FormControl fullWidth>
-					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
-						{t('titleBoard')}
-					</InputLabel>
+		<Box sx={CreateBoardFormContainerStyles}>
+			<FormControl fullWidth>
+				<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
+					{t('titleBoard')}
+				</InputLabel>
 
-					<TextField
-						placeholder={t('writeTitle')}
-						value={title}
-						onChange={(e) => setTitle(e.target.value)}
-						size="small"
-						sx={CreateBoardFormInputTitleStyles(theme)}
-					/>
+				<TextField
+					placeholder={t('writeTitle')}
+					value={title}
+					onChange={(e) => setTitle(e.target.value)}
+					size="small"
+					sx={CreateBoardFormInputTitleStyles(theme)}
+				/>
 
-					<Typography
-						variant="caption"
-						sx={CreateBoardFormInfoTextStyles(theme)}
-					>
-						{t('requiredTitle')}
-					</Typography>
-				</FormControl>
+				<Typography variant="caption" sx={CreateBoardFormInfoTextStyles(theme)}>
+					{t('requiredTitle')}
+				</Typography>
+			</FormControl>
 
-				<FormControl fullWidth>
-					<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
-						{t('descriptionBoard')}
-					</InputLabel>
+			<FormControl fullWidth>
+				<InputLabel shrink sx={CreateBoardFormLabelTitleStyles(theme)}>
+					{t('descriptionBoard')}
+				</InputLabel>
 
-					<TextField
-						placeholder={t('writeDescription')}
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-						size="small"
-						sx={CreateBoardFormInputTitleStyles(theme)}
-					/>
+				<TextField
+					placeholder={t('writeDescription')}
+					value={description}
+					onChange={(e) => setDescription(e.target.value)}
+					size="small"
+					sx={CreateBoardFormInputTitleStyles(theme)}
+				/>
 
-					<Typography
-						variant="caption"
-						sx={CreateBoardFormInfoTextStyles(theme)}
-					>
-						{t('optionalDescription')}
-					</Typography>
-				</FormControl>
+				<Typography variant="caption" sx={CreateBoardFormInfoTextStyles(theme)}>
+					{t('optionalDescription')}
+				</Typography>
+			</FormControl>
 
-				<FormControl fullWidth size="small">
-					<InputLabel shrink sx={CreateBoardFormLabelSelectStyles(theme)}>
-						{loadingWorkspace ? t('loading') : t('workspace')}
-					</InputLabel>
+			<FormControl fullWidth size="small">
+				<InputLabel shrink sx={CreateBoardFormLabelSelectStyles(theme)}>
+					{loadingWorkspace ? t('loading') : t('workspace')}
+				</InputLabel>
 
-					<Select
-						sx={CreateBoardFormInputSelectStyles(theme)}
-						disabled={loadingWorkspace}
-						MenuProps={{
-							PaperProps: {
-								sx: CreateBoardFormInputSelectMenuStyles(theme),
-							},
-						}}
-						value={workspace?._id ?? ''}
-						onChange={(e) => {
-							const selected = workspaceAvailable.find(
-								(w) => w._id === e.target.value
-							)
-							setWorkspace(selected || null)
-						}}
-						renderValue={(selectedId) => {
-							const selected = workspaceAvailable.find(
-								(w) => w._id === selectedId
-							)
-							return selected ? selected.name : ''
-						}}
-					>
-						{workspaceAvailable.map((workspace, index) => (
-							<MenuItem key={index} value={workspace._id.toString()}>
-								{workspace.name}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-
-				<Button
-					variant="contained"
-					fullWidth
-					disabled={!title.trim() || loadingWorkspace || loading}
-					onClick={handleSubmit}
-					sx={CreateBoardFormSubmitButtonStyles(theme)}
+				<Select
+					sx={CreateBoardFormInputSelectStyles(theme)}
+					disabled={loadingWorkspace}
+					MenuProps={{
+						PaperProps: {
+							sx: CreateBoardFormInputSelectMenuStyles(theme),
+						},
+					}}
+					value={workspace?._id ?? ''}
+					onChange={(e) => {
+						const selected = workspaceAvailable.find(
+							(w) => w._id === e.target.value
+						)
+						setWorkspace(selected || null)
+					}}
+					renderValue={(selectedId) => {
+						const selected = workspaceAvailable.find(
+							(w) => w._id === selectedId
+						)
+						return selected ? selected.name : ''
+					}}
 				>
-					{loading ? <CircularProgress size={20} /> : t('create')}
-				</Button>
-			</Box>
-		)
+					{workspaceAvailable.map((workspace, index) => (
+						<MenuItem key={index} value={workspace._id.toString()}>
+							{workspace.name}
+						</MenuItem>
+					))}
+				</Select>
+			</FormControl>
+
+			<Button
+				variant="contained"
+				fullWidth
+				disabled={!title.trim() || loadingWorkspace || loading}
+				onClick={handleSubmit}
+				sx={CreateBoardFormSubmitButtonStyles(theme)}
+			>
+				{loading ? <CircularProgress size={20} /> : t('create')}
+			</Button>
+		</Box>
 	)
 }
 

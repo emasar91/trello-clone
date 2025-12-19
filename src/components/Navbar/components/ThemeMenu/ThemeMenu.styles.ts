@@ -50,9 +50,6 @@ export const AccountMenuThemeMenuContainerStyle = (
 })
 
 export const AccountMenuThemeMenuStyle = (theme: Theme): SxProps<Theme> => ({
-	position: 'absolute',
-	top: '-33px',
-	left: '-238px',
 	'& .MuiMenu-list': {
 		backgroundColor: theme.palette.accountMenu.menuBackground,
 	},

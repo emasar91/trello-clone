@@ -10,6 +10,7 @@ import {
 import React, { useState } from 'react'
 import {
 	ModalCreateWorkspaceButtonStyle,
+	ModalCreateWorkspaceCloseButtonStyle,
 	ModalCreateWorkspaceContainerImageMockStyle,
 	ModalCreateWorkspaceContainerStyle,
 	ModalCreateWorkspaceFormContainerStyle,
@@ -20,6 +21,7 @@ import {
 	ModalCreateWorkspaceTitleStyle,
 } from './ModalCreateWorkspace.styles'
 import { useTranslations } from 'next-intl'
+import { CloseIcon } from '@/public/assets/icons/CloseIcon'
 
 type IModalCreateWorkspace = {
 	openModal: boolean
@@ -70,6 +72,7 @@ const ModalCreateWorkspace = ({
 			<Fade in={openModal}>
 				<Box sx={ModalCreateWorkspaceContainerStyle(theme)}>
 					{/* Parte izquierda */}
+
 					<Box sx={ModalCreateWorkspaceFormContainerStyle}>
 						<Typography
 							variant="h5"
@@ -78,13 +81,20 @@ const ModalCreateWorkspace = ({
 						>
 							{t('modalCreateWorkspace.title')}
 						</Typography>
+
+						<Button
+							onClick={handleCloseModal}
+							sx={ModalCreateWorkspaceCloseButtonStyle(theme)}
+						>
+							<CloseIcon />
+						</Button>
+
 						<Typography
 							variant="body2"
 							sx={ModalCreateWorkspaceSubTitleStyle(theme)}
 						>
 							{t('modalCreateWorkspace.subTitle')}
 						</Typography>
-
 						<Typography
 							variant="body2"
 							sx={ModalCreateWorkspaceLabelStyle(theme)}
@@ -99,7 +109,6 @@ const ModalCreateWorkspace = ({
 							sx={ModalCreateWorkspaceInputStyle(theme)}
 							onChange={(e) => setWorkspaceName(e.target.value)}
 						/>
-
 						<Typography
 							variant="body2"
 							sx={ModalCreateWorkspaceLabelStyle(theme)}
@@ -116,7 +125,6 @@ const ModalCreateWorkspace = ({
 							sx={ModalCreateWorkspaceInputStyle(theme)}
 							onChange={(e) => setWorkspaceDescription(e.target.value)}
 						/>
-
 						<Button
 							onClick={handleOnSubmit}
 							variant="contained"
@@ -128,7 +136,6 @@ const ModalCreateWorkspace = ({
 								: t('modalCreateWorkspace.create')}
 						</Button>
 					</Box>
-
 					{/* Parte derecha */}
 					<Box sx={ModalCreateWorkspaceContainerImageMockStyle(theme)}>
 						<Box

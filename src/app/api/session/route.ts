@@ -12,8 +12,6 @@ import admin from '@/config/firebaseAdmin'
  */
 export async function POST(req: Request) {
 	try {
-		console.log('🔥 Firebase Admin Apps:', admin.apps.length)
-
 		const { token, locale, user } = await req.json()
 		const baseUrl = new URL(req.url).origin
 		const redirectUrl = `${baseUrl}/${locale}/u`
@@ -25,10 +23,8 @@ export async function POST(req: Request) {
 			.createSessionCookie(token, { expiresIn })
 
 		await admin.auth().verifyIdToken(token)
-		console.log('✅ Token Firebase válido')
 
 		const db = await getDB()
-		console.log('🚀 ~ POST ~ db:', db)
 		const usersCollection = db.collection('users')
 		const existingUser = await usersCollection.findOne({ uid: user.uid })
 		// 2️⃣ Guardar user en DB si no existe
@@ -59,7 +55,6 @@ export async function POST(req: Request) {
 	} catch (err: unknown) {
 		const error = err as Error
 		console.error('SESSION ERROR:', error)
-		console.log('SESSION ERROR:', error)
 		return new NextResponse(error.message, { status: 500 })
 	}
 }

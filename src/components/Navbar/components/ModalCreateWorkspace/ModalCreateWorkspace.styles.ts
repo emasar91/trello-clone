@@ -19,6 +19,10 @@ export const ModalCreateWorkspaceContainerImageMockStyle = (
 	justifyContent: 'center',
 	alignItems: 'center',
 	width: '100%',
+
+	'@media (max-width: 600px)': {
+		display: 'none',
+	},
 })
 
 export const ModalCreateWorkspaceTitleStyle = (
@@ -64,6 +68,9 @@ export const ModalCreateWorkspaceFormContainerStyle: SxProps<Theme> = {
 	px: 6,
 	py: 4,
 	position: 'relative',
+	'@media (max-width: 600px)': {
+		px: 4,
+	},
 }
 
 export const ModalCreateWorkspaceContainerStyle = (
@@ -90,6 +97,9 @@ export const ModalCreateWorkspaceContainerStyle = (
 		maxHeight: '800px',
 		maxWidth: '720px',
 	},
+	'@media (max-width: 600px)': {
+		height: 'auto',
+	},
 })
 
 export const ModalCreateWorkspaceButtonStyle = (
@@ -100,5 +110,19 @@ export const ModalCreateWorkspaceButtonStyle = (
 	'&:hover': {
 		backgroundColor:
 			theme.palette.modalCreateWorkspace.buttonBackgroundColorHover,
+	},
+})
+
+export const ModalCreateWorkspaceCloseButtonStyle = (
+	theme: Theme
+): SxProps<Theme> => ({
+	color: theme.palette.modalCreateWorkspace.title,
+	position: 'absolute',
+	top: 10,
+	right: 10,
+	padding: 1,
+	display: 'none',
+	'@media (max-width: 600px)': {
+		display: 'flex',
 	},
 })

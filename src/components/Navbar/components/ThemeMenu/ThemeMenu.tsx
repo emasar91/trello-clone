@@ -17,6 +17,7 @@ import {
 	AccountMenuThemeMenuItemStyle,
 	AccountMenuThemeMenuStyle,
 } from './ThemeMenu.styles'
+import { useWindowSize } from '@/hooks/useWindowsSize'
 
 type IThemeMenu = {
 	themeAnchorEl: null | HTMLElement
@@ -50,13 +51,23 @@ function ThemeMenu({
 	const t = useTranslations('NavbarLogged')
 
 	const theme = useTheme()
+	const width = useWindowSize()
 
+	const isMobile = width! < 600
 	return (
 		<Menu
 			anchorEl={themeAnchorEl}
 			open={themeOpen}
 			onClose={() => setThemeAnchorEl(null)}
 			sx={AccountMenuThemeMenuStyle(theme)}
+			anchorOrigin={{
+				vertical: 'center',
+				horizontal: isMobile ? 'center' : 'left',
+			}}
+			transformOrigin={{
+				vertical: 'center',
+				horizontal: isMobile ? 'center' : 'right',
+			}}
 		>
 			<MenuItem
 				onClick={() => handleSelect(LIGHT_THEME)}
