@@ -21,7 +21,7 @@ export const MobileMenuTitleStyle: SxProps<Theme> = {
 	textDecoration: 'none',
 	borderBottom: '1px solid rgba(0,0,0,0.1)',
 	borderTop: '1px solid rgba(0,0,0,0.1)',
-	minHeight: '70px',
+	height: '60px',
 	marginTop: '10px',
 }
 

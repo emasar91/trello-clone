@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import './BurguerIconMenu.css'
 
-const BurguerIconMenu = () => {
+/**
+ * BurguerIconMenu es un componente que renderiza un menu desplegable.
+ * @returns {JSX.Element} - El componente BurguerIconMenu.
+ */
+const BurguerIconMenu = ({ onClick }: { onClick: () => void }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	/**
@@ -10,6 +14,7 @@ const BurguerIconMenu = () => {
 	 */
 	const handleOpen = () => {
 		setIsMenuOpen(!isMenuOpen)
+		onClick()
 	}
 
 	return (

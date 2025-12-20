@@ -141,7 +141,7 @@ export const NavBarMobileContainerItemMenuStyle = (
 	index: number,
 	borderBottom: boolean
 ): SxProps<Theme> => ({
-	minHeight: '70px',
+	height: '60px',
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',

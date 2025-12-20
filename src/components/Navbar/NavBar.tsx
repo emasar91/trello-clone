@@ -87,34 +87,37 @@ const NavBar = () => {
 			<Box sx={NavBarContainerStyle}>
 				<Box sx={NavBarRowStyle(width)}>
 					<Box sx={logoContainerStyle}>
-						<Link href={'/'} style={logoMobile}>
-							<Box
-								sx={[
-									NavBarLogoStyle,
-									!submenuOpen && logoVisible,
-									submenuOpen && logoHidden,
-								]}
-							>
-								<Logo />
-							</Box>
-						</Link>
-						<Box sx={[backBase, submenuOpen ? backVisible : backHidden]}>
+						{!submenuOpen && (
+							<Link href={'/'} style={logoMobile}>
+								<Box
+									sx={[
+										NavBarLogoStyle,
+										!submenuOpen && logoVisible,
+										submenuOpen && logoHidden,
+									]}
+								>
+									<Logo />
+								</Box>
+							</Link>
+						)}
+						<Box
+							sx={[backBase, submenuOpen ? backVisible : backHidden]}
+							onClick={() => setSubmenuOpen(false)}
+						>
 							<ArrowLeftIcon />
-							<Typography onClick={() => setSubmenuOpen(false)} fontSize={20}>
-								{tt('back')}
-							</Typography>
+							<Typography fontSize={20}>{tt('back')}</Typography>
 						</Box>
 					</Box>
 					{width ? (
 						<Box display={'flex'} gap={'1rem'} alignItems={'center'}>
 							<LangSwitcher />
-							<Box
-								onClick={() => {
-									setOpen(!open)
-								}}
-								sx={NavBarBurguerMenuContainerStyle}
-							>
-								<BurguerIconMenu />
+
+							<Box sx={NavBarBurguerMenuContainerStyle}>
+								<BurguerIconMenu
+									onClick={() => {
+										setOpen(!open)
+									}}
+								/>
 							</Box>
 						</Box>
 					) : (
