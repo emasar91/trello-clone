@@ -71,10 +71,13 @@ export const NavBarLogoStyle: SystemStyleObject<Theme> = {
 	alignItems: 'center',
 	alignSelf: 'stretch',
 	display: 'flex',
-	padding: '1rem',
+	padding: '0.5rem 1rem 1rem 1rem',
 	position: 'absolute',
 	left: 0,
 	transition: 'transform 300ms ease, opacity 300ms ease',
+	'@media (max-width: 990px)': {
+		padding: '1rem',
+	},
 }
 
 export const logoVisible: SystemStyleObject<Theme> = {
