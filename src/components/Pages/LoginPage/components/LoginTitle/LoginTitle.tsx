@@ -4,6 +4,7 @@ import * as React from 'react'
 import {
 	LoginTitleContainerStyle,
 	LoginTitleSubtitleStyle,
+	LoginTitleTipStyle,
 } from './LoginTitle.styles'
 import { useTranslations } from 'next-intl'
 
@@ -35,13 +36,19 @@ const LoginTitle: React.FunctionComponent<ILoginTitleProps> = ({
 		? t('login')
 		: t('register')
 
+	const showTip: boolean = t('login') === subtitleText
+
 	return (
 		<Box sx={LoginTitleContainerStyle}>
 			<Logo />
-
 			<Typography sx={LoginTitleSubtitleStyle} variant="body1">
 				{subtitleText}
 			</Typography>
+			{showTip && (
+				<Typography sx={LoginTitleTipStyle} variant="body1">
+					{t('tip')}
+				</Typography>
+			)}
 		</Box>
 	)
 }

@@ -315,6 +315,8 @@
 		"recover": "Recover password",
 		"noAccount": "Don't have an account?",
 		"record": "Register",
+		"tip": "You can use \n email= admin@admin.com \n password= admin123",
+
 		"form": {
 			"google": "Sign In with Google",
 			"recoverPassword": "Send email",

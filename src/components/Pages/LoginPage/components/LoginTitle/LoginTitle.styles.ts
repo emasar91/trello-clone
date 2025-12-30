@@ -10,3 +10,12 @@ export const LoginTitleContainerStyle: SxProps<Theme> = {
 }
 
 export const LoginTitleSubtitleStyle: SxProps<Theme> = { marginTop: '2rem' }
+
+export const LoginTitleTipStyle: SxProps<Theme> = {
+	backgroundColor: '#dbeafe',
+	padding: '0.5rem',
+	borderRadius: '0.5rem',
+	textAlign: 'center',
+	whiteSpace: 'pre-line',
+	marginTop: '1rem',
+}
