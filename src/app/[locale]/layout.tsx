@@ -1,42 +1,64 @@
-import './globals.css'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import { notFound } from 'next/navigation'
-import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import { routing } from '@/i18n/routing'
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
-import NavBar from '@/components/Navbar/NavBar'
-import Footer from '@/components/Footer/Footer'
-import { AuthProvider } from '@/context/useAuthContext'
-import { ThemeWrapper } from './ThemeWrapper'
+import "./globals.css"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import { notFound } from "next/navigation"
+import { NextIntlClientProvider } from "next-intl"
+import { getMessages } from "next-intl/server"
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import { routing } from "@/i18n/routing"
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter"
+import NavBar from "@/components/Navbar/NavBar"
+import Footer from "@/components/Footer/Footer"
+import { AuthProvider } from "@/context/useAuthContext"
+import { ThemeWrapper } from "./ThemeWrapper"
 
 const geistSans = Geist({
-	variable: '--font-geist-sans',
-	subsets: ['latin'],
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 })
 
 const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
-	subsets: ['latin'],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 })
 
+export const metadata: Metadata = {
+  metadataBase: new URL("https://emasar-trello-clone.vercel.app"),
+  title: "Trello Clone",
+  description: "A Trello Clone made with Next.js. A project by Emanuel Sarco",
+  openGraph: {
+    title: "Trello Clone",
+    description: "A Trello Clone made with Next.js. A project by Emanuel Sarco",
+    url: "https://emasar-trello-clone.vercel.app/",
+    siteName: "Trello Clone",
+    images: [
+      {
+        url: "/assets/trello.png",
+        width: 1200,
+        height: 630,
+        alt: "Trello Clone",
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+}
+
 export async function generateMetadata({
-	params,
+  params,
 }: {
-	params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-	const { locale } = await params
+  const { locale } = await params
 
-	const messages = await getMessages({ locale })
-	const t = messages?.Page as Record<string, string>
+  const messages = await getMessages({ locale })
+  const t = messages?.Page as Record<string, string>
 
-	return {
-		title: t?.title || 'Default Title',
-		description: t?.description || 'Default description',
-	}
+  return {
+    title: t?.title || "Default Title",
+    description: t?.description || "Default description",
+  }
 }
 
 /**
@@ -56,48 +78,48 @@ export async function generateMetadata({
  * the AppRouterCacheProvider
  */
 async function InnerLayout({
-	children,
-	locale,
+  children,
+  locale,
 }: {
-	children: React.ReactNode
-	locale: 'en' | 'es'
+  children: React.ReactNode
+  locale: "en" | "es"
 }) {
-	if (!routing.locales.includes(locale)) {
-		notFound()
-	}
+  if (!routing.locales.includes(locale)) {
+    notFound()
+  }
 
-	const messages = await getMessages({ locale })
+  const messages = await getMessages({ locale })
 
-	return (
-		<html lang={locale}>
-			<body className={`${geistSans.variable} ${geistMono.variable}`}>
-				<AppRouterCacheProvider options={{ key: 'css' }}>
-					<NextIntlClientProvider locale={locale} messages={messages}>
-						<ThemeWrapper>
-							<AuthProvider>
-								<div className="min-h-screen flex flex-col">
-									<NavBar />
-									<main className="flex-1 flex flex-col items-center justify-center">
-										{children}
-									</main>
-									<Footer />
-								</div>
-							</AuthProvider>
-						</ThemeWrapper>
-					</NextIntlClientProvider>
-				</AppRouterCacheProvider>
-			</body>
-		</html>
-	)
+  return (
+    <html lang={locale}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <AppRouterCacheProvider options={{ key: "css" }}>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <ThemeWrapper>
+              <AuthProvider>
+                <div className="min-h-screen flex flex-col">
+                  <NavBar />
+                  <main className="flex-1 flex flex-col items-center justify-center">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </AuthProvider>
+            </ThemeWrapper>
+          </NextIntlClientProvider>
+        </AppRouterCacheProvider>
+      </body>
+    </html>
+  )
 }
 
 export default async function LocalLayout({
-	children,
-	params,
+  children,
+  params,
 }: {
-	children: React.ReactNode
-	params: Promise<{ locale: 'es' | 'en' }>
+  children: React.ReactNode
+  params: Promise<{ locale: "es" | "en" }>
 }) {
-	const { locale } = await params
-	return <InnerLayout locale={locale}>{children}</InnerLayout>
+  const { locale } = await params
+  return <InnerLayout locale={locale}>{children}</InnerLayout>
 }
