@@ -45,22 +45,6 @@ export const metadata: Metadata = {
   },
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}): Promise<Metadata> {
-  const { locale } = await params
-
-  const messages = await getMessages({ locale })
-  const t = messages?.Page as Record<string, string>
-
-  return {
-    title: t?.title || "Default Title",
-    description: t?.description || "Default description",
-  }
-}
-
 /**
  * La función InnerLayout genera una docstring que se utiliza para crear un componente
  * dado los children y locale.
