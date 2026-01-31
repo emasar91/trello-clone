@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Trello Clone",
     images: [
       {
-        url: "/assets/trello.png",
+        url: "/assets/metadata/trello.png",
         width: 1200,
         height: 630,
         alt: "Trello Clone",
