@@ -1,434 +1,434 @@
 {
-	"Page": {
-		"title": "Trello Clone",
-		"Description": "An Trello clone made by next"
-	},
+  "Page": {
+    "title": "Trello Clone",
+    "Description": "An Trello clone made by next"
+  },
 
-	"NavBarLogin": {
-		"buttonLogin": {
-			"login": "Log in",
-			"getFree": "Get Trello for free"
-		}
-	},
+  "NavBarLogin": {
+    "buttonLogin": {
+      "login": "Log in",
+      "getFree": "Get Trello for free"
+    }
+  },
 
-	"NavBar": {
-		"back": "Back",
-		"tabs": {
-			"features": "Features",
-			"solutions": "Solutions",
-			"plans": "Plans",
-			"pricing": "Pricing",
-			"resources": "Resources"
-		}
-	},
-	"Drawer": {
-		"features": {
-			"info": {
-				"featuresTitle": "Explore the features that help your team succeed",
-				"items": {
-					"inbox": "Inbox",
-					"inboxDescription": "Capture every vital detail from emails, Slack, and more directly into your Trello Inbox.",
-					"inboxLink": "mock/inbox",
+  "NavBar": {
+    "back": "Back",
+    "tabs": {
+      "features": "Features",
+      "solutions": "Solutions",
+      "plans": "Plans",
+      "pricing": "Pricing",
+      "resources": "Resources"
+    }
+  },
+  "Drawer": {
+    "features": {
+      "info": {
+        "featuresTitle": "Explore the features that help your team succeed",
+        "items": {
+          "inbox": "Inbox",
+          "inboxDescription": "Capture every vital detail from emails, Slack, and more directly into your Trello Inbox.",
+          "inboxLink": "mock/inbox",
 
-					"planner": "Planner",
-					"plannerDescription": "Sync your calendar and allocate focused time slots to boost productivity.",
-					"plannerLink": "mock/planner",
+          "planner": "Planner",
+          "plannerDescription": "Sync your calendar and allocate focused time slots to boost productivity.",
+          "plannerLink": "mock/planner",
 
-					"automation": "Automation",
-					"automationDescription": "Automate tasks and workflows with Butler automation.",
-					"automationLink": "mock/butler-automation",
+          "automation": "Automation",
+          "automationDescription": "Automate tasks and workflows with Butler automation.",
+          "automationLink": "mock/butler-automation",
 
-					"power-ups": "Power-ups",
-					"powerUpsDescription": "Power up your teams by linking their favorite tools with Trello plugins.",
-					"power-upsLink": "mock/power-ups",
+          "power-ups": "Power-ups",
+          "powerUpsDescription": "Power up your teams by linking their favorite tools with Trello plugins.",
+          "power-upsLink": "mock/power-ups",
 
-					"templates": "Templates",
-					"templatesDescription": "Give your team a blueprint for success with easy-to-use templates from industry leaders and the Trello community.",
-					"templatesLink": "mock/templates",
+          "templates": "Templates",
+          "templatesDescription": "Give your team a blueprint for success with easy-to-use templates from industry leaders and the Trello community.",
+          "templatesLink": "mock/templates",
 
-					"integrations": "Integrations",
-					"integrationsDescription": "Find the apps your team is already using or discover new ways to get work done in Trello.",
-					"integrationsLink": "mock/integrations"
-				}
-			},
-			"extraInfo": {
-				"featuresExtraTitle": "Meet Trello",
-				"featuresExtraDescription": "Trello makes it easy for your team to get work done. No matter the project, workflow, or type of team, Trello can help keep things organized. It’s simple – sign-up, create a board, and you’re off! Productivity awaits.",
-				"featuresExtraButton": "Check out Trello",
-				"featuresExtraButtonLink": "mock/tour"
-			}
-		},
-		"solutions": {
-			"info": {
-				"solutionsTitle": "Take a page out of these pre-built Trello playbooks designed for all teams",
-				"items": {
-					"marketingTeams": "Marketing Teams",
-					"marketingTeamsDescription": "Whether launching a new product, campaign, or creating content, Trello helps marketing teams succeed.",
-					"marketingTeamsLink": "mock/teams/marketing",
+          "integrations": "Integrations",
+          "integrationsDescription": "Find the apps your team is already using or discover new ways to get work done in Trello.",
+          "integrationsLink": "mock/integrations"
+        }
+      },
+      "extraInfo": {
+        "featuresExtraTitle": "Meet Trello",
+        "featuresExtraDescription": "Trello makes it easy for your team to get work done. No matter the project, workflow, or type of team, Trello can help keep things organized. It’s simple – sign-up, create a board, and you’re off! Productivity awaits.",
+        "featuresExtraButton": "Check out Trello",
+        "featuresExtraButtonLink": "mock/tour"
+      }
+    },
+    "solutions": {
+      "info": {
+        "solutionsTitle": "Take a page out of these pre-built Trello playbooks designed for all teams",
+        "items": {
+          "marketingTeams": "Marketing Teams",
+          "marketingTeamsDescription": "Whether launching a new product, campaign, or creating content, Trello helps marketing teams succeed.",
+          "marketingTeamsLink": "mock/teams/marketing",
 
-					"productManagement": "Product Management",
-					"productManagementDescription": "Use Trello’s management boards and roadmap features to simplify complex projects and processes.",
-					"productManagementLink": "mock/teams/product",
+          "productManagement": "Product Management",
+          "productManagementDescription": "Use Trello’s management boards and roadmap features to simplify complex projects and processes.",
+          "productManagementLink": "mock/teams/product",
 
-					"engineeringTeams": "Engineering Teams",
-					"engineeringTeamsDescription": "Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.",
-					"engineeringTeamsLink": "mock/teams/engineering",
+          "engineeringTeams": "Engineering Teams",
+          "engineeringTeamsDescription": "Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.",
+          "engineeringTeamsLink": "mock/teams/engineering",
 
-					"designTeams": "Design Teams",
-					"designTeamsDescription": "Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.",
-					"designTeamsLink": "mock/teams/design",
+          "designTeams": "Design Teams",
+          "designTeamsDescription": "Empower your design teams by using Trello to streamline creative requests and promote more fluid cross-team collaboration.",
+          "designTeamsLink": "mock/teams/design",
 
-					"startups": "Startups",
-					"startupsDescription": "From hitting revenue goals to managing workflows, small businesses thrive with Trello.",
-					"startupsLink": "mock/teams/startups",
+          "startups": "Startups",
+          "startupsDescription": "From hitting revenue goals to managing workflows, small businesses thrive with Trello.",
+          "startupsLink": "mock/teams/startups",
 
-					"remoteTeams": "Remote Teams",
-					"remoteTeamsDescription": "Keep your remote team connected and motivated, no matter where they’re located around the world.",
-					"remoteTeamsLink": "mock/teams/remote-team-management"
-				}
-			},
-			"extraInfo": {
-				"solutionsExtraTitle": "Our product in action",
+          "remoteTeams": "Remote Teams",
+          "remoteTeamsDescription": "Keep your remote team connected and motivated, no matter where they’re located around the world.",
+          "remoteTeamsLink": "mock/teams/remote-team-management"
+        }
+      },
+      "extraInfo": {
+        "solutionsExtraTitle": "Our product in action",
 
-				"items": {
-					"title1": "Use case: Task management",
-					"description1": "Track progress of tasks in one convenient place with a visual layout that adds ‘ta-da’ to your to-do’s.",
-					"link1": "mock/use-cases/task-management",
-					"title2": "Use case: Resource hub",
-					"description2": "Save hours when you give teams a well-designed hub to find information easily and quickly.",
-					"link2": "mock/use-cases/resource-hub",
-					"title3": "Use case: Project management",
-					"description3": "Keep projects organized, deadlines on track, and teammates aligned with Trello.",
-					"link3": "mock/use-cases/project-management"
-				},
-				"solutionsExtraLink": "mock/use-cases",
-				"solutionsExtraLinkText": "See all use cases"
-			}
-		},
-		"plans": {
-			"info": {
-				"items": {
-					"standard": "Standard",
-					"standardDescription": "For teams that need to manage more work and scale collaboration.",
-					"standardLink": "mock/standard",
+        "items": {
+          "title1": "Use case: Task management",
+          "description1": "Track progress of tasks in one convenient place with a visual layout that adds ‘ta-da’ to your to-do’s.",
+          "link1": "mock/use-cases/task-management",
+          "title2": "Use case: Resource hub",
+          "description2": "Save hours when you give teams a well-designed hub to find information easily and quickly.",
+          "link2": "mock/use-cases/resource-hub",
+          "title3": "Use case: Project management",
+          "description3": "Keep projects organized, deadlines on track, and teammates aligned with Trello.",
+          "link3": "mock/use-cases/project-management"
+        },
+        "solutionsExtraLink": "mock/use-cases",
+        "solutionsExtraLinkText": "See all use cases"
+      }
+    },
+    "plans": {
+      "info": {
+        "items": {
+          "standard": "Standard",
+          "standardDescription": "For teams that need to manage more work and scale collaboration.",
+          "standardLink": "mock/standard",
 
-					"premium": "Premium",
-					"premiumDescription": "Best for teams up to 100 that need to track multiple projects and visualize work in a variety of ways.",
-					"premiumLink": "mock/premium",
+          "premium": "Premium",
+          "premiumDescription": "Best for teams up to 100 that need to track multiple projects and visualize work in a variety of ways.",
+          "premiumLink": "mock/premium",
 
-					"enterprise": "Enterprise",
-					"enterpriseDescription": "Everything your enterprise teams and admins need to manage projects.",
-					"enterpriseLink": "mock/enterprise",
+          "enterprise": "Enterprise",
+          "enterpriseDescription": "Everything your enterprise teams and admins need to manage projects.",
+          "enterpriseLink": "mock/enterprise",
 
-					"free": "Free plan",
-					"freeDescription": "For individuals or small teams looking to keep work organized.",
-					"freeButton": "Take a tour of Trello",
-					"freeLink": "mock/tour"
-				}
-			},
-			"extraInfo": {
-				"plansExtraTitle": "Compare plans & pricing",
-				"plansExtraDescription": "Whether you’re a team of 2 or 2,000, Trello’s flexible pricing model means you only pay for what you need.",
-				"plansExtraButton": "View trello pricing",
-				"plansExtraButtonLink": "mock/pricing"
-			}
-		},
-		"pricing": {
-			"link": "mock/pricing"
-		},
-		"resources": {
-			"info": {
-				"resourcesTitle": "Learn & connect",
-				"items": {
-					"trelloGuide": "Trello guide",
-					"trelloGuideDescription": "Our easy to follow workflow guide will take you from project set-up to Trello expert in no time.",
-					"trelloGuideLink": "mock/guide",
+          "free": "Free plan",
+          "freeDescription": "For individuals or small teams looking to keep work organized.",
+          "freeButton": "Take a tour of Trello",
+          "freeLink": "mock/tour"
+        }
+      },
+      "extraInfo": {
+        "plansExtraTitle": "Compare plans & pricing",
+        "plansExtraDescription": "Whether you’re a team of 2 or 2,000, Trello’s flexible pricing model means you only pay for what you need.",
+        "plansExtraButton": "View trello pricing",
+        "plansExtraButtonLink": "mock/pricing"
+      }
+    },
+    "pricing": {
+      "link": "mock/pricing"
+    },
+    "resources": {
+      "info": {
+        "resourcesTitle": "Learn & connect",
+        "items": {
+          "trelloGuide": "Trello guide",
+          "trelloGuideDescription": "Our easy to follow workflow guide will take you from project set-up to Trello expert in no time.",
+          "trelloGuideLink": "mock/guide",
 
-					"remoteWorkGuide": "Remote work guide",
-					"remoteWorkGuideDescription": "The complete guide to setting up your team for remote work success.",
-					"remoteWorkGuideLink": "mock/guide/remote-work",
+          "remoteWorkGuide": "Remote work guide",
+          "remoteWorkGuideDescription": "The complete guide to setting up your team for remote work success.",
+          "remoteWorkGuideLink": "mock/guide/remote-work",
 
-					"webinars": "Webinars",
-					"webinarsDescription": "Enjoy our free Trello webinars and become a productivity professional.",
-					"webinarsLink": "mock/webinars",
+          "webinars": "Webinars",
+          "webinarsDescription": "Enjoy our free Trello webinars and become a productivity professional.",
+          "webinarsLink": "mock/webinars",
 
-					"customersStories": "Customer stories",
-					"customersStoriesDescription": "See how businesses have adopted Trello as a vital part of their workflow.",
-					"customersStoriesLink": "mock/customers",
+          "customersStories": "Customer stories",
+          "customersStoriesDescription": "See how businesses have adopted Trello as a vital part of their workflow.",
+          "customersStoriesLink": "mock/customers",
 
-					"developers": "Developers",
-					"developersDescription": "The sky's the limit in what you can deliver to Trello users in your Power-Up!",
-					"developersLink": "mock/trello/developers",
+          "developers": "Developers",
+          "developersDescription": "The sky's the limit in what you can deliver to Trello users in your Power-Up!",
+          "developersLink": "mock/trello/developers",
 
-					"helpResources": "Help resources",
-					"helpResourcesDescription": "Need help? Articles and FAQs to get you unstuck.",
-					"helpResourcesLink": "mock/trello/help"
-				}
-			},
-			"extraInfo": {
-				"resourcesExtraTitle": "Helping teams work better, together",
-				"resourcesExtraDescription": "Discover Trello use cases, productivity tips, best practices for team collaboration, and expert remote work advice.",
-				"resourcesExtraButton": "Check out the Trello blog",
-				"resourcesExtraButtonLink": "mock/blog/trello"
-			}
-		}
-	},
+          "helpResources": "Help resources",
+          "helpResourcesDescription": "Need help? Articles and FAQs to get you unstuck.",
+          "helpResourcesLink": "mock/trello/help"
+        }
+      },
+      "extraInfo": {
+        "resourcesExtraTitle": "Helping teams work better, together",
+        "resourcesExtraDescription": "Discover Trello use cases, productivity tips, best practices for team collaboration, and expert remote work advice.",
+        "resourcesExtraButton": "Check out the Trello blog",
+        "resourcesExtraButtonLink": "mock/blog/trello"
+      }
+    }
+  },
 
-	"PageHome": {
-		"section1": {
-			"title": "Capture, organize, and tackle your to-dos from anywhere.",
-			"subTitle": "Escape the clutter and chaos—unleash your productivity with Trello.",
-			"description": "By entering my email, I acknowledge the Atlassian Privacy Policy",
-			"watchVideo": "Watch video"
-		},
-		"section2": {
-			"title": "Your productivity powerhouse",
-			"subTitle": "Trello 101",
-			"description": "Stay organized and efficient with Inbox, Boards, and Planner. Every to-do, idea, or responsibility—no matter how small—finds its place, keeping you at the top of your game.",
-			"slider": {
-				"items": {
-					"Inbox": {
-						"title": "Inbox",
-						"description": "When it’s on your mind, it goes in your Inbox. Capture your to-dos from anywhere, anytime.",
-						"image": "/assets/inbox-slider.webp"
-					},
-					"Boards": {
-						"title": "Boards",
-						"description": "Your to-do list may be long, but it can be manageable! Keep tabs on everything from \"to-dos to tackle\" to \"mission accomplished!”",
-						"image": "/assets/board-slider.webp"
-					},
-					"Planner": {
-						"title": "Planner",
-						"description": "Drag, drop, get it done. Snap your top tasks into your calendar and make time for what truly matters.",
-						"image": "/assets/planner-slider.webp"
-					}
-				}
-			}
-		},
-		"section3": {
-			"title": "From message to action",
-			"subTitle": "Quickly turn communication from your favorite apps into to-dos, keeping all your discussions and tasks organized in one place.",
-			"items": {
-				"EmailMagic": {
-					"title": "Email Magic",
-					"description": "Easily turn your emails into to-dos! Just forward them to your Trello Inbox, and they’ll be transformed by Atlassian Intelligence (AI) into organized to-dos with all the links you need.",
-					"image": "/assets/email-todos.webp"
-				},
-				"MessageAppSorcery": {
-					"title": "Message App Sorcery",
-					"description": "Need to follow up on a message from Slack or Microsoft Teams? Send it directly to your Trello board! Your favorite app interface lets you save messages that appear in your Trello Inbox with AI-generated summaries and links.",
-					"image": "/assets/slackteams-to-inbox.webp"
-				}
-			}
-		},
-		"section4": {
-			"title": "Do more with Trello",
-			"subTitle": "Work Smarter",
-			"description": "Customize the way you organize with easy integrations, automation, and mirroring of your to-dos across multiple locations.",
-			"items": {
-				"Integrations": {
-					"title": "Integrations",
-					"description": "Connect the apps you are already using into your Trello workflow or add a Power-Up to fine-tune your specific needs.",
-					"image": "/assets/integration.svg",
-					"button": "Browse Integrations",
-					"buttonLink": "mock/integrations"
-				},
-				"ButlerAutomation": {
-					"title": "Butler Automation",
-					"description": "No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.",
-					"image": "/assets/ButlerAutomation.svg",
-					"button": "Get to know Automation",
-					"buttonLink": "mock/butler-automation"
-				},
-				"CardMirroring": {
-					"title": "Card mirroring",
-					"description": "View all your to-dos from multiple boards in one place. Mirror a card to keep track of work wherever you need it!",
-					"image": "/assets/CardMirroring.svg",
-					"button": "Compare plans",
-					"buttonLink": "mock/pricing"
-				}
-			}
-		},
-		"section5": {
-			"slider": {
-				"items": {
-					"slide1": {
-						"title": "slide1",
-						"description": "slide1",
-						"image": "/assets/slide1-eng.png"
-					},
-					"slide2": {
-						"title": "slide2",
-						"description": "slide2",
-						"image": "/assets/slide2-eng.png"
-					},
-					"slide3": {
-						"title": "slide3",
-						"description": "slide3",
-						"image": "/assets/slide3-eng.png"
-					}
-				}
-			}
-		}
-	},
-	"Footer": {
-		"loging": "Log in",
-		"items": {
-			"AboutTrello": {
-				"title": "About Trello",
-				"subTitle": "What’s behind the boards.",
-				"link": "mock/about"
-			},
-			"Jobs": {
-				"title": "Jobs",
-				"subTitle": "Learn about open roles on the Trello team.",
-				"link": "mock/company/careers"
-			},
-			"Apps": {
-				"title": "Apps",
-				"subTitle": "Download the Trello App for your Desktop or Mobile devices.",
-				"link": "mock/platforms"
-			},
-			"ContactUs": {
-				"title": "ContactUs",
-				"subTitle": "Need anything? Get in touch and we can help.",
-				"link": "mock/contact"
-			}
-		}
-	},
-	"MockPage": {
-		"title": "Page not available",
-		"subTitle": "This section corresponds to the original Trello page [route], and was replaced in this clone.",
-		"description": "This project is a clone for portfolio purposes, and the main functionality is available upon login.",
-		"buttonLogin": "Log in",
-		"buttonHome": "Back to Home"
-	},
-	"NotFound": {
-		"title": "Page not found",
-		"description": "This project is a clone for portfolio purposes, and the main functionality is available upon logging in.",
-		"buttonLogin": "Sign In",
-		"buttonHome": "Back to Home"
-	},
-	"LoginPage": {
-		"register": "Register to continue",
-		"login": "Sign in to continue",
-		"recover": "Recover password",
-		"noAccount": "Don't have an account?",
-		"record": "Register",
-		"tip": "You can use \n email= admin@admin.com \n password= admin123",
+  "PageHome": {
+    "section1": {
+      "title": "Capture, organize, and tackle your to-dos from anywhere.",
+      "subTitle": "Escape the clutter and chaos—unleash your productivity with Trello.",
+      "description": "By entering my email, I acknowledge the Atlassian Privacy Policy",
+      "watchVideo": "Watch video"
+    },
+    "section2": {
+      "title": "Your productivity powerhouse",
+      "subTitle": "Trello 101",
+      "description": "Stay organized and efficient with Inbox, Boards, and Planner. Every to-do, idea, or responsibility—no matter how small—finds its place, keeping you at the top of your game.",
+      "slider": {
+        "items": {
+          "Inbox": {
+            "title": "Inbox",
+            "description": "When it’s on your mind, it goes in your Inbox. Capture your to-dos from anywhere, anytime.",
+            "image": "/assets/inbox-slider.webp"
+          },
+          "Boards": {
+            "title": "Boards",
+            "description": "Your to-do list may be long, but it can be manageable! Keep tabs on everything from \"to-dos to tackle\" to \"mission accomplished!”",
+            "image": "/assets/board-slider.webp"
+          },
+          "Planner": {
+            "title": "Planner",
+            "description": "Drag, drop, get it done. Snap your top tasks into your calendar and make time for what truly matters.",
+            "image": "/assets/planner-slider.webp"
+          }
+        }
+      }
+    },
+    "section3": {
+      "title": "From message to action",
+      "subTitle": "Quickly turn communication from your favorite apps into to-dos, keeping all your discussions and tasks organized in one place.",
+      "items": {
+        "EmailMagic": {
+          "title": "Email Magic",
+          "description": "Easily turn your emails into to-dos! Just forward them to your Trello Inbox, and they’ll be transformed by Atlassian Intelligence (AI) into organized to-dos with all the links you need.",
+          "image": "/assets/email-todos.webp"
+        },
+        "MessageAppSorcery": {
+          "title": "Message App Sorcery",
+          "description": "Need to follow up on a message from Slack or Microsoft Teams? Send it directly to your Trello board! Your favorite app interface lets you save messages that appear in your Trello Inbox with AI-generated summaries and links.",
+          "image": "/assets/slackteams-to-inbox.webp"
+        }
+      }
+    },
+    "section4": {
+      "title": "Do more with Trello",
+      "subTitle": "Work Smarter",
+      "description": "Customize the way you organize with easy integrations, automation, and mirroring of your to-dos across multiple locations.",
+      "items": {
+        "Integrations": {
+          "title": "Integrations",
+          "description": "Connect the apps you are already using into your Trello workflow or add a Power-Up to fine-tune your specific needs.",
+          "image": "/assets/Integrations.svg",
+          "button": "Browse Integrations",
+          "buttonLink": "mock/integrations"
+        },
+        "ButlerAutomation": {
+          "title": "Butler Automation",
+          "description": "No-code automation is built into every Trello board. Focus on the work that matters most and let the robots do the rest.",
+          "image": "/assets/ButlerAutomation.svg",
+          "button": "Get to know Automation",
+          "buttonLink": "mock/butler-automation"
+        },
+        "CardMirroring": {
+          "title": "Card mirroring",
+          "description": "View all your to-dos from multiple boards in one place. Mirror a card to keep track of work wherever you need it!",
+          "image": "/assets/CardMirroring.svg",
+          "button": "Compare plans",
+          "buttonLink": "mock/pricing"
+        }
+      }
+    },
+    "section5": {
+      "slider": {
+        "items": {
+          "slide1": {
+            "title": "slide1",
+            "description": "slide1",
+            "image": "/assets/slide1-eng.png"
+          },
+          "slide2": {
+            "title": "slide2",
+            "description": "slide2",
+            "image": "/assets/slide2-eng.png"
+          },
+          "slide3": {
+            "title": "slide3",
+            "description": "slide3",
+            "image": "/assets/slide3-eng.png"
+          }
+        }
+      }
+    }
+  },
+  "Footer": {
+    "loging": "Log in",
+    "items": {
+      "AboutTrello": {
+        "title": "About Trello",
+        "subTitle": "What’s behind the boards.",
+        "link": "mock/about"
+      },
+      "Jobs": {
+        "title": "Jobs",
+        "subTitle": "Learn about open roles on the Trello team.",
+        "link": "mock/company/careers"
+      },
+      "Apps": {
+        "title": "Apps",
+        "subTitle": "Download the Trello App for your Desktop or Mobile devices.",
+        "link": "mock/platforms"
+      },
+      "ContactUs": {
+        "title": "ContactUs",
+        "subTitle": "Need anything? Get in touch and we can help.",
+        "link": "mock/contact"
+      }
+    }
+  },
+  "MockPage": {
+    "title": "Page not available",
+    "subTitle": "This section corresponds to the original Trello page [route], and was replaced in this clone.",
+    "description": "This project is a clone for portfolio purposes, and the main functionality is available upon login.",
+    "buttonLogin": "Log in",
+    "buttonHome": "Back to Home"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "This project is a clone for portfolio purposes, and the main functionality is available upon logging in.",
+    "buttonLogin": "Sign In",
+    "buttonHome": "Back to Home"
+  },
+  "LoginPage": {
+    "register": "Register to continue",
+    "login": "Sign in to continue",
+    "recover": "Recover password",
+    "noAccount": "Don't have an account?",
+    "record": "Register",
+    "tip": "You can use \n email= admin@admin.com \n password= admin123",
 
-		"form": {
-			"google": "Sign In with Google",
-			"recoverPassword": "Send email",
-			"login": "Sign In",
-			"emailPlaceholder": "Enter your email address",
-			"passwordPlaceholder": "Enter your password",
-			"forgotPassword": "Forgot your password?"
-		}
-	},
-	"NavbarLogged": {
-		"create": "Create",
-		"loading": "Loading...",
-		"menu": {
-			"trello": "Trello",
-			"account": "Account",
-			"profile": "Profile y visibility",
-			"activity": "Activity",
-			"cards": "Cards",
-			"settings": "Settings",
-			"theme": "Theme",
-			"createWorkspace": "Create Workspace",
-			"logout": "Logout",
-			"themeSelect": {
-				"light": "Light",
-				"dark": "Dark"
-			}
-		},
-		"searchBox": {
-			"header": "TARJETAS",
-			"emptyState": "No se encontraron resultados"
-		}
-	},
-	"Toast": {
-		"login": {
-			"weakPassword": "The password must be at least 6 characters long",
-			"emailAlreadyInUse": "The email has already been registered",
-			"invalidEmail": "The email address is invalid",
-			"invalidCredential": "Invalid credentials",
-			"error": "There was a problem logging in",
-			"sendEmail": "Email sent successfully",
-			"errorSendEmail": "There was a problem sending the email"
-		}
-	},
-	"BoardsPage": {
-		"boards": "Boards",
-		"workspaces": "Workspaces",
-		"workspace": "Workspace",
-		"noBoards": "No boards available",
-		"noWorkSpaces": "No workspaces available",
-		"recentlyViewed": "Recently Viewed",
-		"recently": "Recently",
-		"workspacesUser": "Your workspaces",
-		"createNewBoard": "Create a new board",
-		"remainingBoards": "remaining",
-		"backgroundSelection": "Background selection",
-		"createNewBoardTitle": "Create board",
-		"yourBoards": "Your boards",
-		"titleBoard": "Board title",
-		"descriptionBoard": "Description (Optional)",
-		"writeTitle": "Write the title",
-		"writeDescription": "Write the description",
-		"requiredTitle": "👋 You must indicate the title of the board",
-		"optionalDescription": "Description is optional",
-		"update": "Update",
-		"create": "Create",
-		"modalCreateWorkspace": {
-			"title": "Let's create a workspace",
-			"subTitle": "Impulsa tu productividad facilitándoles a todos el acceso a los tableros en una única ubicación.",
-			"create": "Create",
-			"creating": "Creating...",
-			"successCreate": "Workspace created successfully",
-			"name": "Workspace name",
-			"description": "Description (Optional)"
-		},
-		"loading": "Loading...",
-		"menuBaord": {
-			"createBoard": "Create board",
-			"successCreate": "Board created successfully"
-		},
-		"createWorkspace": "Create workspace",
-		"cancel": "Cancel",
-		"name": "Name",
-		"description": "Description (Optional)",
-		"editWorkspaceSuccess": "Workspace edited successfully",
-		"delete": "Delete",
-		"container": {
-			"addCard": "Add card"
-		},
-		"enterNameList": "Enter a list name",
-		"enterTitle": "Enter a title",
-		"addColumn": "Add Column",
-		"addCard": "Add Card",
-		"loadingBoard": "Loading board...",
-		"modalConfirm": {
-			"title": "Are you sure you want to delete this column?",
-			"description": "Also the cards that contain will be deleted, this action cannot be undone?"
-		},
-		"errorEmpty": "The board cannot be left without columns",
-		"errorColumnExists": "A column with the same name already exists"
-	},
-	"ModalItem": {
-		"tags": "Tags",
-		"description": "Description (Optional)",
-		"unsavedChanges": "UNSAVED CHANGES",
-		"editDescription": "Edit",
-		"commentsAndActivity": "Comments and Activity",
-		"writeComment": "Write a comment...",
-		"delete": "Delete",
-		"save": "Save",
-		"cancel": "Cancel",
-		"discardChanges": "Discard changes",
-		"recently": "Recently",
-		"update": "Update"
-	}
+    "form": {
+      "google": "Sign In with Google",
+      "recoverPassword": "Send email",
+      "login": "Sign In",
+      "emailPlaceholder": "Enter your email address",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot your password?"
+    }
+  },
+  "NavbarLogged": {
+    "create": "Create",
+    "loading": "Loading...",
+    "menu": {
+      "trello": "Trello",
+      "account": "Account",
+      "profile": "Profile y visibility",
+      "activity": "Activity",
+      "cards": "Cards",
+      "settings": "Settings",
+      "theme": "Theme",
+      "createWorkspace": "Create Workspace",
+      "logout": "Logout",
+      "themeSelect": {
+        "light": "Light",
+        "dark": "Dark"
+      }
+    },
+    "searchBox": {
+      "header": "TARJETAS",
+      "emptyState": "No se encontraron resultados"
+    }
+  },
+  "Toast": {
+    "login": {
+      "weakPassword": "The password must be at least 6 characters long",
+      "emailAlreadyInUse": "The email has already been registered",
+      "invalidEmail": "The email address is invalid",
+      "invalidCredential": "Invalid credentials",
+      "error": "There was a problem logging in",
+      "sendEmail": "Email sent successfully",
+      "errorSendEmail": "There was a problem sending the email"
+    }
+  },
+  "BoardsPage": {
+    "boards": "Boards",
+    "workspaces": "Workspaces",
+    "workspace": "Workspace",
+    "noBoards": "No boards available",
+    "noWorkSpaces": "No workspaces available",
+    "recentlyViewed": "Recently Viewed",
+    "recently": "Recently",
+    "workspacesUser": "Your workspaces",
+    "createNewBoard": "Create a new board",
+    "remainingBoards": "remaining",
+    "backgroundSelection": "Background selection",
+    "createNewBoardTitle": "Create board",
+    "yourBoards": "Your boards",
+    "titleBoard": "Board title",
+    "descriptionBoard": "Description (Optional)",
+    "writeTitle": "Write the title",
+    "writeDescription": "Write the description",
+    "requiredTitle": "👋 You must indicate the title of the board",
+    "optionalDescription": "Description is optional",
+    "update": "Update",
+    "create": "Create",
+    "modalCreateWorkspace": {
+      "title": "Let's create a workspace",
+      "subTitle": "Impulsa tu productividad facilitándoles a todos el acceso a los tableros en una única ubicación.",
+      "create": "Create",
+      "creating": "Creating...",
+      "successCreate": "Workspace created successfully",
+      "name": "Workspace name",
+      "description": "Description (Optional)"
+    },
+    "loading": "Loading...",
+    "menuBaord": {
+      "createBoard": "Create board",
+      "successCreate": "Board created successfully"
+    },
+    "createWorkspace": "Create workspace",
+    "cancel": "Cancel",
+    "name": "Name",
+    "description": "Description (Optional)",
+    "editWorkspaceSuccess": "Workspace edited successfully",
+    "delete": "Delete",
+    "container": {
+      "addCard": "Add card"
+    },
+    "enterNameList": "Enter a list name",
+    "enterTitle": "Enter a title",
+    "addColumn": "Add Column",
+    "addCard": "Add Card",
+    "loadingBoard": "Loading board...",
+    "modalConfirm": {
+      "title": "Are you sure you want to delete this column?",
+      "description": "Also the cards that contain will be deleted, this action cannot be undone?"
+    },
+    "errorEmpty": "The board cannot be left without columns",
+    "errorColumnExists": "A column with the same name already exists"
+  },
+  "ModalItem": {
+    "tags": "Tags",
+    "description": "Description (Optional)",
+    "unsavedChanges": "UNSAVED CHANGES",
+    "editDescription": "Edit",
+    "commentsAndActivity": "Comments and Activity",
+    "writeComment": "Write a comment...",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "discardChanges": "Discard changes",
+    "recently": "Recently",
+    "update": "Update"
+  }
 }
